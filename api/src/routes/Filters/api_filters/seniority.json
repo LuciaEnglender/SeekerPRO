@@ -1,0 +1,10 @@
+{
+	"seniority": [
+		{ "name": "Trainee" },
+		{ "name": "Junior" },
+		{ "name": "Semi Junior" },
+		{ "name": "Semi Senior" },
+		{ "name": "Senior" },
+		{ "name": "Expert" }
+	]
+}

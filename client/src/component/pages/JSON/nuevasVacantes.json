@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Pizza Vegana",
+        "description": "Desarrollo UX/UI and tester",
+       "technologies":[{"name": "javascript"}, {"name": "react"}, {"name": "redux"}],
+       "skills":[{"name": "persistense"}, {"name": "creative"}],
+       "languages": [ {"name": "español"}],
+       "seniorities": [{"name": "Junior"}  ]   
+    },
+    
+    {
+        "id":2,
+        "name": "Uala",
+        "description": "Full Stack Developer",
+       "technologies":[{"name": "javascript"}, {"name": "angular"}, {"name": "C++"}],
+       "skills":[{"name": "adaptability"}, {"name": "humor"}],
+       "languages": [ {"name": "ingles"}],
+       "seniorities": [{"name": "Trainee"}  ]   
+    }
+    
+]

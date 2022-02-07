@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+
+.general{
+    background-color: #2f3e46;
+    font-family: "Montserrat";
+    text-decoration: 'none';
+    color:#cad2c5;
+}
+
+.body{
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.uno{
+    background-color: #354f52;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.dos{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+}
+.dos.a{
+    background-color: #52796f;
+}
+.dos.b{
+    background-color: #52796f;
+    border-radius: 10px;
+}
+.dos.b1{
+    background-color: #52796f;
+   
+   
+}
+.filtros{
+ margin: 10px;
+ background-color: #52796f;
+ height: auto;
+ border-radius: 10px;
+ padding-bottom: 20px;
+}
+.select{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.head{
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 3px #84a98c solid;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.filter{
+display: flex;
+float: right;
+padding: 30px;
+color: #dff517;
+font-size: 22px;
+}
+.filter:hover{
+    transform: scale(1.1);
+}
+.busca{
+    padding-top: 25px;;
+    font-size: 20px;
+    text-align: center;
+}
+.buscar{
+    padding-top: 25px;;
+    font-size: 20px;
+    color: #dff517;
+}
+.opciones{
+    padding-right: 10px;
+    font-size: 20px;
+}
+.vacantes{
+    margin: 10px;
+    background-color: #52796f;
+    width: 750px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.footer{
+    margin: 10px;
+  background-color: #52796f;
+  width: 320px;
+  height: 800px;
+  border-radius: 10px; 
+   
+}
+.img{
+    width: 250px;
+    margin: 10px;
+}
+
+
+.paginado{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

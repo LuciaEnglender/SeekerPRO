@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500&display=swap');
+
+.gral{
+    overflow: hidden;
+    display: flex;
+    height: 100hv;
+    width: 100vw;
+    }
+    .texto{
+        border: none;
+        background-color: transparent;
+        color:#035827;
+        text-shadow: 0.5 0.5 1px black;
+        position:absolute;
+        font-family: "Montserrat";
+        font-size: 50px;
+        font-weight:bolder;
+        top: 70px;
+       left: 45px;
+        z-index: 1;
+    }
+    .img{
+        position: relative;
+        height: 800px;
+        width: 1500px;   
+    }

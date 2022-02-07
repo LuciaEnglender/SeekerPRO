@@ -1,0 +1,30 @@
+.pagination {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .activa {
+    display: inline-block;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #8e8e8f;
+    background-color: transparent;
+    border: none;
+  }
+  .activa:active{
+    color:blue;
+  }
+  
+ .activa:hover{
+  color: rgb(249, 249, 253);
+  transform: scale(1.30); ;
+}
