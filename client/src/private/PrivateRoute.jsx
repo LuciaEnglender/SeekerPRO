@@ -1,8 +1,16 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import { Route } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-const PrivateRoute = (props) => {
-  return <Route path={props.path} element={props.element} />;
-};
+function PrivateRoute() {
+  const { isAuthenticated } = useAuth0();
+  let location = useLocation();
+
+  return isAuthenticated ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/" replace state={{ from: location }} />
+  );
+}
 
 export default PrivateRoute;
