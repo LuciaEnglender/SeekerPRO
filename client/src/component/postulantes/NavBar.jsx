@@ -155,9 +155,7 @@ const NavBar = ({ titulo }) => {
                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
-                          >
-                            Log Out
-                          </ButtonLogOut>
+                          ></ButtonLogOut>
                         )}
                       </Menu.Item>
                     </Menu.Items>

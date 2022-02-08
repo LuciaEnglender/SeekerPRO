@@ -126,7 +126,8 @@ const NavHomeE = () => {
                         {({ active }) => (
                           <ButtonLogOut
                             estilo={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : ""
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           ></ButtonLogOut>
                         )}
