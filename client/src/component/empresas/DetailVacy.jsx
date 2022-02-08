@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
 import Pipeline from "./modules/Pipeline";
 import {getVacancyDetail} from "../../redux/actions/index"
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 
 
 function DetailVacy() {
@@ -13,7 +14,7 @@ function DetailVacy() {
 
   useEffect(() => {
     dispatch(getVacancyDetail(id))}, [dispatch, id])
-console.log(detalle.name)
+console.log(detalle)
 
   return (
     <div>
@@ -34,7 +35,9 @@ console.log(detalle.name)
       </div>
 
       <Link to="/homee">
-        <button>Volver</button>
+        <button>
+          <BsFillArrowLeftSquareFill />
+        </button>
       </Link>
     </div>
   );

@@ -100,7 +100,7 @@ export function clearDetail() {
 //(http falso...)
 export function getPostulados() {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy//postulantes`);
+    const res = await axios.get(`http://localhost:3001/vacancy/postulantes`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
