@@ -2,12 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
 import Home from "./component/postulantes/Home";
-// import FormVacancy from "./component/empresas/FormVacancy";
 import Landing from "./component/pages/Landing";
-import Register from "./component/pages/Register";
 import CreateForm from "./component/postulantes/Create";
 import Perfil from "./component/postulantes/Perfil";
-import SignUp from "./component/SignUp/SignUp";
 import Notificaciones from "./component/postulantes/Notificaciones";
 import Mensajes from "./component/postulantes/Mensajes";
 import MiPerfil from "./component/postulantes/MiPerfil";
@@ -23,8 +20,8 @@ import FormPerfil from "./component/empresas/FormPerfil";
 function App() {
   return (
     <Routes>
+      {/* LANDING */}
       <Route path="/" element={<Landing />} />
-      <Route path="/signup" element={<SignUp />} />
       {/* RUTAS DE PERFIL */}
       <Route path="/homep" element={<Home />} />
       <Route path="/homep/create" element={<CreateForm />} />
@@ -36,7 +33,6 @@ function App() {
       {/* RUTAS DE EMPRESA */}
       <Route path="/homee" element={<HomeEmpresa />} />
       <Route path="/homee/create" element={<FormPerfil />} />
-      {/* <Route path="/homee/vacancy" element={<FormVacancy />} /> */}
       <Route path="/homee/notification" element={<NotiEmp />} />
       <Route path="/homee/message" element={<MensajeEmp />} />
       <Route path="/homee/perfil" element={<PerfilEmp />} />
@@ -44,8 +40,6 @@ function App() {
       <Route path="/homee/search" element={<SearchPostu />} />
       <Route path="/homee/perfil" element={<PerfilEmp />} />
       <Route path="/homee/setings" element={<SetingsEmp />} />
-      {/* RUTAS DE REGISTRO */}
-      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
