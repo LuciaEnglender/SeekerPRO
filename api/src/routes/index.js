@@ -13,7 +13,8 @@ const language = require("./Filters/language");
 const skill = require("./Filters/skills");
 const tech = require("./Filters/technology");
 const seniority = require("./Filters/seniority");
-const allFilters = require('./Filters/allFiltersVacancy')
+const allFilters = require('./Filters/allFiltersVacancy');
+const allFiltersBuss = require('./Filters/allFiltersBusiness');
 const router = Router();
 
 // Configurar los routers
@@ -23,6 +24,8 @@ router.use('/postulant',routerPostulant);
 router.use('/register', routerSignUp);
 router.use('/vacancy', routerVacancy );
 router.use('/allFiltersVacancy', allFilters);
+router.use('/allFiltersBusiness', allFiltersBuss);
+
 router.use('/admin', routerAdmin );
 
 
