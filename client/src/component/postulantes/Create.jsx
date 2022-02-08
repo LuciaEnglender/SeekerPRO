@@ -8,10 +8,14 @@ import {
   getSkill,
   getLanguage,
   getSeniority,
+  getLocation,
 } from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
+
+
+
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -22,26 +26,45 @@ export default function CreateForm() {
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
   );
-  //const locat = useSelector((state) => state.rootReducerPostulante.location)
+  const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
+  
 
   const [input, setInput] = useState({
     name: "",
     phone: "",
     location: "",
     gender: "",
-    photo: "",
     github: "",
     linkedIn: "",
     portfolio: "",
     CV: "",
+    photo:{},
     technologies: [],
     languages: [],
     skills: [],
     seniority: [],
     extras: "",
   });
-  console.log(input);
+  
+  const [myFile,setMyFile]= useState({})
+
+  // const [image,setImage]= useState({})
+   const fileOnChange=(e)=>{
+     const data= new FormData()
+    console.log(e.target.files[0])
+    setMyFile(e.target.files[0])
+    data.append("photo",myFile)
+     console.log(myFile)
+    // console.log(e.target.files[0])
+   }
+  // const sendImage=(e)=>{
+    //e.target.files[0]
+  //    let formData= new FormData()
+  //    formData.append("archivos",image)
+  //    createPostulante(formData)
+  // }
+  
 
   function handleGithub(e) {
     setInput({
@@ -171,19 +194,27 @@ export default function CreateForm() {
     }
   }
 
+  /////archivos ////
+  /* function onChangeHandle (e){
+    setInput({
+      ...input,
+      [input.photo]: e.target.value,
+    })
+  } */
+
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createPostulante(input));
     alert("Congrats!");
+    dispatch(createPostulante(input))
     setInput({
       name: "",
       phone: "",
       location: "",
       gender: "",
-      photo: "",
       github: "",
       linkedIn: "",
       portfolio: "",
+      photo:"",
       CV: "",
       technologies: [],
       languages: [],
@@ -193,12 +224,14 @@ export default function CreateForm() {
     });
     navigate(-1);
   }
-
+  
   useEffect(() => {
     dispatch(getSkill());
     dispatch(getTechnology());
     dispatch(getLanguage());
     dispatch(getSeniority());
+    dispatch(getLocation());
+   
   }, []);
 
   return (
@@ -208,7 +241,9 @@ export default function CreateForm() {
       </div>
       <div className=" flex m-3  rounded-2xl justify-center">
         <div className="w-auto flex  m-0 rounded-2xl justify-center">
-          <form
+          <form 
+          action="/postulant" method="post"
+          enctype="multipart/form-data"
             className="w-full flex flex-row m-7 justify-center mauto rounded-2xl  bg-verdeMedio"
             onSubmit={(e) => handleSubmit(e)}
           >
@@ -235,6 +270,23 @@ export default function CreateForm() {
                 />
                 {errors.phone && <p className="error">{errors.phone}</p>}
               </div>
+              <br />
+            <div>
+              <label>Locations</label>
+              <select
+                placeholder="Location"
+                type="text"
+                value={input.location}
+                name="location"
+                onChange={(e) => handleChange(e)}
+              >
+                {locat?.map((el) => (
+                  <option value={el} key={el.id}>
+                  </option>
+                ))}
+              </select>
+            </div>
+            <br />
               <div className="w-44 flex flex-col my-2 justify-center">
                 <label className="text-center">Gender:</label>
                 <label className="text-center">
@@ -279,16 +331,17 @@ export default function CreateForm() {
                   Other
                 </label>
               </div>
-              {/* <div className="w-fit flex flex-col my-2 justify-center">
+               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center"> Photo</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder="photo"
-                  type="text"
-                  value={input.photo}
+                  type="file"
                   name="photo"
+                  onChange={(e)=>fileOnChange(e)}
                 />
-              </div> */}
+                {/*<button onClick={sendImage}>Upload</button>*/}
+              </div> 
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center" htmlFor="github">
                   GitHub:
@@ -538,6 +591,7 @@ export default function CreateForm() {
                 <button
                   className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                   type="submit"
+                  //onClick={(e)=>fileOnChange(e)}//
                 >
                   CREAR
                 </button>
@@ -550,27 +604,8 @@ export default function CreateForm() {
   );
 }
 
-/*     </div>
-            <br />
-            <div>
-              <label>Locations</label>
-              <select
-                placeholder="Location"
-                type="text"
-                value={input.location}
-                name="location"
-                onChange={(e) => handleChange(e)}
-              >
-                
-                {locat?.map((el) => (
-                  <option value={el} key={el.id}>
-                    
-                  </option>
-                ))}
-      
-              </select>
-            </div>
-            <br />
+  
+           
       
        
-       */
+       
