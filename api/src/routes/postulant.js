@@ -100,6 +100,26 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
+
+//*************Ruta que postea un id del postulante para agregar sus vacantes relacion de muchos a muchoa */
+routerPostulant.post('/postulate/:id', async (req, res) => {
+  const {id} = req.body
+ 
+  const postulanteId = req.params.id
+  try {
+    let postulante = await Postulant.findByPk(postulanteId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+   
+    await postulante.addVacancy(vacancy);
+    
+      res.status(200).json(postulante);
+
+  }catch(e){
+    console.log(e)
+  }
+});
+
 routerPostulant.post(
   "/",
   [
