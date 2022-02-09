@@ -1,20 +1,38 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
-import JSONPretty from "react-json-pretty";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getEmail } from "../redux/actions";
 
 const Info = () => {
-  const { user, isAuthenticated } = useAuth0();
-  console.log(user);
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
+  const email = user.email;
+  
+  console.log(email);
+  function handleSubmit() {
+    e.preventDefault()
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(getEmail({email: email,
+      profile: "BUSINESS",}));
+      
+    };
+  }
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   return (
     <div>
-      {isAuthenticated ? (
-        <div>
-          {" "}
-          <h2>{user.name}</h2> <JSONPretty data={user} />{" "}
-        </div>
-      ) : (
-        <p>asdas</p>
-      )}
+      <form onClick={(e) => handleSubmit(e)}>
+        <input value={input.name} onChange={(e) => handleChange(e)} />
+        <input value={input.profile} onChange={(e) => handleChange(e)} />
+      </form>
     </div>
   );
 };

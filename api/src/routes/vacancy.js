@@ -107,7 +107,7 @@ routerVacancy.post("/", async (req, res) => {
   const {
     name,
     description,
-    // business,
+    business,
     language,
     //location,
     seniority,
@@ -121,13 +121,13 @@ routerVacancy.post("/", async (req, res) => {
       description,
     });
     //busco la empresa para obtener su nombre;
-    // let businessInDB = await Business.findOne({
-    // 	where: {
-    // 		name: business,
-    // 	},
-    // });
+    let businessInDB = await Business.findOne({
+      where: {
+        name: business,
+      },
+    });
     //le agrego la empresa a la vacante;
-    // await newVacancyInDB.setBusiness(businessInDB);
+    await newVacancyInDB.setBusiness(businessInDB);
     //repito lo mismo con las otras tablas
     if (language) {
       let lenguageInDB = await Language.findAll({
@@ -203,23 +203,24 @@ routerVacancy.get("/:name", async (req, res) => {
         },
       },
     });
-    if(business.length !== 0)acum.push(business);
-  
+    if (business.length !== 0) acum.push(business);
+
     const vacancy = await Vacancy.findAll({
       where: {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
-          
         },
       },
-      include: [{
+      include: [
+        {
           model: Technology,
           attributes: ["name"],
           through: {
             attributes: [],
           },
-        },{
+        },
+        {
           model: Seniority,
           attributes: ["name"],
           through: {
@@ -232,40 +233,45 @@ routerVacancy.get("/:name", async (req, res) => {
           through: {
             attributes: [],
           },
-        }]
+        },
+      ],
     });
-    if(vacancy.length !== 0) acum.push(vacancy);
+    if (vacancy.length !== 0) acum.push(vacancy);
 
     const languageSearch = await Language.findAll({
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes : ["name"],
-      include: [{
-        model: Vacancy,
-        attributes: ["name"],
-        inlcude : [{
-          model: Technology,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },{
-          model: Seniority,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
+      attributes: ["name"],
+      include: [
         {
-          model: Language,
+          model: Vacancy,
           attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        }]
-        
-      }],
+          inlcude: [
+            {
+              model: Technology,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Seniority,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Language,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+        },
+      ],
     });
 
     for (let i = 0; i < languageSearch.length; i++) {
@@ -278,7 +284,7 @@ routerVacancy.get("/:name", async (req, res) => {
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes : ["name"],
+      attributes: ["name"],
       include: [
         {
           model: Vacancy,
@@ -290,7 +296,8 @@ routerVacancy.get("/:name", async (req, res) => {
               through: {
                 attributes: [],
               },
-            },{
+            },
+            {
               model: Seniority,
               attributes: ["name"],
               through: {
@@ -303,8 +310,8 @@ routerVacancy.get("/:name", async (req, res) => {
               through: {
                 attributes: [],
               },
-            }
-          ]
+            },
+          ],
         },
       ],
     });
@@ -318,18 +325,19 @@ routerVacancy.get("/:name", async (req, res) => {
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes : ["name"],
+      attributes: ["name"],
       include: {
         model: Vacancy,
         attributes: ["name", "description"],
-        include:[
+        include: [
           {
             model: Language,
             attributes: ["name"],
             through: {
               attributes: [],
             },
-          },{
+          },
+          {
             model: Technology,
             attributes: ["name"],
             through: {
@@ -341,9 +349,9 @@ routerVacancy.get("/:name", async (req, res) => {
             attributes: ["name"],
             through: {
               attributes: [],
-            } 
-          }
-        ]
+            },
+          },
+        ],
       },
     });
     for (let i = 0; i < senioritySearch.length; i++) {
