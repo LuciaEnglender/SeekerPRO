@@ -15,6 +15,7 @@ export const ADD_FAVOURITE = "ADD_FAVOURITE"
 export const GET_FAVOURITES = "GET_FAVOURITES"
 export const GET_PROFILE = "GET_PROFILE"
 export const FILTER_COMBINATED = "FILTER_COMBINATED"
+export const GET_LOCATION= "GET_LOCATION"
 
 export function createPostulante(payload) {
   console.log(payload)
@@ -45,6 +46,21 @@ export function getTechnology() {
     }
   };
 }
+
+export function getLocation() {
+  return async function (dispatch) {
+    try {
+      const loc = await axios.get("http://localhost:3001/location");
+      return dispatch({
+        type: GET_LOCATION,
+        payload: loc.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 
 export function getSkill() {
   return async function (dispatch) {

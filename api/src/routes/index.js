@@ -13,6 +13,7 @@ const language = require("./Filters/language");
 const skill = require("./Filters/skills");
 const tech = require("./Filters/technology");
 const seniority = require("./Filters/seniority");
+const location = require("./Filters/location")
 const allFilters = require('./Filters/allFiltersVacancy')
 const router = Router();
 
@@ -26,7 +27,7 @@ router.use('/allFiltersVacancy', allFilters);
 router.use('/admin', routerAdmin );
 
 
-
+router.use("/location",location)
 router.use("/languages", language);
 router.use("/skills", skill);
 router.use("/tech", tech);
