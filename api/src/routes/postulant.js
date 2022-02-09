@@ -279,4 +279,22 @@ routerPostulant.post('/postulate/:id', async (req, res) => {
     console.log(e)
   }
 })
+
+routerPostulant.put('/postulate/:id', async (req, res) =>{
+  const id = Number(req.body.id)
+  const postulantId = req.params.id;
+  try {
+      
+    let postulante = await Postulant.findByPk(postulantId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.removeVacancy(vacancy) 
+
+    res.status(200).json('Remove succsessfully')
+  }catch (e) {
+    console.log(e)
+  }
+})
+
 module.exports = routerPostulant;

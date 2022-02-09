@@ -34,7 +34,7 @@ const initialState = {
   vacancy: nuevasVacantes,
   favourites:[],
   filteredVacancy:[],
-  postulations: nuevasVacantes,
+  postulations: [],
   later: []
 };
 

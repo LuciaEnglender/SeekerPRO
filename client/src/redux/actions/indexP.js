@@ -243,10 +243,12 @@ export function follow ({id, postulantId}) {
       } 
 } 
 
-export function apply({id, postulanteId}){
+export function apply(id, postulanteId){
+  console.log(id)
+  console.log(postulanteId)
   return async function (){
     try{
-      await axios.put(`http://localhost:3001/postulant/${postulanteId}/vacancy`, {id});
+      await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
       return {
           type: APPLY,
           }
@@ -257,32 +259,34 @@ export function apply({id, postulanteId}){
   } 
   }
 
-  export function seeLater({id, postulanteId}){
-    console.log({id, postulanteId})
-    return async function (){
-      try{
-        await axios.put(`http://localhost:3001/postulant${postulanteId}`, {id});
-        return {
-            type: SEE_LATER,
-            }
-        } 
-    catch(error){
-          alert("Postulation failed")
-        }
-    } 
-    }
-  
     export function removePost(id, postulanteId){
       console.log(id)
+      console.log(postulanteId)
       return async function (){
         try{
-          await axios.put(`http://localhost:3001/postulant${postulanteId}`, {id});
+          await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
           return {
               type: REMOVE_POST,
               }
           } 
       catch(error){
-            alert("Cant remove")
+            alert("Can't remove")
           }
       } 
       }
+
+      export function seeLater(id, postulanteId){
+        console.log({id, postulanteId})
+        return async function (){
+          try{
+            await axios.put(`http://localhost:3001/postulant${postulanteId}`, {id});
+            return {
+                type: SEE_LATER,
+                }
+            } 
+        catch(error){
+              alert("Postulation failed")
+            }
+        } 
+        }
+    

@@ -10,7 +10,8 @@ function Postulations() {
     const postulations = useSelector((state) =>state.rootReducerPostulante.postulations)
     console.log(postulations)
 
-    const postulanteId= useSelector((state) => state.rootReducerPostulante.profile.id)
+    const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
+    console.log(postulanteId)
 
   useEffect(() => {
       dispatch(getMyPostulations(postulanteId))
@@ -24,9 +25,9 @@ function Postulations() {
     <div>
       {postulations?.map((el) => {
         return (
-          <div className="m-4" key={el.id}>
+          <div className="m-4" key={el.postulant_vacancy.vacancyId}>
             <PostCard
-              id = {el.id}
+              id = {el.postulant_vacancy.vacancyId}
               name={el.name}
               description={el.description}
               languages={el.languages
@@ -39,6 +40,7 @@ function Postulations() {
               technologies={el.technologies
                 ?.map((t) => t.name)
                 .join(", ")}
+                date= {el.postulant_vacancy.createdAt}
             />
           </div>
         );
