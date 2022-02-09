@@ -1,11 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { ButtonLogIn } from "../../private/ButtonLogIn";
 import ButtonSignIn from "../../private/ButtonSignIn";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../redux/actions/indexL";
 
 const Landing = () => {
   const { isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+
+  useEffect(() => {
+    dispatch(getUsers(profileState.email));
+  }, [dispatch, profileState]);
+
   return (
     <body className="p-9 bg-gray-300">
       <nav className=" grid grid-cols-2">
@@ -42,9 +53,7 @@ const Landing = () => {
               minima dicta iure hic, molestiae libero veritatis quos.
             </p>
             {isAuthenticated ? (
-              <Link to="/register">
-                <button>Entrar</button>
-              </Link>
+              <Navigate to={"/register"} />
             ) : (
               <h3 className="text-xl pl-3 font-bold pb-4">
                 Join Us! <ButtonSignIn></ButtonSignIn>

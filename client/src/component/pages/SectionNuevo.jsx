@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import { postEmail, putUsers } from "../../redux/actions/indexL";
+import React, { useState } from "react";
+import { postEmail } from "../../redux/actions/indexL";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SectionNuevo = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useAuth0();
   const [input, setInput] = useState({
     name: "",
     profile: "",
@@ -15,12 +14,15 @@ const SectionNuevo = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    alert("Perfil creado");
     setInput({
       name: "",
       email: "",
       profile: "",
     });
+    console.log(input);
     dispatch(postEmail(input));
+    navigate(-1);
   }
 
   function handleSelect(e) {
@@ -41,25 +43,19 @@ const SectionNuevo = () => {
     <>
       <div className="grid grid-cols-2">
         <div className="p-2">
-          <h2 className="text-5xl  font-bold pb-4">Developer?</h2>
-          <p className="pb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-            sapiente vero temporibus ullam voluptatibus modi maxime quis minima
-            dicta iure hic, molestiae libero veritatis quos.
-          </p>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
               <label>Name</label>
               <input
+                type="text"
                 value={input.name}
                 onChange={(e) => handleChange(e)}
-                type="text"
               />
               <label>Email</label>
               <input
+                type="text"
                 value={input.email}
                 onChange={(e) => handleChange(e)}
-                type="text"
               />
               <label>A qué te dedicás?</label>
               <select onChange={(e) => handleSelect(e)}>
@@ -67,6 +63,7 @@ const SectionNuevo = () => {
                 <option value="BUSINESS">BUSINESS</option>
               </select>
             </div>
+            <button type="submit">Mandar</button>
           </form>
         </div>
       </div>
