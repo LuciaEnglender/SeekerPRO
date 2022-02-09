@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     photo: {
-      type: DataTypes.BLOB,
+      type: DataTypes.JSON,
       allowNull: true
     },
     CV: {

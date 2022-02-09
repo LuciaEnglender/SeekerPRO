@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('location', {
    
-    city: {
+    name: {
         type: DataTypes.STRING
     }
   });
