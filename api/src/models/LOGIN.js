@@ -6,11 +6,10 @@ module.exports = (sequelize) => {
   sequelize.define("login", {
     firstTime: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
     userName: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -18,11 +17,9 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     profile: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
   });
 };
