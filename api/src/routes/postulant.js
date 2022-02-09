@@ -120,6 +120,24 @@ routerPostulant.post('/postulate/:id', async (req, res) => {
   }
 })
 
+//**********Remueve una vacante del postulante */
+routerPostulant.put('/postulate/:id', async (req, res) =>{
+  const {id} = req.body;
+  const postulantId = req.params.id;
+  try {
+      
+    let postulante = await Postulant.findByPk(postulantId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.removeVacancy(vacancy) 
+
+    res.status(200).json('sseasesa')
+  }catch (e) {
+    console.log(e)
+  }
+});
+
 routerPostulant.post(
   "/",
   async (req, res) => {
