@@ -219,13 +219,18 @@ routerPostulant.put("/:id", async (req, res) => {
     await Postulant.update(req.body, {
       where: { id: req.params.id },
     });
+    if (req.body.vacancy) {
+      const allVacancy = await Vacancy.findAll({
+        where: { id: req.params.vacancy },
+      });
+      await createPostuland.addVacancy(allVacancy);
+    }
     res.json({
       sucess: "The postuland details have been successfully modified",
     });
   } catch (error) {
     res.status(400).send("ERROR" + error);
-  }
-});
+  }})
 
 routerPostulant.delete("/:id", async (req, res) => {
   try {
@@ -257,4 +262,21 @@ routerPostulant.get("/vacName", async (req, res) => {
   }
 });
 
+routerPostulant.post('/postulate/:id', async (req, res) => {
+  const {id} = req.body
+ 
+  const postulanteId = req.params.id
+  try {
+    let postulante = await Postulant.findByPk(postulanteId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+   
+    await postulante.addVacancy(vacancy);
+    
+      res.status(200).json(postulante);
+
+  }catch(e){
+    console.log(e)
+  }
+})
 module.exports = routerPostulant;
