@@ -16,10 +16,14 @@ function DetailVacy() {
     dispatch(getVacancyDetail(id))
   }, [dispatch, id])
   console.log(detalle)
-
+ 
+  var count = 0
+  
   return (
     <div>
+      <div>
       <NavHomeE titulo={"Notificaciones"} />
+      </div>
       <div>
         <Pipeline />
       </div>
@@ -27,11 +31,12 @@ function DetailVacy() {
         <h2>Buscamos: {detalle[0].name}</h2>
         <h3>Descripcion de la vacante: {detalle[0].description}</h3>
         <h4>Seniority: {detalle[0].seniorities.map((ele) => (<p>{ele.name}</p>))}</h4>
-        <p>Tecnologías Requeridas: {detalle[0].technologies.map((ele) => (<p>{ele.name}</p>))}</p>
+        <p>Tecnologías Requeridas: {detalle[0].technologies.map((ele) => (<p key={count++}>{ele.name}</p>))}</p>
         <p>Idioma: {detalle[0].languages.map((ele) => (<p>{ele.name}</p>))}</p>
 
 
       </div>
+      <button>Delete Vacancy</button>
 
       <Link to="/homee">
         <button>
