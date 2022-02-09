@@ -33,7 +33,7 @@ export function getVacancy() {
 //GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTESs
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy?id=${id}`);
+    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
@@ -100,7 +100,7 @@ export function clearDetail() {
 //(http falso...)
 export function getPostulados() {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy//postulantes`);
+    const res = await axios.get(`http://localhost:3001/vacancy/postulantes`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
@@ -169,7 +169,7 @@ export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
       let det = await axios.get(
-        `http://localhost:3001/postulant?name=${estado}`
+        `http://localhost:3001/postulant/${estado}`
       );
       return dispatch({
         type: "GET_STATUS_PIPELINE",

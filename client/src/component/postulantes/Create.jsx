@@ -139,7 +139,7 @@ export default function CreateForm() {
     } else {
       setInput({
         ...input,
-        location:[...input.location,  e.target.value,]
+        location: [...input.location, e.target.value],
       });
     }
   }
@@ -226,7 +226,7 @@ export default function CreateForm() {
   function handleSubmit(e) {
     e.preventDefault();
     alert("Congrats!");
-    console.log(input)
+
     dispatch(createPostulante(input))
     setInput({
       name: "",
@@ -655,4 +655,5 @@ export default function CreateForm() {
     </div>
   );
 }
+
 
