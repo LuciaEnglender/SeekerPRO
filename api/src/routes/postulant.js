@@ -8,9 +8,8 @@ const {
   Seniority,
   Vacancy,
 } = require("../db");
-const { check, validationResult } = require("express-validator");
-const routerBusiness = require("./business");
 
+const { check, validationResult } = require("express-validator");
 const routerPostulant = Router();
 
 //validado por el nombre

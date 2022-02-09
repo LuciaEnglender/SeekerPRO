@@ -29,20 +29,6 @@ const allVacancy = await Vacancy.findAll({
 res.status(200).json(allVacancy)
 });
 
-//*************Ruta que postea un id del empresa para agregarid de vacantes en la tabla relacion de muchos a muchoa */
-routerBusiness.post('/emp/:id',async (req, res) => {
-const {id} = req.body
-const idPost = req.params.id
-
-const business = await Business.findByPk(idPost)
-const vacancy = await Vacancy.findByPk(id)
-
- await business.addVacancy(vacancy)
-
-res.status(200).json(business)
-
-})
-
 //Cuenta cuantas Vacantes tiene una empresa recibe id de empresa y retona el numero de vacantes
 routerBusiness.get('/count/:id' , async(req , res) => {
 const busId = req.params.id
