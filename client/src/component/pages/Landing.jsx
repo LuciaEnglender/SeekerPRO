@@ -7,6 +7,7 @@ import { ButtonsHomeE, ButtonsHomeP } from "../../private/ButtonsHome";
 import { getUsers } from "../../redux/actions/indexL";
 import { useDispatch, useSelector } from "react-redux";
 import SectionT from "./SectionT";
+import SectionA from "./SectionA";
 
 const Landing = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,13 @@ const Landing = () => {
         </div>
       </nav>
       <selection className="px-16 mt-32 mb-32">
-        <SectionT></SectionT>
+        {
+          (profileState.perfile = null ? (
+            <SectionT></SectionT>
+          ) : (
+            <SectionA></SectionA>
+          ))
+        }
       </selection>
 
       <section className="text-center mb-32">

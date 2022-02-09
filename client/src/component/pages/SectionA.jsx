@@ -5,7 +5,7 @@ import ButtonSignIn from "../../private/ButtonSignIn";
 import { getUsers } from "../../redux/actions/indexL";
 import { useDispatch, useSelector } from "react-redux";
 
-const SectionT = () => {
+const SectionA = () => {
   const dispatch = useDispatch();
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
@@ -47,4 +47,4 @@ const SectionT = () => {
   );
 };
 
-export default SectionT;
+export default SectionA;
