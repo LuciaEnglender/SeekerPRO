@@ -10,9 +10,9 @@ export function postEmail(payload) {
   };
 }
 
-export function getUsers() {
+export function getUsers(email) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/users`);
+    const res = await axios.get(`http://localhost:3001/users/${email}`);
     return dispatch({
       type: "GET_USER_PERFILE",
       payload: res.data,

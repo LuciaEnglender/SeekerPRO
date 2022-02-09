@@ -5,15 +5,21 @@ import ButtonSignIn from "../../private/ButtonSignIn";
 import { getUsers } from "../../redux/actions/indexL";
 import { useDispatch, useSelector } from "react-redux";
 
-const SectionA = () => {
+const SectionViejo = () => {
   const dispatch = useDispatch();
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
   );
-  const { user, isAuthenticated } = useAuth0();
+  // const { user, isAuthenticated } = useAuth0();
+
+  // const email = profileState?.mail;
 
   useEffect(() => {
-    dispatch(getUsers());
+    const timer = setTimeout(() => {
+      dispatch(getUsers(profileState.mail));
+    }, 6000);
+    return () => clearTimeout(timer);
+    console.log(profileState.mail);
   }, [dispatch]);
 
   return (
@@ -26,19 +32,13 @@ const SectionA = () => {
           dicta iure hic, molestiae libero veritatis quos.
         </p>
 
-        {isAuthenticated ? (
-          <h3 className="text-xl pl-3 font-bold pb-4">
-            {
-              (profileState.profile = "BUSINESS"
-                ? <ButtonsHomeE /> && <ButtonsHomeP />
-                : <ButtonsHomeP /> && <ButtonsHomeE />)
-            }
-          </h3>
-        ) : (
-          <h3 className="text-xl pl-3 font-bold pb-4">
-            Join Us! <ButtonSignIn></ButtonSignIn>
-          </h3>
-        )}
+        <h3 className="text-xl pl-3 font-bold pb-4">
+          {profileState.profile === "BUSINESS" ? (
+            <ButtonsHomeE />
+          ) : (
+            <ButtonsHomeP />
+          )}
+        </h3>
       </div>
       <div>
         <img className="max-w-sm" src="/Landing.png" alt="asd" />
@@ -47,4 +47,4 @@ const SectionA = () => {
   );
 };
 
-export default SectionA;
+export default SectionViejo;

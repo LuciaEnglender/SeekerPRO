@@ -130,7 +130,7 @@ routerPostulant.post(
       skills,
       seniority,
       vacancy,
-      extras
+      extras,
     } = req.body;
     try {
       const errors = validationResult(req);
@@ -148,7 +148,7 @@ routerPostulant.post(
         github,
         linkedIn,
         portfolio,
-        extras
+        extras,
       });
 
       // busca la vacante

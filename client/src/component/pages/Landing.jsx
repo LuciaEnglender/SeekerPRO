@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers, postEmail } from "../../redux/actions/indexL";
+import { useDispatch, useSelector } from "react-redux";
 import ButtonSignIn from "../../private/ButtonSignIn";
 import { ButtonsHomeE, ButtonsHomeP } from "../../private/ButtonsHome";
-import { getUsers } from "../../redux/actions/indexL";
-import { useDispatch, useSelector } from "react-redux";
-import SectionT from "./SectionT";
-import SectionA from "./SectionA";
 
 const Landing = () => {
   const dispatch = useDispatch();
@@ -17,8 +15,39 @@ const Landing = () => {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+    dispatch(getUsers(profileState.mail));
+  });
+
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    photo: "",
+    profile: "",
+  });
+
+  function handleRecruiter(e) {
+    e.preventDefault();
+    dispatch(postEmail(input));
+    console.log(input);
+    setInput({
+      name: user.name,
+      email: user.email,
+      photo: user.picture,
+      profile: "BUSINESS",
+    });
+  }
+
+  function handleDeveloper(e) {
+    e.preventDefault();
+    dispatch(postEmail(input));
+    console.log(input);
+    setInput({
+      name: user.name,
+      email: user.email,
+      photo: user.picture,
+      profile: "DEVELOPER",
+    });
+  }
 
   return (
     <body className="p-9 bg-gray-300">
@@ -47,13 +76,94 @@ const Landing = () => {
         </div>
       </nav>
       <selection className="px-16 mt-32 mb-32">
-        {
-          (profileState.perfile = null ? (
-            <SectionT></SectionT>
+        {isAuthenticated ? (
+          profileState.profile === null ? (
+            //NUEVO USUARIO
+            <div className="grid grid-cols-2">
+              <div className="p-2">
+                <h2 className="text-5xl  font-bold pb-4">Developer?</h2>
+                <p className="pb-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tempora, sapiente vero temporibus ullam voluptatibus modi
+                  maxime quis minima dicta iure hic, molestiae libero veritatis
+                  quos.
+                </p>
+                <Link to="/homep/create">
+                  {" "}
+                  <button
+                    className="p-4 ml-2 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow"
+                    onClick={(e) => handleDeveloper(e)}
+                  >
+                    Empresa...
+                  </button>
+                </Link>
+              </div>
+              <div className="p-2">
+                <h2 className="text-5xl font-bold pb-4">Recruiter?</h2>
+                <p className="pb-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tempora, sapiente vero temporibus ullam voluptatibus modi
+                  maxime quis minima dicta iure hic, molestiae libero veritatis
+                  quos.
+                </p>
+                <Link to="/homee/create">
+                  <button
+                    className="p-4 ml-2 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow"
+                    onClick={(e) => handleRecruiter(e)}
+                  >
+                    Recruitere...
+                  </button>
+                </Link>
+              </div>
+            </div>
           ) : (
-            <SectionA></SectionA>
-          ))
-        }
+            //VIEJO USUARIO
+            <div className="grid grid-cols-2">
+              <div>
+                <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
+                <p className="pb-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tempora, sapiente vero temporibus ullam voluptatibus modi
+                  maxime quis minima dicta iure hic, molestiae libero veritatis
+                  quos.
+                </p>
+
+                <h3 className="text-xl pl-3 font-bold pb-4">
+                  {profileState.profile === "BUSINESS" ? (
+                    <ButtonsHomeE />
+                  ) : (
+                    <ButtonsHomeP />
+                  )}
+                </h3>
+              </div>
+              <div>
+                <img className="max-w-sm" src="/Landing.png" alt="asd" />
+              </div>
+            </div>
+          )
+        ) : (
+          <div className="grid grid-cols-2">
+            <div>
+              <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
+              <p className="pb-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tempora, sapiente vero temporibus ullam voluptatibus modi maxime
+                quis minima dicta iure hic, molestiae libero veritatis quos.
+              </p>
+
+              <div className="grid grid-cols-2">
+                <div>
+                  <h3 className="text-xl pl-3 font-bold pb-4">
+                    Join Us! <ButtonSignIn></ButtonSignIn>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img className="max-w-sm" src="/Landing.png" alt="asd" />
+            </div>
+          </div>
+        )}
       </selection>
 
       <section className="text-center mb-32">
