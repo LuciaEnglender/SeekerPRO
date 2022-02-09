@@ -7,11 +7,11 @@ import { getPostulados, filterStatusPipeline } from "../../../redux/actions";
 function Pipeline() {
   const dispatch = useDispatch();
 
-  const postulados = useSelector((state) => state.postulados);
-  // const postuladosEjemplo = ejemploPipe;
-  useEffect(() => {
-    dispatch(getPostulados());
-  }, [dispatch]);
+  // const postulados = useSelector((state) => state.postulados);
+  // // const postuladosEjemplo = ejemploPipe;
+  // useEffect(() => {
+  //   dispatch(getPostulados());
+  // }, [dispatch]);
 
   function handlePipeline(e) {
     dispatch(filterStatusPipeline(e.target.value));

@@ -42,7 +42,7 @@ function App() {
       <Route path="/homee/notification" element={<NotiEmp />} />
       <Route path="/homee/message" element={<MensajeEmp />} />
       <Route path="/homee/perfil" element={<PerfilEmp />} />
-      <Route path="/vacancy" element={<DetailVacy />} />
+      <Route path="/vacancy/:id" element={<DetailVacy />} />
       <Route path="/homee/search" element={<SearchPostu />} />
       <Route path="/homee/perfil" element={<PerfilEmp />} />
       <Route path="/homee/setings" element={<SetingsEmp />} />
