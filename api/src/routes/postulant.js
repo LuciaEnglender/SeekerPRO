@@ -9,6 +9,7 @@ const {
   Vacancy,
 } = require("../db");
 const { check, validationResult } = require("express-validator");
+const routerBusiness = require("./business");
 
 const routerPostulant = Router();
 
@@ -100,7 +101,6 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
-
 //*************Ruta que postea un id del postulante para agregar sus vacantes relacion de muchos a muchoa */
 routerPostulant.post('/postulate/:id', async (req, res) => {
   const {id} = req.body
@@ -118,7 +118,7 @@ routerPostulant.post('/postulate/:id', async (req, res) => {
   }catch(e){
     console.log(e)
   }
-});
+})
 
 routerPostulant.post(
   "/",
@@ -229,7 +229,24 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
         attributes: ["name", "description"],
       })
       .then((vacancy) => {
+        console.log(vacancy)
         res.json(vacancy);
+
+      });
+  });
+});
+
+//Cuenta cuantos vacantes tiene un postulante
+routerPostulant.get("/:id/vacancy", async (req, res) => {
+  Postulant.findByPk(req.params.id).then((postulant) => {
+    postulant
+      .getVacancies({
+        attributes: ["name", "description"],
+      })
+      .then((vacancy) => {
+        console.log(vacancy)
+        res.json(vacancy.length);
+
       });
   });
 });
@@ -255,25 +272,6 @@ routerPostulant.delete("/:id", async (req, res) => {
     res.json({ sucess: "The postulant data has been successfully deleted" });
   } catch (error) {
     res.status(400).send("ERROR" + error);
-  }
-});
-
-//*************PROBANDO vacName *************** */
-
-routerPostulant.get("/vacName", async (req, res) => {
-  const { name } = req.query;
-
-  // const allVacancy = await Vacancy.findAll();
-  console.log(name);
-
-  try {
-    const allVacancy = await Vacancy.findOne({
-      where: { name: name },
-    });
-
-    res.status(200).json(allVacancy);
-  } catch (e) {
-    console.log(e);
   }
 });
 
