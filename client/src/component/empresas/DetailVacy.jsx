@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
 import Pipeline from "./modules/Pipeline";
-import {getVacancyDetail} from "../../redux/actions/index"
+import { getVacancyDetail } from "../../redux/actions/index"
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 
 
 function DetailVacy() {
@@ -12,32 +13,39 @@ function DetailVacy() {
   const { id } = useParams()
 
   useEffect(() => {
-    dispatch(getVacancyDetail(id))}, [dispatch, id])
-console.log(detalle.name)
-
+    dispatch(getVacancyDetail(id))
+  }, [dispatch, id])
+  console.log(detalle)
+ 
+  var count = 0
+  
   return (
     <div>
+      <div>
       <NavHomeE titulo={"Notificaciones"} />
+      </div>
       <div>
         <Pipeline />
       </div>
-      <div key={detalle?.id}>
-      <h2>Buscamos: {detalle?.name}</h2>
-      <h3>Descripcion de la vacante: {detalle?.description}</h3>
-      {/* <p>Tecnologias rsequeridas: </p>
-                {detail.activities?.length ? detail.activities.map((ele) => (<div key={count++}>Name: {ele.name}
-                <p>Difficulty: {ele.difficulty}</p>
-                <p>Duration: {ele.duration}</p>
-                <p>Season: {ele.season}</p></div>
-                )) : <p>No activities</p>} */}
+      <div key={detalle[0].id}>
+        <h2>Buscamos: {detalle[0].name}</h2>
+        <h3>Descripcion de la vacante: {detalle[0].description}</h3>
+        <h4>Seniority: {detalle[0].seniorities.map((ele) => (<p>{ele.name}</p>))}</h4>
+        <p>Tecnologías Requeridas: {detalle[0].technologies.map((ele) => (<p key={count++}>{ele.name}</p>))}</p>
+        <p>Idioma: {detalle[0].languages.map((ele) => (<p>{ele.name}</p>))}</p>
+
 
       </div>
+      <button>Delete Vacancy</button>
 
       <Link to="/homee">
-        <button>Volver</button>
+        <button>
+          <BsFillArrowLeftSquareFill />
+        </button>
       </Link>
     </div>
   );
 }
 
 export default DetailVacy;
+
