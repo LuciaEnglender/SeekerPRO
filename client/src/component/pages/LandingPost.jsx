@@ -1,9 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { ButtonLogIn } from "../../private/ButtonLogIn";
-import ButtonSignIn from "../../private/ButtonSignIn";
+import { useAuth0 } from "@auth0/auth0-react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
+import { postEmail } from "../../redux/actions/indexL";
 
-const Landing = () => {
+const LandingPost = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth0();
+  const [input, setInput] = useState({
+    email: "",
+    name: "",
+    profile: "",
+  });
+
+  function handleClick(e) {
+    e.preventDefault();
+    setInput({
+      name: user.name,
+      email: user.email,
+      profile: "nuevo",
+    });
+    dispatch(postEmail(input));
+    navigate("/register");
+  }
   return (
     <body className="p-9 bg-gray-300">
       <nav className=" grid grid-cols-2">
@@ -13,7 +34,7 @@ const Landing = () => {
         <div>
           <div className="float-right">
             <div className="float-right">
-              <ButtonLogIn />
+              <ButtonLogOutLanding />
             </div>
             <a
               href="#about"
@@ -30,25 +51,23 @@ const Landing = () => {
           </div>
         </div>
       </nav>
-      <section className="px-16 mt-32 mb-32">
+      <div className="px-16 mt-32 mb-32">
         <div className="grid grid-cols-2">
           <div>
             <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
-            <p className="pb-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-              sapiente vero temporibus ullam voluptatibus modi maxime quis
-              minima dicta iure hic, molestiae libero veritatis quos.
-            </p>
 
             <h3 className="text-xl pl-3 font-bold pb-4">
-              Join Us! <ButtonSignIn></ButtonSignIn>
+              Continua papa{" "}
+              <Link to="/register">
+                <button onClick={(e) => handleClick(e)}>Entrar</button>
+              </Link>
             </h3>
           </div>
           <div>
             <img className="max-w-sm" src="/Landing.png" alt="asd" />
           </div>
         </div>
-      </section>
+      </div>
 
       <section className="text-center mb-32">
         <div className="max-w-xl inline-block">
@@ -131,4 +150,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default LandingPost;

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ButtonsHomeE, ButtonsHomeP } from "../../private/ButtonsHome";
-import ButtonSignIn from "../../private/ButtonSignIn";
 import { getUsers } from "../../redux/actions/indexL";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,17 +9,10 @@ const SectionViejo = () => {
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
   );
-  // const { user, isAuthenticated } = useAuth0();
-
-  // const email = profileState?.mail;
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(getUsers(profileState.mail));
-    }, 6000);
-    return () => clearTimeout(timer);
-    console.log(profileState.mail);
-  }, [dispatch]);
+    dispatch(getUsers(profileState.email));
+  }, [dispatch, profileState]);
 
   return (
     <div className="grid grid-cols-2">

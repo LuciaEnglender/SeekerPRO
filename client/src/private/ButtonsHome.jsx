@@ -6,7 +6,7 @@ export const ButtonsHomeE = () => {
     <Link to="/homee">
       {" "}
       <button className="p-4 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow">
-        Developers
+        Recruiter
       </button>{" "}
     </Link>
   );
@@ -16,7 +16,7 @@ export const ButtonsHomeP = () => {
     <Link to="/homep">
       {" "}
       <button className="p-4 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow">
-        Recruiter
+        Developer
       </button>{" "}
     </Link>
   );

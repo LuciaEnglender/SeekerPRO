@@ -102,17 +102,7 @@ routerPostulant.get("/", async (req, res) => {
 
 routerPostulant.post(
   "/",
-  [
-    /*  check('name', 'name is required').not().isEmpty(),
-    check('gender', 'The gender is required').not().isEmpty(),
-    check('phone', 'phone is required').not().isEmpty(),
-    check('photo', 'The photo is required').not().isEmpty(),
-    check('CV', 'CV is required').not().isEmpty(),
-    check('location', 'The location is required').not().isEmpty(),
-    check('github', 'github is required').not().isEmpty(),
-    check('linkedIn', 'The linkedIn is required').not().isEmpty(),
-    check('portfolio', 'portfolio is required').not().isEmpty()*/
-  ],
+
   async (req, res) => {
     //el campo de genero recibe un solo valor
     let {
@@ -131,6 +121,7 @@ routerPostulant.post(
       seniority,
       vacancy,
       extras,
+      loginId,
     } = req.body;
     try {
       const errors = validationResult(req);
@@ -194,6 +185,9 @@ routerPostulant.post(
         });
         await createPostuland.addTechnology(technologyInDB);
       }
+
+      let finderLogin = await Login.findByPk(loginId);
+      await createPostuland.setLogin(loginId);
 
       res.json(createPostuland);
     } catch (error) {

@@ -420,37 +420,9 @@ routerBusiness.get("/:name", async (req, res) => {
 
 routerBusiness.post(
   "/",
-  [
-    check("name", "Name is required").not().isEmpty(),
-    check("description", "The description is required").not().isEmpty(),
-    check("location", "The location is required").not().isEmpty(),
-    check("cuit", "The cuit is required").not().isEmpty(),
-  ],
-  async (req, res) => {
-    let { name, description, location, cuit } = req.body;
 
-    /////////////////////// LU y ALI///// COMENTE ESTO PARA PROBAR EL POST DE BUSINESS, NO ME DEJABA PORQUE ESTA 2 VECES EL MISMO CODIGO (error de doble respuesta)
-    ////////////////////////// ESTA TODO ORDENADO TAL CUAL LO DEJARON SOLO QUE COMENTE DE LA 46 a la 67 PARA PODER PROBAR PARA LA PRESENTACION
-    ///////////////////////////////////////////PRINCIPIO/////////////////////////////////////////
-    // try {
-    //   //objeto error . //Metodo de expressValidator
-    //   const errors = validationResult(req);
-    //   if (!errors.isEmpty()) {
-    //     //se crea un obj errores convierto en array,
-    //     res.status(422).json({ errores: errors.array() });
-    //   }
-    //   let createBusiness = await Business.create({
-    //     name,
-    //     description,
-    //     location,
-    //     cuit,
-    //   });
-    //   res.json(createBusiness);
-    // } catch (error) {
-    //   res.status(404).send("ERROR" + error);
-    //   console.log(error);
-    // }
-    ////////////////////////////////////////// FIN  /////////////////////////////////////////////////////////
+  async (req, res) => {
+    let { name, description, location, cuit, loginId } = req.body;
 
     try {
       let createBusiness = await Business.create({
@@ -459,6 +431,11 @@ routerBusiness.post(
         location,
         cuit,
       });
+
+      let finderLogin = await Login.findByPk(loginId);
+
+      await createBusiness.setLogin(finderLogin);
+
       res.json(createBusiness);
     } catch (error) {
       res.status(404).send("ERROR" + error);

@@ -1,5 +1,6 @@
 const initialState = {
   perfiles: [],
+  perfilessL: [],
 };
 
 function rootReducerLanding(state = initialState, action) {
@@ -9,7 +10,11 @@ function rootReducerLanding(state = initialState, action) {
         ...state,
         perfiles: action.payload,
       };
-
+    case "PUT_USER_PROFILE":
+      return {
+        ...state,
+        perfiles: action.payload,
+      };
     default:
       return state;
   }
