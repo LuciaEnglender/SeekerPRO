@@ -169,7 +169,7 @@ export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
       let det = await axios.get(
-        `http://localhost:3001/postulant?name=${estado}`
+        `http://localhost:3001/postulant/${estado}`
       );
       return dispatch({
         type: "GET_STATUS_PIPELINE",
