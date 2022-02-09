@@ -7,6 +7,7 @@ const {
   Seniority,
   Skill,
   Technology,
+   Postulant
 } = require("../db");
 
 const { Op } = require("sequelize");
@@ -107,7 +108,7 @@ routerVacancy.post("/", async (req, res) => {
   const {
     name,
     description,
-    // business,
+    business,
     language,
     //location,
     seniority,
@@ -121,13 +122,13 @@ routerVacancy.post("/", async (req, res) => {
       description,
     });
     //busco la empresa para obtener su nombre;
-    // let businessInDB = await Business.findOne({
-    // 	where: {
-    // 		name: business,
-    // 	},
-    // });
+    let businessInDB = await Business.findOne({
+    	where: {
+    		name : business,
+    	},
+    });
     //le agrego la empresa a la vacante;
-    // await newVacancyInDB.setBusiness(businessInDB);
+    await newVacancyInDB.setBusiness(businessInDB);
     //repito lo mismo con las otras tablas
     if (language) {
       let lenguageInDB = await Language.findAll({
@@ -408,15 +409,22 @@ routerVacancy.get("/:name", async (req, res) => {
   }
 });
 
-// // hacerlo al reves los postulantes de cada vacante
-// routerVacancy.get('/:id/postulant', async (req, res) => {
-//     Vacancy.findByPk(req.paramas.id).then(vacancy => {
-//         vacancy.getPostulants({
-//             attribute: ['name']
-//         }).then(postulant => {
-//             res.json(postulant)
-//         });
-//     })
-// })
+
+//cuantos postulantes tiene cada vacante
+routerVacancy.get("/vac/:id", async(req , res) => {
+  Vacancy.findByPk(req.params.id).then((vacancy) => {
+    vacancy
+      .getPostulants({
+        attributes: ["name"],
+      })
+      .then((postulant) => {
+        console.log(postulant)
+        res.json(postulant.length);
+
+
+      });
+  });
+
+});
 
 module.exports = routerVacancy;
