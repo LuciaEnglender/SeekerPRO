@@ -17,17 +17,13 @@ import DetailVacy from "./component/empresas/DetailVacy";
 import SearchPostu from "./component/empresas/SearchPostu";
 import FormPerfil from "./component/empresas/FormPerfil";
 import PrivateRoute from "./private/PrivateRoute";
-import Info from "./private/Info";
 import Register from "./private/Register";
-import LandingPost from "./component/pages/LandingPost";
 
 function App() {
   return (
     <Routes>
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
-      <Route path="/info" element={<Info />} />
-      <Route path="/landingp" element={<LandingPost />} />
       <Route path="/register" element={<Register />} />
       <Route element={<PrivateRoute />}>
         {/* RUTAS DE PERFIL */}

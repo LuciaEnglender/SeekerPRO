@@ -1,57 +1,81 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ButtonLogOutLanding } from "./ButtonLogIn";
-import { getUsers } from "../redux/actions/indexL";
-import { useDispatch, useSelector } from "react-redux";
-import SectionNuevo from "../component/pages/SectionNuevo";
-import SectionViejo from "../component/pages/SectionViejo";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 function Register() {
   const dispatch = useDispatch();
-  const profileState = useSelector((state) => state.rootReducer.perfiles);
-
-  useEffect(() => {
-    dispatch(getUsers(profileState.email));
+  const [input, setInput] = useState({
+    name: "",
+    profile: "",
+    email: "",
   });
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    setInput({
+      name: "",
+      email: "",
+      profile: "",
+    });
+    dispatch(postEmail(input));
+  }
+
+  function handleSelect(e) {
+    setInput({
+      ...input,
+      profile: e.target.value,
+    });
+  }
+
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   return (
-    <body className="p-9 bg-gray-300">
-      <nav className=" grid grid-cols-2">
-        <Link to="/">
-          <h3 className="font-bold  text-2xl">JSeekers</h3>
-        </Link>
-        <div>
-          <div className="float-right">
-            <div className="float-right">
-              <ButtonLogOutLanding />
+    <>
+      <div className="grid grid-cols-2">
+        <div className="p-2">
+          <h2 className="text-5xl  font-bold pb-4">Developer?</h2>
+          <p className="pb-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
+            sapiente vero temporibus ullam voluptatibus modi maxime quis minima
+            dicta iure hic, molestiae libero veritatis quos.
+          </p>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div>
+              <label>Name</label>
+              <input
+                value={input.name}
+                onChange={(e) => handleChange(e)}
+                type="text"
+              />
+              <label>Email</label>
+              <input
+                value={input.email}
+                onChange={(e) => handleChange(e)}
+                type="text"
+              />
+              <label>A qué te dedicás?</label>
+              <select onChange={(e) => handleSelect(e)}>
+                <option value="DEVELOPER">DEVELOPER</option>
+                <option value="BUSINESS">BUSINESS</option>
+              </select>
             </div>
-            <a
-              href="#about"
-              className="hover:opacity-100 opacity-70 text-lg mr-4"
-            >
-              About
-            </a>
-            <a
-              href="#about"
-              className="hover:opacity-100 mr-4 opacity-70 text-lg"
-            >
-              Contact
-            </a>
-          </div>
-        </div>
-      </nav>
-      <div>
-        <div className="px-16 mt-32 mb-32">
-          {/* {profileState.profile === "nuevo" ? (
-            <SectionNuevo></SectionNuevo>
-          ) : (
-            <SectionViejo></SectionViejo>
-          )} */}
+          </form>
         </div>
       </div>
-      ;
-    </body>
+    </>
   );
 }
+
+// {
+//   stado.profile === null ? (
+//     <SectionNuevo></SectionNuevo>
+//   ) : (
+//     <SectionViejo></SectionViejo>
+//   );
+// }
 
 export default Register;

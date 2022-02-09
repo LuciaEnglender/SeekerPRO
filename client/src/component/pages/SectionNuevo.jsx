@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { putUsers } from "../../redux/actions/indexL";
+import { postEmail, putUsers } from "../../redux/actions/indexL";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const SectionNuevo = () => {
   const dispatch = useDispatch();
-  const { user, isAuthenticated } = useAuth0();
-
+  const { user } = useAuth0();
   const [input, setInput] = useState({
+    name: "",
     profile: "",
+    email: "",
   });
 
-  function handleRecruiter(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
     setInput({
-      profile: "BUSINESS",
+      name: "",
+      email: "",
+      profile: "",
     });
-    dispatch(putUsers(input));
+    dispatch(postEmail(input));
   }
 
-  function handleDeveloper(e) {
-    e.preventDefault();
-    console.log(input);
+  function handleSelect(e) {
     setInput({
-      profile: "DEVELOPER",
+      ...input,
+      profile: e.target.value,
     });
-    dispatch(putUsers(input));
+  }
+
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
   }
 
   return (
@@ -40,30 +47,27 @@ const SectionNuevo = () => {
             sapiente vero temporibus ullam voluptatibus modi maxime quis minima
             dicta iure hic, molestiae libero veritatis quos.
           </p>
-          <Link to="/homee/create">
-            <button
-              className="p-4 ml-2 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow"
-              onClick={(e) => handleDeveloper(e)}
-            >
-              Empresa...
-            </button>
-          </Link>
-        </div>
-        <div className="p-2">
-          <h2 className="text-5xl font-bold pb-4">Recruiter?</h2>
-          <p className="pb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-            sapiente vero temporibus ullam voluptatibus modi maxime quis minima
-            dicta iure hic, molestiae libero veritatis quos.
-          </p>
-          <Link to="/homep/create">
-            <button
-              className="p-4 ml-2 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow"
-              onClick={(e) => handleRecruiter(e)}
-            >
-              Recruitere...
-            </button>
-          </Link>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div>
+              <label>Name</label>
+              <input
+                value={input.name}
+                onChange={(e) => handleChange(e)}
+                type="text"
+              />
+              <label>Email</label>
+              <input
+                value={input.email}
+                onChange={(e) => handleChange(e)}
+                type="text"
+              />
+              <label>A qué te dedicás?</label>
+              <select onChange={(e) => handleSelect(e)}>
+                <option value="DEVELOPER">DEVELOPER</option>
+                <option value="BUSINESS">BUSINESS</option>
+              </select>
+            </div>
+          </form>
         </div>
       </div>
     </>

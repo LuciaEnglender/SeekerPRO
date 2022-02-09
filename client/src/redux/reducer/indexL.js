@@ -1,6 +1,5 @@
 const initialState = {
   perfiles: [],
-  perfilessL: [],
 };
 
 function rootReducerLanding(state = initialState, action) {

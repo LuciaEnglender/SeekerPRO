@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ButtonLogIn } from "../../private/ButtonLogIn";
 import ButtonSignIn from "../../private/ButtonSignIn";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Landing = () => {
+  const { isAuthenticated } = useAuth0();
   return (
     <body className="p-9 bg-gray-300">
       <nav className=" grid grid-cols-2">
@@ -39,10 +41,15 @@ const Landing = () => {
               sapiente vero temporibus ullam voluptatibus modi maxime quis
               minima dicta iure hic, molestiae libero veritatis quos.
             </p>
-
-            <h3 className="text-xl pl-3 font-bold pb-4">
-              Join Us! <ButtonSignIn></ButtonSignIn>
-            </h3>
+            {isAuthenticated ? (
+              <Link to="/register">
+                <button>Entrar</button>
+              </Link>
+            ) : (
+              <h3 className="text-xl pl-3 font-bold pb-4">
+                Join Us! <ButtonSignIn></ButtonSignIn>
+              </h3>
+            )}
           </div>
           <div>
             <img className="max-w-sm" src="/Landing.png" alt="asd" />
