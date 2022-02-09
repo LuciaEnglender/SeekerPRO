@@ -6,7 +6,8 @@ module.exports = (sequelize) => {
   sequelize.define('location', {
    
     name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     }
   });
 };
