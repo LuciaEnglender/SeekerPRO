@@ -85,7 +85,7 @@ const HomeEmpresa = () => {
               {currentVacancy ? (
                 currentVacancy.map((el) => {
                   return (
-                    <Link to={`/vacancy?id=${el.id}`}>
+                    <Link to={`/vacancy/${el.id}`}>
                       <CardVacante
                         name={el.name}
                         description={el.description}
