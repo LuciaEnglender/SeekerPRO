@@ -226,11 +226,12 @@ export default function CreateForm() {
   function handleSubmit(e) {
     e.preventDefault();
     alert("Congrats!");
+
     dispatch(createPostulante(input))
     setInput({
       name: "",
       phone: "",
-      location:{} ,
+      location:[],
       gender: "",
       github: "",
       linkedIn: "",
@@ -655,8 +656,4 @@ export default function CreateForm() {
   );
 }
 
-  
-           
-      
-       
-       
+

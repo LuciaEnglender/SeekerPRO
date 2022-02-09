@@ -7,6 +7,7 @@ const {
   Language,
   Seniority,
   Vacancy,
+  Location
 } = require("../db");
 const { check, validationResult } = require("express-validator");
 
@@ -37,6 +38,13 @@ routerPostulant.get("/", async (req, res) => {
           id: id,
         },
         include: [
+          {
+            model: Location,
+            attributes: ['name'],
+            through:{
+              attributes:[]
+            }
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -74,6 +82,13 @@ routerPostulant.get("/", async (req, res) => {
     } else {
       const allPostulant = await Postulant.findAll({
         include: [
+          {
+            model: Location,
+            attributes: ['name'],
+            through:{
+              attributes:[]
+            }
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -113,8 +128,10 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
+
 routerPostulant.post(
   "/",upload.single('archivos'),
+
   async (req, res) => {
     //el campo de genero recibe un solo valor
     let {
@@ -133,8 +150,10 @@ routerPostulant.post(
       vacancy,
       extras
     } = req.body;
+
     let photo=req.file
    console.log(req.file)
+
 
     try {
       const errors = validationResult(req);
@@ -146,7 +165,7 @@ routerPostulant.post(
         name,
         gender,
         phone,
-        photo,
+        //photo,//
         CV,
         location,
         github,
@@ -199,9 +218,19 @@ routerPostulant.post(
         await createPostuland.addTechnology(technologyInDB);
       }
 
+      if(location){
+        let locationInDB = await Location.findAll({
+          where: {
+            name: location
+          }
+        });
+        await createPostuland.addLocation(locationInDB)
+      }
+
+    
       res.json(createPostuland);
     } catch (error) {
-      res.status(400).send("ERROR" + error);
+     console.log(error)
     }
   }
 );
