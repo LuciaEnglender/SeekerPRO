@@ -1,57 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ButtonLogIn from "../../private/ButtonLogIn";
+import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
+import { useAuth0 } from "@auth0/auth0-react";
+import ButtonSignIn from "../../private/ButtonSignIn";
+import { ButtonsHomeE, ButtonsHomeP } from "../../private/ButtonsHome";
+import { getUsers } from "../../redux/actions/indexL";
+import { useDispatch, useSelector } from "react-redux";
+import SectionT from "./SectionT";
 
 const Landing = () => {
+  const dispatch = useDispatch();
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const { user, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
   return (
-    <body className="px-9 bg-gray-300">
-      <nav className="p-4">
+    <body className="p-9 bg-gray-300">
+      <nav className=" grid grid-cols-2">
         <Link to="/">
-          <h3 className="font-bold text-2xl">JSeekers</h3>
+          <h3 className="font-bold  text-2xl">JSeekers</h3>
         </Link>
-        <div className="float-right">
-          <a
-            href="#about"
-            className="hover:opacity-100 opacity-70 text-lg mr-4"
-          >
-            About
-          </a>
-          <a
-            href="#about"
-            className="hover:opacity-100 mr-4 opacity-70 text-lg"
-          >
-            Contact
-          </a>
-          <ButtonLogIn></ButtonLogIn>
+        <div>
+          <div className="float-right">
+            <div className="float-right">
+              {!isAuthenticated ? <ButtonLogIn /> : <ButtonLogOutLanding />}
+            </div>
+            <a
+              href="#about"
+              className="hover:opacity-100 opacity-70 text-lg mr-4"
+            >
+              About
+            </a>
+            <a
+              href="#about"
+              className="hover:opacity-100 mr-4 opacity-70 text-lg"
+            >
+              Contact
+            </a>
+          </div>
         </div>
       </nav>
       <selection className="px-16 mt-32 mb-32">
-        <div className="grid grid-cols-2">
-          <div>
-            <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
-            <p className="pb-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-              sapiente vero temporibus ullam voluptatibus modi maxime quis
-              minima dicta iure hic, molestiae libero veritatis quos.
-            </p>
-            <h3 className="text-2xl font-bold pb-4">Join Us!</h3>
-            <Link to="/homee">
-              {" "}
-              <button className="p-4 py-2 inline-block bg-gradient-to-r from-verdeClaro to-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow">
-                Developers
-              </button>{" "}
-            </Link>
-            <Link to="/homep">
-              {" "}
-              <button className="p-4 py-2 inline-block bg-gradient-to-r from-verdeClaro to-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow">
-                Recruiter
-              </button>{" "}
-            </Link>
-          </div>
-          <div>
-            <img className="max-w-sm" src="/Landing.png" alt="asd" />
-          </div>
-        </div>
+        <SectionT></SectionT>
       </selection>
 
       <section className="text-center mb-32">

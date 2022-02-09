@@ -1,15 +1,5 @@
 import axios from "axios";
 
-export function getEmail(payload) {
-  return async function (dispatch) {
-    const email = await axios.post(
-      `http://localhost:3001/users/register`,
-      payload
-    );
-    return email;
-  };
-}
-
 //Get BUSINESS DETAIL DE PROFILE
 export function getProfile(payload) {
   return async function (dispatch) {
