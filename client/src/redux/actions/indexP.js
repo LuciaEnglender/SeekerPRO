@@ -15,9 +15,8 @@ export const FOLLOW = "FOLLOW"
 export const GET_FAVOURITES = "GET_FAVOURITES"
 export const GET_PROFILE = "GET_PROFILE"
 export const FILTER_COMBINATED = "FILTER_COMBINATED"
-
+export const ADD_FAVOURITES = "ADD_FAVOURITES"
 export const GET_LOCATION= "GET_LOCATION"
-
 export const APPLY = "APPLY"
 export const SEE_LATER= "SEE_LATER"
 export const GET_MY_POSTULATIONS = "GET_MY_POSTULATIONS"

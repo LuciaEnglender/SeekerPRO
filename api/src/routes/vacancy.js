@@ -14,7 +14,7 @@ const e = require("express");
 
 const routerVacancy = Router();
 
-routerVacancy.get("/:id", async (req, res) => {
+routerVacancy.get("/:id", async (req, res) => { //Se busca vacante por id pasado por params
   const id = Number(req.params.id)
 
   try {

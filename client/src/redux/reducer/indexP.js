@@ -15,7 +15,6 @@ import {
   FILTER_BY_SKILL,
   FILTER_COMBINATED,
   ADD_FAVOURITE,
-  GET_SENIORITY,
   GET_LOCATION,
   FOLLOW,
   SEE_LATER,
@@ -107,7 +106,6 @@ export default function rootReducerPostulante(state = initialState, action) {
       };
 
     case FILTER_BY_SKILL:
-
       return {
         ...state,
         filteredVacancy: action.payload,
@@ -151,7 +149,6 @@ export default function rootReducerPostulante(state = initialState, action) {
           ...state,
         }
        default:
-
       return state;
   }
 }
