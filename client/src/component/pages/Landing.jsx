@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { ButtonLogIn } from "../../private/ButtonLogIn";
+import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
 import ButtonSignIn from "../../private/ButtonSignIn";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +26,7 @@ const Landing = () => {
         <div>
           <div className="float-right">
             <div className="float-right">
-              <ButtonLogIn />
+              {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
             </div>
             <a
               href="#about"

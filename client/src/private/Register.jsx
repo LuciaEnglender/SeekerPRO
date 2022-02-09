@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import SectionViejo from "../component/pages/SectionViejo";
+import SectionNuevo from "../component/pages/SectionViejo";
 import { getUsers } from "../redux/actions/indexL";
 import { ButtonLogOutLanding } from "./ButtonLogIn";
 
@@ -11,6 +13,7 @@ function Register() {
 
   useEffect(() => {
     dispatch(getUsers(profileState.email));
+    console.log(profileState.email);
   }, [dispatch, profileState]);
   return (
     <body className="p-9 bg-gray-300">
@@ -45,7 +48,11 @@ function Register() {
               sapiente vero temporibus ullam voluptatibus modi maxime quis
               minima dicta iure hic, molestiae libero veritatis quos.
             </p>
-            {profileState === [] ? SectionN : <SectionViejo></SectionViejo>}
+            {profileState.email === null ? (
+              <SectionViejo></SectionViejo>
+            ) : (
+              <SectionNuevo></SectionNuevo>
+            )}
           </div>
           <div>
             <img className="max-w-sm" src="/Landing.png" alt="asd" />
