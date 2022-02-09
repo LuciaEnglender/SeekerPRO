@@ -11,10 +11,18 @@ export const FILTER_BY_LANGUAGE = "FILTER_BY_LANGUAGE"
 export const FILTER_BY_SENIORITY = "FILTER_BY_SENIORITY"
 export const FILTER_BY_TECHNOLOGY="FILTER_BY_TECHNOLOGY"
 export const FILTER_BY_SKILL="FILTER_BY_SKILL"
-export const ADD_FAVOURITE = "ADD_FAVOURITE"
+export const FOLLOW = "FOLLOW"
 export const GET_FAVOURITES = "GET_FAVOURITES"
 export const GET_PROFILE = "GET_PROFILE"
 export const FILTER_COMBINATED = "FILTER_COMBINATED"
+
+export const GET_LOCATION= "GET_LOCATION"
+
+export const APPLY = "APPLY"
+export const SEE_LATER= "SEE_LATER"
+export const GET_MY_POSTULATIONS = "GET_MY_POSTULATIONS"
+export const REMOVE_POST = "REMOVE_POST" 
+
 
 export function createPostulante(payload) {
   console.log(payload)
@@ -45,6 +53,21 @@ export function getTechnology() {
     }
   };
 }
+
+export function getLocation() {
+  return async function (dispatch) {
+    try {
+      const loc = await axios.get("http://localhost:3001/location");
+      return dispatch({
+        type: GET_LOCATION,
+        payload: loc.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 
 export function getSkill() {
   return async function (dispatch) {
@@ -141,6 +164,19 @@ export function getProfile(payload) {
     }
   };
 }
+export function getMyPostulations(payload) {
+  return async function (dispatch) {
+    try {
+      const postulations = await axios.get(`http://localhost:3001/postulant/${payload}/vacancy`);
+      return dispatch({
+        type: GET_MY_POSTULATIONS,
+        payload: postulations.data,
+      });
+    } catch (error) {
+      console.log("Postulations not founded");
+    }
+  };
+}
 
 export function filterByLanguage (info) {
   return async function (dispatch) {
@@ -212,12 +248,12 @@ export function filterCombinated (info) {
     }
   };
 }
-export function addFavourite (payload) {
+export function follow ({id, postulantId}) {
   return async function(dispatch){
       try{
-          await axios.post('http://localhost:3001/vacancy', payload);
+          await axios.put(`http://localhost:3001/business/${id}`, {postulantId});
           return {
-              type: ADD_FAVOURITE,
+              type: FOLLOW,
               }
           } 
       catch(error){
@@ -225,3 +261,51 @@ export function addFavourite (payload) {
           }
       } 
 } 
+
+export function apply(id, postulanteId){
+  console.log(id)
+  console.log(postulanteId)
+  return async function (){
+    try{
+      await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
+      return {
+          type: APPLY,
+          }
+      } 
+  catch(error){
+        alert("Postulation failed")
+      }
+  } 
+  }
+
+    export function removePost(id, postulanteId){
+      console.log(id)
+      console.log(postulanteId)
+      return async function (){
+        try{
+          await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
+          return {
+              type: REMOVE_POST,
+              }
+          } 
+      catch(error){
+            alert("Can't remove")
+          }
+      } 
+      }
+
+      export function seeLater(id, postulanteId){
+        console.log({id, postulanteId})
+        return async function (){
+          try{
+            await axios.put(`http://localhost:3001/postulant${postulanteId}`, {id});
+            return {
+                type: SEE_LATER,
+                }
+            } 
+        catch(error){
+              alert("Postulation failed")
+            }
+        } 
+        }
+    
