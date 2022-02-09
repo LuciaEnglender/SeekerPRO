@@ -11,7 +11,7 @@ function RemovePost({id}) {
         dispatch(removePost(id, postulanteId));
       }
   return <div>
- <button onClick={()=>handleRemove()}> X </button>
+ <button onClick={()=>handleRemove()}> Remove Post </button>
   </div>;
 }
 
