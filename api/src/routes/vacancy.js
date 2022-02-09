@@ -15,7 +15,7 @@ const e = require("express");
 const routerVacancy = Router();
 
 routerVacancy.get("/", async (req, res) => {
-  const { id } = req.query;
+  const id = Number(req.query.id)
 
   try {
     //si tiene id (o sea que se requiere el detalle) entra acá
@@ -102,6 +102,52 @@ routerVacancy.get("/", async (req, res) => {
     res.send("ERROR" + e);
   }
 });
+routerVacancy.get("/:id", async (req, res) => {
+  const id = Number(req.params.id)
+
+  try {
+    //si tiene id (o sea que se requiere el detalle) entra acá
+    if (id) {
+      const vacanciesInDB = await Vacancy.findAll({
+        //se busca aquel vacante que coincida con este id
+        where: {
+          id: id,
+        },
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      });
+      //si no está es porque no existe
+      vacanciesInDB
+        ? res.status(200).send(vacanciesInDB)
+        : res.status(400).send("doesnt exist this vacancy")
+    } else { res.status(400).send("doesnt exist this vacancy") }
+  } catch (e) {
+    res.send("ERROR" + e);
+  }
+});
+        
+
 
 routerVacancy.post("/", async (req, res) => {
   const {

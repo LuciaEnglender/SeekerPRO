@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import {useQuery} from 'react-query'
 import NavHomeE from "./modules/NavHomeE";
 import Pipeline from "./modules/Pipeline";
 import {getVacancyDetail} from "../../redux/actions/index"
@@ -22,9 +23,9 @@ console.log(detalle)
       <div>
         <Pipeline />
       </div>
-      <div key={detalle?.id}>
-      <h2>Buscamos: {detalle?.name}</h2>
-      <h3>Descripcion de la vacante: {detalle?.description}</h3>
+      <div key={detalle[0].id}>
+      <h2>Buscamos: {detalle[0].name}</h2>
+      <h3>Descripcion de la vacante: {detalle[0].description}</h3>
       {/* <p>Tecnologias rsequeridas: </p>
                 {detail.activities?.length ? detail.activities.map((ele) => (<div key={count++}>Name: {ele.name}
                 <p>Difficulty: {ele.difficulty}</p>

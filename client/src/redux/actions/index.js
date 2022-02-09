@@ -33,7 +33,7 @@ export function getVacancy() {
 //GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTESs
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy?id=${id}`);
+    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
