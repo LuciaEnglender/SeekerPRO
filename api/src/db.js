@@ -45,7 +45,7 @@ const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant, S
 // Product.hasMany(Reviews);
 //Tabla intermedia ente Postulante y Vacante muchos  a  muchos
 Business.belongsToMany(Vacancy, {through : "business_vacancy" });
-Vacancy.belongsToMany(Business, {through : "business_vacancy" });
+Vacancy.belongsToMany(Business, {through : "business_vacancy" });// 
 
 Postulant.belongsToMany(Vacancy, {through : "postulant_vacancy" });
 Vacancy.belongsToMany(Postulant, {through : "postulant_vacancy" });
