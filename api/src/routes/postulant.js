@@ -7,10 +7,24 @@ const {
   Language,
   Seniority,
   Vacancy,
+  Location
 } = require("../db");
 const { check, validationResult } = require("express-validator");
 
 const routerPostulant = Router();
+const multer = require('multer')
+
+////subida de archivos//// cv/photo
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null,'File')
+  },
+  filename: function (req, file, cb) {
+      cb(null, `${Date.now()}-${file.originalname}`)
+  }
+})
+const upload = multer({ storage: storage })
 
 //validado por el nombre
 
@@ -24,6 +38,13 @@ routerPostulant.get("/", async (req, res) => {
           id: id,
         },
         include: [
+          {
+            model: Location,
+            attributes: ['name'],
+            through:{
+              attributes:[]
+            }
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -61,6 +82,13 @@ routerPostulant.get("/", async (req, res) => {
     } else {
       const allPostulant = await Postulant.findAll({
         include: [
+          {
+            model: Location,
+            attributes: ['name'],
+            through:{
+              attributes:[]
+            }
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -100,26 +128,16 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
+
 routerPostulant.post(
-  "/",
-  [
-    /*  check('name', 'name is required').not().isEmpty(),
-    check('gender', 'The gender is required').not().isEmpty(),
-    check('phone', 'phone is required').not().isEmpty(),
-    check('photo', 'The photo is required').not().isEmpty(),
-    check('CV', 'CV is required').not().isEmpty(),
-    check('location', 'The location is required').not().isEmpty(),
-    check('github', 'github is required').not().isEmpty(),
-    check('linkedIn', 'The linkedIn is required').not().isEmpty(),
-    check('portfolio', 'portfolio is required').not().isEmpty()*/
-  ],
+  "/",upload.single('archivos'),
+
   async (req, res) => {
     //el campo de genero recibe un solo valor
     let {
       name,
       gender,
       phone,
-      photo,
       CV,
       location,
       github,
@@ -132,6 +150,11 @@ routerPostulant.post(
       vacancy,
       extras
     } = req.body;
+
+    let photo=req.file
+   console.log(req.file)
+
+
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -142,7 +165,7 @@ routerPostulant.post(
         name,
         gender,
         phone,
-        photo,
+        //photo,//
         CV,
         location,
         github,
@@ -195,9 +218,19 @@ routerPostulant.post(
         await createPostuland.addTechnology(technologyInDB);
       }
 
+      if(location){
+        let locationInDB = await Location.findAll({
+          where: {
+            name: location
+          }
+        });
+        await createPostuland.addLocation(locationInDB)
+      }
+
+    
       res.json(createPostuland);
     } catch (error) {
-      res.status(400).send("ERROR" + error);
+     console.log(error)
     }
   }
 );
@@ -298,3 +331,14 @@ routerPostulant.put('/postulate/:id', async (req, res) =>{
 })
 
 module.exports = routerPostulant;
+
+
+ /*  check('name', 'name is required').not().isEmpty(),
+    check('gender', 'The gender is required').not().isEmpty(),
+    check('phone', 'phone is required').not().isEmpty(),
+    check('photo', 'The photo is required').not().isEmpty(),
+    check('CV', 'CV is required').not().isEmpty(),
+    check('location', 'The location is required').not().isEmpty(),
+    check('github', 'github is required').not().isEmpty(),
+    check('linkedIn', 'The linkedIn is required').not().isEmpty(),
+    check('portfolio', 'portfolio is required').not().isEmpty()*/
