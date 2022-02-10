@@ -47,8 +47,8 @@ const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant, S
 Business.belongsToMany(Vacancy, {through : "business_vacancy" });
 Vacancy.belongsToMany(Business, {through : "business_vacancy" });
 
-Business.belongsToMany(Postulant, {through : "business_postulant" });
 Postulant.belongsToMany(Business, {through : "business_postulant" });//agregar al diagrama
+Business.belongsToMany(Postulant, {through : "business_postulant" });
 
 Postulant.belongsToMany(Vacancy, {through : "postulant_vacancy" });
 Vacancy.belongsToMany(Postulant, {through : "postulant_vacancy" });
