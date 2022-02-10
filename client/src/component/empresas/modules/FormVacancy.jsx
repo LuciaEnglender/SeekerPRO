@@ -8,27 +8,39 @@ import {
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { GrFormClose } from "react-icons/gr";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../../redux/actions/indexL";
 // import NavHomeE from "./NavHomeE";
 
 const FormVacancy = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useAuth0();
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.profiles
+  );
+
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   const [input, setInput] = useState({
     name: "",
     description: "",
     technology: [],
     seniority: [],
     language: [],
+    business: email2,
   });
 
   useEffect(() => {
+    dispatch(getUsers(email2));
     dispatch(getTech());
     dispatch(getSeniority());
     dispatch(getLanguage());
-  }, [dispatch]);
+  }, [dispatch, email2]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,8 +52,9 @@ const FormVacancy = () => {
       technology: [],
       seniority: [],
       language: [],
+      business: email2,
     });
-    navigate(0);
+    navigate("/homee");
   }
   function handleChange(e) {
     setInput({

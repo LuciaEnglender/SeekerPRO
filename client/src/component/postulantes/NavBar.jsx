@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonLogout from "../ui ux/ButtonLogout";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -7,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import ButtonLogOut from "../../private/ButtonLogOut";
 
 // TAILWIND
 const navigation = [
@@ -150,14 +150,12 @@ const NavBar = ({ titulo }) => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <ButtonLogout
+                          <ButtonLogOut
                             estilo={classNames(
                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
-                          >
-                            Log Out
-                          </ButtonLogout>
+                          ></ButtonLogOut>
                         )}
                       </Menu.Item>
                     </Menu.Items>

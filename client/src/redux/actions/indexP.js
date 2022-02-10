@@ -311,6 +311,7 @@ export function apply(id, postulanteId){
             }
         } 
         }
+        
     
         export function removeSeeLater(id, postulanteId){
           console.log(id)
