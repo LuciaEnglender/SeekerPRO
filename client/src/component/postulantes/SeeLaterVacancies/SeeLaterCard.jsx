@@ -1,15 +1,11 @@
 import React from "react";
-import Apply from "./Assets/Apply";
-import SeeLater from "./SeeLaterVacancies/SeeLater";
+import Apply from "../Assets/Apply";
+import RemoveSeeLater from './RemoveSeeLater'
 
-//import {getVacancy} from actions
-// import AddToFavourite from "./Assets/AddToFavourite";
+function SeeLaterCard({ name, description, languages, seniorities, id, technologies}) {
 
-//importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
-function Vacancy({ name, description, languages, seniorities, id, technologies}) {
+console.log(id)
 
-//console.log(id)
-//
   return (
     <div
       tabindex="0"
@@ -52,12 +48,12 @@ function Vacancy({ name, description, languages, seniorities, id, technologies})
           <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
             {technologies ? technologies : "No especificado"}
           </div>
-          <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+          <div class="py-2 px-4 mx-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
         <Apply
         id= {id}/>
         </div>
-        <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <SeeLater
+        <div class="py-2 px-4 mx-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+        <RemoveSeeLater
         id= {id}/>
         </div>
 
@@ -67,4 +63,4 @@ function Vacancy({ name, description, languages, seniorities, id, technologies})
   );
 }
 
-export default Vacancy;
+export default SeeLaterCard;

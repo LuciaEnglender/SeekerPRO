@@ -39,13 +39,19 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant, Skill,Technology,Vacancy,Seniority} = sequelize.models;
+const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant,Pending ,Skill,Technology,Vacancy,Seniority} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 //Tabla intermedia ente Postulante y Vacante muchos  a  muchos
 Business.belongsToMany(Vacancy, {through : "business_vacancy" });
 Vacancy.belongsToMany(Business, {through : "business_vacancy" });
+
+Postulant.belongsToMany(Business, {through : "business_postulant" });//agregar al diagrama
+Business.belongsToMany(Postulant, {through : "business_postulant" });
+
+Pending.belongsToMany(Vacancy, {through : "pending_vacancy" });
+Vacancy.belongsToMany(Pending, {through : "pending_vacancy" });
 
 Postulant.belongsToMany(Vacancy, {through : "postulant_vacancy" });
 Vacancy.belongsToMany(Postulant, {through : "postulant_vacancy" });

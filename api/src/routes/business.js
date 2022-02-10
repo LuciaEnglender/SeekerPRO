@@ -17,40 +17,39 @@ const router = require("./Filters/language");
 const routerBusiness = Router();
 
 // ******************CRUD BUSINESS********************
-// Ruta get Recibe por query name y es la ruta '/Business'
+//Recibe el id de empresa y trae sus vacantes
+routerBusiness.get("/:id", async (req, res) => {
+  const busId = req.params.id;
 
-routerBusiness.get("/vac", async (req, res) => {
-  // const {name} = req.params
-  Business.findAll({
-    //    where : {name : name},
-    include: {
-      model: Vacancy,
-      attributes: ["name"],
-      // where : {name : name},
+  const allVacancy = await Vacancy.findAll({
+    where: {
+      businessId: busId,
     },
-    attributes: ["name", "description", "location", "cuit"],
-  }).then((businesses) => {
-    console.log(businesses);
-    res.json(businesses);
   });
-
-  // const languageSearch = await Language.findAll({
-  //     where: {
-  //         name: {[Op.like] : `%${name}%`},
-  //     },
-  //     include: {
-  //         model: Vacancy,
-  //         attributes : ["name"],
-  //     }
-  // });
-  // console.log(languageSearch)
-  // for (let i = 0; i < languageSearch.length; i++) {
-  //     if (languageSearch[i].vacancies.length !== 0){
-  //             acum.push(languageSearch[i].vacancies)
-  //     }
-  // }
+  res.status(200).json(allVacancy);
 });
 
+//Cuenta cuantas Vacantes tiene una empresa recibe id de empresa y retona el numero de vacantes
+routerBusiness.get("/count/:id", async (req, res) => {
+  const busId = req.params.id;
+  try {
+    Vacancy.findAndCountAll({
+      where: { businessId: busId },
+      offset: 10,
+      limit: 2,
+    }).then((result) => {
+      const resp = result.count;
+      console.log(result.count);
+      res.json(resp);
+    });
+  } catch (erro) {
+    console.log(erro);
+  }
+
+  //res.json(numVacancy)
+});
+
+//Busca empresa por nombre o trae todas
 routerBusiness.get("/:email", async (req, res) => {
   const email = req.params.email;
 
@@ -89,6 +88,8 @@ routerBusiness.get("/", async (req, res) => {
     res.status(404).send("Err" + error);
   }
 });
+
+//****************BUSQUEDA DEL SEARCHBAR DE EMPRESA**************** */
 routerBusiness.get("/:name", async (req, res) => {
   const { name } = req.params;
   const acum = [];
@@ -138,22 +139,6 @@ routerBusiness.get("/:name", async (req, res) => {
       ],
     });
     if (postulant.length !== 0) acum.push(postulant);
-
-    //   //NO BUSCO EMPRESA
-    //   //trae empresas
-    //   //  const business = await Business.findAll({
-    //   //   where:{
-    //   //     [Op.or] : {
-    //   //       name : {[Op.iLike] : `%${name}%`},
-    //   //       description : {[Op.iLike] : `%${name}%`},
-    //   //       location : {[Op.iLike] : `%${name}%`}
-    //   //     },
-    //   //   },
-
-    //   // });
-    //   //     if(business.length !== 0)acum.push(business);
-
-    //   // Trae Vacante
 
     //   //***********Busca por VACANTE y trae los POSTULANTES****
     const vacancies = await Vacancy.findAll({
@@ -264,6 +249,7 @@ routerBusiness.get("/:name", async (req, res) => {
     }
     if (skills.length !== 0) acum.push(skills);
 
+    //Busca por LANGUAGE
     const language = await Language.findAll({
       where: {
         [Op.or]: {
@@ -317,7 +303,8 @@ routerBusiness.get("/:name", async (req, res) => {
       }
     }
     if (language.length !== 0) acum.push(skills);
-    // //  //Busca por TECHNOLOGY
+
+    //Busca por TECHNOLOGY
     const tech = await Technology.findAll({
       where: {
         [Op.or]: {
@@ -372,7 +359,7 @@ routerBusiness.get("/:name", async (req, res) => {
     }
     if (tech.length !== 0) acum.push(tech);
 
-    // // **********SENIORITY*************
+    // Busca por SENIORYTI
     const seniority = await Seniority.findAll({
       where: {
         [Op.or]: {
@@ -452,13 +439,14 @@ routerBusiness.post(
       let finderLogin = await Login.findByPk(emailId);
       console.log(finderLogin);
       await createBusiness.setLogin(finderLogin);
+      res.json(createBusiness);
     } catch (error) {
       console.log(error);
     }
   }
 );
 
-//Ruta put Recibe por param id y es la ruta '/Business/'id
+//Ruta put Recibe por param id y es la ruta '/Business/'id y la modifica
 routerBusiness.put("/:id", async (req, res) => {
   try {
     await Business.update(req.body, {
@@ -470,7 +458,7 @@ routerBusiness.put("/:id", async (req, res) => {
   }
 });
 
-//Ruta delete Recibe por params id '
+//Ruta delete Recibe por params id esto es solo para pruebas'
 routerBusiness.delete("/:id", async (req, res) => {
   try {
     await Business.destroy({
@@ -480,6 +468,19 @@ routerBusiness.delete("/:id", async (req, res) => {
   } catch (error) {
     res.status(404).send("ERROR" + error);
   }
+});
+
+//esta ruta setea business_vacancy con el id empr y id postulant
+routerBusiness.post("/emp/:id", async (req, res) => {
+  const { id } = req.body;
+  const idBusiness = req.params.id;
+
+  const business = await Business.findByPk(idBusiness);
+  const vacancy = await Vacancy.findByPk(id);
+
+  await business.addVacancy(vacancy);
+
+  res.status(200).json(business);
 });
 
 module.exports = routerBusiness;

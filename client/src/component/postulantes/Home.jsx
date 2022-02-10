@@ -1,16 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from "./NavBar";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import Vacancy from "./Vacancy";
-import SearchBar from "./SearchBar";
-
 import { getVacancy } from "../../redux/actions/indexP";
-import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+//import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+//Componentes
+import Postulations from "../postulantes/MyPostulations/Postulations";
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import Vacancy from "./Vacancy";
+import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
+import Business from './FollowBusiness/Business'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,11 +21,10 @@ export default function Home() {
     (state) => state.rootReducerPostulante.filteredVacancy
   );
 
-  //Renderizacions condicional filtro combinado
-  const [combinado, setCombinado] = useState(false);
-
-  function filtrarCombinado() {
-    setCombinado(!combinado);
+  //Renderizacions postulaciones
+  const [postulaciones, setPostulaciones] = useState(false);
+  function handlePostulations() {
+    setPostulaciones(!postulaciones);
   }
 
   const handleAll = (e) => {
@@ -39,7 +40,9 @@ export default function Home() {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    
+  }, [dispatch]);
 
   return (
     <div className="absolute bg-verdeOscuro h-screen w-screen">
@@ -53,7 +56,17 @@ export default function Home() {
         {/* MI PERFIL */}
         <div className="bg-verdeOscuro p-2">
           <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <MiPerfil />
+            {postulaciones === false ? 
+            <> <button 
+             className="h-fit  px-2  mt-1 shadow-black rounded-2xl 
+             text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+             onClick = {()=> handlePostulations()}>POSTULATIONS</button> 
+             <MiPerfil /> </> :
+            <><button 
+            className="h-fit  px-2  mt-1 shadow-black rounded-2xl 
+            text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+            onClick = {()=>handlePostulations()}>MY PROFILE</button>   
+          <div>  <Postulations/>  <Business/> </div></>}
           </div>
         </div>
         {/* VACAN */}
@@ -70,6 +83,7 @@ export default function Home() {
                     <div className="mx-2">
                       <SearchBar />
                     </div>
+                    
                     <button
                       className="h-fit  px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                       onClick={(e) => handleAll(e)}
@@ -81,17 +95,15 @@ export default function Home() {
                 <FiltroDinamico />
               </div>
               <div className="grid-span-4 h-full">
-                <h1 className=" font-bold text-center mb-3">
-                  My opportunities{" "}
-                </h1>
                 {currentVacancy.length === 0 ? (
-                  <p className=" font-bold text-center mb-3">No Vacancis</p>
+                  <p className=" font-bold text-center mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
                   <div>
                     {currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
                           <Vacancy
+                            id = {el.id}
                             name={el.name}
                             description={el.description}
                             languages={el.languages

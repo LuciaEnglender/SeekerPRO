@@ -8,12 +8,16 @@ import {
   getSkill,
   getLanguage,
   getSeniority,
+  getLocation,
 } from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
+
+
+
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -24,6 +28,7 @@ export default function CreateForm() {
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
   );
+  const locat = useSelector((state) => state.rootReducerPostulante.location)
 
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
@@ -34,17 +39,18 @@ export default function CreateForm() {
 
   //const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
+  
 
   const [input, setInput] = useState({
     name: "",
     phone: "",
-    location: "",
+    location: [],
     gender: "",
-    photo: "",
     github: "",
     linkedIn: "",
     portfolio: "",
     CV: "",
+    file:"",
     technologies: [],
     languages: [],
     skills: [],
@@ -52,7 +58,23 @@ export default function CreateForm() {
     extras: "",
     loginId: email2,
   });
-  console.log(input);
+  
+
+  const handleFile=(e)=>{
+    setInput({
+      ...input,
+      file: e.target.files[0]
+    })
+}
+
+const handleCv=(e)=>{
+  setInput({
+    ...input,
+    CV: e.target.files[0]
+  })
+  console.log(e.target.files)
+}
+  
 
   function handleGithub(e) {
     setInput({
@@ -119,6 +141,17 @@ export default function CreateForm() {
     }
   }
 
+  function handleSelectLocation(e) {
+    if (input.location.includes(e.target.value)) {
+      alert("Already in the list");
+    } else {
+      setInput({
+        ...input,
+        location: [...input.location, e.target.value],
+      });
+    }
+  }
+
   function handleExtra(e) {
     setInput({
       ...input,
@@ -167,6 +200,14 @@ export default function CreateForm() {
     });
   };
 
+  const handleDeleteLocation = (e) => {
+    setInput({
+      ...input,
+      location: input.location.filter((el) => el !== e),
+    });
+  }
+  
+
   //// control de gender ////
   function handleCheck(e) {
     if (e.target.checked) {
@@ -184,17 +225,33 @@ export default function CreateForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createPostulante(input));
     alert("Congrats!");
+    const data = new FormData();
+    data.append("name",input.name)
+    data.append("phone",input.phone)
+    data.append("location",input.location)
+    data.append("gender",input.gender)
+    data.append("github",input.github)
+    data.append("linkedIn",input.linkedIn)
+    data.append("portfolio",input.portfolio)
+    data.append("file",input.file)
+    data.append("CV",input.CV)
+    data.append("technologies",input.technologies)
+    data.append("languages",input.languages)
+    data.append("skills",input.skills)
+    data.append("seniority",input.seniority)
+    data.append("extras",input.extras)
+    
+    dispatch(createPostulante(data))
     setInput({
       name: "",
       phone: "",
-      location: "",
+      location:[],
       gender: "",
-      photo: "",
       github: "",
       linkedIn: "",
       portfolio: "",
+      file:"",
       CV: "",
       technologies: [],
       languages: [],
@@ -205,12 +262,14 @@ export default function CreateForm() {
     });
     navigate("/homep");
   }
-
+  
   useEffect(() => {
     dispatch(getSkill());
     dispatch(getTechnology());
     dispatch(getLanguage());
     dispatch(getSeniority());
+    dispatch(getLocation());
+   
     dispatch(getUsers(email2));
   }, []);
 
@@ -247,6 +306,53 @@ export default function CreateForm() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.phone && <p className="error">{errors.phone}</p>}
+              </div>
+              <br />
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center">Location</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="location"
+                  value={input.location}
+                  name="location"
+                  onChange={(e) => handleSelectLocation(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    selected="false"
+                    disabled
+                  >
+                    
+                    Selecction Location
+                  </option>
+                  {locat?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.location.map((el, i) => (
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      
+                      {el}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDeleteLocation(el)}
+                      >
+                        X{" "}
+                      </button>
+                    </li>
+                  ))}
+                </div>
               </div>
               <div className="w-44 flex flex-col my-2 justify-center">
                 <label className="text-center">Gender:</label>
@@ -292,16 +398,19 @@ export default function CreateForm() {
                   Other
                 </label>
               </div>
-              {/* <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center"> Photo</label>
+             {/*  ///////////////////////PHOTO////////////////////// */}
+               <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center" htmlFor="file"> Photo</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder="photo"
-                  type="text"
-                  value={input.photo}
+                  type="file"
                   name="photo"
+                  id="file"
+                  accept=".jpg"
+                  onChange={(e)=>handleFile(e)}
                 />
-              </div> */}
+              </div> 
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center" htmlFor="github">
                   GitHub:
@@ -339,18 +448,21 @@ export default function CreateForm() {
                   onChange={(e) => handlePortfolio(e)}
                 />
               </div>
-              {/* <div className="w-fit flex flex-col my-2 justify-center">
+              {/* /////////////////CV/////////////// */}
+               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center">CV</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder="cv"
-                  type="text"
-                  value={input.CV}
+                  type="file"
+                  id="file"
+                  accept=".pdf"
                   name="CV"
+                  onChange={(e)=>handleCv(e)}
                 />
-              </div> */}
+              </div> 
             </div>
-            {/* ASDASDASDASASAD */}
+            
             <div className="m-9">
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center">Technology</label>
@@ -429,7 +541,7 @@ export default function CreateForm() {
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      {" "}
+                      
                       {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
@@ -551,6 +663,7 @@ export default function CreateForm() {
                 <button
                   className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                   type="submit"
+                  //onClick={(e)=>fileOnChange(e)}//
                 >
                   CREAR
                 </button>
@@ -563,27 +676,4 @@ export default function CreateForm() {
   );
 }
 
-/*     </div>
-            <br />
-            <div>
-              <label>Locations</label>
-              <select
-                placeholder="Location"
-                type="text"
-                value={input.location}
-                name="location"
-                onChange={(e) => handleChange(e)}
-              >
-                
-                {locat?.map((el) => (
-                  <option value={el} key={el.id}>
-                    
-                  </option>
-                ))}
-      
-              </select>
-            </div>
-            <br />
-      
-       
-       */
+
