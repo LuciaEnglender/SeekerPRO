@@ -1,5 +1,4 @@
 const initialState = {
-  vacani: [],
   vacancies: [],
   allVacancies: [],
   vacancyDetail: [],
@@ -31,11 +30,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         vacancies: action.payload,
         allVacancies: action.payload,
-      };
-    case "GET_VACANCIES":
-      return {
-        ...state,
-        vacani: action.payload,
       };
     case "GET_PROFILES":
       return {

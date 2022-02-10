@@ -1,15 +1,5 @@
 import axios from "axios";
 
-export function getVacancies(email) {
-  return async function (dispatch) {
-    const profile = await axios.get(`http://localhost:3001/business/${email}`);
-    return dispatch({
-      type: "GET_VACANCIES",
-      payload: profile.data,
-    });
-  };
-}
-
 //Get BUSINESS DETAIL DE PROFILE
 export function getProfile(payload) {
   return async function (dispatch) {
@@ -31,9 +21,9 @@ export function postVacancy(payload) {
   };
 }
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
-export function getVacancy(id) {
+export function getVacancy() {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy?id=${id}`);
+    const res = await axios.get("http://localhost:3001/vacancy");
     return dispatch({
       type: "GET_VACANCY",
       payload: res.data,
@@ -43,7 +33,7 @@ export function getVacancy(id) {
 //GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTESs
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy?id=${id}`);
+    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
@@ -109,7 +99,7 @@ export function clearDetail() {
 //(http falso...)
 export function getPostulados() {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy//postulantes`);
+    const res = await axios.get(`http://localhost:3001/vacancy/postulantes`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
@@ -177,9 +167,7 @@ export function postulanteDetail(name) {
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(
-        `http://localhost:3001/postulant?name=${estado}`
-      );
+      let det = await axios.get(`http://localhost:3001/postulant/${estado}`);
       return dispatch({
         type: "GET_STATUS_PIPELINE",
         payload: det.data,
