@@ -5,6 +5,7 @@ import NavHomeE from "./modules/NavHomeE";
 import Pipeline from "./modules/Pipeline";
 import { getVacancyDetail } from "../../redux/actions/index"
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import styles from "../ui ux/styles/DetailVacy.module.css"
 
 
 function DetailVacy() {
@@ -36,8 +37,12 @@ function DetailVacy() {
 
 
       </div>
-      <button>Delete Vacancy</button>
+      <Link to={`/vacancy/edit/${id}`}>
+      {/* <EditVcancy id={id} /> */}
+        <button className={styles.button}>Edit Vacancy</button>
+        </Link>
 
+      <button className={styles.button}>Delete Vacancy</button>
       <Link to="/homee">
         <button>
           <BsFillArrowLeftSquareFill />

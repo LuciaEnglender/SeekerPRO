@@ -20,6 +20,7 @@ import SetingsEmp from "./component/empresas/SetingsEmp";
 import DetailVacy from "./component/empresas/DetailVacy";
 import SearchPostu from "./component/empresas/SearchPostu";
 import FormPerfil from "./component/empresas/FormPerfil";
+import EditVcancy from "./component/empresas/modules/EditVcancy";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
       <Route path="/homee/message" element={<MensajeEmp />} />
       <Route path="/homee/perfil" element={<PerfilEmp />} />
       <Route path="/vacancy/:id" element={<DetailVacy />} />
+      <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
       <Route path="/homee/search" element={<SearchPostu />} />
       <Route path="/homee/perfil" element={<PerfilEmp />} />
       <Route path="/homee/setings" element={<SetingsEmp />} />
