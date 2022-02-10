@@ -12,7 +12,7 @@ function MiPerfil() {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    dispatch(getProfile(10));
+    dispatch(getProfile(2));
   }, []);
   return (
     <div>

@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import FiltroDinamico from "./Assets/FiltroDinamico";
 import Vacancy from "./Vacancy";
 import SearchBar from "./SearchBar";
-import Postulations from "./Postulations";
+import Postulations from "../postulantes/MyPostulations/Postulations";
 import { getVacancy } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import MiPerfil from "./MiPerfil";

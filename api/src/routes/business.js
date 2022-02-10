@@ -491,4 +491,16 @@ routerBusiness.delete("/:id", async (req, res) => {
   }
 });
 
+//esta ruta setea business_vacancy con el id empr y id postulant
+routerBusiness.post('/emp/:id',async (req, res) => {
+  const {id} = req.body
+  const idBusiness = req.params.id
+  
+  const business = await Business.findByPk(idBusiness)
+  const vacancy = await Vacancy.findByPk(id)
+  
+   await business.addVacancy(vacancy)
+  
+  res.status(200).json(business)
+  });
 module.exports = routerBusiness;

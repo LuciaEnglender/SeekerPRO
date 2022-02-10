@@ -6,6 +6,7 @@ const routerPostulant = require('./postulant');
 const routerVacancy = require('./vacancy');
 const routerSignUp = require('./registroManual')
 const routerAdmin = require('./admin')
+const routerFavorite = require('./favorite')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -25,7 +26,7 @@ router.use('/register', routerSignUp);
 router.use('/vacancy', routerVacancy );
 router.use('/allFiltersVacancy', allFilters);
 router.use('/admin', routerAdmin );
-
+router.use('/favorite', routerFavorite);
 
 router.use("/location",location)
 router.use("/languages", language);
