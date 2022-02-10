@@ -10,8 +10,8 @@ const {
   Vacancy,
   Location
 } = require("../db");
-const { check, validationResult } = require("express-validator");
 
+const { check, validationResult } = require("express-validator");
 const routerPostulant = Router();
 const multer = require('multer')
 
@@ -135,9 +135,45 @@ routerPostulant.get("/", async (req, res) => {
 });
 
 
+//*************Ruta que postea un id del postulante para agregar sus vacantes relacion de muchos a muchoa */
+routerPostulant.post('/postulate/:id', async (req, res) => {
+  const { id } = req.body
+
+  const postulanteId = req.params.id
+  try {
+    let postulante = await Postulant.findByPk(postulanteId)
+
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.addVacancy(vacancy);
+
+    res.status(200).json(postulante);
+
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+//**********Remueve una vacante del postulante */
+routerPostulant.put('/postulate/:id', async (req, res) => {
+  const { id } = req.body;
+  const postulantId = req.params.id;
+  try {
+
+    let postulante = await Postulant.findByPk(postulantId)
+
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.removeVacancy(vacancy)
+
+    res.status(200).json('sseasesa')
+  } catch (e) {
+    console.log(e)
+  }
+});
+
 routerPostulant.post(
   "/",upload.single('file'),
-
   async (req, res) => {
     //el campo de genero recibe un solo valor
     let {
@@ -246,7 +282,24 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
         attributes: ["name", "description"],
       })
       .then((vacancy) => {
+        console.log(vacancy)
         res.json(vacancy);
+
+      });
+  });
+});
+
+//Cuenta cuantos vacantes tiene un postulante
+routerPostulant.get("/:id/vacancy", async (req, res) => {
+  Postulant.findByPk(req.params.id).then((postulant) => {
+    postulant
+      .getVacancies({
+        attributes: ["name", "description"],
+      })
+      .then((vacancy) => {
+        console.log(vacancy)
+        res.json(vacancy.length);
+
       });
   });
 });
@@ -280,70 +333,4 @@ routerPostulant.delete("/:id", async (req, res) => {
   }
 });
 
-//*************PROBANDO vacName *************** */
-
-routerPostulant.get("/vacName", async (req, res) => {
-  const { name } = req.query;
-
-  // const allVacancy = await Vacancy.findAll();
-  console.log(name);
-
-  try {
-    const allVacancy = await Vacancy.findOne({
-      where: { name: name },
-    });
-
-    res.status(200).json(allVacancy);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-routerPostulant.post('/postulate/:id', async (req, res) => {
-  const {id} = req.body
- 
-  const postulanteId = req.params.id
-  try {
-    let postulante = await Postulant.findByPk(postulanteId)
-   
-    let vacancy = await Vacancy.findByPk(id)
-   
-    await postulante.addVacancy(vacancy);
-    
-      res.status(200).json(postulante);
-
-  }catch(e){
-    console.log(e)
-  }
-})
-
-routerPostulant.put('/postulate/:id', async (req, res) =>{
-  const {id} = req.body
-  const postulantId = Number(req.params.id);
-  console.log(id)
-  try {
-      
-    let postulante = await Postulant.findByPk(postulantId)
-   
-    let vacancy = await Vacancy.findByPk(id)
-
-    await postulante.removeVacancy(vacancy) 
-
-    res.status(200).json('Remove succsessfully')
-  }catch (e) {
-    console.log(e)
-  }
-})
-
 module.exports = routerPostulant;
-
-
- /*  check('name', 'name is required').not().isEmpty(),
-    check('gender', 'The gender is required').not().isEmpty(),
-    check('phone', 'phone is required').not().isEmpty(),
-    check('photo', 'The photo is required').not().isEmpty(),
-    check('CV', 'CV is required').not().isEmpty(),
-    check('location', 'The location is required').not().isEmpty(),
-    check('github', 'github is required').not().isEmpty(),
-    check('linkedIn', 'The linkedIn is required').not().isEmpty(),
-    check('portfolio', 'portfolio is required').not().isEmpty()*/
