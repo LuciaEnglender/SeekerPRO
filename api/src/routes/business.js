@@ -7,6 +7,7 @@ const {
   Language,
   Technology,
   Skill,
+  Login,
   Seniority,
 } = require("../db");
 const { Op } = require("sequelize");
@@ -422,7 +423,7 @@ routerBusiness.post(
   "/",
 
   async (req, res) => {
-    let { name, description, location, cuit, loginId } = req.body;
+    let { name, description, location, cuit, emailId } = req.body;
 
     try {
       let createBusiness = await Business.create({
@@ -432,13 +433,16 @@ routerBusiness.post(
         cuit,
       });
 
-      let finderLogin = await Login.findByPk(loginId);
+      let finderLogin = await Login.findAll({
+        where: {
+          email: emailId,
+        },
+      });
 
       await createBusiness.setLogin(finderLogin);
 
       res.json(createBusiness);
     } catch (error) {
-      res.status(404).send("ERROR" + error);
       console.log(error);
     }
   }
