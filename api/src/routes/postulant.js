@@ -1,5 +1,6 @@
-const { Router } = require("express");
 
+const { Router } = require("express");
+const path= require("path")
 const {
   Postulant,
   Technology,
@@ -14,17 +15,22 @@ const { check, validationResult } = require("express-validator");
 const routerPostulant = Router();
 const multer = require('multer')
 
+
 ////subida de archivos//// cv/photo
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null,'File')
+      cb(null, 'file')
   },
   filename: function (req, file, cb) {
       cb(null, `${Date.now()}-${file.originalname}`)
   }
 })
+
 const upload = multer({ storage: storage })
+
+
+
 
 //validado por el nombre
 
@@ -130,7 +136,7 @@ routerPostulant.get("/", async (req, res) => {
 
 
 routerPostulant.post(
-  "/",upload.single('archivos'),
+  "/",upload.single('file'),
 
   async (req, res) => {
     //el campo de genero recibe un solo valor
@@ -138,7 +144,6 @@ routerPostulant.post(
       name,
       gender,
       phone,
-      CV,
       location,
       github,
       linkedIn,
@@ -148,13 +153,14 @@ routerPostulant.post(
       skills,
       seniority,
       vacancy,
-      extras
+      extras,
     } = req.body;
 
-    let photo=req.file
-   console.log(req.file)
-
-
+    let {file}=req
+    let photo=file.path
+    //let cv =req.file
+    console.log(file)
+   
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -165,8 +171,8 @@ routerPostulant.post(
         name,
         gender,
         phone,
-        //photo,//
-        CV,
+        photo,
+        //CV,//
         location,
         github,
         linkedIn,
@@ -226,11 +232,9 @@ routerPostulant.post(
         });
         await createPostuland.addLocation(locationInDB)
       }
-
-    
       res.json(createPostuland);
     } catch (error) {
-     console.log(error)
+    console.log(error)
     }
   }
 );
