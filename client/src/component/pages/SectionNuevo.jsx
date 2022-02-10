@@ -41,7 +41,15 @@ const SectionNuevo = () => {
   return (
     <div>
       <div className="grid grid-cols-2">
-        <div className="p-2">
+        <div>
+          <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
+          <p className="pb-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
+            sapiente vero temporibus ullam voluptatibus modi maxime quis minima
+            dicta iure hic, molestiae libero veritatis quos.
+          </p>
+        </div>
+        <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
               <label>Name</label>

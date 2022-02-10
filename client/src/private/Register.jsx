@@ -7,15 +7,11 @@ import { ButtonLogOutLanding } from "./ButtonLogIn";
 
 function Register() {
   const dispatch = useDispatch();
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.perfiles
-  );
-
-  let asdasd = profileState.email;
+  const perfiles = useSelector((state) => state.rootReducerLanding.perfiles);
 
   useEffect(() => {
-    console.log(asdasd);
-    dispatch(getUsers("devmontini@gmail.com"));
+    console.log(perfiles);
+    dispatch(getUsers(perfiles));
   }, [dispatch]);
 
   return (
@@ -31,24 +27,11 @@ function Register() {
         </div>
       </nav>
       <section className="px-16 mt-32 mb-32">
-        <div className="grid grid-cols-2">
-          <div>
-            <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
-            <p className="pb-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-              sapiente vero temporibus ullam voluptatibus modi maxime quis
-              minima dicta iure hic, molestiae libero veritatis quos.
-            </p>
-            {asdasd === undefined ? (
-              <SectionNuevo></SectionNuevo>
-            ) : (
-              <SectionViejo></SectionViejo>
-            )}
-          </div>
-          <div>
-            <img className="max-w-sm" src="/Landing.png" alt="asd" />
-          </div>
-        </div>
+        {perfiles ? (
+          <SectionNuevo></SectionNuevo>
+        ) : (
+          <SectionViejo></SectionViejo>
+        )}
       </section>
     </div>
   );

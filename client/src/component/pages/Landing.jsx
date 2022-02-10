@@ -43,21 +43,21 @@ const Landing = () => {
       </nav>
       <section className="px-16 mt-32 mb-32">
         <div className="grid grid-cols-2">
-          <div>
-            <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
-            <p className="pb-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-              sapiente vero temporibus ullam voluptatibus modi maxime quis
-              minima dicta iure hic, molestiae libero veritatis quos.
-            </p>
-            {isAuthenticated ? (
-              <Navigate to={"/register"} />
-            ) : (
+          {isAuthenticated ? (
+            <Navigate to={"/register"} />
+          ) : (
+            <div>
+              <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
+              <p className="pb-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tempora, sapiente vero temporibus ullam voluptatibus modi maxime
+                quis minima dicta iure hic, molestiae libero veritatis quos.
+              </p>
               <h3 className="text-xl pl-3 font-bold pb-4">
                 Join Us! <ButtonSignIn></ButtonSignIn>
               </h3>
-            )}
-          </div>
+            </div>
+          )}
           <div>
             <img className="max-w-sm" src="/Landing.png" alt="asd" />
           </div>
