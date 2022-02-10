@@ -7,6 +7,7 @@ const {
   Language,
   Technology,
   Skill,
+  Login,
   Seniority,
 } = require("../db");
 const { Op } = require("sequelize");
@@ -17,42 +18,54 @@ const routerBusiness = Router();
 
 // ******************CRUD BUSINESS********************
 //Recibe el id de empresa y trae sus vacantes
-routerBusiness.get('/:id', async (req, res) => {
+routerBusiness.get("/:id", async (req, res) => {
+  const busId = req.params.id;
 
-const busId = req.params.id
-
-const allVacancy = await Vacancy.findAll({
-  where: {
-    businessId : busId
-  }
-})
-res.status(200).json(allVacancy)
+  const allVacancy = await Vacancy.findAll({
+    where: {
+      businessId: busId,
+    },
+  });
+  res.status(200).json(allVacancy);
 });
 
 //Cuenta cuantas Vacantes tiene una empresa recibe id de empresa y retona el numero de vacantes
-routerBusiness.get('/count/:id' , async(req , res) => {
-const busId = req.params.id
-try
-{  Vacancy
-  .findAndCountAll({
-     where: { businessId : busId},
-     offset: 10,
-     limit: 2
-  })
-  .then(result => {
-    const resp = result.count 
-    console.log(result.count);
-    res.json(resp)
-  });
-
-}catch(erro){
-  console.log(erro)
-}
+routerBusiness.get("/count/:id", async (req, res) => {
+  const busId = req.params.id;
+  try {
+    Vacancy.findAndCountAll({
+      where: { businessId: busId },
+      offset: 10,
+      limit: 2,
+    }).then((result) => {
+      const resp = result.count;
+      console.log(result.count);
+      res.json(resp);
+    });
+  } catch (erro) {
+    console.log(erro);
+  }
 
   //res.json(numVacancy)
-})
+});
 
 //Busca empresa por nombre o trae todas
+routerBusiness.get("/:email", async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const businessFinder = await Business.findOne({
+      where: {
+        loginEmail: email,
+      },
+    });
+    console.log(businessFinder);
+    res.json(businessFinder);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 routerBusiness.get("/", async (req, res) => {
   const { name } = req.query;
   const allBusiness = await Business.findAll();
@@ -126,7 +139,6 @@ routerBusiness.get("/:name", async (req, res) => {
       ],
     });
     if (postulant.length !== 0) acum.push(postulant);
-
 
     //   //***********Busca por VACANTE y trae los POSTULANTES****
     const vacancies = await Vacancy.findAll({
@@ -412,14 +424,9 @@ routerBusiness.get("/:name", async (req, res) => {
 
 routerBusiness.post(
   "/",
-  [
-    check("name", "Name is required").not().isEmpty(),
-    check("description", "The description is required").not().isEmpty(),
-    check("location", "The location is required").not().isEmpty(),
-    check("cuit", "The cuit is required").not().isEmpty(),
-  ],
+
   async (req, res) => {
-    let { name, description, location, cuit, vacancy } = req.body;
+    let { name, description, location, cuit, emailId } = req.body;
 
     try {
       let createBusiness = await Business.create({
@@ -427,14 +434,13 @@ routerBusiness.post(
         description,
         location,
         cuit,
-
       });
-   
 
-      // createBusiness.setPostulants(allPostulant)
+      let finderLogin = await Login.findByPk(emailId);
+      console.log(finderLogin);
+      await createBusiness.setLogin(finderLogin);
       res.json(createBusiness);
     } catch (error) {
-      res.status(404).send("ERROR" + error);
       console.log(error);
     }
   }
@@ -465,18 +471,16 @@ routerBusiness.delete("/:id", async (req, res) => {
 });
 
 //esta ruta setea business_vacancy con el id empr y id postulant
-routerBusiness.post('/emp/:id',async (req, res) => {
-  const {id} = req.body
-  const idBusiness = req.params.id
-  
-  const business = await Business.findByPk(idBusiness)
-  const vacancy = await Vacancy.findByPk(id)
-  
-   await business.addVacancy(vacancy)
-  
-  res.status(200).json(business)
-  });
+routerBusiness.post("/emp/:id", async (req, res) => {
+  const { id } = req.body;
+  const idBusiness = req.params.id;
+
+  const business = await Business.findByPk(idBusiness);
+  const vacancy = await Vacancy.findByPk(id);
+
+  await business.addVacancy(vacancy);
+
+  res.status(200).json(business);
+});
 
 module.exports = routerBusiness;
-
-

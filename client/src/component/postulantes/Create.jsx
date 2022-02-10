@@ -13,6 +13,8 @@ import {
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 
 
@@ -27,6 +29,15 @@ export default function CreateForm() {
     (state) => state.rootReducerPostulante.seniority
   );
   const locat = useSelector((state) => state.rootReducerPostulante.location)
+
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const { user } = useAuth0();
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
+  //const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
   
 
@@ -45,6 +56,7 @@ export default function CreateForm() {
     skills: [],
     seniority: [],
     extras: "",
+    loginId: email2,
   });
   
 
@@ -56,12 +68,11 @@ export default function CreateForm() {
 }
 
 const handleCv=(e)=>{
-  const CV=e.target.files[0]
   setInput({
     ...input,
     CV: e.target.files[0]
   })
-  console.log(CV)
+  console.log(e.target.files)
 }
   
 
@@ -226,7 +237,7 @@ const handleCv=(e)=>{
     data.append("file",input.file)
     data.append("CV",input.CV)
     data.append("technologies",input.technologies)
-    data.append("language",input.language)
+    data.append("languages",input.languages)
     data.append("skills",input.skills)
     data.append("seniority",input.seniority)
     data.append("extras",input.extras)
@@ -247,8 +258,9 @@ const handleCv=(e)=>{
       skills: [],
       seniority: [],
       extras: "",
+      loginId: email2,
     });
-    navigate(-1);
+    navigate("/homep");
   }
   
   useEffect(() => {
@@ -258,6 +270,7 @@ const handleCv=(e)=>{
     dispatch(getSeniority());
     dispatch(getLocation());
    
+    dispatch(getUsers(email2));
   }, []);
 
   return (
@@ -435,7 +448,7 @@ const handleCv=(e)=>{
                   onChange={(e) => handlePortfolio(e)}
                 />
               </div>
-              {/* /////////////////cv/////////////// */}
+              {/* /////////////////CV/////////////// */}
                <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center">CV</label>
                 <input

@@ -7,7 +7,7 @@ const {
   Seniority,
   Skill,
   Technology,
-   Postulant
+  Postulant,
 } = require("../db");
 
 const { Op } = require("sequelize");
@@ -15,8 +15,9 @@ const e = require("express");
 
 const routerVacancy = Router();
 
-routerVacancy.get("/:id", async (req, res) => { //Se busca vacante por id pasado por params
-  const id = Number(req.params.id)
+routerVacancy.get("/:id", async (req, res) => {
+  //Se busca vacante por id pasado por params
+  const id = Number(req.params.id);
 
   try {
     //si tiene id (o sea que se requiere el detalle) entra acá
@@ -41,59 +42,6 @@ routerVacancy.get("/:id", async (req, res) => { //Se busca vacante por id pasado
               attributes: [],
             },
           },
-          {
-            model: Technology,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-        ],
-      });
-      //si no está es porque no existe
-      vacanciesInDB
-        ? res.status(200).send(vacanciesInDB)
-        : res.status(400).send("doesnt exist this vacancy")
-    } else { res.status(400).send("doesnt exist this vacancy") }
-  } catch (e) {
-    res.send("ERROR" + e);
-  }
-});
-        
-
-routerVacancy.get("/", async (req, res) => {
-  const id = Number(req.query.id)
-
-  try {
-    //si tiene id (o sea que se requiere el detalle) entra acá
-    if (id) {
-      const vacanciesInDB = await Vacancy.findAll({
-        //se busca aquel vacante que coincida con este id
-        where: {
-          id: id,
-        },
-        include: [
-          {
-            model: Language,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          {
-            model: Seniority,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          // {
-          //   model: Skill,
-          //   attributes: ["name"],
-          //   through: {
-          //     attributes: [],
-          //   },
-          // },
           {
             model: Technology,
             attributes: ["name"],
@@ -108,8 +56,41 @@ routerVacancy.get("/", async (req, res) => {
         ? res.status(200).send(vacanciesInDB)
         : res.status(400).send("doesnt exist this vacancy");
     } else {
+      res.status(400).send("doesnt exist this vacancy");
+    }
+  } catch (e) {
+    res.send("ERROR" + e);
+  }
+});
+
+routerVacancy.get("/", async (req, res) => {
+  const { id, business } = req.query;
+
+  try {
+    //si tiene id (o sea que se requiere el detalle) entra acá
+    if (id) {
+      const vacanciesInDB = await Vacancy.findAll({
+        //se busca aquel vacante que coincida con este id
+        where: {
+          id: id,
+        },
+      });
+      //si no está es porque no existe
+      vacanciesInDB
+        ? res.status(200).send(vacanciesInDB)
+        : res.status(400).send("doesnt exist this vacancy");
+    } else if (business) {
+      const finderBusiness = await Business.findOne({
+        where: {
+          loginEmail: business,
+        },
+      });
+
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
+        where: {
+          businessId: finderBusiness.id,
+        },
         include: [
           {
             model: Language,
@@ -150,8 +131,6 @@ routerVacancy.get("/", async (req, res) => {
   }
 });
 
-
-
 routerVacancy.post("/", async (req, res) => {
   const {
     name,
@@ -171,9 +150,9 @@ routerVacancy.post("/", async (req, res) => {
     });
     //busco la empresa para obtener su nombre;
     let businessInDB = await Business.findOne({
-    	where: {
-    		name : business,
-    	},
+      where: {
+        loginEmail: business,
+      },
     });
     //le agrego la empresa a la vacante;
     await newVacancyInDB.setBusiness(businessInDB);
@@ -252,23 +231,24 @@ routerVacancy.get("/:name", async (req, res) => {
         },
       },
     });
-    if(business.length !== 0)acum.push(business);
-  
+    if (business.length !== 0) acum.push(business);
+
     const vacancy = await Vacancy.findAll({
       where: {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
-          
         },
       },
-      include: [{
+      include: [
+        {
           model: Technology,
           attributes: ["name"],
           through: {
             attributes: [],
           },
-        },{
+        },
+        {
           model: Seniority,
           attributes: ["name"],
           through: {
@@ -281,40 +261,45 @@ routerVacancy.get("/:name", async (req, res) => {
           through: {
             attributes: [],
           },
-        }]
+        },
+      ],
     });
-    if(vacancy.length !== 0) acum.push(vacancy);
+    if (vacancy.length !== 0) acum.push(vacancy);
 
     const languageSearch = await Language.findAll({
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes : ["name"],
-      include: [{
-        model: Vacancy,
-        attributes: ["name"],
-        inlcude : [{
-          model: Technology,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },{
-          model: Seniority,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
+      attributes: ["name"],
+      include: [
         {
-          model: Language,
+          model: Vacancy,
           attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        }]
-        
-      }],
+          inlcude: [
+            {
+              model: Technology,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Seniority,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Language,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+        },
+      ],
     });
 
     for (let i = 0; i < languageSearch.length; i++) {
@@ -327,7 +312,7 @@ routerVacancy.get("/:name", async (req, res) => {
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes : ["name"],
+      attributes: ["name"],
       include: [
         {
           model: Vacancy,
@@ -339,7 +324,8 @@ routerVacancy.get("/:name", async (req, res) => {
               through: {
                 attributes: [],
               },
-            },{
+            },
+            {
               model: Seniority,
               attributes: ["name"],
               through: {
@@ -352,8 +338,8 @@ routerVacancy.get("/:name", async (req, res) => {
               through: {
                 attributes: [],
               },
-            }
-          ]
+            },
+          ],
         },
       ],
     });
@@ -367,18 +353,19 @@ routerVacancy.get("/:name", async (req, res) => {
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes : ["name"],
+      attributes: ["name"],
       include: {
         model: Vacancy,
         attributes: ["name", "description"],
-        include:[
+        include: [
           {
             model: Language,
             attributes: ["name"],
             through: {
               attributes: [],
             },
-          },{
+          },
+          {
             model: Technology,
             attributes: ["name"],
             through: {
@@ -390,9 +377,9 @@ routerVacancy.get("/:name", async (req, res) => {
             attributes: ["name"],
             through: {
               attributes: [],
-            } 
-          }
-        ]
+            },
+          },
+        ],
       },
     });
     for (let i = 0; i < senioritySearch.length; i++) {
@@ -457,7 +444,7 @@ routerVacancy.get("/:name", async (req, res) => {
   }
 });
 
-routerVacancy.get("/vacs/:id", async(req , res) => {
+routerVacancy.get("/vacs/:id", async (req, res) => {
   //Trae todos los pustulantes de una vacante
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
@@ -465,16 +452,13 @@ routerVacancy.get("/vacs/:id", async(req , res) => {
         attributes: ["name"],
       })
       .then((postulant) => {
-        console.log(postulant)
+        console.log(postulant);
         res.json(postulant);
-
-
       });
   });
-
 });
 
-routerVacancy.get("/vac/:id", async(req , res) => {
+routerVacancy.get("/vac/:id", async (req, res) => {
   //cuantos postulantes tiene cada vacante
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
@@ -482,13 +466,10 @@ routerVacancy.get("/vac/:id", async(req , res) => {
         attributes: ["name"],
       })
       .then((postulant) => {
-        console.log(postulant)
+        console.log(postulant);
         res.json(postulant.length);
-
-
       });
   });
-
 });
 
 module.exports = routerVacancy;
