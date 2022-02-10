@@ -433,14 +433,7 @@ routerBusiness.post(
         cuit,
       });
 
-      let finderLogin = await Login.findByPk({
-        where: {
-          email: emailId,
-          through: {
-            attributes: [],
-          },
-        },
-      });
+      let finderLogin = await Login.findByPk(emailId);
       console.log(finderLogin);
       await createBusiness.setLogin(finderLogin);
     } catch (error) {

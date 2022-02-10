@@ -12,6 +12,8 @@ import {
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -22,6 +24,14 @@ export default function CreateForm() {
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
   );
+
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const { user } = useAuth0();
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   //const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
 
@@ -40,6 +50,7 @@ export default function CreateForm() {
     skills: [],
     seniority: [],
     extras: "",
+    loginId: email2,
   });
   console.log(input);
 
@@ -190,8 +201,9 @@ export default function CreateForm() {
       skills: [],
       seniority: [],
       extras: "",
+      loginId: email2,
     });
-    navigate(-1);
+    navigate("/homep");
   }
 
   useEffect(() => {
@@ -199,6 +211,7 @@ export default function CreateForm() {
     dispatch(getTechnology());
     dispatch(getLanguage());
     dispatch(getSeniority());
+    dispatch(getUsers(email2));
   }, []);
 
   return (

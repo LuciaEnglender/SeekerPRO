@@ -7,6 +7,7 @@ const {
   Language,
   Seniority,
   Vacancy,
+  Login,
 } = require("../db");
 const { check, validationResult } = require("express-validator");
 
@@ -187,11 +188,11 @@ routerPostulant.post(
       }
 
       let finderLogin = await Login.findByPk(loginId);
-      await createPostuland.setLogin(loginId);
+      await createPostuland.setLogin(finderLogin);
 
       res.json(createPostuland);
     } catch (error) {
-      res.status(400).send("ERROR" + error);
+      console.log(error);
     }
   }
 );
