@@ -39,7 +39,7 @@ export default function CreateForm() {
     linkedIn: "",
     portfolio: "",
     CV: "",
-    photo:{},
+    file:"",
     technologies: [],
     languages: [],
     skills: [],
@@ -47,23 +47,22 @@ export default function CreateForm() {
     extras: "",
   });
   
-  const [myFile,setMyFile]= useState({})
 
-  // const [image,setImage]= useState({})
-   const fileOnChange=(e)=>{
-     const data= new FormData()
-    console.log(e.target.files[0])
-    setMyFile(e.target.files[0])
-    data.append("photo",myFile)
-     console.log(myFile)
-    // console.log(e.target.files[0])
-   }
-  // const sendImage=(e)=>{
-    //e.target.files[0]
-  //    let formData= new FormData()
-  //    formData.append("archivos",image)
-  //    createPostulante(formData)
-  // }
+  const handleFile=(e)=>{
+    setInput({
+      ...input,
+      file: e.target.files[0]
+    })
+}
+
+const handleCv=(e)=>{
+  const CV=e.target.files[0]
+  setInput({
+    ...input,
+    CV: e.target.files[0]
+  })
+  console.log(CV)
+}
   
 
   function handleGithub(e) {
@@ -97,8 +96,6 @@ export default function CreateForm() {
       });
     }
   }
-
-
 
   function handleLanguage(e) {
     if (input.languages.includes(e.target.value)) {
@@ -198,7 +195,7 @@ export default function CreateForm() {
       location: input.location.filter((el) => el !== e),
     });
   }
-
+  
 
   //// control de gender ////
   function handleCheck(e) {
@@ -215,19 +212,26 @@ export default function CreateForm() {
     }
   }
 
-  /////archivos ////
-  /* function onChangeHandle (e){
-    setInput({
-      ...input,
-      [input.photo]: e.target.value,
-    })
-  } */
-
   function handleSubmit(e) {
     e.preventDefault();
     alert("Congrats!");
-
-    dispatch(createPostulante(input))
+    const data = new FormData();
+    data.append("name",input.name)
+    data.append("phone",input.phone)
+    data.append("location",input.location)
+    data.append("gender",input.gender)
+    data.append("github",input.github)
+    data.append("linkedIn",input.linkedIn)
+    data.append("portfolio",input.portfolio)
+    data.append("file",input.file)
+    data.append("CV",input.CV)
+    data.append("technologies",input.technologies)
+    data.append("language",input.language)
+    data.append("skills",input.skills)
+    data.append("seniority",input.seniority)
+    data.append("extras",input.extras)
+    
+    dispatch(createPostulante(data))
     setInput({
       name: "",
       phone: "",
@@ -236,7 +240,7 @@ export default function CreateForm() {
       github: "",
       linkedIn: "",
       portfolio: "",
-      photo:"",
+      file:"",
       CV: "",
       technologies: [],
       languages: [],
@@ -263,9 +267,7 @@ export default function CreateForm() {
       </div>
       <div className=" flex m-3  rounded-2xl justify-center">
         <div className="w-auto flex  m-0 rounded-2xl justify-center">
-          <form 
-          action="/postulant" method="post"
-          enctype="multipart/form-data"
+          <form
             className="w-full flex flex-row m-7 justify-center mauto rounded-2xl  bg-verdeMedio"
             onSubmit={(e) => handleSubmit(e)}
           >
@@ -383,16 +385,18 @@ export default function CreateForm() {
                   Other
                 </label>
               </div>
+             {/*  ///////////////////////PHOTO////////////////////// */}
                <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center"> Photo</label>
+                <label className="text-center" htmlFor="file"> Photo</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder="photo"
                   type="file"
                   name="photo"
-                  onChange={(e)=>fileOnChange(e)}
+                  id="file"
+                  accept=".jpg"
+                  onChange={(e)=>handleFile(e)}
                 />
-                {/*<button onClick={sendImage}>Upload</button>*/}
               </div> 
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center" htmlFor="github">
@@ -431,18 +435,21 @@ export default function CreateForm() {
                   onChange={(e) => handlePortfolio(e)}
                 />
               </div>
-              {/* <div className="w-fit flex flex-col my-2 justify-center">
+              {/* /////////////////cv/////////////// */}
+               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center">CV</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder="cv"
-                  type="text"
-                  value={input.CV}
+                  type="file"
+                  id="file"
+                  accept=".pdf"
                   name="CV"
+                  onChange={(e)=>handleCv(e)}
                 />
-              </div> */}
+              </div> 
             </div>
-            {/* ASDASDASDASASAD */}
+            
             <div className="m-9">
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center">Technology</label>
