@@ -9,6 +9,7 @@ import {
   GET_SEARCH_BAR,
   GET_PROFILE,
   GET_MY_POSTULATIONS,
+  GET_BUSINESS,
   FILTER_BY_LANGUAGE,
   FILTER_BY_SENIORITY,
   FILTER_BY_TECHNOLOGY,
@@ -19,7 +20,8 @@ import {
   FOLLOW,
   SEE_LATER,
   APPLY,
-  REMOVE_POST
+  REMOVE_POST,
+  REMOVE_SEE_LATER
 } from "../actions/indexP";
 
 import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
@@ -37,7 +39,8 @@ const initialState = {
   favourites: [],
   filteredVacancy: [],
   postulations: [],
-  later: []
+  later: [],
+  business: []
 };
 
 export default function rootReducerPostulante(state = initialState, action) {
@@ -92,6 +95,12 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         profile: action.payload,
       };
+      case GET_BUSINESS:
+        return {
+          ...state,
+         business: action.payload,
+        };
+  
 
     case FILTER_BY_SENIORITY:
       return {
@@ -148,6 +157,10 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state,
       }
+      case REMOVE_SEE_LATER:
+        return {
+          ...state
+        }
     default:
       return state;
   }
