@@ -224,7 +224,7 @@ routerVacancy.post("/", async (req, res) => {
   }
 });
 
-routerVacancy.put("/:vacancyId", async (req, res) => {
+routerVacancy.put("/edit/:vacancyId", async (req, res) => {
   // recibe por params el id, lo busca en la db y le modifica aquellos campos que se modificaron
   try {
     await Vacancy.update(req.body, {
