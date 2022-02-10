@@ -431,7 +431,7 @@ routerBusiness.post(
       });
    
 
-      createBusiness.setPostulants(allPostulant)
+      // createBusiness.setPostulants(allPostulant)
       res.json(createBusiness);
     } catch (error) {
       res.status(404).send("ERROR" + error);
