@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     photo: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
       allowNull: true
     },
     CV: {
