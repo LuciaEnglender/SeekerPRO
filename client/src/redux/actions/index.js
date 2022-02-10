@@ -40,11 +40,22 @@ export function getVacancyDetail(id) {
     });
   };
 }
+//DELETE PARA BORRAR MI VACANTE
 export function deleteVacancy(id) {
   return async function (dispatch) {
     const res = await axios.delete(`http://localhost:3001/vacancy/${id}`);
     return dispatch({
       type: "DELETE_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
+//PUT PARA EDITAR MI VACANTE
+export function editVacancy(id, input) {
+  return async function (dispatch) {
+    const res = await axios.put(`http://localhost:3001/vacancy/edit/${id}`, input);
+    return dispatch({
+      type: "EDIT_VACANCY_ID",
       payload: res.data,
     });
   };
