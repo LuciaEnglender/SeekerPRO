@@ -307,4 +307,19 @@ export function apply(id, postulanteId){
             }
         } 
         }
+        
     
+        /* export function getMyProfModif(id) {
+          return async function (dispatch) {
+            try {
+              const postulations = await axios.get(`http://localhost:3001/postulant/${id}`);
+              return dispatch({
+                type: GET_M,
+                payload: postulations.data,
+              });
+            } catch (error) {
+              console.log("Postulations not founded");
+            }
+          };
+        }
+         */
