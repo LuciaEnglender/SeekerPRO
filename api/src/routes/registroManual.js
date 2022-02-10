@@ -29,7 +29,7 @@ routerSignUp.post("/register", async (req, res) => {
 routerSignUp.get("/:email", async (req, res) => {
   const { email } = req.params;
 
-  const finder = await Login.findOne({
+  const finder = await Login.findAll({
     where: {
       email: email,
     },
