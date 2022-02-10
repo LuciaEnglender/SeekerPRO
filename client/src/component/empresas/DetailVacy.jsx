@@ -24,6 +24,7 @@ function DetailVacy() {
   function handleDelete(e) {
     e.preventDefault();
     dispatch(deleteVacancy(id))
+    alert("Vacante eliminada correctamente ! ")
     console.log(id)
     navigate(-1);
 
@@ -33,13 +34,15 @@ function DetailVacy() {
   return <div>
     <NavHomeE titulo={"Notificaciones"} />
     <Pipeline />
+    {detalle.length === 0 ?  <p>No vacancies</p> :
     <div key={detalle[0]?.id}>
       <h2>Buscamos: {detalle[0]?.name}</h2>
       <h3>Descripcion de la vacante: {detalle[0]?.description}</h3>
       <h4>Seniority: {detalle[0].seniorities.length ? detalle[0].seniorities.map((ele) => ele.name) : <p> No especificado</p>}</h4>
       <p>Tecnologías Requeridas: {detalle[0].technologies.length ? detalle[0].technologies.map((ele) => ele.name) : <p> No especificado</p>}</p>
       <p>Idioma: {detalle[0].languages.length ? detalle[0]?.languages.map((ele) => ele.name) : <p> No especificado</p>}</p>
-    </div>
+    </div> 
+}
     <Link to={`/vacancy/edit/${id}`}>
       {/* <EditVcancy id={id} /> */}
       <button className={styles.button}>Edit Vacancy</button>
