@@ -102,8 +102,6 @@ function EditVcancy() {
       <div key={detalle[0]?.id}>
       <label>Buscamos:</label> <input name="name" type="text" value={input.name} onChange={(e) => handleChange(e)}/>  
       <label>Descripcion de la vacante:</label>  <input name="description" type="text" value={input.description} onChange={(e) => handleChange(e)}/> 
-      <label>Seniority: </label><input name="seniorities" type="text" value={input.seniorities} onChange={(e) => handleChange(e)}/> 
-      <label>Tecnologías Requeridas:</label>  <input  name="technologies" type="text" value={input.technologies} onChange={(e) => handleChange(e)}/> 
       <select
             className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
             name="technology"
@@ -134,7 +132,6 @@ function EditVcancy() {
             ))}
           </div>
           
-      <label>Idioma:</label> <input  name="languages" type="text" value={input.languages} onChange={(e) => handleChange(e)}/> 
       </div>
       <button type="submit" >Edit Vacancy</button>
       </form>
