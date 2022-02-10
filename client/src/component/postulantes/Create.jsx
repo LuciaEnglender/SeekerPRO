@@ -13,6 +13,8 @@ import {
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 
 
@@ -27,6 +29,15 @@ export default function CreateForm() {
     (state) => state.rootReducerPostulante.seniority
   );
   const locat = useSelector((state) => state.rootReducerPostulante.location)
+
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const { user } = useAuth0();
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
+  //const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
   
 
@@ -45,6 +56,7 @@ export default function CreateForm() {
     skills: [],
     seniority: [],
     extras: "",
+    loginId: email2,
   });
   
 
@@ -246,8 +258,9 @@ const handleCv=(e)=>{
       skills: [],
       seniority: [],
       extras: "",
+      loginId: email2,
     });
-    navigate(-1);
+    navigate("/homep");
   }
   
   useEffect(() => {
@@ -257,6 +270,7 @@ const handleCv=(e)=>{
     dispatch(getSeniority());
     dispatch(getLocation());
    
+    dispatch(getUsers(email2));
   }, []);
 
   return (

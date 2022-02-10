@@ -1,21 +1,37 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { postEmpresa } from "../../redux/actions/index";
 import NavHomeE from "./modules/NavHomeE";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 export default function FormPerfil() {
+  const { user } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+  console.log(profileState);
   const [input, setInput] = useState({
     name: "",
     description: "",
     location: "",
     cuit: "",
+    emailId: email2,
   });
+
+  useEffect(() => {
+    console.log(email2);
+    dispatch(getUsers(email2));
+  }, [dispatch, email2]);
 
   function handleSubmit(e) {
     e.preventDefault();
+
     dispatch(postEmpresa(input));
     alert("Empresa completada");
     setInput({
@@ -23,8 +39,9 @@ export default function FormPerfil() {
       description: "",
       location: "",
       cuit: "",
+      emailId: "",
     });
-    navigate(-1);
+    navigate("/homee");
   }
 
   function handleChange(e) {

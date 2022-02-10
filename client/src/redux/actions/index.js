@@ -21,9 +21,11 @@ export function postVacancy(payload) {
   };
 }
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
-export function getVacancy() {
+export function getVacancy(business) {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/vacancy");
+    const res = await axios.get(
+      `http://localhost:3001/vacancy?business=${business}`
+    );
     return dispatch({
       type: "GET_VACANCY",
       payload: res.data,
@@ -65,7 +67,6 @@ export function getSearchName(name) {
 }
 //filtros para el searchbar////////////////////////////////
 export function byTech(payload) {
-  
   return {
     type: "BY_TECH",
     payload,
@@ -168,9 +169,7 @@ export function postulanteDetail(name) {
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(
-        `http://localhost:3001/postulant/${estado}`
-      );
+      let det = await axios.get(`http://localhost:3001/postulant/${estado}`);
       return dispatch({
         type: "GET_STATUS_PIPELINE",
         payload: det.data,
