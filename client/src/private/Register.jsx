@@ -17,9 +17,8 @@ function Register() {
 
   const email2 = email.substring(1, email.length - 1);
 
-  ///FALTA VER PORQUE NO ME LLEGA EL MAIL DEL BACK
   useEffect(() => {
-    console.log(email2);
+    console.log(profileState.email);
     dispatch(getUsers(email2));
   }, [dispatch, email2]);
 
