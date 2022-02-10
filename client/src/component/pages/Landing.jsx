@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, Navigate } from "react-router-dom";
 import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
 import ButtonSignIn from "../../private/ButtonSignIn";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../redux/actions/indexL";
 
 const Landing = () => {
   const { isAuthenticated } = useAuth0();
-  const dispatch = useDispatch();
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.perfiles
-  );
+  // const dispatch = useDispatch();
+  // const profileState = useSelector(
+  //   (state) => state.rootReducerLanding.perfiles
+  // );
 
-  useEffect(() => {
-    dispatch(getUsers(profileState.email));
-  }, [dispatch, profileState]);
+  // useEffect(() => {
+  //   dispatch(getUsers(profileState.email));
+  // }, [dispatch, profileState]);
 
   return (
-    <body className="p-9 bg-gray-300">
+    <div className="p-9 bg-gray-300">
       <nav className=" grid grid-cols-2">
         <Link to="/">
           <h3 className="font-bold  text-2xl">JSeekers</h3>
@@ -143,7 +141,7 @@ const Landing = () => {
           Por Henry Group PAPA!
         </a>
       </footer>
-    </body>
+    </div>
   );
 };
 

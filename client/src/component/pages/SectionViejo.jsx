@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { ButtonsHomeE, ButtonsHomeP } from "../../private/ButtonsHome";
+import { ButtonsHomeE } from "../../private/ButtonsHomeE";
+import { ButtonsHomeP } from "../../private/ButtonsHomeP";
 import { getUsers } from "../../redux/actions/indexL";
 import { useDispatch, useSelector } from "react-redux";
 

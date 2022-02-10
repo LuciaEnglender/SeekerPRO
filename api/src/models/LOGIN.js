@@ -20,7 +20,6 @@ module.exports = (sequelize) => {
     },
     profile: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
   });
 };
