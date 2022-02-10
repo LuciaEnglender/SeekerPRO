@@ -2,9 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Rutas compartidas
-import SignUp from "./component/SignUp/SignUp";
 import Landing from "./component/pages/Landing";
-import Register from "./component/pages/Register";
+import Register from "./private/Register";
 
 //Rutas de Postulantes
 import Home from "./component/postulantes/Home";
@@ -13,9 +12,8 @@ import Perfil from "./component/postulantes/Perfil";
 import Notificaciones from "./component/postulantes/Notifications/Notificaciones";
 import Mensajes from "./component/postulantes/Messages/Mensajes";
 import MiPerfil from "./component/postulantes/MiPerfil";
-import DetailPost from './component/postulantes/MyPostulations/DetailPost'
+import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
-
 
 //Rutas de Empresa
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
@@ -29,7 +27,6 @@ import FormPerfil from "./component/empresas/FormPerfil";
 import EditVcancy from "./component/empresas/modules/EditVcancy";
 // import FormVacancy from "./component/empresas/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
-import Register from "./private/Register";
 
 function App() {
   return (
@@ -44,9 +41,9 @@ function App() {
         <Route path="/homep/notificaciones" element={<Notificaciones />} />
         <Route path="/homep/mensajes" element={<Mensajes />} />
         <Route path="/homep/miperfil" element={<MiPerfil />} />
-        <Route path="/homep/favourites" element={<Business/>} />
+        <Route path="/homep/favourites" element={<Business />} />
         <Route path="/homep/create/modifyprofile" element={<Perfil />} />
-        <Route path="/homep/postdetail/:id" element={<DetailPost/>}/>
+        <Route path="/homep/postdetail/:id" element={<DetailPost />} />
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
         <Route path="/homee/create" element={<FormPerfil />} />
