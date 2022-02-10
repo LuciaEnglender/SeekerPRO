@@ -10,7 +10,6 @@ const routerFavorite = require('./favorite')
 const routerPending = require('./pending')
 
 
-
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const language = require("./Filters/language");
@@ -19,6 +18,8 @@ const tech = require("./Filters/technology");
 const seniority = require("./Filters/seniority");
 const allFilters = require('./Filters/allFiltersVacancy');
 const allFiltersBuss = require('./Filters/allFiltersBusiness');
+const location = require("./Filters/location")
+
 const router = Router();
 
 // Configurar los routers
@@ -33,9 +34,7 @@ router.use('/admin', routerAdmin );
 router.use('/favorite', routerFavorite);
 router.use('/pending', routerPending);
 
-
-
-
+router.use("/location",location)
 router.use("/languages", language);
 router.use("/skills", skill);
 router.use("/tech", tech);
