@@ -314,8 +314,9 @@ routerPostulant.post('/postulate/:id', async (req, res) => {
 })
 
 routerPostulant.put('/postulate/:id', async (req, res) =>{
-  const id = Number(req.body.id)
-  const postulantId = req.params.id;
+  const {id} = req.body
+  const postulantId = Number(req.params.id);
+  console.log(id)
   try {
       
     let postulante = await Postulant.findByPk(postulantId)

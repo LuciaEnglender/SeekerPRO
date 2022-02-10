@@ -1,8 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyPostulations} from '../../redux/actions/indexP'
-import PostCard from './PostCard';
+import { getMyPostulations} from '../../../redux/actions/indexP'
+import PostCard from '../MyPostulations/PostCard';
 
 function Postulations() {
 
@@ -11,11 +11,12 @@ function Postulations() {
     console.log(postulations)
 
     const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
-    console.log(postulanteId)
+    //console.log(postulanteId)
 
   useEffect(() => {
       dispatch(getMyPostulations(postulanteId))
-  }, [dispatch]);
+  }, []);
+
   return <div>
           <h1> My applications </h1>
     <div>

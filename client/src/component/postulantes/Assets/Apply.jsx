@@ -6,7 +6,7 @@ import {apply, getMyPostulations} from '../../../redux/actions/indexP'
 function Apply(id) {
 const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
 console.log(id)
-console.log(postulanteId)
+//console.log(postulanteId)
 const  dispatch = useDispatch()
 const navigate = useNavigate()
 
