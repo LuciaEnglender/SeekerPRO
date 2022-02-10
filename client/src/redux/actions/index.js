@@ -1,5 +1,15 @@
 import axios from "axios";
 
+export function getVacancies(email) {
+  return async function (dispatch) {
+    const profile = await axios.get(`http://localhost:3001/business/${email}`);
+    return dispatch({
+      type: "GET_VACANCIES",
+      payload: profile.data,
+    });
+  };
+}
+
 //Get BUSINESS DETAIL DE PROFILE
 export function getProfile(payload) {
   return async function (dispatch) {
@@ -21,9 +31,9 @@ export function postVacancy(payload) {
   };
 }
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
-export function getVacancy() {
+export function getVacancy(id) {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/vacancy");
+    const res = await axios.get(`http://localhost:3001/vacancy?id=${id}`);
     return dispatch({
       type: "GET_VACANCY",
       payload: res.data,

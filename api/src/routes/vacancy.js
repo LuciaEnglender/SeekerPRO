@@ -123,7 +123,7 @@ routerVacancy.post("/", async (req, res) => {
     //busco la empresa para obtener su nombre;
     let businessInDB = await Business.findOne({
       where: {
-        name: business,
+        loginEmail: business,
       },
     });
     //le agrego la empresa a la vacante;

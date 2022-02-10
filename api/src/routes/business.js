@@ -51,6 +51,22 @@ routerBusiness.get("/vac", async (req, res) => {
   // }
 });
 
+routerBusiness.get("/:email", async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const businessFinder = await Business.findOne({
+      where: {
+        loginEmail: email,
+      },
+    });
+    console.log(businessFinder);
+    res.json(businessFinder);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 routerBusiness.get("/", async (req, res) => {
   const { name } = req.query;
   const allBusiness = await Business.findAll();
