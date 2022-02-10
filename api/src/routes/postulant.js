@@ -102,37 +102,37 @@ routerPostulant.get("/", async (req, res) => {
 
 //*************Ruta que postea un id del postulante para agregar sus vacantes relacion de muchos a muchoa */
 routerPostulant.post('/postulate/:id', async (req, res) => {
-  const {id} = req.body
- 
+  const { id } = req.body
+
   const postulanteId = req.params.id
   try {
     let postulante = await Postulant.findByPk(postulanteId)
-   
-    let vacancy = await Vacancy.findByPk(id)
-   
-    await postulante.addVacancy(vacancy);
-    
-      res.status(200).json(postulante);
 
-  }catch(e){
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.addVacancy(vacancy);
+
+    res.status(200).json(postulante);
+
+  } catch (e) {
     console.log(e)
   }
 })
 
 //**********Remueve una vacante del postulante */
-routerPostulant.put('/postulate/:id', async (req, res) =>{
-  const {id} = req.body;
+routerPostulant.put('/postulate/:id', async (req, res) => {
+  const { id } = req.body;
   const postulantId = req.params.id;
   try {
-      
+
     let postulante = await Postulant.findByPk(postulantId)
-   
+
     let vacancy = await Vacancy.findByPk(id)
 
-    await postulante.removeVacancy(vacancy) 
+    await postulante.removeVacancy(vacancy)
 
     res.status(200).json('sseasesa')
-  }catch (e) {
+  } catch (e) {
     console.log(e)
   }
 });

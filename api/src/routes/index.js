@@ -7,6 +7,9 @@ const routerVacancy = require('./vacancy');
 const routerSignUp = require('./registroManual')
 const routerAdmin = require('./admin')
 const routerFavorite = require('./favorite')
+const routerPending = require('./pending')
+
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -28,6 +31,8 @@ router.use('/allFiltersVacancy', allFilters);
 router.use('/allFiltersBusiness', allFiltersBuss);
 router.use('/admin', routerAdmin );
 router.use('/favorite', routerFavorite);
+router.use('/pending', routerPending);
+
 
 
 
