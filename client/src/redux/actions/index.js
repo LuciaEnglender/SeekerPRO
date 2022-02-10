@@ -21,9 +21,11 @@ export function postVacancy(payload) {
   };
 }
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
-export function getVacancy() {
+export function getVacancy(business) {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/vacancy");
+    const res = await axios.get(
+      `http://localhost:3001/vacancy?business=${business}`
+    );
     return dispatch({
       type: "GET_VACANCY",
       payload: res.data,

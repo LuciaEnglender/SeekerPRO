@@ -15,7 +15,7 @@ const e = require("express");
 const routerVacancy = Router();
 
 routerVacancy.get("/", async (req, res) => {
-  const { id } = req.query;
+  const { id, business } = req.query;
 
   try {
     //si tiene id (o sea que se requiere el detalle) entra acá
@@ -30,9 +30,18 @@ routerVacancy.get("/", async (req, res) => {
       vacanciesInDB
         ? res.status(200).send(vacanciesInDB)
         : res.status(400).send("doesnt exist this vacancy");
-    } else {
+    } else if (business) {
+      const finderBusiness = await Business.findOne({
+        where: {
+          loginEmail: business,
+        },
+      });
+
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
+        where: {
+          businessId: finderBusiness.id,
+        },
         include: [
           {
             model: Language,
