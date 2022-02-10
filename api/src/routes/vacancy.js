@@ -409,9 +409,25 @@ routerVacancy.get("/:name", async (req, res) => {
   }
 });
 
+routerVacancy.get("/vacs/:id", async(req , res) => {
+  //Trae todos los pustulantes de una vacante
+  Vacancy.findByPk(req.params.id).then((vacancy) => {
+    vacancy
+      .getPostulants({
+        attributes: ["name"],
+      })
+      .then((postulant) => {
+        console.log(postulant)
+        res.json(postulant);
 
-//cuantos postulantes tiene cada vacante
+
+      });
+  });
+
+});
+
 routerVacancy.get("/vac/:id", async(req , res) => {
+  //cuantos postulantes tiene cada vacante
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
       .getPostulants({
