@@ -14,7 +14,7 @@ import Notificaciones from "./component/postulantes/Notifications/Notificaciones
 import Mensajes from "./component/postulantes/Messages/Mensajes";
 import MiPerfil from "./component/postulantes/MiPerfil";
 import DetailPost from './component/postulantes/MyPostulations/DetailPost'
-import Favourites from "./component/postulantes/FollowBusiness/Favourites";
+import Business from "./component/postulantes/FollowBusiness/Business";
 
 
 //Rutas de Empresa
@@ -40,7 +40,7 @@ function App() {
       <Route path="/homep/notificaciones" element={<Notificaciones />} />
       <Route path="/homep/mensajes" element={<Mensajes />} />
       <Route path="homep/miperfil" element={<MiPerfil />} />
-      <Route path="/homep/favourites" element={<Favourites />} />
+      <Route path="/homep/favourites" element={<Business/>} />
       <Route path="/homep/create/modifyprofile" element={<Perfil />} />
       <Route path="/homep/postdetail/:id" element={<DetailPost/>}/>
       {/* RUTAS DE EMPRESA */}
