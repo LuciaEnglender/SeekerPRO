@@ -13,14 +13,15 @@ function Register() {
     (state) => state.rootReducerLanding.perfiles
   );
 
-  const usuario = JSON.stringify(user);
-  const email = usuario.email;
+  const email = JSON.stringify(user.email);
+
+  const email2 = email.substring(1, email.length - 1);
 
   ///FALTA VER PORQUE NO ME LLEGA EL MAIL DEL BACK
   useEffect(() => {
-    console.log(email);
-    dispatch(getUsers(email));
-  }, [dispatch, email]);
+    console.log(email2);
+    dispatch(getUsers(email2));
+  }, [dispatch, email2]);
 
   return (
     <div className="p-9 bg-gray-300">
