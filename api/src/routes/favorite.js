@@ -8,6 +8,8 @@ const {
 
 const routerFavorite = Router();
 
+//cuando le de click a fovoritos muestra sus empresas favoritas 
+
 //Recibe id emp y renderiza las vacantes de la empresa
 routerFavorite.get('/:id' , async (req, res) => {
 
@@ -19,6 +21,21 @@ routerFavorite.get('/:id' , async (req, res) => {
   })
   res.status(200).json(allVacancy)
   });
+
+//Recibe id de postulante y id de empresa Relacion de sus empresas favoritas
+//para cuando haga enter en la empresa favorita lleva la relacion ala tabla
+routerFavorite.post('/post/:id', async(req , res) =>{
+const idpost = req.params.id
+const {id} = req.body
+
+const postulant = await Postulant.findByPk(idpost)
+const business = await Businesss.findByPk(id)
+
+await postulant.addBusiness(business)
+
+res.status(200).json(postulant)
+});
+
 
 //Setea idVancacy y idBusiness para la tabla business_vacancy
 routerFavorite.post('/emp/:id',async (req, res) => {
