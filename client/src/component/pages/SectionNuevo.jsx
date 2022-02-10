@@ -21,8 +21,9 @@ const SectionNuevo = () => {
       email: "",
       profile: "",
     });
-    navigate(-3);
+    navigate(input.profile === "DEVELOPER" ? "/homep/create" : "/homee/create");
   }
+
   console.log(input);
   function handleSelect(e) {
     setInput({
@@ -72,6 +73,7 @@ const SectionNuevo = () => {
                 value={input.profile}
                 onChange={(e) => handleSelect(e)}
               >
+                <option>Select...</option>
                 <option value="DEVELOPER">DEVELOPER</option>
                 <option value="BUSINESS">BUSINESS</option>
               </select>

@@ -7,11 +7,16 @@ import { ButtonLogOutLanding } from "./ButtonLogIn";
 
 function Register() {
   const dispatch = useDispatch();
-  const perfiles = useSelector((state) => state.rootReducerLanding.perfiles);
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
 
+  let asdasd = profileState.email;
+
+  ///FALTA VER PORQUE NO ME LLEGA EL MAIL DEL BACK
   useEffect(() => {
-    console.log(perfiles);
-    dispatch(getUsers(perfiles));
+    console.log(asdasd);
+    dispatch(getUsers("devmontini@gmail.com"));
   }, [dispatch]);
 
   return (
@@ -27,7 +32,7 @@ function Register() {
         </div>
       </nav>
       <section className="px-16 mt-32 mb-32">
-        {perfiles ? (
+        {asdasd === undefined ? (
           <SectionNuevo></SectionNuevo>
         ) : (
           <SectionViejo></SectionViejo>
