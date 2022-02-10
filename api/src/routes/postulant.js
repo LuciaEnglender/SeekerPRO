@@ -173,7 +173,7 @@ routerPostulant.put('/postulate/:id', async (req, res) => {
 });
 
 routerPostulant.post(
-  "/",upload.single('file'),
+  "/",upload.any('file',2),
   async (req, res) => {
     //el campo de genero recibe un solo valor
     let {
@@ -192,11 +192,12 @@ routerPostulant.post(
       extras,
     } = req.body;
 
-    let {file}=req
-    let photo=file.path
+    let file = req.file
     //let cv =req.file
+    let photo=req.file
     console.log(file)
-   
+    console.log(req.body)
+
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -230,7 +231,7 @@ routerPostulant.post(
             name: languages,
           },
         });
-        await createPostuland.addLanguage(lenguageInDB);
+        await createPostuland.addLanguages(lenguageInDB);
       }
 
       if (seniority) {
@@ -304,6 +305,7 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
   });
 });
 
+//put para modificar datos de un detalle / perfil de postulante
 routerPostulant.put("/:id", async (req, res) => {
   try {
     await Postulant.update(req.body, {
