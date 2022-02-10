@@ -40,7 +40,15 @@ export function getVacancyDetail(id) {
     });
   };
 }
-
+export function deleteVacancy(id) {
+  return async function (dispatch) {
+    const res = await axios.delete(`http://localhost:3001/vacancy/${id}`);
+    return dispatch({
+      type: "DELETE_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
 // ESTA AREA ES PARA BUSCAR A LOS USUARIOS QUE NO SON VACANTES O SEA DEL TODA LA BASE DE DATOS
 //get para traer a todos los usuario
 export function getProfiles() {

@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import NavHomeE from "./modules/NavHomeE";
 import Pipeline from "./modules/Pipeline";
 import { getVacancyDetail } from "../../redux/actions/index"
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import styles from "../ui ux/styles/DetailVacy.module.css"
+import {deleteVacancy} from "../../redux/actions/index"
 
 
 function DetailVacy() {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   const detalle = useSelector((state) => state.rootReducer.vacancyDetail)
   const { id } = useParams()
 
@@ -17,6 +20,14 @@ function DetailVacy() {
     dispatch(getVacancyDetail(id))
   }, [dispatch, id])
   console.log(detalle)
+
+  function handleDelete(e) {
+    e.preventDefault();
+    dispatch(deleteVacancy(id))
+    console.log(id)
+    navigate(-1);
+
+}
 
 
   return <div>
@@ -34,7 +45,7 @@ function DetailVacy() {
       <button className={styles.button}>Edit Vacancy</button>
     </Link>
 
-    <button className={styles.button}>Delete Vacancy</button>
+    <button className={styles.button} onClick={e => { handleDelete(e) }} >Delete Vacancy</button>
     <Link to="/homee">
       <button>
         <BsFillArrowLeftSquareFill />
