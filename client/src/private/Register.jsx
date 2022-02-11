@@ -20,7 +20,7 @@ function Register() {
   useEffect(() => {
     console.log(profileState.email);
     dispatch(getUsers(email2));
-  }, [dispatch, email2]);
+  }, []);
 
   return (
     <div className="p-9 bg-gray-300">

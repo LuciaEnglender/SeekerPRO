@@ -1,0 +1,23 @@
+import React, {useEffect} from 'react';
+import {unfollow} from '../../../redux/actions/indexP'
+import {useDispatch, useSelector} from 'react-redux'
+
+function Unfollow({businessId}) {
+    const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
+   // console.log(id)
+    //console.log(postulanteId)
+    const  dispatch = useDispatch()
+    function handleUnfollow() {
+        dispatch(unfollow(id, businessId));
+        alert ("Unfollowed business")
+      }
+  return <div>
+ <button 
+  className="h-fit mx-4 px-2  my-2 shadow-lg mt-1 
+  shadow-black rounded-2xl 
+   text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+   onClick={()=>handleUnfollow()}> unfollow </button>
+  </div>;
+}
+
+export default Unfollow;
