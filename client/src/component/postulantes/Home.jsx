@@ -1,16 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from "./NavBar";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import Vacancy from "./Vacancy";
-import SearchBar from "./SearchBar";
-import Postulations from "./Postulations";
 import { getVacancy } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+//Componentes
+import Postulations from "../postulantes/MyPostulations/Postulations";
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import Vacancy from "./Vacancy";
+import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
+import Business from './FollowBusiness/Business'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,7 +23,6 @@ export default function Home() {
 
   //Renderizacions postulaciones
   const [postulaciones, setPostulaciones] = useState(false);
-
   function handlePostulations() {
     setPostulaciones(!postulaciones);
   }
@@ -39,7 +40,9 @@ export default function Home() {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    
+  }, [dispatch]);
 
   return (
     <div className="absolute bg-verdeOscuro h-screen w-screen">
@@ -63,7 +66,7 @@ export default function Home() {
             className="h-fit  px-2  mt-1 shadow-black rounded-2xl 
             text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
             onClick = {()=>handlePostulations()}>MY PROFILE</button>   
-            <Postulations/> </>}
+          <div>  <Postulations/>  <Business/> </div></>}
           </div>
         </div>
         {/* VACAN */}
@@ -80,6 +83,7 @@ export default function Home() {
                     <div className="mx-2">
                       <SearchBar />
                     </div>
+                    
                     <button
                       className="h-fit  px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                       onClick={(e) => handleAll(e)}

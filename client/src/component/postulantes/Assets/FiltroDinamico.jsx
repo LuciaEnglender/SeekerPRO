@@ -2,18 +2,18 @@ import {
   filterCombinated,
   getLanguage,
   getSeniority,
-  getSkill,
+  //getSkills,
   getTechnology,
 } from "../../../redux/actions/indexP";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import s from "../Styles/home.module.css";
+//import s from "../Styles/home.module.css";
 
 export default function FiltroDinamico() {
   const dispatch = useDispatch();
   const tecno = useSelector((state) => state.rootReducerPostulante.technology);
-  const habilidades = useSelector((state) => state.rootReducerPostulante.skill);
+ // const habilidades = useSelector((state) => state.rootReducerPostulante.skill);
   const lenguaje = useSelector((state) => state.rootReducerPostulante.language);
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
@@ -36,7 +36,7 @@ export default function FiltroDinamico() {
       skill: [],
     });
   }
-  console.log(input);
+  //console.log(input);
   function handleSelectTechnology(e) {
     if (input.technology.includes(e.target.value)) {
       alert("Already in the list");
@@ -80,12 +80,12 @@ export default function FiltroDinamico() {
       });
     }
   }
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  }
+ // function handleChange(e) {
+ //   setInput({
+ //     ...input,
+ //     [e.target.name]: e.target.value,
+ //   });
+ // }
   const handleDelete = (e) => {
     setInput({
       ...input,
@@ -100,12 +100,12 @@ export default function FiltroDinamico() {
     });
   };
 
-  const handleDeleteSkills = (e) => {
-    setInput({
-      ...input,
-      skill: input.skill.filter((el) => el !== e),
-    });
-  };
+ // const handleDeleteSkills = (e) => {
+ //   setInput({
+ //     ...input,
+ //     skill: input.skill.filter((el) => el !== e),
+ //   });
+ // };
 
   const handleDeleteSeniority = (e) => {
     setInput({

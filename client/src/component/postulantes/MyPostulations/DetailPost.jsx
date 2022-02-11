@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getMyPostulations } from "../../redux/actions/indexP"
-import RemovePost from './Assets/RemovePost';
+import { getMyPostulations } from "../../../redux/actions/indexP"
+import RemovePost from './RemovePost';
 
 function DetailPost(props) {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function DetailPost(props) {
 const post = useSelector((state) => state.rootReducerPostulante.postulations);
 console.log(post)
 const detail = post.filter(el => el.postulant_vacancy.vacancyId === id)
-console.log(detail)
+//console.log(detail)
 useEffect(()=>{
   dispatch(getMyPostulations());  
          
