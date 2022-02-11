@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GrFormClose } from "react-icons/gr";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../../redux/actions/indexL";
+import NavHomeE from "./NavHomeE";
 // import NavHomeE from "./NavHomeE";
 
 const FormVacancy = () => {
@@ -36,11 +37,12 @@ const FormVacancy = () => {
   });
 
   useEffect(() => {
-    dispatch(getUsers(email2));
+    const element = email2;
+    dispatch(getUsers(element));
     dispatch(getTech());
     dispatch(getSeniority());
     dispatch(getLanguage());
-  }, [dispatch, email2]);
+  }, [dispatch]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -54,7 +56,7 @@ const FormVacancy = () => {
       language: [],
       business: email2,
     });
-    navigate("/homee");
+    navigate(-1);
   }
   function handleChange(e) {
     setInput({
@@ -118,7 +120,7 @@ const FormVacancy = () => {
   return (
     <div>
       {/* NAVEGACIOsN */}
-      {/* <NavHomeE titulo={"Crear"} /> */}
+      <NavHomeE titulo={"Crear"} />
       {/* FORM CREACION VACANTE */}
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="w-full flex flex-col m-0 justify-center">

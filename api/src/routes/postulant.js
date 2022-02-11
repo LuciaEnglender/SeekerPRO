@@ -38,7 +38,7 @@ routerPostulant.get("/", async (req, res) => {
     if (id) {
       const allPostulant = await Postulant.findAll({
         where: {
-          id: id,
+          loginEmail: id,
         },
         include: [
           {

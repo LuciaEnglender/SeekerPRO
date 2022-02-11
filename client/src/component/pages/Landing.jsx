@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
 import ButtonSignIn from "../../private/ButtonSignIn";
 import { useAuth0 } from "@auth0/auth0-react";
+import { AiOutlineWhatsApp } from "react-icons/ai";
 
 const Landing = () => {
   const { isAuthenticated } = useAuth0();
@@ -37,6 +38,9 @@ const Landing = () => {
               className="hover:opacity-100 mr-4 opacity-70 text-lg"
             >
               Contact
+            </a>
+            <a href="https://wa.me/número?text=Hola%somos%hired%pro">
+              <AiOutlineWhatsApp/>
             </a>
           </div>
         </div>
