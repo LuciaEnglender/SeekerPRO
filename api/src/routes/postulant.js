@@ -329,4 +329,60 @@ routerPostulant.delete("/:id", async (req, res) => {
   }
 });
 
+//*************PROBANDO vacName *************** */
+
+routerPostulant.get("/vacName", async (req, res) => {
+  const { name } = req.query;
+
+  // const allVacancy = await Vacancy.findAll();
+  console.log(name);
+
+  try {
+    const allVacancy = await Vacancy.findOne({
+      where: { name: name },
+    });
+
+    res.status(200).json(allVacancy);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+routerPostulant.post('/postulate/:id', async (req, res) => {
+  const {id} = req.body
+ 
+  const postulanteId = req.params.id
+  try {
+    let postulante = await Postulant.findByPk(postulanteId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+   
+    await postulante.addVacancy(vacancy);
+    
+      res.status(200).json(postulante);
+
+  }catch(e){
+    console.log(e)
+  }
+})
+
+routerPostulant.put('/postulate/:id', async (req, res) =>{
+  const id = req.body.id
+
+  const postulantId = req.params.id
+
+  try {
+      
+    let postulante = await Postulant.findByPk(postulantId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.removeVacancy(vacancy) 
+
+    res.status(200).json('Remove succsessfully')
+  }catch (e) {
+    console.log(e)
+  }
+})
+
 module.exports = routerPostulant;

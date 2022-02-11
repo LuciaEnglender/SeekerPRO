@@ -35,6 +35,7 @@ function App() {
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
       <Route path="/register" element={<Register />} />
+      <Route element={<PrivateRoute />}>
         {/* RUTAS DE PERFIL */}
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
@@ -56,7 +57,6 @@ function App() {
         <Route path="/vacancy/:id" element={<DetailVacy />} />
         <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
         <Route path="/homee/setings" element={<SetingsEmp />} />
-        <Route element={<PrivateRoute />}>
       </Route>
     </Routes>
   );
