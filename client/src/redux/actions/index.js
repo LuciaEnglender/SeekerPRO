@@ -21,9 +21,11 @@ export function postVacancy(payload) {
   };
 }
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
-export function getVacancy() {
+export function getVacancy(business) {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/vacancy");
+    const res = await axios.get(
+      `http://localhost:3001/vacancy?business=${business}`
+    );
     return dispatch({
       type: "GET_VACANCY",
       payload: res.data,
@@ -40,7 +42,26 @@ export function getVacancyDetail(id) {
     });
   };
 }
-
+//DELETE PARA BORRAR MI VACANTE
+export function deleteVacancy(id) {
+  return async function (dispatch) {
+    const res = await axios.delete(`http://localhost:3001/vacancy/${id}`);
+    return dispatch({
+      type: "DELETE_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
+//PUT PARA EDITAR MI VACANTE
+export function editVacancy(id, input) {
+  return async function (dispatch) {
+    const res = await axios.put(`http://localhost:3001/vacancy/edit/${id}`, input);
+    return dispatch({
+      type: "EDIT_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
 // ESTA AREA ES PARA BUSCAR A LOS USUARIOS QUE NO SON VACANTES O SEA DEL TODA LA BASE DE DATOS
 //get para traer a todos los usuario
 export function getProfiles() {
@@ -65,7 +86,6 @@ export function getSearchName(name) {
 }
 //filtros para el searchbar////////////////////////////////
 export function byTech(payload) {
-  
   return {
     type: "BY_TECH",
     payload,
@@ -168,9 +188,7 @@ export function postulanteDetail(name) {
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(
-        `http://localhost:3001/postulant?name=${estado}`
-      );
+      let det = await axios.get(`http://localhost:3001/postulant/${estado}`);
       return dispatch({
         type: "GET_STATUS_PIPELINE",
         payload: det.data,

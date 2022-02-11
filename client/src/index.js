@@ -9,17 +9,17 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-// const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-// const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
         <Auth0Provider
-          domain={"dev-qme6fpnd.us.auth0.com"}
-          clientId={"3EYKoAz4HUS3pRM8EHiJaWK6fUFhkUqd"}
-          redirectUri={`${window.location.origin}`}
+          domain="dev-qme6fpnd.us.auth0.com"
+          clientId="3EYKoAz4HUS3pRM8EHiJaWK6fUFhkUqd"
+          redirectUri={window.location.origin}
         >
           <App />
         </Auth0Provider>

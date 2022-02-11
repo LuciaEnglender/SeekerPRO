@@ -12,8 +12,8 @@ function MiPerfil() {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    dispatch(getProfile(12));
-  }, []);
+    dispatch(getProfile(1));
+  }, [dispatch]);
   return (
     <div>
       <div className={s.botones}></div>
@@ -50,6 +50,7 @@ function MiPerfil() {
               {" "}
               {perfil[0].technologies?.map((t) => t.name).join(" - ")}{" "}
             </h2>
+            <h2> {perfil[0].locations?.map((loc) => loc.name).join(" - ")}</h2>
             <h2 className={s.items}>
               {" "}
               {perfil[0].seniorities?.map((s) => s.name).join(" - ")}{" "}

@@ -105,6 +105,8 @@
 		{ "name": "xhosa" },
 		{ "name": "yidis" },
 		{ "name": "yoruba" },
-		{ "name": "zulú" }
+		{ "name": "zulú" },
+		{ "name": "guaraní" },
+		{ "name": "klingon" }
 	]
 }

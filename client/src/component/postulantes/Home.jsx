@@ -1,16 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from "./NavBar";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import Vacancy from "./Vacancy";
-import SearchBar from "./SearchBar";
-
 import { getVacancy } from "../../redux/actions/indexP";
-import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+//import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+//Componentes
+
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import Vacancy from "./Vacancy";
+import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
+//import Business from './FollowBusiness/Business'
+//import Postulations from "../postulantes/MyPostulations/Postulations";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,13 +22,15 @@ export default function Home() {
     (state) => state.rootReducerPostulante.filteredVacancy
   );
 
-  //Renderizacions condicional filtro combinado
-  const [combinado, setCombinado] = useState(false);
-
-  function filtrarCombinado() {
-    setCombinado(!combinado);
+  //Renderizacions postulaciones
+  const [postulaciones, setPostulaciones] = useState(false);
+  function handlePostulations() {
+    setPostulaciones(!postulaciones);
   }
-
+  const [empresas, setEmpresas] = useState(false);
+  function handleEmpresas() {
+    setEmpresas(!empresas);
+  }
   const handleAll = (e) => {
     dispatch(getVacancy());
   };
@@ -36,10 +41,14 @@ export default function Home() {
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
+  const pageMax = filtradas.length / 3
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    
+  }, [dispatch]);
 
   return (
     <div className="absolute bg-verdeOscuro h-screen w-screen">
@@ -52,8 +61,8 @@ export default function Home() {
       <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro  h-auto pt-7">
         {/* MI PERFIL */}
         <div className="bg-verdeOscuro p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <MiPerfil />
+          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">        
+                <MiPerfil /> 
           </div>
         </div>
         {/* VACAN */}
@@ -70,28 +79,29 @@ export default function Home() {
                     <div className="mx-2">
                       <SearchBar />
                     </div>
-                    <button
-                      className="h-fit  px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                   <div>           
+                       <button
+                      className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                       onClick={(e) => handleAll(e)}
                     >
                       all vacancies{" "}
-                    </button>
+                    </button> 
+                  </div>
                   </div>
                 </div>
                 <FiltroDinamico />
               </div>
               <div className="grid-span-4 h-full">
-                <h1 className=" font-bold text-center mb-3">
-                  My opportunities{" "}
-                </h1>
                 {currentVacancy.length === 0 ? (
-                  <p className=" font-bold text-center mb-3">No Vacancis</p>
+                  <p className=" font-bold text-center my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
                   <div>
                     {currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
                           <Vacancy
+                            id = {el.id}
+                            businessId = {el.businessId}
                             name={el.name}
                             description={el.description}
                             languages={el.languages
@@ -120,20 +130,27 @@ export default function Home() {
                 >
                   <AiOutlineArrowLeft />
                 </button>
+                
                 <button
                   className="m-3"
                   onClick={() =>
-                    paginado(currentPage === 3 ? currentPage : currentPage + 1)
+                    paginado(pageMax - currentPage <= 1 ? currentPage : currentPage + 1)
                   }
                 >
                   <AiOutlineArrowRight />
                 </button>
-                <Pagination
-                  vacancyPerPage={vacancyPerPage}
-                  filtradas={filtradas}
-                  paginado={paginado}
-                />
-              </div>
+                     <h1> 
+                      <Pagination
+                     vacancyPerPage={vacancyPerPage}
+                     filtradas={filtradas}
+                     paginado={paginado}
+                   />
+                   </h1>
+                 </div>
+             
+             
+             
+             
             </div>
           </div>
         </div>
@@ -168,3 +185,35 @@ export default function Home() {
     </div>
   );
 }
+
+
+/*              <div className="flex m-0 justify-center">
+              <div>
+              {postulaciones === false ? 
+                   <> <button 
+                    className="h-fit mx-4 px-2  my-2 shadow-lg mt-1 shadow-black rounded-2xl 
+                    text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                    onClick = {()=> handlePostulations()}> my applies </button>  
+                    </> :           
+                     <><button 
+                  className="h-fit mx-4 px-2  my-2 mt-1 shadow-lg shadow-black rounded-2xl 
+                  text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                  onClick = {()=>handlePostulations()}>see less</button>   
+                <div>  <Postulations/> </div></>}
+
+              </div>
+              <div>
+              {empresas === false ? 
+                   <> <button 
+                    className="h-fit mx-4   my-2 px-2  shadow-lg mt-1 shadow-black rounded-2xl 
+                    text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                    onClick = {()=> handleEmpresas()}> followed business </button>  
+                    </> :           
+                     <><button 
+                  className="h-fit mx-4 my-2 px-2  mt-1 shadow-lg shadow-black rounded-2xl 
+                  text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                  onClick = {()=>handleEmpresas()}>see less</button>   
+                <div>  <Business/> </div></>}
+              </div>
+              </div>
+*/
