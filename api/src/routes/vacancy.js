@@ -254,7 +254,7 @@ routerVacancy.put("/edit/:vacancyId", async (req, res) => {
   }
 });
 
-routerVacancy.get("/:name", async (req, res) => {
+routerVacancy.get("/search/:name", async (req, res) => {
   const { name } = req.params;
   const acum = [];
   try {

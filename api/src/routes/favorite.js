@@ -20,15 +20,18 @@ routerFavorite.get("/:id/business", async (req, res) => {
 });
 
 //(3)Recibe id emp y renderiza las vacantes de la empresa
-
-routerFavorite.get("/:id", async (req, res) => {
-  const busId = req.params.id;
-  const allVacancy = await Vacancy.findAll({
-    where: {
-      businessId: busId,
-    },
+//cuando le de click a una empresa traelas vacantes de la empresa
+routerFavorite.post ("/:id/vacancy", async (req, res) => {
+  Business.findByPk(req.params.id).then((business) => {
+    business
+      .getVacancies({
+        attributes: ["name", "description"],
+      })
+      .then((vacancy) => {
+        console.log(vacancy);
+        res.json(vacancy);
+      });
   });
-  res.status(200).json(allVacancy);
 });
 
 //(1)Recibe id de postulante y id de empresa Relacion de sus empresas favoritas
@@ -45,8 +48,35 @@ routerFavorite.post("/post/:id", async (req, res) => {
   res.status(200).json(postulant);
 });
 
-//(4)borra la vacante de favorito
-routerFavorite.put("/pos/:id", async (req, res) => {
+
+// (4)si le da a una vacante
+//Setea idVancacy y idBusiness para la tabla business_vacancy
+routerFavorite.post("/emp/:id", async (req, res) => {
+  const { id } = req.body;
+  const idBusiness = req.params.id;
+  
+  const business = await Business.findByPk(idBusiness);
+  const vacancy = await Vacancy.findByPk(id);
+  
+  await business.addVacancy(vacancy);
+  
+  res.status(200).json(business);
+});
+
+//(5)borra la vacante de favorito
+routerFavorite.put("/vac/:id", async (req, res) => {
+  const { id } = req.body;
+  const idVacancy = req.params.id;
+  
+  const business = await Business.findByPk(idVacancy);
+  const vacancy = await Vacancy.findByPk(id);
+  
+  await business.removeVacancy(vacancy);
+  res.status(200).json(business);
+});
+
+//(6)borra la empresa de favorito
+routerFavorite.put("/post/:id", async (req, res) => {
   const { id } = req.body;
   const idPostulant = req.params.id;
 
@@ -55,41 +85,6 @@ routerFavorite.put("/pos/:id", async (req, res) => {
 
   await postulant.removeBusiness(business);
   res.status(200).json(postulant);
-});
-//Recibe id emp y renderiza las vacantes de la empresa
-routerFavorite.get("/:id", async (req, res) => {
-  const busId = req.params.id;
-  const allVacancy = await Vacancy.findAll({
-    where: {
-      businessId: busId,
-    },
-  });
-  res.status(200).json(allVacancy);
-});
-
-//Setea idVancacy y idBusiness para la tabla business_vacancy
-routerFavorite.post("/emp/:id", async (req, res) => {
-  const { id } = req.body;
-  const idBusiness = req.params.id;
-
-  const business = await Business.findByPk(idBusiness);
-  const vacancy = await Vacancy.findByPk(id);
-
-  await business.addVacancy(vacancy);
-
-  res.status(200).json(business);
-});
-
-//borra la vacante de favorito
-routerFavorite.put("/vac/:id", async (req, res) => {
-  const { id } = req.body;
-  const idVacancy = req.params.id;
-
-  const business = await Business.findByPk(idVacancy);
-  const vacancy = await Vacancy.findByPk(id);
-
-  await business.removeVacancy(vacancy);
-  res.status(200).json(business);
 });
 
 module.exports = routerFavorite;

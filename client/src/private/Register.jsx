@@ -20,7 +20,7 @@ function Register() {
   useEffect(() => {
     const element = email2;
     console.log(profileState.email);
-    dispatch(getUsers(element));
+    dispatch(getUsers(email2));
   }, []);
 
   return (

@@ -18,14 +18,14 @@ function BusinessCard({name, description, id}) {
                   class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
                 > 
                   {name} <br/>
-                  Vacante {id}
+                  Business {id}
                 </p>      
               </div>
               </Link>
               <div role="img" aria-label="bookmark">
                 <p class="focus:outline-none" width="28" height="28">
-               <RemovePost
-               id = {id}/>
+               <Unfollow
+               businessId = {id}/>
                 </p>
               </div>
             </div>
