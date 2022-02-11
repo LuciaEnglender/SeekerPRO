@@ -208,3 +208,17 @@ export function postEmpresa(payload) {
     });
   };
 }
+export function filterVacancies (info) {
+  return async function (dispatch) {
+    try {
+      const combinated = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      console.log(combinated)
+      return dispatch({
+        type: "FILTER_VACANCIES",
+        payload: combinated.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
