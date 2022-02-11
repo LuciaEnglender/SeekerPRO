@@ -28,6 +28,7 @@ import FormPerfil from "./component/empresas/FormPerfil";
 import EditVcancy from "./component/empresas/modules/EditVcancy";
 // import FormVacancy from "./component/empresas/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
+import FormVacancy from "./component/empresas/modules/FormVacancy";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/homee/notification" element={<NotiEmp />} />
         <Route path="/homee/message" element={<MensajeEmp />} />
         <Route path="/homee/perfil" element={<PerfilEmp />} />
+        <Route path="/homee/vacante" element={<FormVacancy />} />
         <Route path="/vacancy" element={<DetailVacy />} />
         <Route path="/homee/search" element={<SearchPostu />} />
         <Route path="/vacancy/:id" element={<DetailVacy />} />

@@ -32,9 +32,8 @@ const HomeEmpresa = () => {
   const email2 = email.substring(1, email.length - 1);
 
   useEffect(() => {
-    const element = email2;
-    dispatch(getVacancy(element));
-  }, [email2, dispatch]);
+    dispatch(getVacancy(email2));
+  }, [dispatch]);
 
   return (
     <div className="bg-verdeOscuro w-screen h-screen">
@@ -43,7 +42,7 @@ const HomeEmpresa = () => {
         <NavHomeE titulo={"Home"} />
       </div>
       {/* BODY */}
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro  h-auto pt-7">
+      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-verdeOscuro  h-auto pt-7">
         {/* AREA DE CREACION */}
         <div className="bg-verdeOscuro p-2">
           <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
@@ -93,23 +92,32 @@ const HomeEmpresa = () => {
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
             <div className="lg:grid items-center justify-center">
               <h1 className=" font-bold text-center mb-3">Vacantes:</h1>
-              {currentVacancy ? (
-                currentVacancy.map((el) => {
-                  return (
-                    <Link to={`/vacancy/${el.id}`}>
-                      <CardVacante
-                        name={el.name}
-                        description={el.description}
-                        technologies={el.technologies}
-                        seniorities={el.seniorities}
-                        languages={el.languages}
-                      />
-                    </Link>
-                  );
-                })
-              ) : (
-                <h1>Crea tu vacante</h1>
-              )}
+              <div className="flex m-0 justify-center">
+                <Link to="/homee/vacante">
+                  <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro">
+                    Agregar Vacante
+                  </button>
+                </Link>
+              </div>
+              <div>
+                {currentVacancy ? (
+                  currentVacancy.map((el) => {
+                    return (
+                      <Link to={`/vacancy/${el.id}`}>
+                        <CardVacante
+                          name={el.name}
+                          description={el.description}
+                          technologies={el.technologies}
+                          seniorities={el.seniorities}
+                          languages={el.languages}
+                        />
+                      </Link>
+                    );
+                  })
+                ) : (
+                  <h1>Crea tu vacante</h1>
+                )}
+              </div>
             </div>
             <div className="w-full mt-3 flex justify-center">
               <button
@@ -137,14 +145,6 @@ const HomeEmpresa = () => {
             </div>
           </div>
         </div>
-        {/* AREA DE DATA CUENTA */}
-        <div className="bg-verdeOscuro p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <h1 className=" font-bold  text-center mb-3">Crear:</h1>
-            <FormVacancy></FormVacancy>
-          </div>
-        </div>
-        {/* DIV PARA GRID 2BLE */}
         <div></div>
       </div>
     </div>
