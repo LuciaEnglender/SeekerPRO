@@ -152,7 +152,7 @@ const FormVacancy = () => {
               Select...
             </option>
             {technology.map((e) => (
-              <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
+              <option className="rounded-2xl bg-verdeClaro" value={e.name}>{e.name}</option>
             ))}
           </select>
           <div>

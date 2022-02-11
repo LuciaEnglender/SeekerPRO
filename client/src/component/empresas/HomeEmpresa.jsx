@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
-import { getVacancy } from "../../redux/actions";
+import { getVacancy, postVacancy } from "../../redux/actions";
 import CardVacante from "./modules/CardVacante";
 import FormVacancy from "./modules/FormVacancy";
 import Pagination from "./Pagination";
@@ -33,7 +33,7 @@ const HomeEmpresa = () => {
 
   useEffect(() => {
     dispatch(getVacancy(email2));
-  }, [dispatch, email2]);
+  }, [dispatch, email2, postVacancy()]);
 
   return (
     <div className="bg-verdeOscuro w-screen h-screen">
