@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+    getVacancy,
+    getTech,
+    getSeniority,
+    getLanguage,
+  } from "../../../redux/actions/index";
+  import { GrFormClose } from "react-icons/gr";
 
 function SearcHome() {
     const dispatch = useDispatch();
@@ -15,13 +22,44 @@ function SearcHome() {
         language: []
       })
       useEffect(() => {
-        const element = email2;
-        dispatch(getUsers(element));
+        dispatch(getVacancy());
         dispatch(getTech());
         dispatch(getSeniority());
         dispatch(getLanguage());
       }, [dispatch]);
 
+      function handleSelectTechno(e) {
+        console.log(input.technology);
+        if (input.technology.includes(e.target.value)) {
+          alert("Already in the list");
+        } else {
+          setInput({
+            ...input,
+            technology: [...input.technology, e.target.value],
+          });
+        }
+      }
+    ///////////delete///////
+  const handleDeleteSeniority = (e) => {
+    setInput({
+      ...input,
+      seniority: input.seniority.filter((el) => el !== e),
+    });
+  };
+
+  const handleDeleteLanguage = (e) => {
+    setInput({
+      ...input,
+      language: input.language.filter((el) => el !== e),
+    });
+  };
+
+  const handleDeleteTechnology = (e) => {
+    setInput({
+      ...input,
+      technology: input.technology.filter((el) => el !== e),
+    });
+  };
     return (
         <div>
             <div className="bg-verdeOscuro p-2">
@@ -52,7 +90,25 @@ function SearcHome() {
               <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
             ))}
                             </select>
-                        </div>
+                            <div>
+            {input.technology.map((el, i) => (
+              <li
+                className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                key={i}
+              >
+                {el}
+                <button
+                  className="rounded-2xl hover:bg-verdeClaro"
+                  type="reset"
+                  onClick={() => handleDeleteTechnology(el)}
+                >
+                  <GrFormClose />
+                </button>
+              </li>
+            ))}
+          </div>
+          {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
+        </div>
                         <div className="w-full my-3 flex flex-col m-0 justify-center">
                             <label> Lenguaje:</label>
                             <select className="w-full xl:w-52 rounded-2xl bg-verdeClaro">
