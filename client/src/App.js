@@ -34,28 +34,27 @@ function App() {
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
       <Route path="/register" element={<Register />} />
-        {/* RUTAS DE PERFIL */}
-        <Route path="/homep" element={<Home />} />
-        <Route path="/homep/create" element={<CreateForm />} />
-        <Route path="/homep/notificaciones" element={<Notificaciones />} />
-        <Route path="/homep/mensajes" element={<Mensajes />} />
-        <Route path="/homep/miperfil" element={<MiPerfil />} />
-        <Route path="/homep/favourites" element={<Business />} />
-        <Route path="/homep/create/modifyprofile" element={<Perfil />} />
-        <Route path="/homep/postdetail/:id" element={<DetailPost />} />
-        {/* RUTAS DE EMPRESA */}
-        <Route path="/homee" element={<HomeEmpresa />} />
-        <Route path="/homee/create" element={<FormPerfil />} />
-        <Route path="/homee/notification" element={<NotiEmp />} />
-        <Route path="/homee/message" element={<MensajeEmp />} />
-        <Route path="/homee/perfil" element={<PerfilEmp />} />
-        <Route path="/vacancy" element={<DetailVacy />} />
-        <Route path="/homee/search" element={<SearchPostu />} />
-        <Route path="/vacancy/:id" element={<DetailVacy />} />
-        <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
-        <Route path="/homee/setings" element={<SetingsEmp />} />
-        <Route element={<PrivateRoute />}>
-      </Route>
+      {/* RUTAS DE PERFIL */}
+      <Route path="/homep" element={<Home />} />
+      <Route path="/homep/create" element={<CreateForm />} />
+      <Route path="/homep/notificaciones" element={<Notificaciones />} />
+      <Route path="/homep/mensajes" element={<Mensajes />} />
+      <Route path="/homep/miperfil" element={<MiPerfil />} />
+      <Route path="/homep/favourites" element={<Business />} />
+      <Route path="/homep/create/modifyprofile" element={<Perfil />} />
+      <Route path="/homep/postdetail/:id" element={<DetailPost />} />
+      {/* RUTAS DE EMPRESA */}
+      <Route path="/homee" element={<HomeEmpresa />} />
+      <Route path="/homee/create" element={<FormPerfil />} />
+      <Route path="/homee/notification" element={<NotiEmp />} />
+      <Route path="/homee/message" element={<MensajeEmp />} />
+      <Route path="/homee/perfil" element={<PerfilEmp />} />
+      <Route path="/vacancy" element={<DetailVacy />} />
+      <Route path="/homee/search" element={<SearchPostu />} />
+      <Route path="/vacancy/:id" element={<DetailVacy />} />
+      <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
+      <Route path="/homee/setings" element={<SetingsEmp />} />
+      <Route element={<PrivateRoute />}></Route>
     </Routes>
   );
 }

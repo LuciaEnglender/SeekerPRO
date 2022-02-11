@@ -13,7 +13,7 @@ import { getUsers } from "../../redux/actions/indexL";
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const vacancy = useSelector((state) => state.rootReducer.vacancies);
-  console.log(vacancy)
+  console.log(vacancy);
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +33,7 @@ const HomeEmpresa = () => {
 
   useEffect(() => {
     dispatch(getVacancy(email2));
-  }, [dispatch, email2]);
+  }, []);
 
   return (
     <div className="bg-verdeOscuro w-screen h-screen">

@@ -58,7 +58,7 @@ const SectionNuevo = () => {
         </div>
         <div className="m-10">
           <div>
-            <h2 className="text-5xl font-bold pb-4">Comoo Developer:</h2>
+            <h2 className="text-5xl font-bold pb-4">Comoo Recruiter:</h2>
             <p className="pb-4 text-justify">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
               sapiente vero temporibus ullam .
