@@ -28,6 +28,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 //validado por el nombre
 
 routerPostulant.get("/", async (req, res) => {
@@ -37,7 +38,7 @@ routerPostulant.get("/", async (req, res) => {
     if (id) {
       const allPostulant = await Postulant.findAll({
         where: {
-          id: id,
+          loginEmail: id,
         },
         include: [
           {
@@ -165,7 +166,7 @@ routerPostulant.put("/postulate/:id", async (req, res) => {
   }
 });
 
-routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
+routerPostulant.post("/", upload.any("file",2), async (req, res) => {
   //el campo de genero recibe un solo valor
   let {
     name,
@@ -184,11 +185,21 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
     loginId,
   } = req.body;
 
-  let file = req.file;
+  let file = req.files;
   //let cv =req.file
-  let photo = req.file;
   console.log(file);
-  console.log(req.body);
+  if(file){
+     for(let i=0;i<file.length;i++){
+       if(file[i].mimetype==='image/jpeg'){
+         var photo=file[i].path
+       }
+       else{
+         var CV=file[i].path
+       }
+     }
+  }
+  
+
 
   try {
     const errors = validationResult(req);
@@ -201,7 +212,7 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
       gender,
       phone,
       photo,
-      //CV,//
+      CV,
       location,
       github,
       linkedIn,
@@ -211,6 +222,7 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
 
     // busca la vacante
     if (vacancy) {
+
       const allVacancy = await Vacancy.findAll({
         where: { name: vacancy },
       });
@@ -218,9 +230,11 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
     }
 
     if (languages) {
+
+      let arrL=languages.split(",")
       let lenguageInDB = await Language.findAll({
         where: {
-          name: languages,
+          name: arrL,
         },
       });
       await createPostuland.addLanguages(lenguageInDB);
@@ -236,18 +250,20 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
     }
 
     if (skills) {
+      let skillArr=skills.split(",")
       let skillInDB = await Skill.findAll({
         where: {
-          name: skills,
+          name: skillArr,
         },
       });
       await createPostuland.addSkill(skillInDB);
     }
 
     if (technologies) {
+      let tecno=technologies.split(",")
       let technologyInDB = await Technology.findAll({
         where: {
-          name: technologies,
+          name: tecno,
         },
       });
       await createPostuland.addTechnology(technologyInDB);

@@ -31,9 +31,7 @@ import {
 import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
 
 const initialState = {
-  profile: [
-    { id: 1 }
-  ],
+  profile: [],
   technology: [],
   skill: [],
   language: [],

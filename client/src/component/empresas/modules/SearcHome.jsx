@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -216,4 +217,5 @@ function SearcHome() {
     )
 }
 
-export default SearcHome
+
+// export default SearcHome

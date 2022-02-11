@@ -35,7 +35,7 @@ function App() {
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
       <Route path="/register" element={<Register />} />
-      <Route element={<PrivateRoute />}>
+        <Route element={<PrivateRoute />}>
         {/* RUTAS DE PERFIL */}
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
