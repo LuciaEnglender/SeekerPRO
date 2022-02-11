@@ -58,7 +58,7 @@ export default function CreateForm() {
     extras: "",
     loginId: email2,
   });
-  
+  console.log(input)
 
   const handleFile=(e)=>{
     setInput({
@@ -241,6 +241,7 @@ const handleCv=(e)=>{
     data.append("skills",input.skills)
     data.append("seniority",input.seniority)
     data.append("extras",input.extras)
+    data.append("loginId", input.loginId)
     
     dispatch(createPostulante(data))
     setInput({
