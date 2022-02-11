@@ -32,8 +32,9 @@ const HomeEmpresa = () => {
   const email2 = email.substring(1, email.length - 1);
 
   useEffect(() => {
-    dispatch(getVacancy(email2));
-  }, []);
+    const element = email2;
+    dispatch(getVacancy(element));
+  }, [email2, dispatch]);
 
   return (
     <div className="bg-verdeOscuro w-screen h-screen">

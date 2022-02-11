@@ -158,8 +158,9 @@ routerVacancy.get("/", async (req, res) => {
           },
         ],
       });
-      vacanciesInDB? res.status(200).json(vacanciesInDB)
-      : res.status(400).send('not vacancies yet')
+      vacanciesInDB
+        ? res.status(200).json(vacanciesInDB)
+        : res.status(400).send("not vacancies yet");
     }
   } catch (e) {
     console.log(e);

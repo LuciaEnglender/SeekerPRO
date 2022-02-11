@@ -18,8 +18,9 @@ function Register() {
   const email2 = email.substring(1, email.length - 1);
 
   useEffect(() => {
+    const element = email2;
     console.log(profileState.email);
-    dispatch(getUsers(email2));
+    dispatch(getUsers(element));
   }, []);
 
   return (

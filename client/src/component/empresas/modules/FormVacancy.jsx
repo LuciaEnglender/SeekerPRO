@@ -36,11 +36,12 @@ const FormVacancy = () => {
   });
 
   useEffect(() => {
-    dispatch(getUsers(email2));
+    const element = email2;
+    dispatch(getUsers(element));
     dispatch(getTech());
     dispatch(getSeniority());
     dispatch(getLanguage());
-  }, [dispatch, email2]);
+  }, [dispatch]);
 
   function handleSubmit(e) {
     e.preventDefault();
