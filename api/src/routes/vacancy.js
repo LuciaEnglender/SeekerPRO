@@ -125,9 +125,44 @@ routerVacancy.get("/", async (req, res) => {
       vacanciesInDB
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
+    } else {
+      const vacanciesInDB = await Vacancy.findAll({
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          // {
+          //   model: Skill,
+          //   attributes: ["name"],
+          //   through: {
+          //     attributes: [],
+          //   },
+          // },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      });
+      vacanciesInDB? res.status(200).json(vacanciesInDB)
+      : res.status(400).send('not vacancies yet')
     }
   } catch (e) {
-    res.send("ERROR" + e);
+    console.log(e);
   }
 });
 
@@ -218,7 +253,7 @@ routerVacancy.put("/edit/:vacancyId", async (req, res) => {
   }
 });
 
-routerVacancy.get("/:name", async (req, res) => {
+routerVacancy.get("/search/:name", async (req, res) => {
   const { name } = req.params;
   const acum = [];
   try {

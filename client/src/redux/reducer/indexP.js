@@ -4,12 +4,15 @@ import {
   GET_SKILL,
   GET_LANGUAGE,
   GET_VACANCY,
+  GET_VACANCY_ID,
   GET_FAVOURITES,
   GET_SENIORITY,
   GET_SEARCH_BAR,
   GET_PROFILE,
   GET_MY_POSTULATIONS,
   GET_BUSINESS,
+  GET_FOLLOWED,
+  GET_SEE_LATER,
   FILTER_BY_LANGUAGE,
   FILTER_BY_SENIORITY,
   FILTER_BY_TECHNOLOGY,
@@ -18,6 +21,7 @@ import {
   ADD_FAVOURITES,
   GET_LOCATION,
   FOLLOW,
+  UNFOLLOW,
   SEE_LATER,
   APPLY,
   REMOVE_POST,
@@ -28,19 +32,20 @@ import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
 
 const initialState = {
   profile: [
-    { id: 2 }
+    { id: 1 }
   ],
   technology: [],
   skill: [],
   language: [],
   seniority: [],
   location: [],
-  vacancy: nuevasVacantes,
+  vacancy: [],
   favourites: [],
   filteredVacancy: [],
   postulations: [],
   later: [],
-  business: []
+  business: [],
+  followedBusiness: []
 };
 
 export default function rootReducerPostulante(state = initialState, action) {
@@ -70,6 +75,11 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         filteredVacancy: action.payload,
       };
+      case GET_VACANCY_ID:
+        return {
+          ...state,
+          filteredVacancy: action.payload,
+        };   
     case GET_FAVOURITES:
       return {
         ...state,
@@ -100,7 +110,11 @@ export default function rootReducerPostulante(state = initialState, action) {
           ...state,
          business: action.payload,
         };
-  
+  case  GET_SEE_LATER:
+    return{
+      ...state,
+      later: action.payload,
+    }
 
     case FILTER_BY_SENIORITY:
       return {
@@ -120,12 +134,12 @@ export default function rootReducerPostulante(state = initialState, action) {
         filteredVacancy: action.payload,
       };
 
-    case FILTER_BY_LANGUAGE: {
+    case FILTER_BY_LANGUAGE: 
       return {
         ...state,
         filteredVacancy: action.payload,
       };
-    }
+    
     case FILTER_COMBINATED:
       return {
         ...state,
@@ -137,8 +151,18 @@ export default function rootReducerPostulante(state = initialState, action) {
       };
     case FOLLOW:
       return {
-        ...state
-      }
+        ...state,
+             }
+      case UNFOLLOW:
+        return{
+          ...state
+        }
+        case GET_FOLLOWED:
+          return{
+      ...state,
+      followedBusiness: action.payload
+        }
+        
     case SEE_LATER:
       return {
         ...state,
