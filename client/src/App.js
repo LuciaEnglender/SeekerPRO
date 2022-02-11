@@ -14,6 +14,7 @@ import Mensajes from "./component/postulantes/Messages/Mensajes";
 import MiPerfil from "./component/postulantes/MiPerfil";
 import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
+import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLaterVacancies"
 
 //Rutas de Empresa
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
@@ -34,6 +35,7 @@ function App() {
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
       <Route path="/register" element={<Register />} />
+      <Route element={<PrivateRoute />}>
         {/* RUTAS DE PERFIL */}
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
@@ -43,6 +45,7 @@ function App() {
         <Route path="/homep/favourites" element={<Business />} />
         <Route path="/homep/create/modifyprofile" element={<Perfil />} />
         <Route path="/homep/postdetail/:id" element={<DetailPost />} />
+        <Route path="/homep/seelater" element={<SeeLaterVancancies/>}/>
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
         <Route path="/homee/create" element={<FormPerfil />} />
@@ -54,7 +57,6 @@ function App() {
         <Route path="/vacancy/:id" element={<DetailVacy />} />
         <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
         <Route path="/homee/setings" element={<SetingsEmp />} />
-        <Route element={<PrivateRoute />}>
       </Route>
     </Routes>
   );

@@ -11,7 +11,7 @@ function Pagination({vacancyPerPage, filtradas, paginado }) {
     return (
         <nav>
             
-            <ul className={s.pagination}>
+            <ul >
                 {pageNumbers?.map(number => (
                     <li key={number}>
                          <button className={s.activa} onClick = {() => paginado(number)}>

@@ -12,7 +12,7 @@ const SectionViejo = () => {
 
   useEffect(() => {
     dispatch(getUsers(profileState.email));
-  }, [dispatch, profileState]);
+  }, []);
 
   return (
     <div className="grid grid-cols-2">

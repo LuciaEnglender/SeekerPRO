@@ -9,9 +9,14 @@ function RemovePost({id}) {
     const  dispatch = useDispatch()
     function handleRemove() {
         dispatch(removePost(id, postulanteId));
+        alert ("This applied was remove")
       }
   return <div>
- <button onClick={()=>handleRemove()}> Remove Post </button>
+ <button 
+  className="h-fit mx-4 px-2  my-2 shadow-lg mt-1 
+  shadow-black rounded-2xl 
+   text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+ onClick={()=>handleRemove()}> Remove Post </button>
   </div>;
 }
 

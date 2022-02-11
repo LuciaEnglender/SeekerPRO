@@ -11,9 +11,8 @@ import ButtonLogOut from "../../private/ButtonLogOut";
 // TAILWIND
 const navigation = [
   { name: "Home", href: "/homep", current: false },
-  { name: "My Profile", href: "/homep/create", current: false },
-  { name: "Favourites", href: "/homep/favourites", current: false },
-  { name: "Messages", href: "/homep/mensajes", current: false },
+    { name: "Messages", href: "/homep/mensajes", current: false },
+  { name: "Notifications", href: "/homep/notificaciones", current: false },
 ];
 
 function classNames(...classes) {
@@ -122,19 +121,47 @@ const NavBar = ({ titulo }) => {
                           </Link>
                         )}
                       </Menu.Item>
+                      
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to="/homep/create"
+                            to="/homep/favourites"
                             className={classNames(
                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                            Favourites
+                            Followed Business
                           </Link>
                         )}
                       </Menu.Item>
+                      <Menu.Item>
+                         {({ active }) => (
+                           <Link
+                             to="/homep/seelater"
+                             className={classNames(
+                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                             )}
+                           >
+                             Pending Vacancies
+                           </Link>
+                         )}
+                       </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/homep/notificaciones"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                           Notifications
+                          </Link>
+                        )}
+                      </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <Link

@@ -1,18 +1,27 @@
 import React from "react";
-import Apply from "./Assets/Apply";
-import SeeLater from "./SeeLaterVacancies/SeeLater";
-import Follow from './FollowBusiness/Follow'
+import Apply from "../Assets/Apply"
+import RemoveSeeLater from './RemoveSeeLater'
+import NavBar from "../NavBar";
+import MiPerfil from '../MiPerfil';
 
-//import {getVacancy} from actions
-// import AddToFavourite from "./Assets/AddToFavourite";
+function seeLaterVacancy({ name, description, languages, seniorities, id, technologies}) {
 
-//importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
-function Vacancy({ name, description, languages, seniorities, id, technologies, businessId}) {
-
-//console.log(id)
 //
   return (
-    <div
+    <div className="absolute bg-verdeOscuro h-screen w-screen"> 
+     <div>
+          <NavBar />
+        </div>
+        <div className="focus:outline-none grid sm:grid-rows-4 
+grid-cols-3 bg-verdeOscuro  h-auto pt-7">
+   {/* MI PERFIL */}
+   <div className="bg-verdeOscuro p-2">
+     <div className="bg-verdeMedio rounded-2xl p-2 w-full 
+h-full">        
+           <MiPerfil /> 
+     </div>
+    </div>  
+  <div
       tabindex="0"
       aria-label="card 1"
       class="focus:outline-none shadow-lg shadow-black rounded-2xl 2xl:w-full mb-7 bg-gray-300 p-6"
@@ -58,18 +67,15 @@ function Vacancy({ name, description, languages, seniorities, id, technologies, 
         id= {id}/>
         </div>
         <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <SeeLater
+        <RemoveSeeLater
         id= {id}/>
         </div>
-        <div >
-         <Follow 
-       businessId= {businessId}/>
-         </div>
-
+        </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
 
-export default Vacancy;
+export default seeLaterVacancy;

@@ -5,6 +5,7 @@ export const GET_SKILL = "GET_SKILL";
 export const GET_LANGUAGE = "GET_LANGUAGE";
 export const GET_IDIOMS = "GET_IDIOMS";
 export const GET_VACANCY="GET_VACANCY"
+export const GET_VACANCY_ID="GET_VACANCY_ID"
 export const GET_SENIORITY = "GET_SENIORITY"
 export const GET_SEARCH_BAR="GET_SEARCH_BAR"
 export const FILTER_BY_LANGUAGE = "FILTER_BY_LANGUAGE"
@@ -12,6 +13,8 @@ export const FILTER_BY_SENIORITY = "FILTER_BY_SENIORITY"
 export const FILTER_BY_TECHNOLOGY="FILTER_BY_TECHNOLOGY"
 export const FILTER_BY_SKILL="FILTER_BY_SKILL"
 export const FOLLOW = "FOLLOW"
+export const UNFOLLOW = "UNFOLLOW"
+export const GET_FOLLOWED = "GET_FOLLOWED"
 export const GET_FAVOURITES = "GET_FAVOURITES"
 export const GET_PROFILE = "GET_PROFILE"
 export const FILTER_COMBINATED = "FILTER_COMBINATED"
@@ -23,6 +26,7 @@ export const GET_MY_POSTULATIONS = "GET_MY_POSTULATIONS"
 export const REMOVE_POST = "REMOVE_POST" 
 export const REMOVE_SEE_LATER = "REMOVE_SEE_LATER"
 export const GET_BUSINESS = "GET_BUSINESS"
+export const GET_SEE_LATER = "GET_SEE_LATER"
 
 export function createPostulante(payload) {
  // console.log(payload)
@@ -109,10 +113,20 @@ export function getVacancy() {
     }
   };
 }
+export function getVacancyDetail(id) {
+  return async function (dispatch) {
+    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
+    return dispatch({
+      type: "GET_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
+
 export function getSearchBar(payload) {
   return async function (dispatch) {
       try {
-          var json = await axios(`http://localhost:3001/vacancy/${payload}`);
+          var json = await axios(`http://localhost:3001/vacancy/search/${payload}`);
           console.log(json.data)
           return dispatch ({
               type: GET_SEARCH_BAR,
@@ -165,20 +179,7 @@ export function getProfile(payload) {
     }
   };
 }
-export function getMyPostulations(payload) {
-  return async function (dispatch) {
-    try {
-      const postulations = await axios.get(`http://localhost:3001/postulant/${payload}/vacancy`);
-      return dispatch({
-        type: GET_MY_POSTULATIONS,
-        payload: postulations.data,
-      });
-    } catch (error) {
-      console.log("Postulations not founded");
-    }
-  };
-}
-
+//FILTROS
 export function filterByLanguage (info) {
   return async function (dispatch) {
     try {
@@ -249,11 +250,30 @@ export function filterCombinated (info) {
     }
   };
 }
-//por params el id de la empresa y por body el id de vacante
-export function follow ({id, vacancyId}) {
+
+//FOLLOW
+export function getBusiness (){
+  console.log("enviado")
+  return async function () {
+    try{
+      const business = await axios.get("http://localhost:3001/business")
+      console.log("bussiness", business)
+      return {
+        type: GET_BUSINESS,
+        payload: business.data
+      }
+    }
+    catch(error){
+      alert("Busniss not found")
+    }
+  }
+}
+
+export function followBusiness (postulanteId, businessId) {
+  console.log("postulanteId", postulanteId, "businessId", businessId)
   return async function(dispatch){
       try{
-          await axios.post(`http://localhost:3001/favorite/emp/${id}`, {vacancyId});
+          await axios.post(`http://localhost:3001/favorite/post/${postulanteId}`, businessId);
           return {
               type: FOLLOW,
               }
@@ -263,7 +283,36 @@ export function follow ({id, vacancyId}) {
           }
       } 
 } 
-
+export function unfollow(id, vacancyId){
+  console.log(id)
+  console.log(vacancyId)
+  return async function (){
+    try{
+      await axios.put(`http://localhost:3001/postulant/favorite/${vacancyId}`, id);
+      return {
+          type: UNFOLLOW,
+          }
+      } 
+  catch(error){
+        alert("Can't unfollow, try later")
+      }
+  } 
+  }
+  export function getFollowed(postulanteId) {
+    return async function (dispatch) {
+      try {
+        const followed = await axios.get(`http://localhost:3001/${postulanteId}/business`);
+        return dispatch({
+          type: GET_FOLLOWED,
+          payload:followed.data,
+        });
+      } catch (error) {
+        console.log("Try later");
+      }
+    };
+  }
+  
+  //APPLY POSTULATION
 
 export function apply(id, postulanteId){
   console.log(id)
@@ -296,7 +345,21 @@ export function apply(id, postulanteId){
           }
       } 
       }
+      export function getMyPostulations(payload) {
+        return async function (dispatch) {
+          try {
+            const postulations = await axios.get(`http://localhost:3001/postulant/${payload}/vacancy`);
+            return dispatch({
+              type: GET_MY_POSTULATIONS,
+              payload: postulations.data,
+            });
+          } catch (error) {
+            console.log("Postulations not founded");
+          }
+        };
+      }
 
+//SEE LATER      
       export function seeLater(id, postulanteId){
         console.log({id, postulanteId})
         return async function (){
@@ -312,8 +375,7 @@ export function apply(id, postulanteId){
         } 
         }
         
-    
-        export function removeSeeLater(id, postulanteId){
+         export function removeSeeLater(id, postulanteId){
           console.log(id)
           console.log(postulanteId)
           return async function (){
@@ -328,17 +390,17 @@ export function apply(id, postulanteId){
               }
           } 
           }
-    export function getBusinees (){
-      return async function () {
-        try{
-          const business = await axios.get("http://localhost:3001/business")
-          return {
-            type: GET_BUSINESS,
-            payload: business.data
+          export function getSeeLater() {
+            return async function (dispatch) {
+              try {
+                const later = await axios.get("http://localhost:3001/");
+                return dispatch({
+                  type: GET_SEE_LATER,
+                  payload:later.data,
+                });
+              } catch (error) {
+                console.log("Try later");
+              }
+            };
           }
-        }
-        catch(error){
-          alert("Busniss not found")
-        }
-      }
-    }
+        
