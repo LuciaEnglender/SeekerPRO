@@ -54,7 +54,7 @@ function App() {
         <Route path="/vacancy/:id" element={<DetailVacy />} />
         <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
         <Route path="/homee/setings" element={<SetingsEmp />} />
-      <Route element={<PrivateRoute />}>
+        <Route element={<PrivateRoute />}>
       </Route>
     </Routes>
   );

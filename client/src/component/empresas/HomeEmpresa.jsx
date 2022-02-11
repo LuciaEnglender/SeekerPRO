@@ -13,6 +13,7 @@ import { getUsers } from "../../redux/actions/indexL";
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const vacancy = useSelector((state) => state.rootReducer.vacancies);
+  console.log(vacancy)
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);

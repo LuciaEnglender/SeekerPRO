@@ -12,8 +12,8 @@ function MiPerfil() {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    dispatch(getProfile(2));
-  }, []);
+    dispatch(getProfile(1));
+  }, [dispatch]);
   return (
     <div>
       <div className={s.botones}></div>
