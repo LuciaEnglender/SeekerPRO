@@ -17,8 +17,8 @@ ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
         <Auth0Provider
-          domain={domain}
-          clientId={clientId}
+          domain="dev-qme6fpnd.us.auth0.com"
+          clientId="3EYKoAz4HUS3pRM8EHiJaWK6fUFhkUqd"
           redirectUri={window.location.origin}
         >
           <App />
