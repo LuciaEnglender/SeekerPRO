@@ -131,15 +131,15 @@ routerPostulant.get("/", async (req, res) => {
 });
 
 //*************Ruta que postea un id del postulante para agregar sus vacantes relacion de muchos a muchoa */
-routerPostulant.post("/postulate/:id", async (req, res) => {
+routerPostulant.post("/postulate/:idP", async (req, res) => {
   const { id } = req.body;
 
-  const postulanteId = req.params.id;
+  const {postulanteId} = req.params.idP;
   try {
     let postulante = await Postulant.findByPk(postulanteId);
 
     let vacancy = await Vacancy.findByPk(id);
-
+    console.log(vacancy)
     await postulante.addVacancy(vacancy);
 
     res.status(200).json(postulante);
@@ -149,7 +149,7 @@ routerPostulant.post("/postulate/:id", async (req, res) => {
 });
 
 //**********Remueve una vacante del postulante */
-routerPostulant.put("/postulate/:id", async (req, res) => {
+routerPostulant.delete("/postulate/:id", async (req, res) => {
   const { id } = req.body;
   const postulantId = req.params.id;
   try {
@@ -202,7 +202,6 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
       phone,
       photo,
       //CV,//
-      location,
       github,
       linkedIn,
       portfolio,

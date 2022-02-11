@@ -242,18 +242,27 @@ routerVacancy.post("/", async (req, res) => {
 routerVacancy.put("/edit/:vacancyId", async (req, res) => {
   // recibe por params el id, lo busca en la db y le modifica aquellos campos que se modificaron
   try {
-    await Vacancy.update(req.body, {
-      where: {
+    let finder = await Vacancy.update(
+      {
+        languages : req.body.languages
+    },
+      {
+        where: {
         id: req.params.vacancyId,
-      },
+      }
     });
-    res.status(200).send("Modificado");
+
+
+   
+
+
+    res.status(200).send(finder);
   } catch (e) {
     console.log(e);
   }
 });
 
-routerVacancy.get("/:name", async (req, res) => {
+routerVacancy.get("/search/:name", async (req, res) => {
   const { name } = req.params;
   const acum = [];
   try {
