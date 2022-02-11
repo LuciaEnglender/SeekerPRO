@@ -18,17 +18,14 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     photo: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
       allowNull: true
     },
     CV: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
+  
     github : {
       type: DataTypes.STRING,
       allowNull: true

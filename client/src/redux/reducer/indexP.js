@@ -1,44 +1,46 @@
 import {
   POST_POSTULANTE,
-  GET_TECHNOLOGY, 
+  GET_TECHNOLOGY,
   GET_SKILL,
   GET_LANGUAGE,
   GET_VACANCY,
-  GET_FAVOURITES, 
+  GET_FAVOURITES,
   GET_SENIORITY,
-  GET_SEARCH_BAR, 
+  GET_SEARCH_BAR,
   GET_PROFILE,
   GET_MY_POSTULATIONS,
+  GET_BUSINESS,
   FILTER_BY_LANGUAGE,
   FILTER_BY_SENIORITY,
   FILTER_BY_TECHNOLOGY,
   FILTER_BY_SKILL,
   FILTER_COMBINATED,
-  ADD_FAVOURITE,
-  GET_SENIORITY,
+  ADD_FAVOURITES,
   GET_LOCATION,
   FOLLOW,
   SEE_LATER,
-  APPLY, 
-  REMOVE_POST 
+  APPLY,
+  REMOVE_POST,
+  REMOVE_SEE_LATER
 } from "../actions/indexP";
 
 import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
 
 const initialState = {
   profile: [
-    {id: 2}
-  ] ,
+    { id: 1 }
+  ],
   technology: [],
   skill: [],
   language: [],
   seniority: [],
   location: [],
   vacancy: nuevasVacantes,
-  favourites:[],
-  filteredVacancy:[],
+  favourites: [],
+  filteredVacancy: [],
   postulations: [],
-  later: []
+  later: [],
+  business: []
 };
 
 export default function rootReducerPostulante(state = initialState, action) {
@@ -93,6 +95,12 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         profile: action.payload,
       };
+      case GET_BUSINESS:
+        return {
+          ...state,
+         business: action.payload,
+        };
+  
 
     case FILTER_BY_SENIORITY:
       return {
@@ -107,7 +115,6 @@ export default function rootReducerPostulante(state = initialState, action) {
       };
 
     case FILTER_BY_SKILL:
-
       return {
         ...state,
         filteredVacancy: action.payload,
@@ -124,34 +131,37 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         filteredVacancy: action.payload,
       };
-    case ADD_FAVOURITE:
+    case ADD_FAVOURITES:
       return {
         ...state,
-      };    
-         case FOLLOW:
-           return {
-             ...state
-           }
-           case SEE_LATER:
-             return{
-               ...state,
-              later: action.payload
-             }
-             case GET_MY_POSTULATIONS:
-              return{
-                ...state,
-               postulations: action.payload
-              } 
-              case APPLY:
-                return{
-                  ...state
-                }
-      case REMOVE_POST :
-        return{
-          ...state,
+      };
+    case FOLLOW:
+      return {
+        ...state
+      }
+    case SEE_LATER:
+      return {
+        ...state,
+        later: action.payload
+      }
+    case GET_MY_POSTULATIONS:
+      return {
+        ...state,
+        postulations: action.payload
+      }
+    case APPLY:
+      return {
+        ...state
+      }
+    case REMOVE_POST:
+      return {
+        ...state,
+      }
+      case REMOVE_SEE_LATER:
+        return {
+          ...state
         }
-       default:
-
+    default:
       return state;
   }
 }

@@ -15,17 +15,17 @@ export const FOLLOW = "FOLLOW"
 export const GET_FAVOURITES = "GET_FAVOURITES"
 export const GET_PROFILE = "GET_PROFILE"
 export const FILTER_COMBINATED = "FILTER_COMBINATED"
-
+export const ADD_FAVOURITES = "ADD_FAVOURITES"
 export const GET_LOCATION= "GET_LOCATION"
-
 export const APPLY = "APPLY"
 export const SEE_LATER= "SEE_LATER"
 export const GET_MY_POSTULATIONS = "GET_MY_POSTULATIONS"
 export const REMOVE_POST = "REMOVE_POST" 
-
+export const REMOVE_SEE_LATER = "REMOVE_SEE_LATER"
+export const GET_BUSINESS = "GET_BUSINESS"
 
 export function createPostulante(payload) {
-  console.log(payload)
+ // console.log(payload)
   
   return async function (dispatch) {
     try {
@@ -95,6 +95,7 @@ export function getLanguage() {
     }
   };
 }
+//Trae todas las vacantes de todas las empresas
 export function getVacancy() {
   return async function (dispatch) {
     try {
@@ -248,19 +249,21 @@ export function filterCombinated (info) {
     }
   };
 }
-export function follow ({id, postulantId}) {
+//por params el id de la empresa y por body el id de vacante
+export function follow ({id, vacancyId}) {
   return async function(dispatch){
       try{
-          await axios.put(`http://localhost:3001/business/${id}`, {postulantId});
+          await axios.post(`http://localhost:3001/favorite/emp/${id}`, {vacancyId});
           return {
               type: FOLLOW,
               }
           } 
       catch(error){
-            alert("We can't save it as favourite")
+            alert("You can't follow")
           }
       } 
 } 
+
 
 export function apply(id, postulanteId){
   console.log(id)
@@ -298,7 +301,7 @@ export function apply(id, postulanteId){
         console.log({id, postulanteId})
         return async function (){
           try{
-            await axios.put(`http://localhost:3001/postulant${postulanteId}`, {id});
+            await axios.post(`http://localhost:3001/postulant/${postulanteId}`, {id});
             return {
                 type: SEE_LATER,
                 }
@@ -308,4 +311,34 @@ export function apply(id, postulanteId){
             }
         } 
         }
+        
     
+        export function removeSeeLater(id, postulanteId){
+          console.log(id)
+          console.log(postulanteId)
+          return async function (){
+            try{
+              await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
+              return {
+                  type: REMOVE_SEE_LATER,
+                  }
+              } 
+          catch(error){
+                alert("Can't remove")
+              }
+          } 
+          }
+    export function getBusinees (){
+      return async function () {
+        try{
+          const business = await axios.get("http://localhost:3001/business")
+          return {
+            type: GET_BUSINESS,
+            payload: business.data
+          }
+        }
+        catch(error){
+          alert("Busniss not found")
+        }
+      }
+    }

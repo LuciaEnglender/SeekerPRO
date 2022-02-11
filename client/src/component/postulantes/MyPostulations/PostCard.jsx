@@ -1,5 +1,5 @@
 import React from 'react';
-import RemovePost from './Assets/RemovePost';
+import RemovePost from '../MyPostulations/RemovePost';
 import {Link} from 'react-router-dom'
 
 function PostCard({name, description, id}) {

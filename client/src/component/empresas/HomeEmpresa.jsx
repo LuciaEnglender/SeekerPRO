@@ -7,10 +7,14 @@ import CardVacante from "./modules/CardVacante";
 import FormVacancy from "./modules/FormVacancy";
 import Pagination from "./Pagination";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const vacancy = useSelector((state) => state.rootReducer.vacancies);
+  console.log(vacancy)
+  const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
   const vacancyPerPage = 3;
@@ -21,9 +25,15 @@ const HomeEmpresa = () => {
     setCurrentPage(pageNumber);
   };
 
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   useEffect(() => {
-    dispatch(getVacancy());
-  }, [dispatch]);
+    dispatch(getVacancy(email2));
+  }, [dispatch, email2]);
 
   return (
     <div className="bg-verdeOscuro w-screen h-screen">
