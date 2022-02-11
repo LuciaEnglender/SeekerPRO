@@ -53,10 +53,7 @@ const Landing = () => {
                 Tempora, sapiente vero temporibus ullam voluptatibus modi maxime
                 quis minima dicta iure hic, molestiae libero veritatis quos.
               </p>
-              <h3 className="text-xl pl-3 font-bold pb-4">
-                Join Us! <ButtonSignIn></ButtonSignIn>
-              </h3>
-            </div>
+           </div>
           )}
           <div>
             <img className="max-w-sm" src="/Landing.png" alt="asd" />
