@@ -2,11 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import { getVacancy } from "../../redux/actions/indexP";
+import { getBusiness, getProfile, getVacancy } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
-
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
 import Vacancy from "./Vacancy";
@@ -19,21 +18,12 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const filtradas = useSelector(
-    (state) => state.rootReducerPostulante.filteredVacancy
-  );
+    (state) => state.rootReducerPostulante.filteredVacancy);
 
   //Renderizacions postulaciones
-  const [postulaciones, setPostulaciones] = useState(false);
-  function handlePostulations() {
-    setPostulaciones(!postulaciones);
-  }
-  const [empresas, setEmpresas] = useState(false);
-  function handleEmpresas() {
-    setEmpresas(!empresas);
-  }
   const handleAll = (e) => {
     dispatch(getVacancy());
-  };
+    };
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,12 +33,15 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 3
 
+  console.log(currentVacancy)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {
-    
-  }, [dispatch]);
+  
+  useEffect(()=>{
+    dispatch(getProfile(1))
+  },[dispatch])
+  
 
   return (
     <div className="absolute bg-verdeOscuro h-screen w-screen">
@@ -101,8 +94,7 @@ export default function Home() {
                         <div className="m-4" key={el.id}>
                           <Vacancy
                             id = {el.id}
-                            businessId = {el.businessId}
-                            name={el.name}
+                             name={el.name}
                             description={el.description}
                             languages={el.languages
                               ?.map((l) => l.name)
@@ -186,6 +178,17 @@ export default function Home() {
   );
 }
 
+
+
+/*  const [postulaciones, setPostulaciones] = useState(false);
+  function handlePostulations() {
+    setPostulaciones(!postulaciones);
+  }
+  const [empresas, setEmpresas] = useState(false);
+  function handleEmpresas() {
+    setEmpresas(!empresas);
+  }
+*/
 
 /*              <div className="flex m-0 justify-center">
               <div>

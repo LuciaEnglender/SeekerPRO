@@ -44,7 +44,30 @@ const initialState = {
   filteredVacancy: [],
   postulations: [],
   later: [],
-  business: [],
+  business: [
+    {
+    "id": 1,
+    "name": "Empresa Ronaldo",
+    "description": "Hacemos paginas baratas y bonitas",
+    "location": "El mundo",
+    "cuit": "2020202020205",
+    "createdAt": "2022-02-11T18:35:14.583Z",
+    "updatedAt": "2022-02-11T18:35:14.785Z",
+    "fk_login": null,
+    "loginEmail": "recruiterseeker@gmail.com"
+    },
+    {
+    "id": 2,
+    "name": "Globant",
+    "description": "Somos los primeros en ofrecer ingeniería, innovación y diseño a escala. Globant crea software que conecta.",
+    "location": "Cordoba.",
+    "cuit": "202020",
+    "createdAt": "2022-02-11T19:22:03.787Z",
+    "updatedAt": "2022-02-11T19:22:03.787Z",
+    "fk_login": null,
+    "loginEmail": null
+    }
+    ],
   followedBusiness: []
 };
 

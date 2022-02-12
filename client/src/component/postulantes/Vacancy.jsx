@@ -9,7 +9,7 @@ import Follow from './FollowBusiness/Follow'
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
 function Vacancy({ name, description, languages, seniorities, id, technologies, businessId}) {
 
-//console.log(id)
+console.log(id)
 //
   return (
     <div
@@ -63,7 +63,7 @@ function Vacancy({ name, description, languages, seniorities, id, technologies, 
         </div>
         <div >
          <Follow 
-       businessId= {businessId}/>
+       id= {id}/>
          </div>
 
         </div>

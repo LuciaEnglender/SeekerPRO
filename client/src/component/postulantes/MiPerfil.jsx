@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProfile } from "../../redux/actions/indexP";
-
+//import NavBar from "./NavBar";
 import s from "../postulantes/Styles/miperfil.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -17,7 +17,6 @@ function MiPerfil() {
   return (
     <div>
       <div className={s.botones}></div>
-
       <div className={s.info}>
         {perfil.length === 0 ? (
           <div>

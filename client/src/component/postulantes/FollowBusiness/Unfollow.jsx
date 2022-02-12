@@ -1,15 +1,18 @@
 import React, {useEffect} from 'react';
 import {unfollow} from '../../../redux/actions/indexP'
 import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 function Unfollow({businessId}) {
     const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
    // console.log(id)
     //console.log(postulanteId)
     const  dispatch = useDispatch()
+    const navigate = useNavigate()
     function handleUnfollow() {
         dispatch(unfollow(id, businessId));
         alert ("Unfollowed business")
+        navigate(-1)
       }
   return <div>
  <button 

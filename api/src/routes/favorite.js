@@ -38,8 +38,8 @@ routerFavorite.post ("/:id/vacancy", async (req, res) => {
 //para cuando haga enter en la empresa agregar a favorita lleva la relacion ala tabla
 routerFavorite.post("/post/:id", async (req, res) => {
   const idpost = req.params.id;
-  const { id } = req.body;
-
+  const id  = Number(req.body.id);
+ console.log(idpost, id)
   const postulant = await Postulant.findByPk(idpost);
   const business = await Business.findByPk(id);
 

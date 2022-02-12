@@ -1,8 +1,8 @@
 import React from 'react';
-import RemovePost from '../MyPostulations/RemovePost';
 import {Link} from 'react-router-dom'
+import Unfollow from './Unfollow';
 
-function BusinessCard({name, description, id}) {
+function BusinessCard({name, description, location, id}) {
     return (
         <div
           tabindex="0"
@@ -37,7 +37,15 @@ function BusinessCard({name, description, id}) {
             >
               {description}
             </p>
+          </div>          <div class="px-2">
+            <p
+              tabindex="0"
+              class="focus:outline-none text-sm leading-5 py-2 text-gray-600"
+            >
+              {location}
+            </p>
           </div>
+
         </div>
       );
     

@@ -253,11 +253,10 @@ export function filterCombinated (info) {
 
 //FOLLOW
 export function getBusiness (){
-  console.log("enviado")
   return async function () {
     try{
       const business = await axios.get("http://localhost:3001/business")
-      console.log("bussiness", business)
+      console.log("bussiness", business.data)
       return {
         type: GET_BUSINESS,
         payload: business.data
@@ -269,11 +268,11 @@ export function getBusiness (){
   }
 }
 
-export function followBusiness (postulanteId, businessId) {
-  console.log("postulanteId", postulanteId, "businessId", businessId)
+export function followBusiness (postulanteId, id) {
+ // console.log("postulanteId", postulanteId, "businessId", id)
   return async function(dispatch){
       try{
-          await axios.post(`http://localhost:3001/favorite/post/${postulanteId}`, businessId);
+          await axios.post(`http://localhost:3001/favorite/post/${postulanteId}`,{ id: id});
           return {
               type: FOLLOW,
               }
@@ -283,12 +282,12 @@ export function followBusiness (postulanteId, businessId) {
           }
       } 
 } 
-export function unfollow(id, vacancyId){
-  console.log(id)
-  console.log(vacancyId)
+export function unfollow(postulanteId, businessId){
+  console.log(postulanteId)
+  console.log(businessId)
   return async function (){
     try{
-      await axios.put(`http://localhost:3001/postulant/favorite/${vacancyId}`, id);
+      await axios.put(`http://localhost:3001/favorite/post/${postulanteId}`, businessId);
       return {
           type: UNFOLLOW,
           }
@@ -301,7 +300,7 @@ export function unfollow(id, vacancyId){
   export function getFollowed(postulanteId) {
     return async function (dispatch) {
       try {
-        const followed = await axios.get(`http://localhost:3001/${postulanteId}/business`);
+        const followed = await axios.get(`http://localhost:3001/favorite/${postulanteId}/business`);
         return dispatch({
           type: GET_FOLLOWED,
           payload:followed.data,
@@ -335,7 +334,7 @@ export function apply(id, postulanteId){
       console.log(postulanteId)
       return async function (){
         try{
-          await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
+          await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, {id:id});
           return {
               type: REMOVE_POST,
               }

@@ -4,15 +4,15 @@ import {followBusiness} from '../../../redux/actions/indexP'
 
 /*recibo por destructuring id de la vacante y dispatcho un post?*/
 
-function Follow({businessId}) {
+function Follow({id}) {
   const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
   console.log("postulanteId", postulanteId)
-  console.log(businessId)
+  console.log("businessId", id)
 
 const  dispatch = useDispatch()
 
 function handleClick () {
-    dispatch(followBusiness(businessId, postulanteId));
+    dispatch(followBusiness(id, postulanteId));
     alert("Now you're following this business")
 }
 
