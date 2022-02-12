@@ -53,9 +53,9 @@ const Landing = () => {
             <div>
               <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
               <p className="pb-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Tempora, sapiente vero temporibus ullam voluptatibus modi maxime
-                quis minima dicta iure hic, molestiae libero veritatis quos.
+            Optimized to make you grow
+                
+                
               </p>
            </div>
           )}
@@ -69,31 +69,30 @@ const Landing = () => {
         <div className="max-w-xl inline-block">
           <h1 className="text-4xl font-bold mb-4">How it Works?</h1>
           <p className="mb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ad
-            laudantium veniam incidunt aliquid fugit reprehenderit officiis
-            officia eum, velit in veritatis! Alias, enim necessitatibus?
+          JSeeker is an application that emerges to efficiently connect developers and recruiters.
+Through an effective and minimalist system, it makes finding the right developer or the ideal position easier every day!
+            
+            
           </p>
 
           <div className="grid grid-cols-2 tex-center gap-4">
             <div className="pt-8">
               <h2 className="font-bold text-2xl"> Step 1</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum,
-                amet?
+              Register in a very simple way only with your email
+                
               </p>
             </div>
             <div className="pt-8">
               <h2 className="font-bold text-2xl"> Step 2</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum,
-                amet?
-              </p>
+               Complete your data in a simple and dynamic form
+                           </p>
             </div>
             <div className="pt-8">
               <h2 className="font-bold text-2xl"> Step 3</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum,
-                amet?
+              Browse the application looking for your ideal match in the IT world               
               </p>
             </div>
             <div className="pt-8">
