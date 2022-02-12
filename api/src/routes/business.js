@@ -68,18 +68,18 @@ routerBusiness.get("/:email", async (req, res) => {
 
 routerBusiness.get("/", async (req, res) => {
   const { name } = req.query;
-  const allBusiness = await Business.findAll();
+  
   //console.log(allBusiness)
   try {
     if (name) {
-      const nameBusiness = await allBusiness.filter((el) =>
-        el.dataValues.name.toLowerCase().includes(name.toLowerCase())
-      );
-      console.log(nameBusiness);
-      nameBusiness
-        ? res.status(200).send(nameBusiness)
-        : res.status(404).send("Unregistered company");
+      const business = await Business.findOne({
+        where: {
+          loginEmail: name
+        }
+      })
+      res.status(200).json(business)
     } else {
+      const allBusiness = await Business.findAll();
       allBusiness
         ? res.status(200).json(allBusiness)
         : res.status(400).send("The company does not exist");

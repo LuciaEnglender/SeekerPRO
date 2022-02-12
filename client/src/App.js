@@ -27,7 +27,7 @@ import DetailVacy from "./component/empresas/DetailVacy";
 import SearchPostu from "./component/empresas/SearchPostu";
 import FormPerfil from "./component/empresas/FormPerfil";
 import EditVcancy from "./component/empresas/modules/EditVcancy";
-// import FormVacancy from "./component/empresas/FormVacancy";
+import FormVacancy from "./component/empresas/modules/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
       <Route path="/register" element={<Register />} />
-      <Route element={<PrivateRoute />}>
+        <Route element={<PrivateRoute />}>
         {/* RUTAS DE PERFIL */}
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
@@ -59,6 +59,7 @@ function App() {
         <Route path="/vacancy/:id" element={<DetailVacy />} />
         <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
         <Route path="/homee/setings" element={<SetingsEmp />} />
+        <Route path="/homee/vacante" element={<FormVacancy />} />
       </Route>
     </Routes>
   );

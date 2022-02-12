@@ -58,7 +58,7 @@ export default function CreateForm() {
     extras: "",
     loginId: email2,
   });
-  
+  console.log(input)
 
   const handleFile=(e)=>{
     setInput({
@@ -136,7 +136,7 @@ const handleCv=(e)=>{
     } else {
       setInput({
         ...input,
-        seniority: [...input.seniority, e.target.value],
+        seniority: [e.target.value],
       });
     }
   }
@@ -147,7 +147,7 @@ const handleCv=(e)=>{
     } else {
       setInput({
         ...input,
-        location: [...input.location, e.target.value],
+        location: [e.target.value]
       });
     }
   }
@@ -164,12 +164,11 @@ const handleCv=(e)=>{
       ...input,
       [e.target.name]: e.target.value,
     });
-    /*setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );*/
+		let objError = validate({
+			...input,
+			[e.target.name]: e.target.value,
+		});
+		setErrors(objError);
   }
 
   const handleDelete = (e) => {
@@ -225,42 +224,60 @@ const handleCv=(e)=>{
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert("Congrats!");
-    const data = new FormData();
-    data.append("name",input.name)
-    data.append("phone",input.phone)
-    data.append("location",input.location)
-    data.append("gender",input.gender)
-    data.append("github",input.github)
-    data.append("linkedIn",input.linkedIn)
-    data.append("portfolio",input.portfolio)
-    data.append("file",input.file)
-    data.append("CV",input.CV)
-    data.append("technologies",input.technologies)
-    data.append("languages",input.languages)
-    data.append("skills",input.skills)
-    data.append("seniority",input.seniority)
-    data.append("extras",input.extras)
-    
-    dispatch(createPostulante(data))
-    setInput({
-      name: "",
-      phone: "",
-      location:[],
-      gender: "",
-      github: "",
-      linkedIn: "",
-      portfolio: "",
-      file:"",
-      CV: "",
-      technologies: [],
-      languages: [],
-      skills: [],
-      seniority: [],
-      extras: "",
-      loginId: email2,
-    });
-    navigate("/homep");
+
+    if (
+      !input.name ||
+      !input.phone ||
+      !input.location ||
+      !input.gender ||
+      !input.linkedIn ||
+      !input.file||
+      !input.CV||
+      !input.technologies ||
+      !input.languages ||
+      !input.skills ||
+      !input.seniority
+    ) {
+      alert("Please, complete all fields");
+    } else {
+      alert("Congrats!");
+      const data = new FormData();
+      data.append("name", input.name);
+      data.append("phone", input.phone);
+      data.append("location", input.location);
+      data.append("gender", input.gender);
+      data.append("github", input.github);
+      data.append("linkedIn", input.linkedIn);
+      data.append("portfolio", input.portfolio);
+      data.append("file", input.file);
+      data.append("file", input.CV);
+      data.append("technologies", [input.technologies]);
+      data.append("languages", [input.languages]);
+      data.append("skills", [input.skills]);
+      data.append("seniority", [input.seniority]);
+      data.append("extras", input.extras);
+      data.append("loginId", input.loginId)
+      dispatch(createPostulante(data));
+      setInput({
+        name: "",
+        phone: "",
+        location: [],
+        gender: "",
+        github: "",
+        linkedIn: "",
+        portfolio: "",
+        file: "",
+        CV: "",
+        technologies: [],
+        languages: [],
+        skills: [],
+        seniority: [],
+        extras: "",
+        loginId: email2,
+      });
+      navigate("/homep");
+    }
+
   }
   
   useEffect(() => {
@@ -269,7 +286,6 @@ const handleCv=(e)=>{
     dispatch(getLanguage());
     dispatch(getSeniority());
     dispatch(getLocation());
-   
     dispatch(getUsers(email2));
   }, []);
 
@@ -286,7 +302,7 @@ const handleCv=(e)=>{
           >
             <div className="m-9">
               <div className="w-full flex flex-col my-2 justify-center">
-                <h3 className="text-center">Name</h3>
+                <h3 className="text-center">Name*</h3>
                 <input
                   className="xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="text"
@@ -309,7 +325,7 @@ const handleCv=(e)=>{
               </div>
               <br />
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center">Location</label>
+                <label className="text-center">Location*</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="location"
@@ -319,11 +335,11 @@ const handleCv=(e)=>{
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    selected
                     disabled
+                    value=""
                   >
-                    
-                    Selecction Location
+                    Location Selection
                   </option>
                   {locat?.map((el) => (
                     <option
@@ -341,7 +357,6 @@ const handleCv=(e)=>{
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      
                       {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
@@ -398,19 +413,22 @@ const handleCv=(e)=>{
                   Other
                 </label>
               </div>
-             {/*  ///////////////////////PHOTO////////////////////// */}
-               <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center" htmlFor="file"> Photo</label>
+              {/*  ///////////////////////PHOTO////////////////////// */}
+              <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center" htmlFor="file">
+                  {" "}
+                  Photo (.jpg)
+                </label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder="photo"
+                  placeholder=".jpg"
                   type="file"
-                  name="photo"
+                  name="file"
                   id="file"
                   accept=".jpg"
-                  onChange={(e)=>handleFile(e)}
+                  onChange={(e) => handleFile(e)}
                 />
-              </div> 
+              </div>
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center" htmlFor="github">
                   GitHub:
@@ -444,25 +462,24 @@ const handleCv=(e)=>{
                   type="text"
                   name="portfolio"
                   value={input.portfolio}
-                  placeholder="portfolio"
                   onChange={(e) => handlePortfolio(e)}
                 />
               </div>
               {/* /////////////////CV/////////////// */}
-               <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center">CV</label>
+              <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center">CV (.pdf)</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder="cv"
+                  placeholder=".pdf"
                   type="file"
                   id="file"
                   accept=".pdf"
-                  name="CV"
-                  onChange={(e)=>handleCv(e)}
+                  name="file"
+                  onChange={(e) => handleCv(e)}
                 />
-              </div> 
+              </div>
             </div>
-            
+
             <div className="m-9">
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center">Technology</label>
@@ -475,10 +492,11 @@ const handleCv=(e)=>{
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    Selection Tecnology
+                    Tecnologies Selection
                   </option>
                   {tecno?.map((el) => (
                     <option
@@ -519,11 +537,11 @@ const handleCv=(e)=>{
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    {" "}
-                    Selecction Languages{" "}
+                    Languages Selection
                   </option>
                   {lenguaje?.map((el) => (
                     <option
@@ -541,7 +559,6 @@ const handleCv=(e)=>{
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      
                       {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
@@ -565,10 +582,11 @@ const handleCv=(e)=>{
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    Selecction Skills
+                    Skills Selection
                   </option>
                   {habilidades?.map((el) => (
                     <option
@@ -611,10 +629,11 @@ const handleCv=(e)=>{
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    Selecction Siniority
+                    Seniority Selection
                   </option>
                   {experiencia?.map((el) => (
                     <option

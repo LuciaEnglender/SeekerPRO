@@ -13,6 +13,7 @@ const initialState = {
   skill: [],
   language: [],
   pipeline: [],
+  filteredVacancy:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -137,6 +138,11 @@ function rootReducer(state = initialState, action) {
       };
     case "GET_VACANCY_ID":
       return { ...state, vacancyDetail: action.payload };
+      case "FILTER_VACANCIES":
+      return {
+        ...state,
+        vacancies: action.payload,
+      };
 
     default:
       return state;

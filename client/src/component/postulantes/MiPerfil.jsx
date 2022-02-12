@@ -5,14 +5,24 @@ import { getProfile } from "../../redux/actions/indexP";
 //import NavBar from "./NavBar";
 import s from "../postulantes/Styles/miperfil.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
+  
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  console.log(profileState)
   const { user, isAuthenticated } = useAuth0();
 
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   useEffect(() => {
-    dispatch(getProfile(1));
+    dispatch(getProfile(email2));
+    console.log(perfil)
   }, [dispatch]);
   return (
     <div>
