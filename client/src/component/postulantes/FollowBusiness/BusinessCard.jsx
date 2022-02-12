@@ -17,15 +17,15 @@ function BusinessCard({name, description, location, id}) {
                   tabindex="0"
                   class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
                 > 
-                  {name} <br/>
-                  Business {id}
+                {name} <br/>
+                  {id}
                 </p>      
               </div>
               </Link>
               <div role="img" aria-label="bookmark">
                 <p class="focus:outline-none" width="28" height="28">
                <Unfollow
-               businessId = {id}/>
+                 id = {id}/>
                 </p>
               </div>
             </div>
@@ -35,14 +35,14 @@ function BusinessCard({name, description, location, id}) {
               tabindex="0"
               class="focus:outline-none text-sm leading-5 py-2 text-gray-600"
             >
-              {description}
+              {description}  
             </p>
           </div>          <div class="px-2">
             <p
               tabindex="0"
               class="focus:outline-none text-sm leading-5 py-2 text-gray-600"
             >
-              {location}
+             {location}
             </p>
           </div>
 

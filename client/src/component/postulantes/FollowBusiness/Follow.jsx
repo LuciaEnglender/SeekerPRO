@@ -6,13 +6,12 @@ import {followBusiness} from '../../../redux/actions/indexP'
 
 function Follow({id}) {
   const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
-  console.log("postulanteId", postulanteId)
-  console.log("businessId", id)
-
+  console.log("postulanteId", postulanteId, "businessId", id)
+ 
 const  dispatch = useDispatch()
 
 function handleClick () {
-    dispatch(followBusiness(id, postulanteId));
+    dispatch(followBusiness(postulanteId, id));
     alert("Now you're following this business")
 }
 

@@ -2,22 +2,27 @@ import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getBusiness, getFollowed } from '../../../redux/actions/indexP';
 //import { follow} from '../../../redux/actions/indexP'
-import BusinessCard from '../MyPostulations/PostCard';
+import BusinessCard from './BusinessCard';
 import NavBar from '../NavBar';
 
 
 function Business() {
+  const followedBusiness = useSelector((state) =>state.rootReducerPostulante.followedBusiness)
+ //console.log(followedBusiness)
+  const business = useSelector((state) =>state.rootReducerPostulante.business)
+  console.log(business)
+  const postulanteId = useSelector ((state) => state.rootReducerPostulante.profile[0].id)
+
   const dispatch = useDispatch();
   const handleAllBusiness = (e) => {
+    e.preventDefault()
     dispatch(getBusiness());
     };
-  useDispatch(()=>{
-    dispatch(getBusiness())
-    dispatch(getFollowed())
-  },[dispatch])
-const followedBusiness = useSelector((state) =>state.rootReducerPostulante.followedBusiness)
- //console.log(followedBusiness)
- const business = useSelector((state) =>state.rootReducerPostulante.business)
+  useEffect(()=>{
+     dispatch(getFollowed(postulanteId))
+   },[dispatch])
+
+
  //console.log(business)
 
 
@@ -43,11 +48,11 @@ const followedBusiness = useSelector((state) =>state.rootReducerPostulante.follo
    </button>
 </p>        
 <div  className="flex m-0 justify-center">
-    {business.length === 0 ? <p></p> : business?.map((el) => {
+    {business.length === 0 ? <p>No empresas </p> : business?.map((el) => {
       return (
         <div className="m-4" key={el.id}>
           <BusinessCard
-            id = {el.id}
+            id = {el.business_postulant.businessId}
             name={el.name}
             description={el.description}
             location={el.location} 

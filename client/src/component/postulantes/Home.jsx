@@ -126,7 +126,7 @@ export default function Home() {
                 <button
                   className="m-3"
                   onClick={() =>
-                    paginado(pageMax - currentPage <= 1 ? currentPage : currentPage + 1)
+                    paginado( currentPage + 1)
                   }
                 >
                   <AiOutlineArrowRight />
