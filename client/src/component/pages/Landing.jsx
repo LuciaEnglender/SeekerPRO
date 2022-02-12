@@ -20,7 +20,8 @@ const Landing = () => {
     <div className="p-9 bg-gray-300">
       <nav className=" grid grid-cols-2">
         <Link to="/">
-          <h3 className="font-bold  text-2xl">JSeekers</h3>
+          <h1 className="font-bold  text-2xl">JSeekers</h1>
+          <h3 className="font-bold  text-2xl"> Optimized to make you grow</h3>
         </Link>
         <div>
           <div className="float-right">
@@ -53,7 +54,7 @@ const Landing = () => {
             <div>
               <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
               <p className="pb-4">
-            Optimized to make you grow
+           
                 
                 
               </p>
@@ -98,8 +99,7 @@ Through an effective and minimalist system, it makes finding the right developer
             <div className="pt-8">
               <h2 className="font-bold text-2xl"> Step 4</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum,
-                amet?
+              Enjoy your extra free time!                
               </p>
             </div>
           </div>
@@ -109,16 +109,23 @@ Through an effective and minimalist system, it makes finding the right developer
         <div>
           <h2 className="text-5xl font-bold pb-4">About</h2>
           <p className="pb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-            sapiente vero temporibus ullam voluptatibus modi maxime quis minima
-            dicta iure hic, molestiae libero veritatis quos.
-          </p>
+          JSeeker is an application that emerges to efficiently connect developers and recruiters.
+<br/>
+          Created in February 2022 by a group of students from Henry's bootcamp, this application was created to make the process of hiring workers in the IT world easier and more dynamic.<br/>
+          JSekeer allows you to have an updated resume without having to spend too much time on it.
+It also provides a series of statistical data so that the developer can continue training in a completely supported way... cause
+anyone can help you get a job, we give you the right advice to grow in your career! <br/>
+But also for the recruiters we bring an update... Connection without laps and metrics day by day that are marking the optimal work times. 
+                    </p>
         </div>
       </section>
       <section id="contact" className="px-16 mb-32">
         <div>
           <h2 className="text-5xl font-bold pb-4">Contact</h2>
-          <p className="pb-4">Feel free to cantact us!</p>
+          <p className="pb-4">
+          Doubts? Wanting to have the premium? ... Feel free to cantact us! <br/>
+          Call our general manager of UX/UI Franco Montini to more details: +5490303456 <br/>
+           Cordoba, Argentina </p>
           <Link to="/homep">
             {" "}
             <button className="p-4 py-2 inline-block bg-gradient-to-r from-verdeClaro to-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow">
@@ -135,7 +142,7 @@ Through an effective and minimalist system, it makes finding the right developer
           About
         </a>
         <a className="hover:opacity-100 opacity-70 mr-4" href="a">
-          Countact
+          Contact
         </a>
         <a className="hover:opacity-100 opacity-70" href="a">
           Por Henry Group PAPA!
