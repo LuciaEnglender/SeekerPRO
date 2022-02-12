@@ -2,13 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import { getBusiness, getProfile, getVacancy } from "../../redux/actions/indexP";
+import { getProfile, getVacancy } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
 import Vacancy from "./Vacancy";
+import BusinessCard from '../postulantes/FollowBusiness/BusinessCard'
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 //import Business from './FollowBusiness/Business'
@@ -19,6 +20,7 @@ export default function Home() {
 
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy);
+  
 
   //Renderizacions postulaciones
   const handleAll = (e) => {
@@ -33,7 +35,7 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 3
 
-  console.log(currentVacancy)
+  console.log("current", currentVacancy)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -85,11 +87,25 @@ export default function Home() {
                 <FiltroDinamico />
               </div>
               <div className="grid-span-4 h-full">
-                {currentVacancy.length === 0 ? (
+                 {currentVacancy.length === 0 ? (
                   <p className=" font-bold text-center my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
-                  <div>
-                    {currentVacancy?.map((el) => {
+                  <div>        
+                    {currentVacancy[0].createBus? 
+                                        currentVacancy?.map((el)=> {
+                                          return (
+                                            <div className="m-4" key={el.id}>
+                                            <BusinessCard
+                                              id = {el.id}
+                                               name={el.name}
+                                              description={el.description}
+                                              languages={el.languages}                                                                                                                                                                                                                                                         />
+                                          </div>
+                                          )
+                                        })
+                    
+                    : 
+                    currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
                           <Vacancy
@@ -109,7 +125,11 @@ export default function Home() {
                           />
                         </div>
                       );
-                    })}
+                    }) 
+
+                    
+                    
+                    }
                   </div>
                 )}
               </div>

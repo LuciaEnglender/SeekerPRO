@@ -61,12 +61,7 @@ console.log(id)
         <SeeLater
         id= {id}/>
         </div>
-        <div >
-         <Follow 
-       id= {id}/>
          </div>
-
-        </div>
       </div>
     </div>
   );
