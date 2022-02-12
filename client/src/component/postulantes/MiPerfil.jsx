@@ -11,10 +11,6 @@ function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
   
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.perfiles
-  );
-  console.log(profileState)
   const { user, isAuthenticated } = useAuth0();
 
   const email = JSON.stringify(user.email);
@@ -22,7 +18,7 @@ function MiPerfil() {
 
   useEffect(() => {
     dispatch(getProfile(email2));
-    console.log(perfil)
+   
   }, [dispatch]);
   return (
     <div>

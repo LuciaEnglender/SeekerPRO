@@ -12,6 +12,8 @@ import Vacancy from "./Vacancy";
 import BusinessCard from '../postulantes/FollowBusiness/BusinessCard'
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+
 //import Business from './FollowBusiness/Business'
 //import Postulations from "../postulantes/MyPostulations/Postulations";
 
@@ -21,11 +23,6 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy);
   
-
-  //Renderizacions postulaciones
-  const handleAll = (e) => {
-    dispatch(getVacancy());
-    };
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,9 +37,23 @@ export default function Home() {
     setCurrentPage(pageNumber);
   };
   
-  useEffect(()=>{
-    dispatch(getProfile(1))
-  },[dispatch])
+  const perfil = useSelector((state) => state.rootReducerPostulante.profile);
+  
+  const { user, isAuthenticated } = useAuth0();
+
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
+//Renderizacions todas las vacantes
+const handleAll = (e) => {
+  dispatch(getVacancy(email2));
+  };
+
+  useEffect(() => {
+    dispatch(getProfile(email2));   
+  }, [dispatch]);
+
+
   
 
   return (
