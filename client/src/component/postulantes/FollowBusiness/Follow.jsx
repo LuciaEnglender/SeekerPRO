@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux"
+import { useNavigate } from 'react-router-dom';
 import {followBusiness} from '../../../redux/actions/indexP'
 
 /*recibo por destructuring id de la vacante y dispatcho un post?*/
@@ -9,10 +10,12 @@ function Follow({id}) {
   console.log("postulanteId", postulanteId, "businessId", id)
  
 const  dispatch = useDispatch()
+const navigate = useNavigate()
 
 function handleClick () {
     dispatch(followBusiness(postulanteId, id));
     alert("Now you're following this business")
+    navigate(-1)
 }
 
   return <div>

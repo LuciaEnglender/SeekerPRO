@@ -248,10 +248,11 @@ export function filterCombinated (info) {
 
 //FOLLOW
 export function getBusiness (){
+  console.log("llego pedido a action")
   return async function (dispatch) {
     try{
       const business = await axios.get("http://localhost:3001/business")
-      console.log("bussiness", business.data)
+      console.log("business", business.data)
       return dispatch( {
         type: GET_BUSINESS,
         payload: business.data
