@@ -1,15 +1,18 @@
 import React, {useEffect} from 'react';
 import {removePost} from '../../../redux/actions/indexP'
 import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 function RemovePost({id}) {
     const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
    // console.log(id)
     //console.log(postulanteId)
     const  dispatch = useDispatch()
+    const navigate = useNavigate()
     function handleRemove() {
         dispatch(removePost(id, postulanteId));
         alert ("This applied was remove")
+        navigate(-1)
       }
   return <div>
  <button 

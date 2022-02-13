@@ -22,6 +22,7 @@ export default function SearchBar() {
       setName("");
     }
   }
+
   return (
     <div className="w-fit justify-center h-9 flex flex-row text-gray-800 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro">
       <input

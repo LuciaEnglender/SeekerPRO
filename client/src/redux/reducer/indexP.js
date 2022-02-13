@@ -1,31 +1,35 @@
 import {
+  //POSTULANT
   POST_POSTULANTE,
+  GET_PROFILE,
+  //GET
   GET_TECHNOLOGY,
   GET_SKILL,
   GET_LANGUAGE,
   GET_VACANCY,
   GET_VACANCY_ID,
-  GET_FAVOURITES,
   GET_SENIORITY,
+  GET_LOCATION,
   GET_SEARCH_BAR,
-  GET_PROFILE,
+  //POSTULATION
   GET_MY_POSTULATIONS,
+  REMOVE_POST,
+  APPLY,
+  //FOLLOW
   GET_BUSINESS,
   GET_FOLLOWED,
+  UNFOLLOW,
+  FOLLOW,
+  //PENDING
   GET_SEE_LATER,
+  SEE_LATER,
+  REMOVE_SEE_LATER,
+  //FILTERS
   FILTER_BY_LANGUAGE,
   FILTER_BY_SENIORITY,
   FILTER_BY_TECHNOLOGY,
   FILTER_BY_SKILL,
   FILTER_COMBINATED,
-  ADD_FAVOURITES,
-  GET_LOCATION,
-  FOLLOW,
-  UNFOLLOW,
-  SEE_LATER,
-  APPLY,
-  REMOVE_POST,
-  REMOVE_SEE_LATER
 } from "../actions/indexP";
 
 import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
@@ -38,10 +42,9 @@ const initialState = {
   seniority: [],
   location: [],
   vacancy: [],
-  favourites: [],
   filteredVacancy: [],
   postulations: [],
-  later: [],
+  pending: [],
   business: [],
   followedBusiness: []
 };
@@ -78,11 +81,6 @@ export default function rootReducerPostulante(state = initialState, action) {
           ...state,
           filteredVacancy: action.payload,
         };   
-    case GET_FAVOURITES:
-      return {
-        ...state,
-        favourites: action.payload,
-      };
     case GET_SENIORITY:
       return {
         ...state,
@@ -111,7 +109,7 @@ export default function rootReducerPostulante(state = initialState, action) {
   case  GET_SEE_LATER:
     return{
       ...state,
-      later: action.payload,
+      pending: action.payload,
     }
 
     case FILTER_BY_SENIORITY:
@@ -143,17 +141,13 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         filteredVacancy: action.payload,
       };
-    case ADD_FAVOURITES:
-      return {
-        ...state,
-      };
     case FOLLOW:
       return {
         ...state,
-             }
+              }
       case UNFOLLOW:
         return{
-          ...state
+          ...state,          
         }
         case GET_FOLLOWED:
           return{
@@ -164,7 +158,7 @@ export default function rootReducerPostulante(state = initialState, action) {
     case SEE_LATER:
       return {
         ...state,
-        later: action.payload
+        pending: action.payload
       }
     case GET_MY_POSTULATIONS:
       return {
