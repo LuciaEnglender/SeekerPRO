@@ -20,7 +20,7 @@ export function postVacancy(payload) {
     return res;
   };
 }
-//GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
+//GET PARA VER TODAS MIS VACANTES COMO EMPRESAS
 export function getVacancy(business) {
   return async function (dispatch) {
     const res = await axios.get(
@@ -32,7 +32,7 @@ export function getVacancy(business) {
     });
   };
 }
-//GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTESs
+//GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTES
 export function getVacancyDetail(id) {
   return async function (dispatch) {
     const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
@@ -117,10 +117,10 @@ export function clearDetail() {
 }
 
 //GET PARA TRAER A LOS POSTULADOS DE UNA DE MIS VACANTES
-//(http falso...)
+
 export function getPostulados() {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy/postulantes`);
+    const res = await axios.get(`http://localhost:3001/vacancy/vacs/:id`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,

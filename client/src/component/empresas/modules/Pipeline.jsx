@@ -5,8 +5,9 @@ import { getPostulados, filterStatusPipeline } from "../../../redux/actions";
 // import { ejemploPipe } from "./MOCKS/ejemploPipe";
 import styles from "../../ui ux/styles/ButtonPipeline.css"
 import { Link } from "react-router-dom";
+import PostulantesVacancy from "../PostulantesVacancy";
 
-function Pipeline() {
+function Pipeline({id}) {
   const dispatch = useDispatch();
 
   // const postulados = useSelector((state) => state.postulados);
@@ -53,16 +54,16 @@ function Pipeline() {
       <div class="w-1/2 mx-auto mt-4  rounded">
 
         <ul id="tabs" class="inline-flex w-full px-1 pt-2 ">
-          <li class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2 border-blue-400 rounded-t opacity-50"><a id="default-tab" href="#first">All</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#second">Clothes</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#third">Electronics</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#fourth">Others</a></li>
+          <li class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2 border-blue-400 rounded-t opacity-50"><a id="default-tab" href="#first">Nuevo</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#second">Entrevista</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#third">Contactado</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#fourth">Contratado</a></li>
         </ul>
 
 
         <div id="tab-contents">
           <div id="first" class="p-4">
-           Nuevo
+           <PostulantesVacancy id={id}/>
           </div>
           <div id="second" class="hidden p-4">
             Entrevista

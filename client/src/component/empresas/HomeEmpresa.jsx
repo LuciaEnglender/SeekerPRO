@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
 import { getVacancy } from "../../redux/actions";
 import CardVacante from "./modules/CardVacante";
-import FormVacancy from "./modules/FormVacancy";
 import Pagination from "./Pagination";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -26,9 +25,7 @@ const HomeEmpresa = () => {
     setCurrentPage(pageNumber);
   };
 
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.perfiles
-  );
+ 
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
