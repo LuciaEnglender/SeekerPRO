@@ -50,7 +50,7 @@ routerBusiness.get("/count/:id", async (req, res) => {
 });
 
 //Busca empresa por nombre o trae todas
-routerBusiness.get("/:email", async (req, res) => {
+routerBusiness.get("/find/:email", async (req, res) => {
   const email = req.params.email;
 
   try {
@@ -67,14 +67,14 @@ routerBusiness.get("/:email", async (req, res) => {
 });
 
 routerBusiness.get("/", async (req, res) => {
-  const { name } = req.query;
+  const { business } = req.query;
   
   //console.log(allBusiness)
   try {
-    if (name) {
+    if (business) {
       const business = await Business.findOne({
         where: {
-          loginEmail: name
+          loginEmail: business
         }
       })
       res.status(200).json(business)
@@ -90,7 +90,7 @@ routerBusiness.get("/", async (req, res) => {
 });
 
 //****************BUSQUEDA DEL SEARCHBAR DE EMPRESA**************** */
-routerBusiness.get("/:name", async (req, res) => {
+routerBusiness.get("/search/:name", async (req, res) => {
   const { name } = req.params;
   const acum = [];
   try {
@@ -426,7 +426,7 @@ routerBusiness.post(
   "/",
 
   async (req, res) => {
-    let { name, description, location, cuit, emailId } = req.body;
+    let { name, description, location, cuit, emailId ,createBus } = req.body;
 
     try {
       let createBusiness = await Business.create({
@@ -434,6 +434,7 @@ routerBusiness.post(
         description,
         location,
         cuit,
+        createBus
       });
 
       let finderLogin = await Login.findByPk(emailId);

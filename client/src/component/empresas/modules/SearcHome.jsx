@@ -218,4 +218,4 @@ function SearcHome() {
 }
 
 
-// export default SearcHome
+export default SearcHome

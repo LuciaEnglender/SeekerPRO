@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProfile } from "../../redux/actions/indexP";
-
+//import NavBar from "./NavBar";
 import s from "../postulantes/Styles/miperfil.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
@@ -11,10 +11,6 @@ function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
   
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.perfiles
-  );
-  console.log(profileState)
   const { user, isAuthenticated } = useAuth0();
 
   const email = JSON.stringify(user.email);
@@ -22,12 +18,11 @@ function MiPerfil() {
 
   useEffect(() => {
     dispatch(getProfile(email2));
-    console.log(perfil)
+   
   }, [dispatch]);
   return (
     <div>
       <div className={s.botones}></div>
-
       <div className={s.info}>
         {perfil.length === 0 ? (
           <div>

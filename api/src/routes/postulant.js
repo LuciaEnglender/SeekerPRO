@@ -131,40 +131,6 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
-//*************Ruta que postea un id del postulante para agregar sus vacantes relacion de muchos a muchoa */
-routerPostulant.post("/postulate/:id", async (req, res) => {
-  const { id } = req.body;
-
-  const postulanteId = req.params.id;
-  try {
-    let postulante = await Postulant.findByPk(postulanteId);
-
-    let vacancy = await Vacancy.findByPk(id);
-
-    await postulante.addVacancy(vacancy);
-
-    res.status(200).json(postulante);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-//**********Remueve una vacante del postulante */
-routerPostulant.put("/postulate/:id", async (req, res) => {
-  const { id } = req.body;
-  const postulantId = req.params.id;
-  try {
-    let postulante = await Postulant.findByPk(postulantId);
-
-    let vacancy = await Vacancy.findByPk(id);
-
-    await postulante.removeVacancy(vacancy);
-
-    res.status(200).json("sseasesa");
-  } catch (e) {
-    console.log(e);
-  }
-});
 
 routerPostulant.post("/", upload.any("file",2), async (req, res) => {
   //el campo de genero recibe un solo valor
@@ -288,7 +254,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
 });
 //Trae las vacantes  por postulante
 routerPostulant.get("/:id/vacancy", async (req, res) => {
-  Postulant.findByPk(req.params.id).then((postulant) => {
+ try{ Postulant.findByPk(req.params.id).then((postulant) => {
     postulant
       .getVacancies({
         attributes: ["name", "description"],
@@ -297,12 +263,14 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
         console.log(vacancy);
         res.json(vacancy);
       });
-  });
+  });} catch(e ){
+    console.log(e)
+  }
 });
 
 //Cuenta cuantos vacantes tiene un postulante
 routerPostulant.get("/:id/vacancy", async (req, res) => {
-  Postulant.findByPk(req.params.id).then((postulant) => {
+  try{Postulant.findByPk(req.params.id).then((postulant) => {
     postulant
       .getVacancies({
         attributes: ["name", "description"],
@@ -311,7 +279,9 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
         console.log(vacancy);
         res.json(vacancy.length);
       });
-  });
+  });}catch(e){
+    console.log(e)
+  }
 });
 
 //put para modificar datos de un detalle / perfil de postulante

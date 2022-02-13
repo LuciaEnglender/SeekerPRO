@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import Follow from './Follow';
+import Unfollow from './Unfollow';
 
-function BusinessCard({name, description, location, id}) {
+function FollowedCard({name, description, location, id}) {
     return (
         <div
           tabindex="0"
@@ -24,7 +24,7 @@ function BusinessCard({name, description, location, id}) {
               </Link>
                 <div role="img" aria-label="bookmark">
                 <p class="focus:outline-none" width="28" height="28">
-               <Follow
+               <Unfollow
                  id = {id}/>
                 </p>
               </div>
@@ -53,4 +53,4 @@ function BusinessCard({name, description, location, id}) {
   
 }
 
-export default BusinessCard;
+export default FollowedCard;

@@ -67,6 +67,47 @@ routerVacancy.get("/", async (req, res) => {
   const { id, business } = req.query;
 
   try {
+
+    const ALLVACS = await Vacancy.findAll({
+      include: [
+        {
+          model: Language,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Seniority,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        // {
+        //   model: Skill,
+        //   attributes: ["name"],
+        //   through: {
+        //     attributes: [],
+        //   },
+        // },
+        {
+          model: Technology,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Business,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        }
+      ],
+    });
+    
     //si tiene id (o sea que se requiere el detalle) entra acá
     if (id) {
       const vacanciesInDB = await Vacancy.findAll({
@@ -126,39 +167,8 @@ routerVacancy.get("/", async (req, res) => {
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
     } else {
-      const vacanciesInDB = await Vacancy.findAll({
-        include: [
-          {
-            model: Language,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          {
-            model: Seniority,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          // {
-          //   model: Skill,
-          //   attributes: ["name"],
-          //   through: {
-          //     attributes: [],
-          //   },
-          // },
-          {
-            model: Technology,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-        ],
-      });
-      vacanciesInDB? res.status(200).json(vacanciesInDB)
+     
+      ALLVACS? res.status(200).json(ALLVACS)
       : res.status(400).send('not vacancies yet')
     }
   } catch (e) {
@@ -456,28 +466,28 @@ routerVacancy.get("/filterByTech", async (req, res) => {
   res.status(200).send(vacanciesInDB);
 });
 
-routerVacancy.get("/:name", async (req, res) => {
-  const { name } = req.params;
+// routerVacancy.get("/:name", async (req, res) => {
+//   const { name } = req.params;
 
-  try {
-    const businesss = await Business.findAll({
-      where: {
-        name: name,
-      },
-    });
-    console.log(businesss);
+//   try {
+//     const businesss = await Business.findAll({
+//       where: {
+//         name: name,
+//       },
+//     });
+//     console.log(businesss);
 
-    const vacanciesXbusiness = await Vacancy.findAll({
-      where: {
-        businessId: businesss.id,
-      },
-    });
+//     const vacanciesXbusiness = await Vacancy.findAll({
+//       where: {
+//         businessId: businesss.id,
+//       },
+//     });
 
-    res.status(200).json(vacanciesXbusiness);
-  } catch (e) {
-    console.log(e);
-  }
-});
+//     res.status(200).json(vacanciesXbusiness);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
 routerVacancy.get("/vacs/:id", async (req, res) => {
   //Trae todos los pustulantes de una vacante
