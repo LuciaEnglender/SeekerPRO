@@ -95,10 +95,11 @@ function SearcHome() {
             <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
                 <div className="bg-grey 300 p-2 px-10">
                     <div className="bg-verdeMedio rounded-2xl p-6 w-full h-full">
-                        <h1 className=" font-bold  text-center mb-3">Filtros:</h1>
-                        <h1 className=" font-bold  text-center mb-3">(in work)</h1>
+                        <h1 className=" font-bold  text-center mb-3">Filtrar</h1>
+                        <h1 className=" font-bold  text-center mb-3"> </h1>
+                        <hr />
                         <div>
-                            <div className="w-full flex flex-col m-0 justify-center">
+                            <div className="w-full flex flex-col m-0 justify-center pt-5">
                                 <label> Buscar:</label>
                                 <input
                                     className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
