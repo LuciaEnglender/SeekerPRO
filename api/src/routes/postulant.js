@@ -299,7 +299,7 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
 });
 
 //put para modificar datos de un detalle / perfil de postulante
-routerPostulant.put("/:id", async (req, res) => {
+// routerPostulant.put("/:id", async (req, res) => {
   try {
     await Postulant.update(req.body, {
       where: { id: req.params.id },
