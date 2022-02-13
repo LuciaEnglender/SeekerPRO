@@ -1,8 +1,8 @@
 import React from 'react';
+import RemovePost from '../MyPostulations/RemovePost';
 import {Link} from 'react-router-dom'
-import Follow from './Follow';
 
-function BusinessCard({name, description, location, id}) {
+function BusinessCard({name, description, id}) {
     return (
         <div
           tabindex="0"
@@ -17,15 +17,15 @@ function BusinessCard({name, description, location, id}) {
                   tabindex="0"
                   class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
                 > 
-                {name} <br/>
-                  {id}
+                  {name} <br/>
+                  Business {id}
                 </p>      
               </div>
               </Link>
-                <div role="img" aria-label="bookmark">
+              <div role="img" aria-label="bookmark">
                 <p class="focus:outline-none" width="28" height="28">
-               <Follow
-                 id = {id}/>
+               <Unfollow
+               businessId = {id}/>
                 </p>
               </div>
             </div>
@@ -35,17 +35,9 @@ function BusinessCard({name, description, location, id}) {
               tabindex="0"
               class="focus:outline-none text-sm leading-5 py-2 text-gray-600"
             >
-              {description}  
-            </p>
-          </div>          <div class="px-2">
-            <p
-              tabindex="0"
-              class="focus:outline-none text-sm leading-5 py-2 text-gray-600"
-            >
-             {location}
+              {description}
             </p>
           </div>
-
         </div>
       );
     

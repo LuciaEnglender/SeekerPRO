@@ -15,7 +15,6 @@ import MiPerfil from "./component/postulantes/MiPerfil";
 import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
 import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLaterVacancies"
-import Postulations from "./component/postulantes/MyPostulations/Postulations";
 
 //Rutas de Empresa
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
@@ -47,7 +46,6 @@ function App() {
         <Route path="/homep/create/modifyprofile" element={<Perfil />} />
         <Route path="/homep/postdetail/:id" element={<DetailPost />} />
         <Route path="/homep/seelater" element={<SeeLaterVancancies/>}/>
-        <Route path="/homep/mypostulations" element={<Postulations/>}/>
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
         <Route path="/homee/create" element={<FormPerfil />} />

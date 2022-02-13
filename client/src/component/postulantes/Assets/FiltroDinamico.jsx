@@ -13,6 +13,7 @@ import { useEffect } from "react";
 export default function FiltroDinamico() {
   const dispatch = useDispatch();
   const tecno = useSelector((state) => state.rootReducerPostulante.technology);
+ // const habilidades = useSelector((state) => state.rootReducerPostulante.skill);
   const lenguaje = useSelector((state) => state.rootReducerPostulante.language);
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority

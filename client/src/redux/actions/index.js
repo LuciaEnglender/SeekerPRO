@@ -76,7 +76,7 @@ export function getProfiles() {
 //get para buscar por nombre "searchBar"
 export function getSearchName(name) {
   return async function (dispatch) {
-    var res = await axios.get(`http://localhost:3001/postulant/search/${name}`);
+    var res = await axios.get(`http://localhost:3001/postulant?name=${name}`);
 
     return dispatch({
       type: "GET_NAME_PROFILE",

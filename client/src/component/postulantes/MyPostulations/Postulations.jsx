@@ -3,7 +3,6 @@ import {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyPostulations} from '../../../redux/actions/indexP'
 import PostCard from '../MyPostulations/PostCard';
-import NavBar from '../NavBar';
 
 function Postulations() {
 
@@ -20,7 +19,6 @@ function Postulations() {
 
   return <div>
           <h1> My applications </h1>
-          <div><NavBar/></div>
     <div>
     {postulations.length === 0 ? (
     <p className=" font-bold text-center mb-3">No applies? Search know!</p>

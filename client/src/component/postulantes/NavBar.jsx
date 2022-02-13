@@ -148,20 +148,6 @@ const NavBar = ({ titulo }) => {
                            </Link>
                          )}
                        </Menu.Item>
-                       <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/homep/mypostulations"
-                            className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            My applies
-                          </Link>
-                        )}
-                      </Menu.Item>
-
                       <Menu.Item>
                         {({ active }) => (
                           <Link

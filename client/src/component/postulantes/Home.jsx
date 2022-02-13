@@ -2,18 +2,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import { getProfile, getVacancy } from "../../redux/actions/indexP";
+import { getVacancy } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
+
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
 import Vacancy from "./Vacancy";
-import BusinessCard from '../postulantes/FollowBusiness/BusinessCard'
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
-import { useAuth0 } from "@auth0/auth0-react";
-
 //import Business from './FollowBusiness/Business'
 //import Postulations from "../postulantes/MyPostulations/Postulations";
 
@@ -21,8 +19,21 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const filtradas = useSelector(
-    (state) => state.rootReducerPostulante.filteredVacancy);
-  
+    (state) => state.rootReducerPostulante.filteredVacancy
+  );
+
+  //Renderizacions postulaciones
+  const [postulaciones, setPostulaciones] = useState(false);
+  function handlePostulations() {
+    setPostulaciones(!postulaciones);
+  }
+  const [empresas, setEmpresas] = useState(false);
+  function handleEmpresas() {
+    setEmpresas(!empresas);
+  }
+  const handleAll = (e) => {
+    dispatch(getVacancy());
+  };
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,29 +43,12 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 3
 
-  console.log("current", currentVacancy)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  
-  const perfil = useSelector((state) => state.rootReducerPostulante.profile);
-  
-  const { user, isAuthenticated } = useAuth0();
-
-  const email = JSON.stringify(user.email);
-  const email2 = email.substring(1, email.length - 1);
-
-//Renderizacions todas las vacantes
-const handleAll = (e) => {
-  dispatch(getVacancy(email2));
-  };
-
   useEffect(() => {
-    dispatch(getProfile(email2));   
+    
   }, [dispatch]);
-
-
-  
 
   return (
     <div className="absolute bg-verdeOscuro h-screen w-screen">
@@ -98,30 +92,17 @@ const handleAll = (e) => {
                 <FiltroDinamico />
               </div>
               <div className="grid-span-4 h-full">
-                 {currentVacancy.length === 0 ? (
+                {currentVacancy.length === 0 ? (
                   <p className=" font-bold text-center my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
-                  <div>        
-                    {currentVacancy[0].createBus? 
-                                        currentVacancy?.map((el)=> {
-                                          return (
-                                            <div className="m-4" key={el.id}>
-                                            <BusinessCard
-                                              id = {el.id}
-                                               name={el.name}
-                                              description={el.description}
-                                              languages={el.languages}                                                                                                                                                                                                                                                         />
-                                          </div>
-                                          )
-                                        })
-                    
-                    : 
-                    currentVacancy?.map((el) => {
+                  <div>
+                    {currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
                           <Vacancy
                             id = {el.id}
-                             name={el.name}
+                            businessId = {el.businessId}
+                            name={el.name}
                             description={el.description}
                             languages={el.languages
                               ?.map((l) => l.name)
@@ -136,11 +117,7 @@ const handleAll = (e) => {
                           />
                         </div>
                       );
-                    }) 
-
-                    
-                    
-                    }
+                    })}
                   </div>
                 )}
               </div>
@@ -157,7 +134,7 @@ const handleAll = (e) => {
                 <button
                   className="m-3"
                   onClick={() =>
-                    paginado( currentPage + 1)
+                    paginado(pageMax - currentPage <= 1 ? currentPage : currentPage + 1)
                   }
                 >
                   <AiOutlineArrowRight />
@@ -209,17 +186,6 @@ const handleAll = (e) => {
   );
 }
 
-
-
-/*  const [postulaciones, setPostulaciones] = useState(false);
-  function handlePostulations() {
-    setPostulaciones(!postulaciones);
-  }
-  const [empresas, setEmpresas] = useState(false);
-  function handleEmpresas() {
-    setEmpresas(!empresas);
-  }
-*/
 
 /*              <div className="flex m-0 justify-center">
               <div>

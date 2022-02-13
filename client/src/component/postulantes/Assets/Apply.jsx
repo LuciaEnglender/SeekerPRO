@@ -1,14 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {apply, getMyPostulations, getProfile} from '../../../redux/actions/indexP'
-import { useAuth0, isAuthenticated } from "@auth0/auth0-react";
+import {apply, getMyPostulations} from '../../../redux/actions/indexP'
 
 function Apply(id) {
 const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
+//console.log(id)
+//console.log(postulanteId)
 const  dispatch = useDispatch()
-const { user } = useAuth0();
-const email = JSON.stringify(user.email);
-const email2 = email.substring(1, email.length - 1);
 
 
 function handleApply() {
@@ -17,8 +15,7 @@ function handleApply() {
 }
 
 useEffect(()=>{
- dispatch(getMyPostulations())
-  dispatch(getProfile(email2));
+  dispatch(getMyPostulations())
 }, [dispatch])
 
   return <div>

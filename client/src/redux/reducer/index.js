@@ -141,7 +141,7 @@ function rootReducer(state = initialState, action) {
       case "FILTER_VACANCIES":
       return {
         ...state,
-        vacancies: action.payload,
+        filteredVacancy: action.payload,
       };
 
     default:
