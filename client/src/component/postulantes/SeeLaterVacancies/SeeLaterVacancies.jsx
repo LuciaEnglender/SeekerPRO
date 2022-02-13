@@ -30,8 +30,8 @@ function SeeLaterVacancies() {
       id = {el.id}
       name={el.name}
       description={el.description}
-      languages={el.languages?.map((l) => l.name) .join(", ")}
-      seniorities={el.seniorities  ?.map((s) => s.name).join(", ")}
+      languages={el.languages?.map((l) => l.name).join(", ")}
+      seniorities={el.seniorities?.map((s) => s.name).join(", ")}
       skills={el.skills?.map((sk) => sk.name).join(", ")}
       technologies={el.technologies?.map((t) => t.name).join(", ")}
     />

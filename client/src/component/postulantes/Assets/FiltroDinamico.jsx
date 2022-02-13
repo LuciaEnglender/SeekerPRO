@@ -121,9 +121,9 @@ export default function FiltroDinamico() {
 
   return (
     <div className=" flex flex-col">
-      <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
-        <div className="m-3 flex flex-col justify-center">
-          <label> Technology</label>
+      <form className=" flex flex-row " onSubmit={(e) => handleSubmit(e)}>
+        <div className="m-3 flex flex-col justify-center ">
+          <label className="text-gray-400"> Technology</label>
           <select
             className="xl:w-52 rounded-2xl bg-verdeClaro"
             placeholder="technology"
@@ -165,7 +165,7 @@ export default function FiltroDinamico() {
           ))}
         </div>
         <div className=" m-3 flex flex-col m-0 justify-center">
-          <label> Languages</label>
+          <label className="text-gray-400"> Languages</label>
           <select
             className=" xl:w-52 rounded-2xl bg-verdeClaro"
             placeholder="languages"
@@ -209,7 +209,7 @@ export default function FiltroDinamico() {
           </div>
         </div>
         <div className=" flex flex-col m-0 justify-center">
-          <label>Seniority</label>
+          <label className="text-gray-400">Seniority</label>
           <select
             className=" xl:w-52 rounded-2xl bg-verdeClaro"
             placeholder="Seniority"

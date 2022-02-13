@@ -52,10 +52,9 @@ const SectionNuevo = () => {
     <div>
       <div className="grid grid-cols-2">
         <div className="m-10">
-          <h2 className="text-5xl font-bold pb-4">Comoo Developer:</h2>
+          <h2 className="text-5xl font-bold pb-4">Como Developer</h2>
           <p className="pb-4 text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-            sapiente vero temporibus ullam .
+            We will help you to get in contact with recruiters all over the world, from the most relevant IT  companies.
           </p>
           <div className="flex m-0 justify-center">
             <button
@@ -63,16 +62,15 @@ const SectionNuevo = () => {
               value="DEVELOPER"
               onClick={(e) => handleSubmitP(e)}
             >
-              Developer?
+              Developer
             </button>
           </div>
         </div>
         <div className="m-10">
           <div>
-            <h2 className="text-5xl font-bold pb-4">Comoo Developer:</h2>
+            <h2 className="text-5xl font-bold pb-4">Como Recruiter</h2>
             <p className="pb-4 text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-              sapiente vero temporibus ullam .
+              We offer efficiency in the selection process in recruiting developers specialized in all technologies.
             </p>
             <div className="flex m-0 justify-center">
               <button
@@ -80,7 +78,7 @@ const SectionNuevo = () => {
                 value="BUSINESS"
                 onClick={(e) => handleSubmitE(e)}
               >
-                Recruiter?
+                Recruiter
               </button>
             </div>
           </div>

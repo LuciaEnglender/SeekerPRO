@@ -19,13 +19,14 @@ function Postulations() {
   }, []);
 
   return <div>
-          <h1> My applications </h1>
+          
           <div><NavBar/></div>
-    <div>
+          <h1 className=' bg-gray-300 text-center pt-4 font-bold text-xl ' > My applications </h1>
+    <div >
     {postulations.length === 0 ? (
     <p className=" font-bold text-center mb-3">No applies? Search know!</p>
   ) : (
-    <div>
+    <div  className="focus:outline-none bg-gray-300 w-screen h-screen pt-7">
       {postulations?.map((el) => {
         return (
           <div className="m-4" key={el.postulant_vacancy.vacancyId}>

@@ -11,21 +11,24 @@
 }
 .info{
     text-align: center;  
+    color:rgb(161 161 170);
 }
 
  
 .head{
+    color: rgb(161 161 170) ;
       font-size: 22px;
       font-weight: bold;
 }
 .extras{
- border-bottom: 3px #84a98c solid;
+ border-bottom: 3px rgb(13, 13, 14) solid;
  padding-bottom: 15px;
  font-size: 17px; 
+ color:rgb(161 161 170);
    }
    
 .puesto{
-    color: #dff517;
+    color:rgb(161 161 170);
     font-size: 18px;
     text-align: center;
 }
@@ -43,9 +46,10 @@
    
 .items{
     font-size: 17px;
-    border-bottom: 3px #84a98c solid;
+    border-bottom: 3px rgb(12, 12, 15) solid;
     padding-bottom: 10px;
-    padding-top: 10px;  
+    padding-top: 10px; 
+    color:rgb(161 161 170);
 }
    
    
