@@ -254,10 +254,11 @@ const FormVacancy = () => {
         </div>
       </form>
       </div>
+      <div className="ml-10">
       <Link to="/homee">
       <BsFillArrowLeftSquareFill />
       </Link>
-      
+      </div>
     </div>
   );
 };

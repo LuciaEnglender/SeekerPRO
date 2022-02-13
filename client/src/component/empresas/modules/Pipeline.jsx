@@ -3,22 +3,23 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostulados, filterStatusPipeline } from "../../../redux/actions";
 // import { ejemploPipe } from "./MOCKS/ejemploPipe";
-import styles from "../../ui ux/styles/ButtonPipeline.css"
 import { Link } from "react-router-dom";
 import PostulantesVacancy from "../PostulantesVacancy";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Pipeline({id}) {
   const dispatch = useDispatch();
+  const { user } = useAuth0()
+  const postulados = useSelector((state) => state.rootReducer.postulados);
+  console.log(postulados)
+  // const postuladosEjemplo = ejemploPipe;
+  useEffect(() => {
+    dispatch(getPostulados(id));
+  }, [dispatch]);
 
-  // const postulados = useSelector((state) => state.postulados);
-  // // const postuladosEjemplo = ejemploPipe;
-  // useEffect(() => {
-  //   dispatch(getPostulados());
-  // }, [dispatch]);
-
-  function handlePipeline(e) {
-    dispatch(filterStatusPipeline(e.target.value));
-  }
+  // function handlePipeline(e) {
+  //   dispatch(filterStatusPipeline(e.target.value));
+  // }
   useEffect(() => {
   let tabsContainer = document.querySelector("#tabs");
 
@@ -64,7 +65,32 @@ function Pipeline({id}) {
 
         <div id="tab-contents">
           <div id="first" class="p-4">
-          Nuevo
+          {postulados.length === 0 ? <p>Waiting for people...</p> : 
+           <div >
+           <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+        <div class="flex justify-center md:justify-end -mt-8">
+          {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+        </div>
+        <div className="p-2">
+          <h2 class="text-gray-800 text-2x2 font-semibold">{postulados[0]?.name}</h2>
+          {/* <p class="mt-2 text-gray-600">Descripcion de la vacante: {detalle[0]?.description}</p>
+          <p class="mt-2 text-gray-600">Seniority: {detalle[0].seniorities.length ? detalle[0].seniorities.map((ele) => ele.name) : <p> No especificado</p>}</p>
+          <p class="mt-2 text-gray-600">Tecnologías Requeridas: {detalle[0].technologies.length ? detalle[0].technologies.map((ele) => ele.name + ", ") : <p> No especificado</p>}</p>
+          <p class="mt-2 text-gray-600">Idioma: {detalle[0].languages.length ? detalle[0]?.languages.map((ele) => ele.name) : <p> No especificado</p>}</p> */}
+          {/* <div class="flex justify-end mt-1">
+          <Link to={`/vacancy/edit/${id}`}> */}
+            {/* <EditVcancy id={id} /> */}
+            {/* <button className="text-xs font-medium text-indigo-500">Edit Vacancy</button>
+          </Link>
+          </div>
+          <div class="flex justify-end mt-4">
+          <button className="text-xs font-medium text-indigo-500" onClick={e => { handleDelete(e) }} >Delete Vacancy</button>
+          </div> */}
+        </div>
+        
+      </div>
+          </div> 
+          }
           </div>
           <div id="second" class="hidden p-4">
             Entrevista
