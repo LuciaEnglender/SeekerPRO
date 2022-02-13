@@ -66,13 +66,14 @@ function Pipeline({id}) {
         <div id="tab-contents">
           <div id="first" class="p-4">
           {postulados.length === 0 ? <p>Waiting for people...</p> : 
+          postulados.map((el) => {return(
            <div >
            <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
         <div class="flex justify-center md:justify-end -mt-8">
           {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
         </div>
         <div className="p-2">
-          <h2 class="text-gray-800 text-2x2 font-semibold">{postulados[0]?.name}</h2>
+          <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
           {/* <p class="mt-2 text-gray-600">Descripcion de la vacante: {detalle[0]?.description}</p>
           <p class="mt-2 text-gray-600">Seniority: {detalle[0].seniorities.length ? detalle[0].seniorities.map((ele) => ele.name) : <p> No especificado</p>}</p>
           <p class="mt-2 text-gray-600">Tecnologías Requeridas: {detalle[0].technologies.length ? detalle[0].technologies.map((ele) => ele.name + ", ") : <p> No especificado</p>}</p>
@@ -89,7 +90,7 @@ function Pipeline({id}) {
         </div>
         
       </div>
-          </div> 
+          </div> )})
           }
           </div>
           <div id="second" class="hidden p-4">
