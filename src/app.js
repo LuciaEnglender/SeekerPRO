@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const path = require('path');
 
 require('./db.js');
 
@@ -21,6 +22,15 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+//server.use(express.static(path.join(__dirname.slice(0,-4), "client/build")))
+server.use(express.static("client/build"))
+
+if(process.env.NODE_ENV === "production"){
+  server.use(express.static(path.join(__dirname.slice(0,-4), "client/build")))
+}
+
+console.log(path.join(__dirname.slice(0,-4), "client/build"))
 
 server.use('/', routes);
 

@@ -14,6 +14,12 @@ const e = require("express");
 
 const routerVacancy = Router();
 
+// intento de derivar al usuario al inicio en caso de poner cualquier cosa en el path
+// routerVacancy.get("*", (req,res) => {
+//   res.sendFile(path.join(__dirname, "client/build//index.html"))
+//   console.log(__dirname)
+// })
+
 routerVacancy.get("/", async (req, res) => {
   const { id } = req.query;
 

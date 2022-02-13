@@ -21,7 +21,7 @@ export function createPostulante(payload) {
   
   return async function (dispatch) {
     try {
-    const res= await axios.post("http://localhost:3001/postulant", payload);
+    const res= await axios.post("/postulant", payload);
       return dispatch({
         type: POST_POSTULANTE,
           payload: res
@@ -35,7 +35,7 @@ export function createPostulante(payload) {
 export function getTechnology() {
   return async function (dispatch) {
     try {
-      const tecno = await axios.get("http://localhost:3001/tech");
+      const tecno = await axios.get("/tech");
       return dispatch({
         type: GET_TECHNOLOGY,
         payload: tecno.data,
@@ -49,7 +49,7 @@ export function getTechnology() {
 export function getSkill() {
   return async function (dispatch) {
     try {
-      const skill = await axios.get("http://localhost:3001/skills");
+      const skill = await axios.get("/skills");
       return dispatch({
         type: GET_SKILL,
         payload: skill.data,
@@ -62,7 +62,7 @@ export function getSkill() {
 export function getLanguage() {
   return async function (dispatch) {
     try {
-      const language = await axios.get("http://localhost:3001/languages");
+      const language = await axios.get("/languages");
       return dispatch({
         type: GET_LANGUAGE,
         payload: language.data,
@@ -75,7 +75,7 @@ export function getLanguage() {
 export function getVacancy() {
   return async function (dispatch) {
     try {
-      const vacantes = await axios.get("http://localhost:3001/vacancy");
+      const vacantes = await axios.get("/vacancy");
       return dispatch({
         type: GET_VACANCY,
         payload:vacantes.data,
@@ -88,7 +88,7 @@ export function getVacancy() {
 export function getSearchBar(payload) {
   return async function (dispatch) {
       try {
-          var json = await axios(`http://localhost:3001/vacancy/${payload}`);
+          var json = await axios(`/vacancy/${payload}`);
           console.log(json.data)
           return dispatch ({
               type: GET_SEARCH_BAR,
@@ -103,7 +103,7 @@ export function getSearchBar(payload) {
 export function getSeniority() {
   return async function (dispatch) {
     try {
-      const seniority = await axios.get("http://localhost:3001/seniority");
+      const seniority = await axios.get("/seniority");
       return dispatch({
         type: GET_SENIORITY,
         payload: seniority.data,
@@ -118,7 +118,7 @@ export function getSeniority() {
 export function getFavourites() {
   return async function (dispatch) {
     try {
-      const fav = await axios.get("http://localhost:3001/favourites");
+      const fav = await axios.get("/favourites");
       return dispatch({
         type: GET_FAVOURITES,
         payload: fav.data,
@@ -131,7 +131,7 @@ export function getFavourites() {
 export function getProfile(payload) {
   return async function (dispatch) {
     try {
-      const profile = await axios.get(`http://localhost:3001/postulant?id=${payload}`);
+      const profile = await axios.get(`/postulant?id=${payload}`);
       return dispatch({
         type: GET_PROFILE,
         payload: profile.data,
@@ -145,7 +145,7 @@ export function getProfile(payload) {
 export function filterByLanguage (info) {
   return async function (dispatch) {
     try {
-      const language = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const language = await axios.post("/allFiltersVacancy", info);
       return dispatch({
         type: FILTER_BY_LANGUAGE,
         payload: language.data,
@@ -158,7 +158,7 @@ export function filterByLanguage (info) {
 export function filterBySeniority (info) {
   return async function (dispatch) {
     try {
-      const seniority = await axios.post(`http://localhost:3001/allFiltersVacancy`, info)
+      const seniority = await axios.post(`/allFiltersVacancy`, info)
       console.log( seniority.data)
       return dispatch({
         type: FILTER_BY_SENIORITY,
@@ -174,7 +174,7 @@ export function filterBySeniority (info) {
 export function filterByTechnology(info){
   return async function (dispatch) {
     try {
-      const techno = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const techno = await axios.post("/allFiltersVacancy", info);
       return dispatch({
         type: FILTER_BY_TECHNOLOGY,
         payload: techno.data,
@@ -188,7 +188,7 @@ export function filterByTechnology(info){
 export function filterBySkill(info){
   return async function (dispatch) {
     try {
-      const skill = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const skill = await axios.post("/allFiltersVacancy", info);
       return dispatch({
         type: FILTER_BY_SKILL,
         payload: skill.data,
@@ -201,7 +201,7 @@ export function filterBySkill(info){
 export function filterCombinated (info) {
   return async function (dispatch) {
     try {
-      const combinated = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const combinated = await axios.post("/allFiltersVacancy", info);
       console.log(combinated)
       return dispatch({
         type: FILTER_COMBINATED,
@@ -215,7 +215,7 @@ export function filterCombinated (info) {
 export function addFavourite (payload) {
   return async function(dispatch){
       try{
-          await axios.post('http://localhost:3001/vacancy', payload);
+          await axios.post('/vacancy', payload);
           return {
               type: ADD_FAVOURITE,
               }
