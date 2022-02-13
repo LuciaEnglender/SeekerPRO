@@ -208,6 +208,7 @@ export function postEmpresa(payload) {
     });
   };
 }
+//FILTRO DE HOME EMPRESA PARA LOS SELECT
 export function filterVacancies (info) {
   return async function (dispatch) {
     try {
