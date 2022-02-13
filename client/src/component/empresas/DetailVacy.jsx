@@ -42,7 +42,7 @@ function DetailVacy() {
   <div class="flex justify-center md:justify-end -mt-8">
     <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/>
   </div>
-  <div className="p-5" ey={detalle[0]?.id}>
+  <div className="p-5" key={detalle[0]?.id}>
     <h2 class="text-gray-800 text-3x3 font-semibold">{detalle[0]?.name}</h2>
     <p class="mt-2 text-gray-600">Descripcion de la vacante: {detalle[0]?.description}</p>
     <p class="mt-2 text-gray-600">Seniority: {detalle[0].seniorities.length ? detalle[0].seniorities.map((ele) => ele.name) : <p> No especificado</p>}</p>
@@ -63,7 +63,7 @@ function DetailVacy() {
     </div> 
 }
 
-    <div>
+    <div className="ml-8">
     <Link to="/homee">
       <button>
         <BsFillArrowLeftSquareFill />

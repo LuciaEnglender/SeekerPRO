@@ -118,9 +118,9 @@ export function clearDetail() {
 
 //GET PARA TRAER A LOS POSTULADOS DE UNA DE MIS VACANTES
 
-export function getPostulados() {
+export function getPostulados(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy/vacs/:id`);
+    const res = await axios.get(`http://localhost:3001/vacancy/vacs/${id}`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
