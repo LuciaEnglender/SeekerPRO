@@ -40,6 +40,7 @@ const HomeEmpresa = () => {
         <NavHomeE titulo={"Home"} />
       </div>
       {/* BODY */}
+      
       <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-verdeOscuro  h-auto pt-7">
         {/* AREA DE CREACION */}
         <div><SearcHome/></div>

@@ -126,7 +126,7 @@ routerVacancy.get("/", async (req, res) => {
           loginEmail: business,
         },
       });
-
+ console.log(finderBusiness)
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
         where: {

@@ -18,9 +18,9 @@ module.exports = (sequelize) => {
     cuit: {
       type: DataTypes.STRING,
     },
-    createBus:{
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    }
+    // createBus:{
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: true,
+    // }
   });
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 ///TENDRIAMOS QUE TRAER MAS DATOS PARA LAS CARDS DE USUARIOS (ejemplo skills y tecnologias)
-export default function CardProfile({
+export default function CardPerfiles({
   name,
   extras,
   technologies,

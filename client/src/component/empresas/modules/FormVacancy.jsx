@@ -37,8 +37,7 @@ const FormVacancy = () => {
   });
 
   useEffect(() => {
-    const element = email2;
-    dispatch(getUsers(element));
+    dispatch(getUsers(email2));
     dispatch(getTech());
     dispatch(getSeniority());
     dispatch(getLanguage());

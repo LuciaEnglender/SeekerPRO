@@ -22,6 +22,7 @@ export default function FormPerfil() {
     location: "",
     cuit: "",
     emailId: email2,
+    // createBus: true,
   });
 
   useEffect(() => {
@@ -32,14 +33,15 @@ export default function FormPerfil() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(postEmpresa(input));
+    dispatch(postEmpresa(input), console.log(input));
     alert("Empresa completada");
     setInput({
       name: "",
       description: "",
       location: "",
       cuit: "",
-      emailId: "",
+      emailId: email2,
+      // createBus: true,
     });
     navigate("/homee");
   }

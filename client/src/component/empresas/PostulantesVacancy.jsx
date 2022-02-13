@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useParams, Link } from "react-router-dom";
-import CardProfile from "./modules/CardProfile";
+import CardPerfiles from "./modules/CardPerfiles";
+import { useAuth0 } from "@auth0/auth0-react";
+import {getPostulados} from "../../redux/actions/index"
 
 function PostulantesVacancy({id}) {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function PostulantesVacancy({id}) {
                   postulados.map((el) => {
                     return (
                       <Link to={`/vacancy/${el.id}`}>
-                        <CardProfile
+                        <CardPerfiles
                           name={el.name}
                           description={el.description}
                           technologies={el.technologies}
