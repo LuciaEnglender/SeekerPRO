@@ -93,8 +93,8 @@ function SearcHome() {
     return (
         <div>
             <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
-                <div className="bg-verdeOscuro p-2">
-                    <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
+                <div className="bg-grey 300 p-2 px-10">
+                    <div className="bg-verdeMedio rounded-2xl p-6 w-full h-full">
                         <h1 className=" font-bold  text-center mb-3">Filtros:</h1>
                         <h1 className=" font-bold  text-center mb-3">(in work)</h1>
                         <div>

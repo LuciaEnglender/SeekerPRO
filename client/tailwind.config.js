@@ -10,7 +10,7 @@ module.exports = {
         verdeHover: "#c6e0b6",
         grisBoton: "#475569",
       },
-      darkMode: 'class'
+      //darkMode: 'class'
     },
   },
   plugins: [],
