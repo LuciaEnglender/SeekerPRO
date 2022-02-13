@@ -161,40 +161,7 @@ routerVacancy.get("/", async (req, res) => {
       const finderBusiness = await Business.findOne({
         where: {
           loginEmail: business,
-        },
-        include: [
-          {
-            model: Vacancy
-          },
-          {
-            model: Language,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          {
-            model: Seniority,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          // {
-          //   model: Skill,
-          //   attributes: ["name"],
-          //   through: {
-          //     attributes: [],
-          //   },
-          // },
-          {
-            model: Technology,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-        ]
+        }
       });
  console.log(finderBusiness)
       //y sino, devuelve todos las vacantes
@@ -231,6 +198,9 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
+          {
+            model: Business
+          }
         ],
       });
       vacanciesInDB
