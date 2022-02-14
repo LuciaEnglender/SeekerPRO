@@ -7,7 +7,7 @@ function PostCard({name, description, id}) {
         <div
           tabindex="0"
           aria-label="card 1"
-          class="focus:outline-none shadow-lg shadow-black rounded-2xl 2xl:w-full mb-7 bg-gray-300 p-6"
+          class="focus:outline-none shadow-lg shadow-black rounded-2xl 2xl:w-full mb-7 bg-gray-200 p-6"
         >
           <div class="flex items-center  border-b border-gray-400 pb-6">
             <div class="flex items-start justify-between w-full">

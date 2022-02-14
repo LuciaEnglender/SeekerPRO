@@ -57,27 +57,27 @@ const handleAll = (e) => {
   
 
   return (
-    <div className="absolute bg-verdeOscuro h-screen w-screen">
+    <div className="absolute bg-gray-300 h-screen w-screen">
       {/* NAVBAR */}
       <div>
         <NavBar />
       </div>
 
       {/* AREA */}
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro  h-auto pt-7">
+      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-gray-300  h-auto pt-7">
         {/* MI PERFIL */}
-        <div className="bg-verdeOscuro p-2">
+        <div className="bg-gray-300 p-2">
           <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">        
                 <MiPerfil /> 
           </div>
         </div>
         {/* VACAN */}
-        <div className="col-span-3 bg-verdeOscuro p-2">
+        <div className="col-span-3 bg-gray-300 p-2">
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
             <div className="items-center justify-center grid grid-row-7">
               <div className="grid-span-2 bg-verdeMedio w-fit">
                 <div className="flex m-0 justify-center">
-                  <h1 className="font-bold text-center mb-3">Opportunities!</h1>
+                  <h1 className="font-bold text-center text-zinc-400 mb-3">Opportunities!</h1>
                 </div>
                 {/* SEARCHBAR */}
                 <div className=" flex m-0 justify-center">
@@ -99,7 +99,7 @@ const handleAll = (e) => {
               </div>
               <div className="grid-span-4 h-full">
                  {currentVacancy.length === 0 ? (
-                  <p className=" font-bold text-center my-4 mb-3">Don't wait for opportunities, go for them!</p>
+                  <p className=" font-bold text-center text-zinc-400 my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
                   <div>        
                     {currentVacancy[0].createBus? 
@@ -144,9 +144,9 @@ const handleAll = (e) => {
                   </div>
                 )}
               </div>
-              <div className="w-full mt-3 flex justify-center">
+              <div className="w-full mt-3 flex justify-center ">
                 <button
-                  className="m-3"
+                  className="m-3 text-zinc-400"
                   onClick={() =>
                     paginado(currentPage === 1 ? currentPage : currentPage - 1)
                   }
@@ -155,7 +155,7 @@ const handleAll = (e) => {
                 </button>
                 
                 <button
-                  className="m-3"
+                  className="m-3 text-zinc-400"
                   onClick={() =>
                     paginado( currentPage + 1)
                   }

@@ -20,7 +20,8 @@ module.exports = (sequelize) => {
     },
     // createBus:{
     //   type: DataTypes.BOOLEAN,
-    //   allowNull: true,
+    //   defaultValue: true,
+    //   allowNull: false,
     // }
   });
 };
