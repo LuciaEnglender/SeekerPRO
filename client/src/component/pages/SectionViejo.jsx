@@ -19,9 +19,9 @@ const SectionViejo = () => {
       <div>
         <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
         <p className="pb-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-          sapiente vero temporibus ullam voluptatibus modi maxime quis minima
-          dicta iure hic, molestiae libero veritatis quos.
+        JSeeker, the application that emerges to efficiently connect developers and recruiters.
+        
+        
         </p>
         <h3 className="text-xl pl-3 font-bold pb-4">
           {profileState.profile === "DEVELOPER" ? (

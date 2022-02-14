@@ -77,7 +77,7 @@ const handleAll = (e) => {
             <div className="items-center justify-center grid grid-row-7">
               <div className="grid-span-2 bg-verdeMedio w-fit">
                 <div className="flex m-0 justify-center">
-                  <h1 className="font-bold text-center text-zinc-400 mb-3">Opportunities!</h1>
+                  <h1 className="font-bold text-center text-zinc-400 mb-3"></h1>
                 </div>
                 {/* SEARCHBAR */}
                 <div className=" flex m-0 justify-center">
@@ -85,7 +85,10 @@ const handleAll = (e) => {
                     <div className="mx-2">
                       <SearchBar />
                     </div>
-                   <div>           
+                  </div>
+ </div>
+                <FiltroDinamico />
+                <div className=" flex m-0 justify-center">           
                        <button
                       className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                       onClick={(e) => handleAll(e)}
@@ -93,16 +96,14 @@ const handleAll = (e) => {
                       all vacancies{" "}
                     </button> 
                   </div>
-                  </div>
-                </div>
-                <FiltroDinamico />
+
               </div>
               <div className="grid-span-4 h-full">
                  {currentVacancy.length === 0 ? (
                   <p className=" font-bold text-center text-zinc-400 my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
                   <div>        
-                    {currentVacancy[0].createBus? 
+                    {currentVacancy[0].cuit? 
                                         currentVacancy?.map((el)=> {
                                           return (
                                             <div className="m-4" key={el.id}>
@@ -157,10 +158,10 @@ const handleAll = (e) => {
                 <button
                   className="m-3 text-zinc-400"
                   onClick={() =>
-                    paginado( currentPage + 1)
+                    paginado( pageMax <= currentPage? currentPage : currentPage + 1)
                   }
-                >
-                  <AiOutlineArrowRight />
+                > <AiOutlineArrowRight />
+                  
                 </button>
                      <h1> 
                       <Pagination
