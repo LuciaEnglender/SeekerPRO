@@ -5,7 +5,7 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 // const { DATABASE_URL } = process.env;
-const DATABASE_URL = "postgres://aykxrszxwncsal:29f8b65477e84d79d840eafeeb43fadcdef4146b4e253b96d22608544be0c253@ec2-34-194-171-47.compute-1.amazonaws.com:5432/d9m2ne6s1g1a79"
+const DATABASE_URL = "postgres://upnleitnluhsqx:c21b2fe1e0b8fd236da184d9d183e9fb5a34d6c8a3c726476f1c4c6f870b6fb4@ec2-35-175-68-90.compute-1.amazonaws.com:5432/ddkcrnia0pk999"
 
 // const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
 // const proConfig = DB_DATABASE_URL;
