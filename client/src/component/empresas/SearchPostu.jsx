@@ -6,6 +6,7 @@ import {
   bySenior,
   bySkills,
   byTech,
+  filterSelects,
   getLanguage,
   getProfiles,
   getSeniority,
@@ -64,6 +65,12 @@ const SearchPostu = () => {
     e.preventDefault();
     dispatch(byLengua(e.target.value));
   }
+  function handleSubmit2(e){
+    e.preventDefault()
+        dispatch(filterSelects(name));
+        setName("");
+  }
+
 
   return (
     <div className="bg-verdeOscuro w-screen h-screen">
@@ -73,10 +80,10 @@ const SearchPostu = () => {
       {/* BODY */}
       <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro h-auto pt-7">
         {/* AREA DE CREACION */}
-        <div className="bg-verdeOscuro p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
+        <div className="bg-verdeOscuro p-2 ">
+          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full ml-10">
             <h1 className=" font-bold  text-center mb-3">Busqueda:</h1>
-            <div>
+            <div className="ml-5">
               <div className="w-full flex flex-col m-0 justify-center">
                 <label> Buscar:</label>
                 <input
@@ -85,6 +92,7 @@ const SearchPostu = () => {
                   placeholder="Name..."
                   onChange={(e) => handleInputChange(e)}
                 ></input>
+                <div className="ml-14 mt-2">
                 <button
                   className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                   type="submit"
@@ -92,6 +100,7 @@ const SearchPostu = () => {
                 >
                   Search
                 </button>
+                </div>
               </div>
               {/* <SearchBar></SearchBar> */}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
@@ -174,6 +183,13 @@ const SearchPostu = () => {
                     );
                   })}
                 </select>
+                <div className="ml-16 mt-4">
+                <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro pl-20px"
+                                    type="reset"
+                                    onClick={(e) => handleSubmit2(e)}
+                                >Search
+                                </button>
+                                </div>
               </div>
             </div>
           </div>

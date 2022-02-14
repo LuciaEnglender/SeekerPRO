@@ -223,3 +223,33 @@ export function filterVacancies (info) {
     }
   };
 }
+//SEARCH DE HOME FUNCIONANDO OK
+
+export function getSearchBar(name) {
+  return async function (dispatch) {
+    try {
+      let det = await axios.get(`http://localhost:3001/vacancy/search/${name}`);
+      return dispatch({
+        type: "GET_VACANCY_NAME",
+        payload: det.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+//FILTRO DE HOME EMPRESA PARA LOS SELECT
+export function filterSelects (name) {
+  return async function (dispatch) {
+    try {
+      const combinated = await axios.post("http://localhost:3001/allFiltersBusiness", name);
+      console.log(combinated)
+      return dispatch({
+        type: "FILTER_POSTULANT",
+        payload: combinated.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

@@ -13,7 +13,8 @@ const initialState = {
   skill: [],
   language: [],
   pipeline: [],
-  filteredVacancy:[],
+  filteredVacancy: [],
+  filteredBusiness: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -90,8 +91,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf1
           : techs
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterByActivity,
@@ -103,8 +104,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf2
           : senior
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterBySenuirity,
@@ -116,8 +117,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf3
           : skills
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterBySkills,
@@ -129,20 +130,30 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf4
           : lenguage
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterByLenguage,
       };
     case "GET_VACANCY_ID":
       return { ...state, vacancyDetail: action.payload };
-      case "FILTER_VACANCIES":
+    case "FILTER_VACANCIES":
       return {
         ...state,
         vacancies: action.payload,
       };
-
+    case "GET_VACANCY_NAME":
+      return{
+        ...state, vacancies: action.payload,
+      }
+      case "FILTER_POSTULANT":
+      return{
+        ...state, profiles: action.payload,
+      }
+ 
+ 
+      
     default:
       return state;
   }

@@ -6,7 +6,8 @@ import {
     getTech,
     getSeniority,
     getLanguage,
-    filterVacancies
+    filterVacancies,
+    getSearchBar
 } from "../../../redux/actions/index";
 import { GrFormClose } from "react-icons/gr";
 
@@ -15,8 +16,8 @@ function SearcHome() {
     const technology = useSelector((state) => state.rootReducer.technology);
     const seniority = useSelector((state) => state.rootReducer.seniority);
     const language = useSelector((state) => state.rootReducer.language);
-    const filtro = useSelector((state)=> state.rootReducer.filteredVacancy)
-
+    const filtro = useSelector((state) => state.rootReducer.filteredVacancy)
+    const [name, setName] = useState("");
     const [input, setInput] = useState({
         technology: [],
         seniority: [],
@@ -64,9 +65,9 @@ function SearcHome() {
         e.preventDefault();
         dispatch(filterVacancies(input));
         setInput({
-            technology: [],
-            language: [],
-            seniority: [],
+            technology: "",
+            language: "",
+            seniority: "",
         }, console.log(input));
     }
     ///////////delete///////
@@ -90,6 +91,21 @@ function SearcHome() {
             technology: input.technology.filter((el) => el !== e),
         });
     };
+    function handleInputChange(e) {
+        e.preventDefault();
+        setName(e.target.value);
+      }
+    
+    function handleSubmit2(e){
+        e.preventDefault();
+        if (name.length === 0) {
+            return alert("Please write a name");
+          } else {
+            dispatch(getSearchBar(name));
+            setName("");
+          }
+      }
+    
     return (
         <div>
             <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
@@ -102,10 +118,19 @@ function SearcHome() {
                             <div className="w-full flex flex-col m-0 justify-center pt-5">
                                 <label> Buscar:</label>
                                 <input
-                                    className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                                    className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
                                     type="text"
+                                    onChange={(e) => handleInputChange(e)}
                                 />
+                                
                             </div>
+                            <div className="ml-14 mt-4">
+                            <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro pl-20px"
+                                    type="reset"
+                                    onClick={(e) => handleSubmit2(e)}
+                                >Search
+                                </button>
+                                </div>
                             <div className="w-full my-3 flex flex-col m-0 justify-center">
                                 <label> Tecnologias:</label>
                                 <select
