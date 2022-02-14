@@ -8,28 +8,32 @@ import NavHomeE from "./modules/NavHomeE";
 const PerfilEmp = () => {
   const dispatch = useDispatch();
   const empresa = useSelector((state) => state.rootReducer.business);
-  console.log(empresa);
   const { user, isAuthenticated } = useAuth0();
 
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   useEffect(() => {
-    dispatch(getProfile("franco"));
+    dispatch(getProfile(email2));
+    console.log(empresa);
   }, [dispatch]);
 
   return (
     <div>
       <NavHomeE titulo={"PerfilUser"} />
-
-      <div>
-        {isAuthenticated && (
-          <div>
-            <h1> Nombre: {empresa[0].name} </h1>
+      <div className={"lex m-0 justify-content"}>
+        <div className="flex m-0 justify-content">
+          <h1> Nombre: {empresa.name} </h1>
+        </div>
+        <div className="flex m-0 justify-content">
+          {isAuthenticated && (
             <img
               className="h-300 w-300 rounded-full"
               src={user.picture}
               alt=""
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

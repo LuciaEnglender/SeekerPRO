@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 10,
         "name": "Pizza Vegana",
         "description": "Desarrollo UX/UI and tester",
        "technologies":[{"name": "javascript"}, {"name": "react"}, {"name": "redux"}],
@@ -10,7 +10,7 @@
     },
     
     {
-        "id":2,
+        "id":20,
         "name": "Uala",
         "description": "Full Stack Developer",
        "technologies":[{"name": "javascript"}, {"name": "angular"}, {"name": "C++"}],

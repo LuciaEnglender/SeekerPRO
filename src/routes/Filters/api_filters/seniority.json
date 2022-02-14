@@ -1,10 +1,9 @@
 {
 	"seniority": [
-		{ "name": "Trainee" },
-		{ "name": "Junior" },
-		{ "name": "Semi Junior" },
-		{ "name": "Semi Senior" },
-		{ "name": "Senior" },
-		{ "name": "Expert" }
+		{ "name": "Trainee, 0-6 Months" },
+		{ "name": "Junior, 6 Months-2 Years"},
+		{ "name": "Semi Senior, 3-5 Years" },
+		{ "name": "Senior, 5-10 Years" },
+		{ "name": "Expert, 10+ Years" }
 	]
 }

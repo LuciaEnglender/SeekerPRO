@@ -2,18 +2,17 @@ import {
   filterCombinated,
   getLanguage,
   getSeniority,
-  getSkill,
+  //getSkills,
   getTechnology,
 } from "../../../redux/actions/indexP";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import s from "../Styles/home.module.css";
+//import s from "../Styles/home.module.css";
 
 export default function FiltroDinamico() {
   const dispatch = useDispatch();
   const tecno = useSelector((state) => state.rootReducerPostulante.technology);
-  const habilidades = useSelector((state) => state.rootReducerPostulante.skill);
   const lenguaje = useSelector((state) => state.rootReducerPostulante.language);
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
@@ -36,7 +35,7 @@ export default function FiltroDinamico() {
       skill: [],
     });
   }
-  console.log(input);
+  //console.log(input);
   function handleSelectTechnology(e) {
     if (input.technology.includes(e.target.value)) {
       alert("Already in the list");
@@ -80,12 +79,12 @@ export default function FiltroDinamico() {
       });
     }
   }
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  }
+ // function handleChange(e) {
+ //   setInput({
+ //     ...input,
+ //     [e.target.name]: e.target.value,
+ //   });
+ // }
   const handleDelete = (e) => {
     setInput({
       ...input,
@@ -100,12 +99,12 @@ export default function FiltroDinamico() {
     });
   };
 
-  const handleDeleteSkills = (e) => {
-    setInput({
-      ...input,
-      skill: input.skill.filter((el) => el !== e),
-    });
-  };
+ // const handleDeleteSkills = (e) => {
+ //   setInput({
+ //     ...input,
+ //     skill: input.skill.filter((el) => el !== e),
+ //   });
+ // };
 
   const handleDeleteSeniority = (e) => {
     setInput({
@@ -122,9 +121,9 @@ export default function FiltroDinamico() {
 
   return (
     <div className=" flex flex-col">
-      <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
-        <div className="m-3 flex flex-col justify-center">
-          <label> Technology</label>
+      <form className=" flex flex-row " onSubmit={(e) => handleSubmit(e)}>
+        <div className="m-3 flex flex-col justify-center ">
+          <label className="text-gray-400"> Technology</label>
           <select
             className="xl:w-52 rounded-2xl bg-verdeClaro"
             placeholder="technology"
@@ -166,7 +165,7 @@ export default function FiltroDinamico() {
           ))}
         </div>
         <div className=" m-3 flex flex-col m-0 justify-center">
-          <label> Languages</label>
+          <label className="text-gray-400"> Languages</label>
           <select
             className=" xl:w-52 rounded-2xl bg-verdeClaro"
             placeholder="languages"
@@ -210,7 +209,7 @@ export default function FiltroDinamico() {
           </div>
         </div>
         <div className=" flex flex-col m-0 justify-center">
-          <label>Seniority</label>
+          <label className="text-gray-400">Seniority</label>
           <select
             className=" xl:w-52 rounded-2xl bg-verdeClaro"
             placeholder="Seniority"

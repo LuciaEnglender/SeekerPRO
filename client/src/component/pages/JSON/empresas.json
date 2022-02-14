@@ -1,0 +1,35 @@
+[{
+    "name": "Mercado Libre",
+    "description" : "Comprá productos con Envío Gratis en el día en Mercado Libre Argentina. Encontrá miles de marcas y productos a precios increíbles.",
+    "location" : "Argentina.",
+    "cuit" : 202020
+},
+{
+    "name": "Globant",
+    "description" : "Somos los primeros en ofrecer ingeniería, innovación y diseño a escala. Globant crea software que conecta.",
+    "location" : "Cordoba.",
+    "cuit" : 202020
+},
+{
+    "name": "AccenturE",
+    "description" : "Accenture adopta el poder del cambio para crear valor de 360° y éxito compartido para nuestros clientes, personas, accionistas, socios y comunidades.",
+    "location" : "Bermudas.",
+    "cuit" : 202020
+},
+{
+    "name": "Applaudo Studios",
+    "description" : "We are Applaudo Studios! A Nearshore Software Development company focused on creating products and services that meet quality and innovation for our global clients.",
+    "location" : "Buenos Aires.",
+    "cuit" : 202020
+},
+{
+    "name": "Despegar",
+        "description": "Despegar es la agencia de viaje líder en Latinoamérica. Encontrá tu vuelo, hotel, paquete y actividades en la mejor agencia online, Despegar.",
+        "location": "Buenos Aires.",
+},
+{
+    "name": "Carpgemini",
+        "description": "Capgemini S.A., es la primera corporación multinacional francesa de servicios de consultoría tecnológica, con sede en París, así como la sexta mundial del sector en 2016.​ ",
+        "location": "Buenos Aires.",
+}
+]

@@ -8,10 +8,16 @@ import {
   getSkill,
   getLanguage,
   getSeniority,
+  getLocation,
 } from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
+
+
+
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -22,26 +28,53 @@ export default function CreateForm() {
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
   );
+  const locat = useSelector((state) => state.rootReducerPostulante.location)
+
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+  const { user } = useAuth0();
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   //const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
+  
 
   const [input, setInput] = useState({
     name: "",
     phone: "",
-    location: "",
+    location: [],
     gender: "",
-    photo: "",
     github: "",
     linkedIn: "",
     portfolio: "",
     CV: "",
+    file:"",
     technologies: [],
     languages: [],
     skills: [],
     seniority: [],
     extras: "",
+    loginId: email2,
   });
-  console.log(input);
+  console.log(input)
+
+  const handleFile=(e)=>{
+    setInput({
+      ...input,
+      file: e.target.files[0]
+    })
+}
+
+const handleCv=(e)=>{
+  setInput({
+    ...input,
+    CV: e.target.files[0]
+  })
+  console.log(e.target.files)
+}
+  
 
   function handleGithub(e) {
     setInput({
@@ -103,7 +136,18 @@ export default function CreateForm() {
     } else {
       setInput({
         ...input,
-        seniority: [...input.seniority, e.target.value],
+        seniority: [e.target.value],
+      });
+    }
+  }
+
+  function handleSelectLocation(e) {
+    if (input.location.includes(e.target.value)) {
+      alert("Already in the list");
+    } else {
+      setInput({
+        ...input,
+        location: [e.target.value]
       });
     }
   }
@@ -120,12 +164,11 @@ export default function CreateForm() {
       ...input,
       [e.target.name]: e.target.value,
     });
-    /*setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );*/
+		let objError = validate({
+			...input,
+			[e.target.name]: e.target.value,
+		});
+		setErrors(objError);
   }
 
   const handleDelete = (e) => {
@@ -156,6 +199,14 @@ export default function CreateForm() {
     });
   };
 
+  const handleDeleteLocation = (e) => {
+    setInput({
+      ...input,
+      location: input.location.filter((el) => el !== e),
+    });
+  }
+  
+
   //// control de gender ////
   function handleCheck(e) {
     if (e.target.checked) {
@@ -173,36 +224,73 @@ export default function CreateForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createPostulante(input));
-    alert("Congrats!");
-    setInput({
-      name: "",
-      phone: "",
-      location: "",
-      gender: "",
-      photo: "",
-      github: "",
-      linkedIn: "",
-      portfolio: "",
-      CV: "",
-      technologies: [],
-      languages: [],
-      skills: [],
-      seniority: [],
-      extras: "",
-    });
-    navigate(-1);
-  }
 
+    if (
+      !input.name ||
+      !input.phone ||
+      !input.location ||
+      !input.gender ||
+      !input.linkedIn ||
+      !input.file||
+      !input.CV||
+      !input.technologies ||
+      !input.languages ||
+      !input.skills ||
+      !input.seniority
+    ) {
+      alert("Please, complete all fields");
+    } else {
+      alert("Congrats!");
+      const data = new FormData();
+      data.append("name", input.name);
+      data.append("phone", input.phone);
+      data.append("location", input.location);
+      data.append("gender", input.gender);
+      data.append("github", input.github);
+      data.append("linkedIn", input.linkedIn);
+      data.append("portfolio", input.portfolio);
+      data.append("file", input.file);
+      data.append("file", input.CV);
+      data.append("technologies", [input.technologies]);
+      data.append("languages", [input.languages]);
+      data.append("skills", [input.skills]);
+      data.append("seniority", [input.seniority]);
+      data.append("extras", input.extras);
+      data.append("loginId", input.loginId)
+      dispatch(createPostulante(data));
+      setInput({
+        name: "",
+        phone: "",
+        location: [],
+        gender: "",
+        github: "",
+        linkedIn: "",
+        portfolio: "",
+        file: "",
+        CV: "",
+        technologies: [],
+        languages: [],
+        skills: [],
+        seniority: [],
+        extras: "",
+        loginId: email2,
+      });
+      navigate("/homep");
+    }
+
+  }
+  
   useEffect(() => {
     dispatch(getSkill());
     dispatch(getTechnology());
     dispatch(getLanguage());
     dispatch(getSeniority());
+    dispatch(getLocation());
+    dispatch(getUsers(email2));
   }, []);
 
   return (
-    <div className="bg-verdeOscuro w-screen h-screen ">
+    <div className="bg-verdeOscuro w-screen h-screen">
       <div>
         <NavBar />
       </div>
@@ -214,7 +302,7 @@ export default function CreateForm() {
           >
             <div className="m-9">
               <div className="w-full flex flex-col my-2 justify-center">
-                <h3 className="text-center">Name</h3>
+                <h3 className="text-center text-verdeHover">Name*</h3>
                 <input
                   className="xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="text"
@@ -225,7 +313,7 @@ export default function CreateForm() {
                 {errors.name && <p className="error">{errors.name}</p>}
               </div>
               <div className="w-44 flex flex-col my-2 justify-center">
-                <label className="text-center"> Phone</label>
+                <label className="text-center text-verdeHover"> Phone</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="number"
@@ -235,9 +323,55 @@ export default function CreateForm() {
                 />
                 {errors.phone && <p className="error">{errors.phone}</p>}
               </div>
+              <br />
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Location*</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="location"
+                  value={input.location}
+                  name="location"
+                  onChange={(e) => handleSelectLocation(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    selected
+                    disabled
+                    value=""
+                  >
+                    Location Selection
+                  </option>
+                  {locat?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.location.map((el, i) => (
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      {el}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDeleteLocation(el)}
+                      >
+                        X{" "}
+                      </button>
+                    </li>
+                  ))}
+                </div>
+              </div>
               <div className="w-44 flex flex-col my-2 justify-center">
-                <label className="text-center">Gender:</label>
-                <label className="text-center">
+                <label className="text-center text-verdeHover">Gender:</label>
+                <label className="text-center text-verdeHover">
                   <input
                     className="text-center"
                     value="Femenine"
@@ -248,7 +382,7 @@ export default function CreateForm() {
                   />
                   Feminine
                 </label>
-                <label className="text-center" htmlFor="cbox2">
+                <label className="text-center text-verdeHover" htmlFor="cbox2">
                   <input
                     value="Masculine"
                     type="radio"
@@ -258,7 +392,7 @@ export default function CreateForm() {
                   />
                   Masculine
                 </label>
-                <label className="text-center" htmlFor="cbox2">
+                <label className="text-center text-verdeHover" htmlFor="cbox2">
                   <input
                     value="non-binary"
                     type="radio"
@@ -268,7 +402,7 @@ export default function CreateForm() {
                   />
                   Non-Binary
                 </label>
-                <label className="text-center" htmlFor="cbox2">
+                <label className="text-center text-verdeHover" htmlFor="cbox2">
                   <input
                     value="Other"
                     type="radio"
@@ -279,18 +413,24 @@ export default function CreateForm() {
                   Other
                 </label>
               </div>
-              {/* <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center"> Photo</label>
+              {/*  ///////////////////////PHOTO////////////////////// */}
+              <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center text-verdeHover" htmlFor="file">
+                  {" "}
+                  Photo (.jpg)
+                </label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder="photo"
-                  type="text"
-                  value={input.photo}
-                  name="photo"
+                  placeholder=".jpg"
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept=".jpg"
+                  onChange={(e) => handleFile(e)}
                 />
-              </div> */}
+              </div>
               <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center" htmlFor="github">
+                <label className="text-center text-verdeHover" htmlFor="github">
                   GitHub:
                 </label>
                 <input
@@ -302,7 +442,7 @@ export default function CreateForm() {
                 />
               </div>
               <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center" htmlFor="linkedin">
+                <label className="text-center text-verdeHover" htmlFor="linkedin">
                   LinkedIn:
                 </label>
                 <input
@@ -314,7 +454,7 @@ export default function CreateForm() {
                 />
               </div>
               <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center" for="portfolio">
+                <label className="text-center text-verdeHover" for="portfolio">
                   PortFolio
                 </label>
                 <input
@@ -322,25 +462,27 @@ export default function CreateForm() {
                   type="text"
                   name="portfolio"
                   value={input.portfolio}
-                  placeholder="portfolio"
                   onChange={(e) => handlePortfolio(e)}
                 />
               </div>
-              {/* <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center">CV</label>
+              {/* /////////////////CV/////////////// */}
+              <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center text-verdeHover">CV (.pdf)</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder="cv"
-                  type="text"
-                  value={input.CV}
-                  name="CV"
+                  placeholder=".pdf"
+                  type="file"
+                  id="file"
+                  accept=".pdf"
+                  name="file"
+                  onChange={(e) => handleCv(e)}
                 />
-              </div> */}
+              </div>
             </div>
-            {/* ASDASDASDASASAD */}
+
             <div className="m-9">
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center">Technology</label>
+                <label className="text-center text-verdeHover">Technology</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="technology"
@@ -350,10 +492,11 @@ export default function CreateForm() {
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    Selection Tecnology
+                    Tecnologies Selection
                   </option>
                   {tecno?.map((el) => (
                     <option
@@ -384,7 +527,7 @@ export default function CreateForm() {
                 </div>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center">Languages</label>
+                <label className="text-center text-verdeHover">Languages</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="languages"
@@ -394,11 +537,11 @@ export default function CreateForm() {
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    {" "}
-                    Selecction Languages{" "}
+                    Languages Selection
                   </option>
                   {lenguaje?.map((el) => (
                     <option
@@ -416,7 +559,6 @@ export default function CreateForm() {
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      {" "}
                       {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
@@ -430,7 +572,7 @@ export default function CreateForm() {
                 </div>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center"> Skill</label>
+                <label className="text-center text-verdeHover"> Skill</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="skill"
@@ -440,10 +582,11 @@ export default function CreateForm() {
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    Selecction Skills
+                    Skills Selection
                   </option>
                   {habilidades?.map((el) => (
                     <option
@@ -476,7 +619,7 @@ export default function CreateForm() {
                 </div>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center">Siniority</label>
+                <label className="text-center text-verdeHover">Siniority</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="Seniority"
@@ -486,10 +629,11 @@ export default function CreateForm() {
                 >
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected="false"
+                    value=""
                     disabled
+                    selected
                   >
-                    Selecction Siniority
+                    Seniority Selection
                   </option>
                   {experiencia?.map((el) => (
                     <option
@@ -524,7 +668,7 @@ export default function CreateForm() {
               <br />
 
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center">Extras</label>
+                <label className="text-center text-verdeHover">Extras</label>
                 <textarea
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder=""
@@ -538,6 +682,7 @@ export default function CreateForm() {
                 <button
                   className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                   type="submit"
+                  //onClick={(e)=>fileOnChange(e)}//
                 >
                   CREAR
                 </button>
@@ -550,27 +695,4 @@ export default function CreateForm() {
   );
 }
 
-/*     </div>
-            <br />
-            <div>
-              <label>Locations</label>
-              <select
-                placeholder="Location"
-                type="text"
-                value={input.location}
-                name="location"
-                onChange={(e) => handleChange(e)}
-              >
-                
-                {locat?.map((el) => (
-                  <option value={el} key={el.id}>
-                    
-                  </option>
-                ))}
-      
-              </select>
-            </div>
-            <br />
-      
-       
-       */
+

@@ -1,20 +1,18 @@
 import React from "react";
-import ButtonLogout from "../ui ux/ButtonLogout";
 import { Link } from "react-router-dom";
-import s from "../postulantes/Styles/nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // ESTILOS
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import ButtonLogOut from "../../private/ButtonLogOut";
 
 // TAILWIND
 const navigation = [
   { name: "Home", href: "/homep", current: false },
-  { name: "My Profile", href: "/homep/create", current: false },
-  { name: "Favourites", href: "/homep/favourites", current: false },
-  { name: "Messages", href: "/homep/mensajes", current: false },
+    { name: "Messages", href: "/homep/mensajes", current: false },
+  { name: "Notifications", href: "/homep/notificaciones", current: false },
 ];
 
 function classNames(...classes) {
@@ -123,19 +121,61 @@ const NavBar = ({ titulo }) => {
                           </Link>
                         )}
                       </Menu.Item>
+                      
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to="/homep/create"
+                            to="/homep/favourites"
                             className={classNames(
                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                            Favourites
+                            Followed Business
                           </Link>
                         )}
                       </Menu.Item>
+                      <Menu.Item>
+                         {({ active }) => (
+                           <Link
+                             to="/homep/seelater"
+                             className={classNames(
+                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                             )}
+                           >
+                             Pending Vacancies
+                           </Link>
+                         )}
+                       </Menu.Item>
+                       <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/homep/mypostulations"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            My applies
+                          </Link>
+                        )}
+                      </Menu.Item>
+
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/homep/notificaciones"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                           Notifications
+                          </Link>
+                        )}
+                      </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -151,14 +191,12 @@ const NavBar = ({ titulo }) => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <ButtonLogout
+                          <ButtonLogOut
                             estilo={classNames(
                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
-                          >
-                            Log Out
-                          </ButtonLogout>
+                          ></ButtonLogOut>
                         )}
                       </Menu.Item>
                     </Menu.Items>

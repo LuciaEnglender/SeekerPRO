@@ -1,68 +1,87 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from "./NavBar";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import Vacancy from "./Vacancy";
-import SearchBar from "./SearchBar";
-
-import { getVacancy } from "../../redux/actions/indexP";
-import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+import { getProfile, getBusiness, getVacancy } from "../../redux/actions/indexP";
+//import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+//Componentes
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import Vacancy from "./Vacancy";
+import BusinessCard from '../postulantes/FollowBusiness/BusinessCard'
+import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+
+//import Business from './FollowBusiness/Business'
+//import Postulations from "../postulantes/MyPostulations/Postulations";
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  const filtradas = useSelector(
-    (state) => state.rootReducerPostulante.filteredVacancy
-  );
+  const filtradas = useSelector((state) => state.rootReducerPostulante.filteredVacancy);
 
-  //Renderizacions condicional filtro combinado
-  const [combinado, setCombinado] = useState(false);
-
-  function filtrarCombinado() {
-    setCombinado(!combinado);
-  }
-
-  const handleAll = (e) => {
-    dispatch(getVacancy());
-  };
-
+    const business = useSelector((state) =>state.rootReducerPostulante.business)
+    const handleAllBusiness = (e) => {
+      e.preventDefault()
+      dispatch(getBusiness());
+      };
+console.log("business", business)
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
   const vacancyPerPage = 3;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
+  const pageMax = filtradas.length / 3
+
+  console.log("current", currentVacancy)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {}, [dispatch]);
+  
+  const perfil = useSelector((state) => state.rootReducerPostulante.profile);
+  
+  const { user, isAuthenticated } = useAuth0();
+
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
+//Renderizacions todas las vacantes
+const handleAll = (e) => {
+  dispatch(getVacancy(email2));
+  };
+
+  useEffect(() => {
+    dispatch(getProfile(email2));   
+  }, [dispatch]);
+
+
+  
 
   return (
-    <div className="absolute bg-verdeOscuro h-screen w-screen">
+    <div className="absolute bg-gray-300 h-screen w-screen">
       {/* NAVBAR */}
       <div>
         <NavBar />
       </div>
 
       {/* AREA */}
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro  h-auto pt-7">
+      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-gray-300  h-auto pt-7">
         {/* MI PERFIL */}
-        <div className="bg-verdeOscuro p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <MiPerfil />
+        <div className="bg-gray-300 p-2">
+          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">        
+                <MiPerfil /> 
           </div>
         </div>
         {/* VACAN */}
-        <div className="col-span-3 bg-verdeOscuro p-2">
+        <div className="col-span-3 bg-gray-300 p-2">
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
             <div className="items-center justify-center grid grid-row-7">
               <div className="grid-span-2 bg-verdeMedio w-fit">
                 <div className="flex m-0 justify-center">
-                  <h1 className="font-bold text-center mb-3">Opportunities!</h1>
+                  <h1 className="font-bold text-center text-zinc-400 mb-3"></h1>
                 </div>
                 {/* SEARCHBAR */}
                 <div className=" flex m-0 justify-center">
@@ -70,29 +89,46 @@ export default function Home() {
                     <div className="mx-2">
                       <SearchBar />
                     </div>
-                    <button
-                      className="h-fit  px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                  </div>
+ </div>
+                <FiltroDinamico />
+                <div className=" flex m-0 justify-center">           
+                       <button
+                      className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                       onClick={(e) => handleAll(e)}
                     >
                       all vacancies{" "}
-                    </button>
+                    </button> 
+
                   </div>
-                </div>
-                <FiltroDinamico />
+
+
               </div>
               <div className="grid-span-4 h-full">
-                <h1 className=" font-bold text-center mb-3">
-                  My opportunities{" "}
-                </h1>
-                {currentVacancy.length === 0 ? (
-                  <p className=" font-bold text-center mb-3">No Vacancis</p>
+                 {currentVacancy.length === 0 ? (
+                  <p className=" font-bold text-center text-zinc-400 my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
-                  <div>
-                    {currentVacancy?.map((el) => {
+                  <div>        
+                    { currentVacancy[0].cuit? 
+                                        currentVacancy?.map((el)=> {
+                                          return (
+                                            <div className="m-4" key={el.id}>
+                                            <BusinessCard
+                                              id = {el.id}
+                                               name={el.name}
+                                              description={el.description}
+                                              languages={el.languages}                                                                                                                                                                                                                                                         />
+                                          </div>
+                                          )
+                                        })
+                    
+                    : 
+                    currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
                           <Vacancy
-                            name={el.name}
+                            id = {el.id}
+                             name={el.name}
                             description={el.description}
                             languages={el.languages
                               ?.map((l) => l.name)
@@ -107,33 +143,44 @@ export default function Home() {
                           />
                         </div>
                       );
-                    })}
+                    }) 
+
+                    
+                    
+                    }
                   </div>
                 )}
               </div>
-              <div className="w-full mt-3 flex justify-center">
+              <div className="w-full mt-3 flex justify-center ">
                 <button
-                  className="m-3"
+                  className="m-3 text-zinc-400"
                   onClick={() =>
                     paginado(currentPage === 1 ? currentPage : currentPage - 1)
                   }
                 >
                   <AiOutlineArrowLeft />
                 </button>
+                
                 <button
-                  className="m-3"
+                  className="m-3 text-zinc-400"
                   onClick={() =>
-                    paginado(currentPage === 3 ? currentPage : currentPage + 1)
+                    paginado( pageMax <= currentPage? currentPage : currentPage + 1)
                   }
-                >
-                  <AiOutlineArrowRight />
+                > <AiOutlineArrowRight />
+                  
                 </button>
-                <Pagination
-                  vacancyPerPage={vacancyPerPage}
-                  filtradas={filtradas}
-                  paginado={paginado}
-                />
-              </div>
+                     <h1> 
+                      <Pagination
+                     vacancyPerPage={vacancyPerPage}
+                     filtradas={filtradas}
+                     paginado={paginado}
+                   />
+                   </h1>
+                 </div>
+             
+             
+             
+             
             </div>
           </div>
         </div>
@@ -168,3 +215,46 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+/*  const [postulaciones, setPostulaciones] = useState(false);
+  function handlePostulations() {
+    setPostulaciones(!postulaciones);
+  }
+  const [empresas, setEmpresas] = useState(false);
+  function handleEmpresas() {
+    setEmpresas(!empresas);
+  }
+*/
+
+/*              <div className="flex m-0 justify-center">
+              <div>
+              {postulaciones === false ? 
+                   <> <button 
+                    className="h-fit mx-4 px-2  my-2 shadow-lg mt-1 shadow-black rounded-2xl 
+                    text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                    onClick = {()=> handlePostulations()}> my applies </button>  
+                    </> :           
+                     <><button 
+                  className="h-fit mx-4 px-2  my-2 mt-1 shadow-lg shadow-black rounded-2xl 
+                  text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                  onClick = {()=>handlePostulations()}>see less</button>   
+                <div>  <Postulations/> </div></>}
+
+              </div>
+              <div>
+              {empresas === false ? 
+                   <> <button 
+                    className="h-fit mx-4   my-2 px-2  shadow-lg mt-1 shadow-black rounded-2xl 
+                    text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                    onClick = {()=> handleEmpresas()}> followed business </button>  
+                    </> :           
+                     <><button 
+                  className="h-fit mx-4 my-2 px-2  mt-1 shadow-lg shadow-black rounded-2xl 
+                  text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                  onClick = {()=>handleEmpresas()}>see less</button>   
+                <div>  <Business/> </div></>}
+              </div>
+              </div>
+*/

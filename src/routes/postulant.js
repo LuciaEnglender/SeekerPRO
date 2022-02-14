@@ -1,5 +1,5 @@
 const { Router } = require("express");
-
+const path = require("path");
 const {
   Postulant,
   Technology,
@@ -7,10 +7,27 @@ const {
   Language,
   Seniority,
   Vacancy,
+  Location,
+  Login,
 } = require("../db");
-const { check, validationResult } = require("express-validator");
 
+const { check, validationResult } = require("express-validator");
 const routerPostulant = Router();
+const multer = require("multer");
+
+////subida de archivos//// cv/photo
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "file");
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 
 //validado por el nombre
 
@@ -21,9 +38,16 @@ routerPostulant.get("/", async (req, res) => {
     if (id) {
       const allPostulant = await Postulant.findAll({
         where: {
-          id: id,
+          loginEmail: id,
         },
         include: [
+          {
+            model: Location,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -62,6 +86,13 @@ routerPostulant.get("/", async (req, res) => {
       const allPostulant = await Postulant.findAll({
         include: [
           {
+            model: Location,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
             model: Language,
             attributes: ["name"],
             through: {
@@ -100,22 +131,48 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
-routerPostulant.post(
-  "/",
-  [
-    /*  check('name', 'name is required').not().isEmpty(),
-    check('gender', 'The gender is required').not().isEmpty(),
-    check('phone', 'phone is required').not().isEmpty(),
-    check('photo', 'The photo is required').not().isEmpty(),
-    check('CV', 'CV is required').not().isEmpty(),
-    check('location', 'The location is required').not().isEmpty(),
-    check('github', 'github is required').not().isEmpty(),
-    check('linkedIn', 'The linkedIn is required').not().isEmpty(),
-    check('portfolio', 'portfolio is required').not().isEmpty()*/
-  ],
-  async (req, res) => {
-    //el campo de genero recibe un solo valor
-    let {
+routerPostulant.post("/", upload.any("file",2), async (req, res) => {
+  //el campo de genero recibe un solo valor
+  let {
+    name,
+    gender,
+    phone,
+    location,
+    github,
+    linkedIn,
+    portfolio,
+    technologies,
+    languages,
+    skills,
+    seniority,
+    vacancy,
+    extras,
+    loginId,
+  } = req.body;
+
+  let file = req.files;
+  //let cv =req.file
+  console.log(file);
+  if(file){
+     for(let i=0;i<file.length;i++){
+       if(file[i].mimetype==='image/jpeg'){
+         var photo=file[i].path
+       }
+       else{
+         var CV=file[i].path
+       }
+     }
+  }
+  
+
+
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      //se crea un obj errores convierto en array,
+      res.status(422).json({ errores: errors.array() });
+    }
+    createPostuland = await Postulant.create({
       name,
       gender,
       phone,
@@ -125,100 +182,119 @@ routerPostulant.post(
       github,
       linkedIn,
       portfolio,
-      technologies,
-      languages,
-      skills,
-      seniority,
-      vacancy,
-      extras
-    } = req.body;
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        //se crea un obj errores convierto en array,
-        res.status(422).json({ errores: errors.array() });
-      }
-      createPostuland = await Postulant.create({
-        name,
-        gender,
-        phone,
-        photo,
-        CV,
-        location,
-        github,
-        linkedIn,
-        portfolio,
-        extras
+      extras,
+    });
+
+    // busca la vacante
+    if (vacancy) {
+
+      const allVacancy = await Vacancy.findAll({
+        where: { name: vacancy },
       });
-
-      // busca la vacante
-      if (vacancy) {
-        const allVacancy = await Vacancy.findAll({
-          where: { name: vacancy },
-        });
-        await createPostuland.addVacancy(allVacancy);
-      }
-
-      if (languages) {
-        let lenguageInDB = await Language.findAll({
-          where: {
-            name: languages,
-          },
-        });
-        await createPostuland.addLanguage(lenguageInDB);
-      }
-
-      if (seniority) {
-        let seniorityInDB = await Seniority.findAll({
-          where: {
-            name: seniority,
-          },
-        });
-        await createPostuland.addSeniority(seniorityInDB);
-      }
-
-      if (skills) {
-        let skillInDB = await Skill.findAll({
-          where: {
-            name: skills,
-          },
-        });
-        await createPostuland.addSkill(skillInDB);
-      }
-
-      if (technologies) {
-        let technologyInDB = await Technology.findAll({
-          where: {
-            name: technologies,
-          },
-        });
-        await createPostuland.addTechnology(technologyInDB);
-      }
-
-      res.json(createPostuland);
-    } catch (error) {
-      res.status(400).send("ERROR" + error);
+      await createPostuland.addVacancy(allVacancy);
     }
+
+    if (languages) {
+
+      let arrL=languages.split(",")
+      let lenguageInDB = await Language.findAll({
+        where: {
+          name: arrL,
+        },
+      });
+      await createPostuland.addLanguages(lenguageInDB);
+    }
+
+    if (seniority) {
+      let seniorityInDB = await Seniority.findAll({
+        where: {
+          name: seniority,
+        },
+      });
+      await createPostuland.addSeniority(seniorityInDB);
+    }
+
+    if (skills) {
+      let skillArr=skills.split(",")
+      let skillInDB = await Skill.findAll({
+        where: {
+          name: skillArr,
+        },
+      });
+      await createPostuland.addSkill(skillInDB);
+    }
+
+    if (technologies) {
+      let tecno=technologies.split(",")
+      let technologyInDB = await Technology.findAll({
+        where: {
+          name: tecno,
+        },
+      });
+      await createPostuland.addTechnology(technologyInDB);
+    }
+
+    if (location) {
+      let locationInDB = await Location.findAll({
+        where: {
+          name: location,
+        },
+      });
+      await createPostuland.addLocation(locationInDB);
+    }
+
+    let finderLogin = await Login.findByPk(loginId);
+    await createPostuland.setLogin(finderLogin);
+
+    res.json(createPostuland);
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 //Trae las vacantes  por postulante
 routerPostulant.get("/:id/vacancy", async (req, res) => {
-  Postulant.findByPk(req.params.id).then((postulant) => {
+ try{ Postulant.findByPk(req.params.id).then((postulant) => {
     postulant
       .getVacancies({
         attributes: ["name", "description"],
       })
       .then((vacancy) => {
+        console.log(vacancy);
         res.json(vacancy);
       });
-  });
+  });} catch(e ){
+    console.log(e)
+  }
 });
 
+//Cuenta cuantos vacantes tiene un postulante
+routerPostulant.get("/:id/vacancy", async (req, res) => {
+  try{Postulant.findByPk(req.params.id).then((postulant) => {
+    postulant
+      .getVacancies({
+        attributes: ["name", "description"],
+      })
+      .then((vacancy) => {
+        console.log(vacancy);
+        res.json(vacancy.length);
+      });
+  });}catch(e){
+    console.log(e)
+  }
+});
+
+//put para modificar datos de un detalle / perfil de postulante
 routerPostulant.put("/:id", async (req, res) => {
   try {
     await Postulant.update(req.body, {
       where: { id: req.params.id },
     });
+    if (req.body.vacancy) {
+      const allVacancy = await Vacancy.findAll({
+        where: { id: req.params.vacancy },
+      });
+      await createPostuland.addVacancy(allVacancy);
+    }
     res.json({
       sucess: "The postuland details have been successfully modified",
     });
@@ -256,5 +332,42 @@ routerPostulant.get("/vacName", async (req, res) => {
     console.log(e);
   }
 });
+
+routerPostulant.post('/postulate/:id', async (req, res) => {
+  const {id} = req.body
+ 
+  const postulanteId = req.params.id
+  try {
+    let postulante = await Postulant.findByPk(postulanteId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+   
+    await postulante.addVacancy(vacancy);
+    
+      res.status(200).json(postulante);
+
+  }catch(e){
+    console.log(e)
+  }
+})
+
+routerPostulant.put('/postulate/:id', async (req, res) =>{
+  const id = req.body.id
+
+  const postulantId = req.params.id
+
+  try {
+      
+    let postulante = await Postulant.findByPk(postulantId)
+   
+    let vacancy = await Vacancy.findByPk(id)
+
+    await postulante.removeVacancy(vacancy) 
+
+    res.status(200).json('Remove succsessfully')
+  }catch (e) {
+    console.log(e)
+  }
+})
 
 module.exports = routerPostulant;

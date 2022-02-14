@@ -2,22 +2,27 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProfile } from "../../redux/actions/indexP";
-
+//import NavBar from "./NavBar";
 import s from "../postulantes/Styles/miperfil.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUsers } from "../../redux/actions/indexL";
 
 function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
+  
   const { user, isAuthenticated } = useAuth0();
 
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
   useEffect(() => {
-    dispatch(getProfile(12));
-  }, []);
+    dispatch(getProfile(email2));
+   
+  }, [dispatch]);
   return (
     <div>
       <div className={s.botones}></div>
-
       <div className={s.info}>
         {perfil.length === 0 ? (
           <div>
@@ -50,6 +55,7 @@ function MiPerfil() {
               {" "}
               {perfil[0].technologies?.map((t) => t.name).join(" - ")}{" "}
             </h2>
+            <h2> {perfil[0].locations?.map((loc) => loc.name).join(" - ")}</h2>
             <h2 className={s.items}>
               {" "}
               {perfil[0].seniorities?.map((s) => s.name).join(" - ")}{" "}

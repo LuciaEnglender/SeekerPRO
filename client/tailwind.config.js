@@ -3,13 +3,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        verdeOscuro: "#354f52",
-        verdeMedio: "#52796f",
-        verdeClaro: "#84a98c",
+        verdeOscuro:"#242121" ,
+        verdeMedio: "#333333",
+        verdeClaro: "#CDC7CB",
         verdeMuyClaro: "#cad2c5",
         verdeHover: "#c6e0b6",
         grisBoton: "#475569",
       },
+      //darkMode: 'class'
     },
   },
   plugins: [],

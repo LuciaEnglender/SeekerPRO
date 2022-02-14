@@ -20,27 +20,48 @@ export function postVacancy(payload) {
     return res;
   };
 }
-//GET PARA VER TODAS MIS VACANTES COMO EMPRESAs
-export function getVacancy() {
+//GET PARA VER TODAS MIS VACANTES COMO EMPRESAS
+export function getVacancy(business) {
   return async function (dispatch) {
-    const res = await axios.get("/vacancy");
+    const res = await axios.get(
+      `http://localhost:3001/vacancy?business=${business}`
+    );
     return dispatch({
       type: "GET_VACANCY",
       payload: res.data,
     });
   };
 }
-//GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTESs
+//GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTES
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`/vacancy?id=${id}`);
+    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
     });
   };
 }
-
+//DELETE PARA BORRAR MI VACANTE
+export function deleteVacancy(id) {
+  return async function (dispatch) {
+    const res = await axios.delete(`http://localhost:3001/vacancy/${id}`);
+    return dispatch({
+      type: "DELETE_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
+//PUT PARA EDITAR MI VACANTE
+export function editVacancy(id, input) {
+  return async function (dispatch) {
+    const res = await axios.put(`http://localhost:3001/vacancy/edit/${id}`, input);
+    return dispatch({
+      type: "EDIT_VACANCY_ID",
+      payload: res.data,
+    });
+  };
+}
 // ESTA AREA ES PARA BUSCAR A LOS USUARIOS QUE NO SON VACANTES O SEA DEL TODA LA BASE DE DATOS
 //get para traer a todos los usuario
 export function getProfiles() {
@@ -55,8 +76,7 @@ export function getProfiles() {
 //get para buscar por nombre "searchBar"
 export function getSearchName(name) {
   return async function (dispatch) {
-    var res = await axios.get(`/postulant?name=${name}`);
-
+    var res = await axios.get(`http://localhost:3001/postulant/search/${name}`);
     return dispatch({
       type: "GET_NAME_PROFILE",
       payload: res.data,
@@ -65,7 +85,6 @@ export function getSearchName(name) {
 }
 //filtros para el searchbar////////////////////////////////
 export function byTech(payload) {
-  
   return {
     type: "BY_TECH",
     payload,
@@ -97,10 +116,10 @@ export function clearDetail() {
 }
 
 //GET PARA TRAER A LOS POSTULADOS DE UNA DE MIS VACANTES
-//(http falso...)
-export function getPostulados() {
+
+export function getPostulados(id) {
   return async function (dispatch) {
-    const res = await axios.get(`/vacancy//postulantes`);
+    const res = await axios.get(`http://localhost:3001/vacancy/vacs/${id}`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
@@ -168,9 +187,7 @@ export function postulanteDetail(name) {
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(
-        `/postulant?name=${estado}`
-      );
+      let det = await axios.get(`http://localhost:3001/postulant/${estado}`);
       return dispatch({
         type: "GET_STATUS_PIPELINE",
         payload: det.data,
@@ -188,5 +205,20 @@ export function postEmpresa(payload) {
       type: "POST_EMPRESA",
       payload: res.data,
     });
+  };
+}
+//FILTRO DE HOME EMPRESA PARA LOS SELECT
+export function filterVacancies (info) {
+  return async function (dispatch) {
+    try {
+      const combinated = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      console.log(combinated)
+      return dispatch({
+        type: "FILTER_VACANCIES",
+        payload: combinated.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

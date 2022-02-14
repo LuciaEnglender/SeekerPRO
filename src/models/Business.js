@@ -14,10 +14,14 @@ module.exports = (sequelize) => {
     },
     location: {
       type: DataTypes.STRING,
-      // allowNull: false
     },
-    // cuit: {
-    //   type: DataTypes.INTEGER,
-    // },
+    cuit: {
+      type: DataTypes.STRING,
+    },
+    // createBus:{
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: true,
+    //   allowNull: false,
+    // }
   });
 };
