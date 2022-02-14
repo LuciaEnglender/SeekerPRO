@@ -3,7 +3,7 @@ import axios from "axios";
 export function postEmail(payload) {
   return async function (dispatch) {
     const email = await axios.post(
-      `http://localhost:3001/users/register`,
+      `/users/register`,
       payload
     );
     return email;
@@ -12,7 +12,7 @@ export function postEmail(payload) {
 
 export function getUsers(email) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/users/${email}`);
+    const res = await axios.get(`/users/${email}`);
     console.log(res.data);
     return dispatch({
       type: "GET_USER_PERFILE",
@@ -23,7 +23,7 @@ export function getUsers(email) {
 
 export function putUsers(email) {
   return async function (dispatch) {
-    const res = await axios.put(`http://localhost:3001/users/${email}`);
+    const res = await axios.put(`/users/${email}`);
     console.log(res.data);
     return dispatch({
       type: "PUT_USER_PERFILE",

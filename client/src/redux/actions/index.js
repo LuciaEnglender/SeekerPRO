@@ -24,7 +24,7 @@ export function postVacancy(payload) {
 export function getVacancy(business) {
   return async function (dispatch) {
     const res = await axios.get(
-      `http://localhost:3001/vacancy?business=${business}`
+      `/vacancy?business=${business}`
     );
     return dispatch({
       type: "GET_VACANCY",
@@ -35,7 +35,7 @@ export function getVacancy(business) {
 //GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTES
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
+    const res = await axios.get(`/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
@@ -45,7 +45,7 @@ export function getVacancyDetail(id) {
 //DELETE PARA BORRAR MI VACANTE
 export function deleteVacancy(id) {
   return async function (dispatch) {
-    const res = await axios.delete(`http://localhost:3001/vacancy/${id}`);
+    const res = await axios.delete(`/vacancy/${id}`);
     return dispatch({
       type: "DELETE_VACANCY_ID",
       payload: res.data,
@@ -55,7 +55,7 @@ export function deleteVacancy(id) {
 //PUT PARA EDITAR MI VACANTE
 export function editVacancy(id, input) {
   return async function (dispatch) {
-    const res = await axios.put(`http://localhost:3001/vacancy/edit/${id}`, input);
+    const res = await axios.put(`/vacancy/edit/${id}`, input);
     return dispatch({
       type: "EDIT_VACANCY_ID",
       payload: res.data,
@@ -76,7 +76,7 @@ export function getProfiles() {
 //get para buscar por nombre "searchBar"
 export function getSearchName(name) {
   return async function (dispatch) {
-    var res = await axios.get(`http://localhost:3001/postulant/search/${name}`);
+    var res = await axios.get(`/postulant/search/${name}`);
     return dispatch({
       type: "GET_NAME_PROFILE",
       payload: res.data,
@@ -119,7 +119,7 @@ export function clearDetail() {
 
 export function getPostulados(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy/vacs/${id}`);
+    const res = await axios.get(`/vacancy/vacs/${id}`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
@@ -187,7 +187,7 @@ export function postulanteDetail(name) {
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(`http://localhost:3001/postulant/${estado}`);
+      let det = await axios.get(`/postulant/${estado}`);
       return dispatch({
         type: "GET_STATUS_PIPELINE",
         payload: det.data,
@@ -211,7 +211,7 @@ export function postEmpresa(payload) {
 export function filterVacancies (info) {
   return async function (dispatch) {
     try {
-      const combinated = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const combinated = await axios.post("/allFiltersVacancy", info);
       console.log(combinated)
       return dispatch({
         type: "FILTER_VACANCIES",

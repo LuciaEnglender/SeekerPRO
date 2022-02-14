@@ -68,7 +68,7 @@ export function getTechnology() {
 export function getLocation() {
   return async function (dispatch) {
     try {
-      const loc = await axios.get("http://localhost:3001/location");
+      const loc = await axios.get("/location");
       return dispatch({
         type: GET_LOCATION,
         payload: loc.data,
@@ -122,7 +122,7 @@ export function getVacancy() {
 }
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
+    const res = await axios.get(`/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
@@ -134,7 +134,7 @@ export function getSearchBar(payload) {
   console.log(payload)
   return async function (dispatch) {
       try {
-          var json = await axios(`http://localhost:3001/vacancy/search/${payload}`);
+          var json = await axios(`/vacancy/search/${payload}`);
           console.log(json.data)
           return dispatch ({
               type: GET_SEARCH_BAR,
@@ -268,7 +268,7 @@ export function getBusiness (){
   console.log("llego pedido a action")
   return async function (dispatch) {
     try{
-      const business = await axios.get("http://localhost:3001/business")
+      const business = await axios.get("/business")
       console.log("business", business.data)
       return dispatch( {
         type: GET_BUSINESS,
@@ -285,7 +285,7 @@ export function followBusiness (postulanteId, id) {
  console.log("postulanteId", postulanteId, "businessId", id)
   return async function(dispatch){
       try{
-          await axios.post(`http://localhost:3001/favorite/post/${postulanteId}`,{ id: id});
+          await axios.post(`/favorite/post/${postulanteId}`,{ id: id});
           return dispatch({
               type: FOLLOW,
               })
@@ -299,7 +299,7 @@ export function unfollow(postulanteId, businessId){
   console.log("postulante", postulanteId, "empresa" , businessId)
   return async function (){
     try{
-      await axios.put(`http://localhost:3001/favorite/post/${postulanteId}`, {id:businessId});
+      await axios.put(`/favorite/post/${postulanteId}`, {id:businessId});
       return {
           type: UNFOLLOW,
           }
@@ -313,7 +313,7 @@ export function unfollow(postulanteId, businessId){
     console.log("postulante siguiendo", postulanteId)
     return async function (dispatch) {
       try {
-        const followed = await axios.get(`http://localhost:3001/favorite/${postulanteId}/business`);
+        const followed = await axios.get(`/favorite/${postulanteId}/business`);
         return dispatch({
           type: GET_FOLLOWED,
           payload:followed.data,
@@ -331,7 +331,7 @@ export function apply(id, postulanteId){
   console.log(postulanteId)
   return async function (){
     try{
-      await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
+      await axios.post(`/postulant/postulate/${postulanteId}`, id);
       return {
           type: APPLY,
           }
@@ -347,7 +347,7 @@ export function apply(id, postulanteId){
       console.log(postulanteId)
       return async function (){
         try{
-          await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, {id:id});
+          await axios.put(`/postulant/postulate/${postulanteId}`, {id:id});
           return {
               type: REMOVE_POST,
               }
@@ -360,7 +360,7 @@ export function apply(id, postulanteId){
       export function getMyPostulations(payload) {
         return async function (dispatch) {
           try {
-            const postulations = await axios.get(`http://localhost:3001/postulant/${payload}/vacancy`);
+            const postulations = await axios.get(`/postulant/${payload}/vacancy`);
             return dispatch({
               type: GET_MY_POSTULATIONS,
               payload: postulations.data,
@@ -376,7 +376,7 @@ export function apply(id, postulanteId){
         console.log({id, postulanteId})
         return async function (){
           try{
-            await axios.post(`http://localhost:3001/pending/${postulanteId}`, {id:id});
+            await axios.post(`/pending/${postulanteId}`, {id:id});
             return {
                 type: SEE_LATER,
                 }
@@ -392,7 +392,7 @@ export function apply(id, postulanteId){
           console.log(postulanteId)
           return async function (){
             try{
-              await axios.put(`http://localhost:3001/pending/${postulanteId}`, id);
+              await axios.put(`/pending/${postulanteId}`, id);
               return {
                   type: REMOVE_SEE_LATER,
                   }
@@ -405,7 +405,7 @@ export function apply(id, postulanteId){
           export function getSeeLater(postulanteId) {
             return async function (dispatch) {
               try {
-                const later = await axios.get(`http://localhost:3001/pending/${postulanteId}/vacancy`);
+                const later = await axios.get(`/pending/${postulanteId}/vacancy`);
                 return dispatch({
                   type: GET_SEE_LATER,
                   payload:later.data,
