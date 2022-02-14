@@ -16,7 +16,7 @@ function SearcHome() {
     const technology = useSelector((state) => state.rootReducer.technology);
     const seniority = useSelector((state) => state.rootReducer.seniority);
     const language = useSelector((state) => state.rootReducer.language);
-    const filtro = useSelector((state) => state.rootReducer.vacancies)
+    const filtro = useSelector((state) => state.rootReducer.filteredVacancy)
     const [name, setName] = useState("");
     const [input, setInput] = useState({
         technology: [],
@@ -24,7 +24,7 @@ function SearcHome() {
         language: []
     })
     useEffect(() => {
-
+       
         dispatch(getTech());
         dispatch(getSeniority());
         dispatch(getLanguage());
@@ -65,9 +65,9 @@ function SearcHome() {
         e.preventDefault();
         dispatch(filterVacancies(input));
         setInput({
-            technology: [],
-            language: [],
-            seniority: [],
+            technology: "",
+            language: "",
+            seniority: "",
         }, console.log(input));
     }
     ///////////delete///////
@@ -94,18 +94,18 @@ function SearcHome() {
     function handleInputChange(e) {
         e.preventDefault();
         setName(e.target.value);
-    }
-
-    function handleSubmit2(e) {
+      }
+    
+    function handleSubmit2(e){
         e.preventDefault();
         if (name.length === 0) {
             return alert("Please write a name");
-        } else {
+          } else {
             dispatch(getSearchBar(name));
             setName("");
-        }
-    }
-
+          }
+      }
+    
     return (
         <div>
             <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
@@ -122,17 +122,17 @@ function SearcHome() {
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
                                 />
-
+                                
                             </div>
                             <div className="ml-14 mt-4">
-                                <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro pl-20px"
+                            <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro pl-20px"
                                     type="reset"
                                     onClick={(e) => handleSubmit2(e)}
                                 >Search
                                 </button>
-                            </div>
+                                </div>
                             <div className="w-full my-3 flex flex-col m-0 justify-center">
-                                <label> Technologies:</label>
+                                <label> Tecnologias:</label>
                                 <select
                                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                                     name="technology"
@@ -140,11 +140,8 @@ function SearcHome() {
                                 >
                                     <option
                                         className="rounded-2xl bg-verdeClaro"
-                                        selected
-                                        disabled
-                                        value=""
+                                        selected="false"
                                     >
-                                        Select...
                                     </option>
                                     {technology.map((e) => (
                                         <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
@@ -170,20 +167,13 @@ function SearcHome() {
                                 {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
                             </div>
                             <div className="w-full my-3 flex flex-col m-0 justify-center">
-                                <label> Language:</label>
+                                <label> Lenguaje:</label>
                                 <select
                                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                                     name="language"
                                     onChange={(e) => handleSelectLenguge(e)}
                                 >
-                                    <option
-                                        className="rounded-2xl bg-verdeClaro"
-                                        selected
-                                        disabled
-                                        value=""
-                                    >
-                                        Select...
-                                    </option>
+                                    <option selected="false">-</option>
                                     {language.map((e) => (
                                         <option value={e.name}>{e.name}</option>
                                     ))}
@@ -213,14 +203,7 @@ function SearcHome() {
                                 <select className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                                     name="seniority"
                                     onChange={(e) => handleSelectSeniority(e)}>
-                                    <option
-                                        className="rounded-2xl bg-verdeClaro"
-                                        selected
-                                        disabled
-                                        value=""
-                                    >
-                                        Select...
-                                    </option>
+                                    <option selected="false">-</option>
                                     {seniority.map((e) => (
                                         <option className="rounded-2xl bg-verdeClaro" value={e.name}>
                                             {e.name}
@@ -248,7 +231,7 @@ function SearcHome() {
                             </div>
                             <div className="w-full  my-3 flex m-0 justify-center">
                                 <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro">
-                                    Filter
+                                    Buscar
                                 </button>
                             </div>
                         </div>

@@ -85,7 +85,7 @@ const SearchPostu = () => {
             <h1 className=" font-bold  text-center mb-3">Busqueda:</h1>
             <div className="ml-5">
               <div className="w-full flex flex-col m-0 justify-center">
-                <label> search Postulants</label>
+                <label> Buscar:</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="text"
@@ -104,18 +104,13 @@ const SearchPostu = () => {
               </div>
               {/* <SearchBar></SearchBar> */}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label> filter postulants by:</label>
+                <label> Tecnologias:</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   onChange={(e) => handleByTech(e)}
                 >
-                  <option
-                    className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
-                  >
-                    tecnologies 
+                  <option className="rounded-2xl bg-verdeClaro" value="All">
+                    All Tech
                   </option>
                   {technology.map((el) => {
                     return (
@@ -134,13 +129,8 @@ const SearchPostu = () => {
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   onChange={(e) => handleBySkills(e)}
                 >
-                  <option
-                    className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
-                  >
-                    seniority
+                  <option className="rounded-2xl bg-verdeClaro" value="All">
+                    All Seniority
                   </option>
                   {seniority.map((el) => {
                     return (
@@ -154,19 +144,33 @@ const SearchPostu = () => {
                   })}
                 </select>
               </div>
-            
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  onChange={(e) => handleBySenior(e)}
+                >
+                  <option className="rounded-2xl bg-verdeClaro" value="All">
+                    All Skill
+                  </option>
+                  {skill.map((el) => {
+                    return (
+                      <option
+                        className="rounded-2xl bg-verdeClaro"
+                        value={el.name}
+                      >
+                        {el.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   onChange={(e) => handleByLengua(e)}
                 >
-                  <option
-                    className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
-                  >
-                    language
+                  <option className="rounded-2xl bg-verdeClaro" value="All">
+                    All Leng
                   </option>
                   {language.map((el) => {
                     return (
