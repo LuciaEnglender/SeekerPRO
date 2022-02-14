@@ -316,13 +316,15 @@ routerVacancy.get("/search/:name", async (req, res) => {
       },
     });
     if (business.length !== 0) acum.push(business);
+
     const vacancy = await Vacancy.findAll({
       where: {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
-        },
+          },
       },
+     attributes: ['name','id'],
       include: [
         {
           model: Technology,
@@ -345,9 +347,17 @@ routerVacancy.get("/search/:name", async (req, res) => {
             attributes: [],
           },
         },
+        {
+          model: Business,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
       ],
     });
     if (vacancy.length !== 0) acum.push(vacancy);
+
     const languageSearch = await Language.findAll({
       where: {
         name: { [Op.iLike]: `%${name}%` },
@@ -356,7 +366,7 @@ routerVacancy.get("/search/:name", async (req, res) => {
       include: [
         {
           model: Vacancy,
-          attributes: ["name"],
+          attributes: ["name", 'id'],
           inlcude: [
             {
               model: Technology,
@@ -398,11 +408,11 @@ routerVacancy.get("/search/:name", async (req, res) => {
       include: [
         {
           model: Vacancy,
-          attributes: ["name", "description"],
+          attributes: ["name", "description", 'id'],
           include: [
             {
               model: Language,
-              attributes: ["name"],
+              attributes: ["name", 'id'],
               through: {
                 attributes: [],
               },
@@ -435,10 +445,10 @@ routerVacancy.get("/search/:name", async (req, res) => {
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes: ["name"],
+      attributes: ["name", 'id'],
       include: {
         model: Vacancy,
-        attributes: ["name", "description"],
+        attributes: ["name", "description", 'id'],
         include: [
           {
             model: Language,
