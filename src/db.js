@@ -12,6 +12,7 @@ const DATABASE_URL = "postgres://upnleitnluhsqx:c21b2fe1e0b8fd236da184d9d183e9fb
 // console.log(`data: ${DB_DATABASE_URL}`)
 // console.log(process.env)
 
+
 const sequelize = new Sequelize(DATABASE_URL,
 	{
 		logging: false, // set to console.log to see the raw SQL queries
