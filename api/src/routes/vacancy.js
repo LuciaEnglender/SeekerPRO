@@ -115,6 +115,43 @@ routerVacancy.get("/", async (req, res) => {
         where: {
           id: id,
         },
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          // {
+          //   model: Skill,
+          //   attributes: ["name"],
+          //   through: {
+          //     attributes: [],
+          //   },
+          // },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Business,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          }
+        ]
       });
       //si no está es porque no existe
       vacanciesInDB
@@ -124,9 +161,9 @@ routerVacancy.get("/", async (req, res) => {
       const finderBusiness = await Business.findOne({
         where: {
           loginEmail: business,
-        },
+        }
       });
-
+ console.log(finderBusiness)
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
         where: {
@@ -161,6 +198,9 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
+          {
+            model: Business
+          }
         ],
       });
       vacanciesInDB

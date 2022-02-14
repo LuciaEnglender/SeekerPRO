@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
 import { getVacancy } from "../../redux/actions";
 import CardVacante from "./modules/CardVacante";
-import FormVacancy from "./modules/FormVacancy";
 import Pagination from "./Pagination";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -26,9 +25,7 @@ const HomeEmpresa = () => {
     setCurrentPage(pageNumber);
   };
 
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.perfiles
-  );
+ 
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
@@ -37,28 +34,30 @@ const HomeEmpresa = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-verdeOscuro w-screen h-screen">
+    <div className="bg-gray-300 w-screen h-screen">
       <div>
         {/* NAVEGACION */}
         <NavHomeE titulo={"Home"} />
       </div>
       {/* BODY */}
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-verdeOscuro  h-auto pt-7">
+      
+      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
         {/* AREA DE CREACION */}
-        <div><SearcHome/></div>
+        <div className="ml-16"><SearcHome/></div>
         {/* AREA DE VACANTES */}
-        <div className="col-span-2 bg-verdeOscuro p-2">
-          <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <div className="lg:grid items-center justify-center">
-              <h1 className=" font-bold text-center mb-3">Vacantes:</h1>
+        <div className="col-span-2 bg-gray-300 p-2 mr-16">
+          <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
+            <div className="lg:grid items-center justify-center ">
+              <h1 className=" font-bold text-center mb-3 pt-2">Vacantes:</h1>
+              <hr />
               <div className="flex m-0 justify-center">
                 <Link to="/homee/vacante">
-                  <button className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro">
+                  <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro">
                     Agregar Vacante
                   </button>
                 </Link>
               </div>
-              <div>
+              <div className="mt-5">
                 {currentVacancy ? (
                   currentVacancy.map((el) => {
                     return (

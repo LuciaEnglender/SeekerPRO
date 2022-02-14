@@ -426,7 +426,7 @@ routerBusiness.post(
   "/",
 
   async (req, res) => {
-    let { name, description, location, cuit, emailId ,createBus } = req.body;
+    let { name, description, location, cuit, emailId } = req.body;
 
     try {
       let createBusiness = await Business.create({
@@ -434,7 +434,7 @@ routerBusiness.post(
         description,
         location,
         cuit,
-        createBus
+        //createBus
       });
 
       let finderLogin = await Login.findByPk(emailId);

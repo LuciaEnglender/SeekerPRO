@@ -47,7 +47,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         postulados: action.payload,
-        allPostulados: action.payload,
       };
     case "GET_DETAIL_POSTULANTE":
       return {

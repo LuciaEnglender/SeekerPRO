@@ -11,6 +11,8 @@ import { GrFormClose } from "react-icons/gr";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../../redux/actions/indexL";
 import NavHomeE from "./NavHomeE";
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 // import NavHomeE from "./NavHomeE";
 
 const FormVacancy = () => {
@@ -37,8 +39,7 @@ const FormVacancy = () => {
   });
 
   useEffect(() => {
-    const element = email2;
-    dispatch(getUsers(element));
+    dispatch(getUsers(email2));
     dispatch(getTech());
     dispatch(getSeniority());
     dispatch(getLanguage());
@@ -118,11 +119,12 @@ const FormVacancy = () => {
   };
 
   return (
-    <div>
+    <div >
       {/* NAVEGACIOsN */}
       <NavHomeE titulo={"Crear"} />
       {/* FORM CREACION VACANTE */}
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <div className="bg-gray-300 w-fit m-10 rounded-2xl pb-4">
+      <form onSubmit={(e) => handleSubmit(e)} className="m-10 pt-10 ">
         <div className="w-full flex flex-col m-0 justify-center">
           <label> Name:</label>
           <input
@@ -242,7 +244,7 @@ const FormVacancy = () => {
           </div>
           {/*  <ul><li>{input.seniority.map(el => el + " ,")}</li></ul> */}
         </div>
-        <div className="w-full  my-3 flex m-0 justify-center">
+        <div className="w-full  my-3 flex m-0 justify-center pt-10">
           <button
             type="submit"
             className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
@@ -251,9 +253,12 @@ const FormVacancy = () => {
           </button>
         </div>
       </form>
-      {/* <Link to="/homee">
-        <button>Volver</button>
-      </Link> */}
+      </div>
+      <div className="ml-10">
+      <Link to="/homee">
+      <BsFillArrowLeftSquareFill />
+      </Link>
+      </div>
     </div>
   );
 };
