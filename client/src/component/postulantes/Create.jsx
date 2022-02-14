@@ -290,7 +290,7 @@ const handleCv=(e)=>{
   }, []);
 
   return (
-    <div className="bg-verdeOscuro w-screen h-screen">
+    <div className="bg-verdeOscuro w-screen h-full">
       <div>
         <NavBar />
       </div>

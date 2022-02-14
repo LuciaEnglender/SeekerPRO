@@ -12,7 +12,7 @@ function RemovePost({id}) {
     function handleRemove() {
         dispatch(removePost(id, postulanteId));
         alert ("This applied was remove")
-        navigate(-1)
+        navigate("/homep")
       }
   return <div>
  <button 

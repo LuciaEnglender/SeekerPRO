@@ -25,7 +25,7 @@ const HomeEmpresa = () => {
     setCurrentPage(pageNumber);
   };
 
- 
+
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
@@ -40,10 +40,10 @@ const HomeEmpresa = () => {
         <NavHomeE titulo={"Home"} />
       </div>
       {/* BODY */}
-      
+
       <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
         {/* AREA DE CREACION */}
-        <div className="ml-16"><SearcHome/></div>
+        <div className="ml-16"><SearcHome /></div>
         {/* AREA DE VACANTES */}
         <div className="col-span-2 bg-gray-300 p-2 mr-16">
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
@@ -52,7 +52,7 @@ const HomeEmpresa = () => {
               <hr />
               <div className="flex m-0 justify-center">
                 <Link to="/homee/vacante">
-                  <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro">
+                  <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
                     Agregar Vacante
                   </button>
                 </Link>

@@ -2,6 +2,7 @@ import {
   //POSTULANT
   POST_POSTULANTE,
   GET_PROFILE,
+  PUT_EDIT_PROFILE,
   //GET
   GET_TECHNOLOGY,
   GET_SKILL,
@@ -55,6 +56,10 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state,
       };
+      case PUT_EDIT_PROFILE:
+        return{
+          ...state
+        };
     case GET_TECHNOLOGY:
       return {
         ...state,

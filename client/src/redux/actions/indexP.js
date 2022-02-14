@@ -2,6 +2,7 @@ import axios from "axios";
 //POSTULANT
 export const POST_POSTULANTE = "POST_POSTULANTE";
 export const GET_PROFILE = "GET_PROFILE"
+export const PUT_EDIT_PROFILE="PUT_EDIT_PROFILE"
 //GET 
 export const GET_TECHNOLOGY = "GET_TECHNOLOGY";
 export const GET_SKILL = "GET_SKILL";
@@ -399,3 +400,18 @@ export function apply(id, postulanteId){
             };
           }
         
+
+          //MODIFY PROFILE
+          export function editProfile(id,input){
+            console.log("input action que enviamos",input)
+            return async function(dispatch){
+              try{
+                const edit= await axios.put(`http://localhost:3001/postulant/${id}`, input)
+                return dispatch({
+                  type:PUT_EDIT_PROFILE,
+                  payload: edit.data,
+                })
+              }catch(error){
+              }
+            };
+          }
