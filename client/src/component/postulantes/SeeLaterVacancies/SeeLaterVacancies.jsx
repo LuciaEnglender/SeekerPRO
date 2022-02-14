@@ -7,10 +7,11 @@ import MiPerfil from '../MiPerfil';
 
 
 function SeeLaterVacancies() {
+  const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
   const dispatch = useDispatch();
   useDispatch(()=>{
-    dispatch(getSeeLater())
-  },[])
+    dispatch(getSeeLater(postulanteId))
+  },[dispatch])
   const pending = useSelector((state) =>state.rootReducerPostulante.pending)
  console.log(pending)
 

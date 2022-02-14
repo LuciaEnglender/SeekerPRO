@@ -243,7 +243,9 @@ return (
            name= 'name'
            onChange={(e) => handleChange(e)}
         />         
-                        <label className="text-center"> Phone</label>
+        <div> 
+                        <label className="text-center"> ET TELEFONO CASA</label>
+                
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="number"
@@ -251,6 +253,53 @@ return (
                   name="phone"
                   onChange={(e) => handleChange(e)}
                 />
+                </div>
+                {/*LOCATION*/}
+
+                <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Location*</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  value={input.locations}
+                  name="locations"
+                  onChange={(e) => handleSelectLocation(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    selected
+                    disabled
+                    value=""
+                  >
+                    Location Selection
+                  </option>
+                  {locat?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.locations?.map((el, i) => (
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      {el}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDeleteLocation(el)}
+                      >
+                        X
+                      </button>
+                    </li>
+                  ))}
+                </div>
+              </div>
     {/*gender*/}
     <div className="w-44 flex flex-col my-2 justify-center">
                 <label className="text-center">Gender:</label>

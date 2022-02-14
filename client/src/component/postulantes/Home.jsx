@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import { getProfile, getBusiness, getVacancy } from "../../redux/actions/indexP";
+import { getProfile, getBusiness, getVacancy, clearBusiness } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
@@ -22,12 +22,6 @@ export default function Home() {
 
   const filtradas = useSelector((state) => state.rootReducerPostulante.filteredVacancy);
 
-    const business = useSelector((state) =>state.rootReducerPostulante.business)
-    const handleAllBusiness = (e) => {
-      e.preventDefault()
-      dispatch(getBusiness());
-      };
-console.log("business", business)
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
   const vacancyPerPage = 3;
@@ -50,8 +44,18 @@ console.log("business", business)
 
 //Renderizacions todas las vacantes
 const handleAll = (e) => {
-  dispatch(getVacancy(email2));
+  dispatch(clearBusiness());
+  dispatch(getVacancy(email2)); 
   };
+
+//Renderizacion de todas las empresas
+  const business = useSelector((state) =>state.rootReducerPostulante.business)
+  const handleAllBusiness = (e) => {
+    e.preventDefault()
+    dispatch(getBusiness());
+    };
+
+//console.log("business", business)
 
   useEffect(() => {
     dispatch(getProfile(email2));   
@@ -99,6 +103,10 @@ const handleAll = (e) => {
                     >
                       all vacancies{" "}
                     </button> 
+    <button className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                onClick={(e) => handleAllBusiness(e)} >
+                      all business{" "}
+   </button>
 
                   </div>
 
@@ -109,7 +117,22 @@ const handleAll = (e) => {
                   <p className=" font-bold text-center text-zinc-400 my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
                   <div>        
-                    { currentVacancy[0].cuit? 
+                    { business.length > 0 ?                                         
+                    business?.map((el)=> {
+                                          return (
+                                            <div className="m-4" key={el.id}>
+                                            <BusinessCard
+                                              id = {el.id}
+                                               name={el.name}
+                                              description={el.description}
+                                              languages={el.languages}                                                                                                                                                                                                                           />
+                                          </div>
+                                          )
+                                        }) :
+                    
+
+                    
+                    currentVacancy[0].cuit? 
                                         currentVacancy?.map((el)=> {
                                           return (
                                             <div className="m-4" key={el.id}>
