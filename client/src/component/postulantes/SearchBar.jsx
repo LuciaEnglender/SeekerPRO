@@ -26,9 +26,10 @@ export default function SearchBar() {
   return (
     <div className="w-fit justify-center h-9 flex flex-row text-gray-800 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro">
       <input
-        className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+        className="w-full xl:w-80 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
         type="text"
         value={name}
+        placeholder="  vacancy or company..."
         onKeyPress={(e) => e.key === "Enter" && handleSubmit(e)}
         onChange={(e) => handleInputChange(e)}
       />
