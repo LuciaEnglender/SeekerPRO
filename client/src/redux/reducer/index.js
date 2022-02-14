@@ -147,10 +147,10 @@ function rootReducer(state = initialState, action) {
       return{
         ...state, vacancies: action.payload,
       }
-      case "FILTER_POSTULANT":
-      return{
-        ...state, profiles: action.payload,
-      }
+      // case "FILTER_POSTULANT":
+      // return{
+      //   ...state, profiles: action.payload,
+      // }
  
  
       
