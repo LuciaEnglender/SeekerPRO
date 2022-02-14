@@ -55,7 +55,7 @@ const handleAll = (e) => {
 
   useEffect(() => {
     dispatch(getProfile(email2));   
-  }, [dispatch]);
+  }, []);
 
 
   
