@@ -107,7 +107,6 @@ routerVacancy.get("/", async (req, res) => {
         }
       ],
     });
-    
     //si tiene id (o sea que se requiere el detalle) entra acá
     if (id) {
       const vacanciesInDB = await Vacancy.findAll({
@@ -317,7 +316,6 @@ routerVacancy.get("/search/:name", async (req, res) => {
       },
     });
     if (business.length !== 0) acum.push(business);
-
     const vacancy = await Vacancy.findAll({
       where: {
         [Op.or]: {
@@ -350,7 +348,6 @@ routerVacancy.get("/search/:name", async (req, res) => {
       ],
     });
     if (vacancy.length !== 0) acum.push(vacancy);
-
     const languageSearch = await Language.findAll({
       where: {
         name: { [Op.iLike]: `%${name}%` },
@@ -556,5 +553,6 @@ routerVacancy.get("/vac/:id", async (req, res) => {
       });
   });
 });
+
 
 module.exports = routerVacancy;

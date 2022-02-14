@@ -4,14 +4,25 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+// const { DATABASE_URL } = process.env;
+const DATABASE_URL = "postgres://aykxrszxwncsal:29f8b65477e84d79d840eafeeb43fadcdef4146b4e253b96d22608544be0c253@ec2-34-194-171-47.compute-1.amazonaws.com:5432/d9m2ne6s1g1a79"
 
-const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
+// const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
+// const proConfig = DB_DATABASE_URL;
+// console.log(`data: ${DB_DATABASE_URL}`)
+// console.log(process.env)
+
+const sequelize = new Sequelize(DATABASE_URL,
+	{
+		logging: false, // set to console.log to see the raw SQL queries
+		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false,
+			}
+		}
+	}
 );
 const basename = path.basename(__filename);
 
@@ -39,11 +50,27 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant,Pending ,Skill,Technology,Vacancy,Seniority} = sequelize.models;
+
+const {
+	Admin,
+	Business,
+	Language,
+	Location,
+	Login,
+	Message,
+	PipeLine,
+	Postulant,
+  Pending,
+	Skill,
+	Technology,
+	Vacancy,
+	Seniority,
+} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 //Tabla intermedia ente Postulante y Vacante muchos  a  muchos
+
 Business.belongsToMany(Vacancy, {through : "business_vacancy" });
 Vacancy.belongsToMany(Business, {through : "business_vacancy" });
 
@@ -110,8 +137,6 @@ Vacancy.hasOne(PipeLine,{foreignKey:"fk_vacancy"})
 PipeLine.belongsTo(Vacancy);
 
 ///lo Trabajado probando para agragar un postulante a una vacante
-
-
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

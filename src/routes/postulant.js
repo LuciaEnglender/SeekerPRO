@@ -131,7 +131,6 @@ routerPostulant.get("/", async (req, res) => {
   }
 });
 
-
 routerPostulant.post("/", upload.any("file",2), async (req, res) => {
   //el campo de genero recibe un solo valor
   let {

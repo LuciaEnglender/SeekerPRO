@@ -4,7 +4,7 @@ import axios from "axios";
 export function getProfile(payload) {
   return async function (dispatch) {
     const profile = await axios.get(
-      `http://localhost:3001/business?name=${payload}`
+      `/business?name=${payload}`
     );
     return dispatch({
       type: "GET_BISSNESS_DETAIL",
@@ -16,7 +16,7 @@ export function getProfile(payload) {
 //POST PARA CREAR VACANTES
 export function postVacancy(payload) {
   return async function () {
-    const res = await axios.post("http://localhost:3001/vacancy", payload);
+    const res = await axios.post("/vacancy", payload);
     return res;
   };
 }
@@ -66,7 +66,7 @@ export function editVacancy(id, input) {
 //get para traer a todos los usuario
 export function getProfiles() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/postulant");
+    const res = await axios.get("/postulant");
     return dispatch({
       type: "GET_PROFILES",
       payload: res.data,
@@ -77,7 +77,6 @@ export function getProfiles() {
 export function getSearchName(name) {
   return async function (dispatch) {
     var res = await axios.get(`http://localhost:3001/postulant/search/${name}`);
-
     return dispatch({
       type: "GET_NAME_PROFILE",
       payload: res.data,
@@ -132,7 +131,7 @@ export function getPostulados(id) {
 //treaer las tecnologias para el form
 export function getTech() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/tech");
+    const res = await axios.get("/tech");
     return dispatch({
       type: "GET_TECH",
       payload: res.data,
@@ -142,7 +141,7 @@ export function getTech() {
 //treaer las seniority para el form
 export function getSeniority() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/seniority");
+    const res = await axios.get("/seniority");
     return dispatch({
       type: "GET_SENIORITY",
       payload: res.data,
@@ -152,7 +151,7 @@ export function getSeniority() {
 //treaer las Lenguaje de programacion para el form
 export function getSkills() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/skills");
+    const res = await axios.get("/skills");
     return dispatch({
       type: "GET_SKILLS",
       payload: res.data,
@@ -162,7 +161,7 @@ export function getSkills() {
 //get para trert los idiomas para el form
 export function getLanguage() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/languages");
+    const res = await axios.get("/languages");
     return dispatch({
       type: "GET_LANGUAGE",
       payload: res.data,
@@ -174,7 +173,7 @@ export function getLanguage() {
 export function postulanteDetail(name) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(`http://localhost:3001/business/${name}`);
+      let det = await axios.get(`/business/${name}`);
       return dispatch({
         type: "GET_DETAIL_POSTULANTE",
         payload: det.data,
@@ -201,7 +200,7 @@ export function filterStatusPipeline(estado) {
 //POST DEL FORM PARA COMPLETAR INFO DE EMPRESA
 export function postEmpresa(payload) {
   return async function (dispatch) {
-    const res = await axios.post("http://localhost:3001/business", payload);
+    const res = await axios.post("/business", payload);
     return dispatch({
       type: "POST_EMPRESA",
       payload: res.data,
