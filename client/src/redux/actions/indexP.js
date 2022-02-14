@@ -34,8 +34,9 @@ export const REMOVE_POST = "REMOVE_POST"
 export const REMOVE_SEE_LATER = "REMOVE_SEE_LATER"
 export const GET_SEE_LATER = "GET_SEE_LATER"
 export const SEE_LATER= "SEE_LATER"
-
-
+//EDITOR
+export const EDIT_LOCATION_ADD_POSTULANT ='EDIT_LOCATION_ADD_POSTULANT'
+export const EDIT_LOCATION_DELETE_POSTULANT = 'EDIT_LOCATION_DELETE_POSTULANT'
 
 //ACTIONS
 export function createPostulante(payload) {
@@ -415,3 +416,34 @@ export function apply(id, postulanteId){
               }
             };
           }
+
+//EDITOR DE PSTULANTES
+
+export function deleteLocation(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationDelete`, input)
+      return dispatch({
+        type: EDIT_LOCATION_DELETE_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addLocation(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationAdd`, input)
+      return dispatch({
+        type: EDIT_LOCATION_ADD_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+

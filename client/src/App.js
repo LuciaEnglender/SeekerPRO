@@ -16,6 +16,7 @@ import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
 import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLaterVacancies"
 import Postulations from "./component/postulantes/MyPostulations/Postulations";
+import EditProfile from "./component/postulantes/EDIT2";
 
 //Rutas de Empresa
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
@@ -30,6 +31,7 @@ import EditVcancy from "./component/empresas/modules/EditVcancy";
 import FormVacancy from "./component/empresas/modules/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
 
+
 function App() {
   return (
     <Routes>
@@ -42,9 +44,9 @@ function App() {
         <Route path="/homep/create" element={<CreateForm />} />
         <Route path="/homep/notificaciones" element={<Notificaciones />} />
         <Route path="/homep/mensajes" element={<Mensajes />} />
-        <Route path="/homep/miperfil" element={<MiPerfil />} />
+        <Route path="/homep/miperfil" element={<EditProfile />} />
         <Route path="/homep/favourites" element={<Business />} />
-        <Route path="/homep/create/modifyprofile" element={<Perfil />} />
+        <Route path="/homep/create/modifyprofile" element={<EditProfile />} />
         <Route path="/homep/postdetail/:id" element={<DetailPost />} />
         <Route path="/homep/seelater" element={<SeeLaterVancancies/>}/>
         <Route path="/homep/mypostulations" element={<Postulations/>}/>
