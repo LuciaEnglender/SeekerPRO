@@ -131,7 +131,7 @@ function SearcHome() {
                                 </button>
                             </div>
                             <div className="w-full my-3 flex flex-col m-0 justify-center">
-                                <label> Technologies:</label>
+                                <label> technologies:</label>
                                 <select
                                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                                     name="technology"
@@ -169,7 +169,7 @@ function SearcHome() {
                                 {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
                             </div>
                             <div className="w-full my-3 flex flex-col m-0 justify-center">
-                                <label> Language:</label>
+                                <label> language:</label>
                                 <select
                                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                                     name="language"
@@ -208,7 +208,7 @@ function SearcHome() {
                             </div>
 
                             <div className="w-full my-3 flex flex-col m-0 justify-center">
-                                <label> Seniority:</label>
+                                <label> seniority:</label>
                                 <select className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                                     name="seniority"
                                     onChange={(e) => handleSelectSeniority(e)}>
