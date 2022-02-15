@@ -125,7 +125,8 @@ const handleAll = (e) => {
                                               id = {el.id}
                                                name={el.name}
                                               description={el.description}
-                                              languages={el.languages}                                                                                                                                                                                                                           />
+                                              location={el.location}  
+                                                                                                                                                                                                                                                                   />
                                           </div>
                                           )
                                         }) :
@@ -140,12 +141,12 @@ const handleAll = (e) => {
                                               id = {el.id}
                                                name={el.name}
                                               description={el.description}
-                                              languages={el.languages}                                                                                                                                                                                                                                                         />
+                                              location={el.location}                                                                                                                                                                                                                                                         />
                                           </div>
                                           )
                                         })
                     
-                    : 
+                    :  
                     currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
@@ -169,7 +170,7 @@ const handleAll = (e) => {
                     }) 
 
                     
-                    
+
                     }
                   </div>
                 )}
