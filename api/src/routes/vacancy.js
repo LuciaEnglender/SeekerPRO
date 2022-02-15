@@ -273,7 +273,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addTechnology(technologyInDB);
     }
-    console.log(newVacancyInDB);
+    //console.log(newVacancyInDB);
     res.status(200).json(newVacancyInDB);
   } catch (e) {
     console.log(e);
