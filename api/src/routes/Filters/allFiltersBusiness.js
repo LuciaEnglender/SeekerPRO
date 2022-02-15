@@ -114,7 +114,7 @@ router.post('/' , async (req, res) => {
         for(var i=0;i<totalPostulant.length;i++){
 
             if(language){                            
-                console.log('entro if')
+                //console.log('entro if')
                 if(typeof language==="string"){
                     // console.log('entro aca ')
                     for(var j=0;j<totalPostulant[i].languages.length;j++){
@@ -135,7 +135,7 @@ router.post('/' , async (req, res) => {
                 }
                 else{
                     for(var j=0;j<totalPostulant[i].languages.length;j++){
-                        console.log('entro else ')
+                        //console.log('entro else ')
                         //res.status(200).json(totalPostulant)//
                         for(var k=0;k<language.length;k++){
                            if(totalPostulant[i].languages[j]._previousDataValues.name===language[k]){

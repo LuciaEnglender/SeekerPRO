@@ -1,10 +1,10 @@
 import axios from "axios";
 
 //Get BUSINESS DETAIL DE PROFILE
-export function getProfile(payload) {
+export function getProfile(email) {
   return async function (dispatch) {
     const profile = await axios.get(
-      `http://localhost:3001/business?name=${payload}`
+      `http://localhost:3001/business/find/${email}`
     );
     return dispatch({
       type: "GET_BISSNESS_DETAIL",
@@ -55,7 +55,10 @@ export function deleteVacancy(id) {
 //PUT PARA EDITAR MI VACANTE
 export function editVacancy(id, input) {
   return async function (dispatch) {
-    const res = await axios.put(`http://localhost:3001/vacancy/edit/${id}`, input);
+    const res = await axios.put(
+      `http://localhost:3001/vacancy/edit/${id}`,
+      input
+    );
     return dispatch({
       type: "EDIT_VACANCY_ID",
       payload: res.data,
@@ -174,7 +177,9 @@ export function getLanguage() {
 export function postulanteDetail(name) {
   return async function (dispatch) {
     try {
-      let det = await axios.get(`http://localhost:3001/business/${name}`);
+      let det = await axios.get(
+        `http://localhost:3001/business/search/${name}`
+      );
       return dispatch({
         type: "GET_DETAIL_POSTULANTE",
         payload: det.data,
@@ -209,11 +214,14 @@ export function postEmpresa(payload) {
   };
 }
 //FILTRO DE HOME EMPRESA PARA LOS SELECT
-export function filterVacancies (info) {
+export function filterVacancies(info) {
   return async function (dispatch) {
     try {
-      const combinated = await axios.post("http://localhost:3001/allFiltersVacancy", info);
-      console.log(combinated)
+      const combinated = await axios.post(
+        "http://localhost:3001/allFiltersVacancy",
+        info
+      );
+      console.log(combinated);
       return dispatch({
         type: "FILTER_VACANCIES",
         payload: combinated.data,
@@ -239,11 +247,14 @@ export function getSearchBar(name) {
   };
 }
 //FILTRO DE HOME EMPRESA PARA LOS SELECT
-export function filterSelects (name) {
+export function filterSelects(info) {
   return async function (dispatch) {
     try {
-      const combinated = await axios.post("http://localhost:3001/allFiltersBusiness", name);
-      console.log(combinated)
+      const combinated = await axios.post(
+        "http://localhost:3001/allFiltersBusiness",
+        info
+      );
+      console.log(combinated);
       return dispatch({
         type: "FILTER_POSTULANT",
         payload: combinated.data,
@@ -253,3 +264,21 @@ export function filterSelects (name) {
     }
   };
 }
+
+// export function filterVacancies(info) {
+//   return async function (dispatch) {
+//     try {
+//       const combinated = await axios.post(
+//         "http://localhost:3001/allFiltersVacancy",
+//         info
+//       );
+//       console.log(combinated);
+//       return dispatch({
+//         type: "FILTER_VACANCIES",
+//         payload: combinated.data,
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
