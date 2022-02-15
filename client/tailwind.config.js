@@ -9,7 +9,7 @@ module.exports = {
         colorFondo3: "#A2928E",
         colorBoton: "#E94E2D",
 
-        ///VIEJOS
+        //NUEVOS
         verdeOscuro: "#242121",
         verdeMedio: "#333333",
         verdeClaro: "#CDC7CB",
