@@ -67,9 +67,15 @@ routerVacancy.get("/", async (req, res) => {
   const { id, business } = req.query;
 
   try {
-
     const ALLVACS = await Vacancy.findAll({
       include: [
+        {
+          model: Business,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
         {
           model: Language,
           attributes: ["name"],
@@ -98,16 +104,9 @@ routerVacancy.get("/", async (req, res) => {
             attributes: [],
           },
         },
-        {
-          model: Business,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        }
       ],
     });
-    
+
     //si tiene id (o sea que se requiere el detalle) entra acá
     if (id) {
       const vacanciesInDB = await Vacancy.findAll({
@@ -116,6 +115,66 @@ routerVacancy.get("/", async (req, res) => {
           id: id,
         },
         include: [
+          {
+            model: Business,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          // {
+          //   model: Skill,
+          //   attributes: ["name"],
+          //   through: {
+          //     attributes: [],
+          //   },
+          // },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      });
+      //si no está es porque no existe
+      vacanciesInDB
+        ? res.status(200).send(vacanciesInDB)
+        : res.status(400).send("doesnt exist this vacancy");
+    } else if (business) {
+      const finderBusiness = await Business.findOne({
+        where: {
+          loginEmail: business,
+        },
+      });
+      //y sino, devuelve todos las vacantes
+      const vacanciesInDB = await Vacancy.findAll({
+        where: {
+          businessId: finderBusiness.id,
+        },
+        include: [
+          {
+            model: Business,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -146,70 +205,16 @@ routerVacancy.get("/", async (req, res) => {
           },
           {
             model: Business,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          }
-        ]
-      });
-      //si no está es porque no existe
-      vacanciesInDB
-        ? res.status(200).send(vacanciesInDB)
-        : res.status(400).send("doesnt exist this vacancy");
-    } else if (business) {
-      const finderBusiness = await Business.findOne({
-        where: {
-          loginEmail: business,
-        }
-      });
- console.log(finderBusiness)
-      //y sino, devuelve todos las vacantes
-      const vacanciesInDB = await Vacancy.findAll({
-        where: {
-          businessId: finderBusiness.id,
-        },
-        include: [
-          {
-            model: Language,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
           },
-          {
-            model: Seniority,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          // {
-          //   model: Skill,
-          //   attributes: ["name"],
-          //   through: {
-          //     attributes: [],
-          //   },
-          // },
-          {
-            model: Technology,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-          {
-            model: Business
-          }
         ],
       });
       vacanciesInDB
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
     } else {
-     
-      ALLVACS? res.status(200).json(ALLVACS)
-      : res.status(400).send('not vacancies yet')
+      ALLVACS
+        ? res.status(200).json(ALLVACS)
+        : res.status(400).send("not vacancies yet");
     }
   } catch (e) {
     console.log(e);
@@ -250,14 +255,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addLanguage(lenguageInDB);
     }
-    /*if (location) {
-			let locationInDB = await Location.findAll({
-				where: {
-					name: location,
-				},
-			});
-			await newVacancyInDB.addLocation(locationInDB);
-		}*/
+
     if (seniority) {
       let seniorityInDB = await Seniority.findAll({
         where: {
@@ -266,14 +264,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addSeniority(seniorityInDB);
     }
-    // if (skill) {
-    //   let skillInDB = await Skill.findAll({
-    //     where: {
-    //       name: skill,
-    //     },
-    //   });
-    //   await newVacancyInDB.addSkill(skillInDB);
-    // }
+
     if (technology) {
       let technologyInDB = await Technology.findAll({
         where: {
@@ -551,7 +542,7 @@ routerVacancy.get("/vac/:id", async (req, res) => {
         attributes: ["name"],
       })
       .then((postulant) => {
-        console.log(postulant);
+        // console.log(postulant);
         res.json(postulant.length);
       });
   });

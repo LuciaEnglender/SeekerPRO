@@ -3,6 +3,7 @@ const initialState = {
   allVacancies: [],
   vacancyDetail: [],
   business: [],
+
   profiles: [],
   allProfiles: [],
   postulados: [],
@@ -15,6 +16,7 @@ const initialState = {
   pipeline: [],
   filteredVacancy: [],
   filteredBusiness: [],
+  filterPostulant: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -37,7 +39,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         profiles: action.payload,
-        allProfiles: action.payload,
+        //allProfiles: action.payload,
       };
     case "GET_BISSNESS_DETAIL":
       return {
@@ -52,7 +54,7 @@ function rootReducer(state = initialState, action) {
     case "GET_DETAIL_POSTULANTE":
       return {
         ...state,
-        detailPostulante: action.payload,
+        profiles: action.payload,
       };
     case "CLEAR_DETAIL":
       return {
@@ -91,8 +93,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf1
           : techs
-            .filter((a) => a.name === action.payload)[0]
-            .profiles.map((e) => e);
+              .filter((a) => a.name === action.payload)[0]
+              .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterByActivity,
@@ -104,8 +106,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf2
           : senior
-            .filter((a) => a.name === action.payload)[0]
-            .profiles.map((e) => e);
+              .filter((a) => a.name === action.payload)[0]
+              .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterBySenuirity,
@@ -117,8 +119,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf3
           : skills
-            .filter((a) => a.name === action.payload)[0]
-            .profiles.map((e) => e);
+              .filter((a) => a.name === action.payload)[0]
+              .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterBySkills,
@@ -130,8 +132,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf4
           : lenguage
-            .filter((a) => a.name === action.payload)[0]
-            .profiles.map((e) => e);
+              .filter((a) => a.name === action.payload)[0]
+              .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterByLenguage,
@@ -144,16 +146,16 @@ function rootReducer(state = initialState, action) {
         vacancies: action.payload,
       };
     case "GET_VACANCY_NAME":
-      return{
-        ...state, vacancies: action.payload,
-      }
-      case "FILTER_POSTULANT":
-      return{
-        ...state, profiles: action.payload,
-      }
- 
- 
-      
+      return {
+        ...state,
+        vacancies: action.payload,
+      };
+    case "FILTER_POSTULANT":
+      return {
+        ...state,
+        profiles: action.payload,
+      };
+
     default:
       return state;
   }

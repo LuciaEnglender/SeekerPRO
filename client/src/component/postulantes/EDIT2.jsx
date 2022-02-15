@@ -2,14 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  editProfile,
-  getTechnology,
-  getSkill,
-  getLanguage,
-  getSeniority,
-  getLocation,
-} from "../../redux/actions/indexP";
+import { editProfile,getTechnology,getSkill,getLanguage, deleteTechnology,getSeniority,getLocation,
+  deleteLanguage, deleteSkill,deleteSeñority, addTechnology, addLanguage, addSeñority, addSkill, addLocation, deleteLocation} from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 //import validate from "./Validation";
 import NavBar from "./NavBar";
@@ -27,6 +21,7 @@ export default function EditProfile(){
    
     const profileState = useSelector((state) => state.rootReducerPostulante.profile[0]);
     const id = useSelector((state) => state.rootReducerPostulante.profile[0].id);
+
    /*  console.log("profile:", profileState) */
       const { user } = useAuth0();
       const email = JSON.stringify(user.email);
@@ -37,7 +32,7 @@ export default function EditProfile(){
         id: profileState.id,
         name:profileState.name,
         phone: profileState.phone,
-        locations: profileState.location,
+        locations: profileState.locations,
         gender:profileState.gender,
         github: profileState.github,
         linkedIn: profileState.linkedIn,
@@ -47,11 +42,12 @@ export default function EditProfile(){
         technologies: profileState.technologies,
         languages: profileState.languages,
         skills: profileState.skills,
-        seniorities:profileState.seniority,
+        seniorities:profileState.seniorities,
         extras:profileState.extras,
         //loginId:id,
       });
-
+  
+      
       function handleChange(e) {
         setInput({
           ...input,
@@ -70,7 +66,7 @@ export default function EditProfile(){
         ...input,
         CV: e.target.files[0]
       })
-      console.log(e.target.files)
+ 
     }
       
     
@@ -103,6 +99,8 @@ export default function EditProfile(){
             ...input,
             technologies: [...input.technologies, e.target.value],
           });
+          dispatch(addTechnology(id, e.target.value))
+          console.log(e.target.value)
         }
       }
     
@@ -114,6 +112,7 @@ export default function EditProfile(){
             ...input,
             languages: [...input.languages, e.target.value],
           });
+          dispatch(addLanguage(id, e.target.value))
         }
       }
     
@@ -125,29 +124,35 @@ export default function EditProfile(){
             ...input,
             skills: [...input.skills, e.target.value],
           });
+          dispatch(addSkill(id, e.target.value))
         }
       }
     
       function handleSelectSeniority(e) {
-        if (input.seniority.includes(e.target.value)) {
+        if (input.seniorities.includes(e.target.value)) {
           alert("Already in the list");
         } else {
           setInput({
             ...input,
-            seniority: [e.target.value],
+            seniorities: [e.target.value],
           });
+          dispatch(addSeñority(id, e.target.value))
         }
       }
     
       function handleSelectLocation(e) {
-        if (input.location.includes(e.target.value)) {
+     
+        if (input.locations.includes(e.target.value)) {
           alert("Already in the list");
         } else {
           setInput({
             ...input,
-            location: [e.target.value]
-          });
+            locations:[e.target.value]
+          }); 
+          dispatch(addLocation(id, e.target.value))
         }
+        
+       
       }
     
       function handleExtra(e) {
@@ -159,6 +164,7 @@ export default function EditProfile(){
     
     
       function handleLanguage(e) {
+      
         if (input.languages.includes(e.target.value)) {
           alert("Already in the list");
         } else {
@@ -166,41 +172,49 @@ export default function EditProfile(){
             ...input,
             languages: [...input.languages, e.target.value],
           });
+          dispatch(addLanguage(id, e.target.value))
+          console.log(input.languages)
         }
       }
 
       const handleDelete = (e) => {
         setInput({
           ...input,
-          technologies: input.technologies.filter((el) => el !== e),
+          technologies: input.technologies.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e),
         });
-      };
+       
+        dispatch(deleteTechnology(id, e.name))
+       };
     
       const handleDeleteLanguage = (e) => {
         setInput({
           ...input,
-          languages: input.languages.filter((el) => el !== e),
+          languages: input.languages.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e),
         });
+        
+        dispatch(deleteLanguage(id, e.name))
       };
       const handleDeleteSkills = (e) => {
         setInput({
           ...input,
-          skills: input.skills.filter((el) => el !== e),
-        });
+          skills: input.skills.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e),});
+        dispatch(deleteSkill(id, e.name))
       };
     
       const handleDeleteSeniority = (e) => {
         setInput({
           ...input,
-          seniority: input.seniority.filter((el) => el !== e),
-        });
+          seniorities: input.seniorities.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e), });
+        dispatch(deleteSeñority(id, e.name))
       };
     
       const handleDeleteLocation = (e) => {
+        console.log(e.target.value)
         setInput({
           ...input,
-          location: input.location.filter((el) => el !== e),
-        });
+          locations: input.locations.filter((el) =>  el.name !== e.target.value),});
+        dispatch(deleteLocation(id, e.target.value))
+ 
       }
       
       function handleCheck(e) {
@@ -251,6 +265,62 @@ return (
                   name="phone"
                   onChange={(e) => handleChange(e)}
                 />
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Location*</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="location"
+                  // value={input.locations}
+                  name="locations"
+                  onChange={(e) => handleSelectLocation(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    selected
+                    disabled
+                    value=""
+                  >
+                    Location Selection
+                  </option>
+                  {locat?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.locations?.map((el, i) => (
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                      value={el.name}
+                    >
+                      {el.name}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={(el) => handleDeleteLocation(el)}
+                      >
+                        X
+                      </button>
+                    </li>
+                  ))}
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+                
     {/*gender*/}
     <div className="w-44 flex flex-col my-2 justify-center">
                 <label className="text-center">Gender:</label>
@@ -297,6 +367,26 @@ return (
                 </label>
               </div>
 
+
+
+              {/*  ///////////////////////PHOTO////////////////////// */}
+              <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center text-verdeHover" htmlFor="file">
+                  
+                  Photo (.jpg)
+                </label>
+                <input
+                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                  placeholder=".jpg"
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept=".jpg"
+                  onChange={(e) => handleFile(e)}
+                />
+              </div>
+              
+
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center" htmlFor="github">
                   GitHub:
@@ -333,13 +423,278 @@ return (
                   onChange={(e) => handlePortfolio(e)}
                 />
               </div>
+             {/* /////////////////CV/////////////// */}
+              <div className="w-fit flex flex-col my-2 justify-center">
+                <label className="text-center text-verdeHover">CV (.pdf)</label>
+                <input
+                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                  placeholder=".pdf"
+                  type="file"
+                  id="file"
+                  accept=".pdf"
+                  name="file"
+                  onChange={(e) => handleCv(e)}
+                />
+              </div>
+       
+              <div className="m-9">
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Technology</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="technology"
+                  value={input.technologies}
+                  name="technology"
+                  onChange={(e) => handleSelectTechnology(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    value=""
+                    disabled
+                    selected
+                  >
+                    Tecnologies Selection
+                  </option>
+                  {tecno?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.technologies?.map((el, i) => (
+                    typeof el === 'object' ?
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      {el.name}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDelete(el)}
+                      >
+                        <GrFormClose />
+                      </button>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDelete(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
 
-        {/*LANGUAGES*/}
+                  ))}
+                </div>
+              </div>
+              </div>
+              
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Languages</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="languages"
+                  value={input.languages}
+                  name="languages"
+                  onChange={(e) => handleLanguage(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    value=""
+                    disabled
+                    selected
+                  >
+                    Languages Selection
+                  </option>
+                  {lenguaje?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.languages?.map((el, i) => (
+                    typeof el === 'object' ?
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      {el.name}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDeleteLanguage(el)}
+                      >
+                        <GrFormClose />
+                      </button>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
+                  ))}
+                </div>
+              </div>
 
 
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover"> Skill</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="skill"
+                  value={input.skills}
+                  name="skills"
+                  onChange={(e) => handleSkill(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    value=""
+                    disabled
+                    selected
+                  >
+                    Skills Selection
+                  </option>
+                  {habilidades?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.skills?.map((el, i) => (
+                    typeof el === 'object' ?
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      {el.name}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDeleteSkills(el)}
+                      >
+                        <GrFormClose />
+                      </button>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
+                  ))}
+                </div>
+              </div>
 
 
-      {/*BOTON SUBMIT*/}
+              <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Siniority</label>
+                <select
+                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                  placeholder="Seniority"
+                  value={input.seniority}
+                  name="seniority"
+                  onChange={(e) => handleSelectSeniority(e)}
+                >
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    value=""
+                    disabled
+                    selected
+                  >
+                    Seniority Selection
+                  </option>
+                  {experiencia?.map((el) => (
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      value={el.name}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  {input.seniorities?.map((el, i) => (
+                    typeof el === 'object' ?
+                    <li
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={i}
+                    >
+                      {el.name}
+                      <button
+                        className="rounded-2xl hover:bg-verdeClaro"
+                        type="reset"
+                        onClick={() => handleDeleteSeniority(el)}
+                      >
+                        <GrFormClose />
+                      </button>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
+                  ))}
+                </div>
+              </div>
+
+               <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <label className="text-center text-verdeHover">Extras</label>
+                <textarea
+                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                  placeholder=""
+                  type="text"
+                  value={input.extras}
+                  name="extras"
+                  onChange={(e) => handleExtra(e)}
+                />
+              </div> 
+
+    
          <div className="w-full  my-3 flex m-0 justify-center">
         <button
           className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
