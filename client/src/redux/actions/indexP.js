@@ -133,7 +133,7 @@ export function getVacancyDetail(id) {
 }
 
 export function getSearchBar(payload) {
-  console.log(payload)
+  console.log('search', payload)
   return async function (dispatch) {
       try {
           var json = await axios(`http://localhost:3001/vacancy/search/${payload}`);
