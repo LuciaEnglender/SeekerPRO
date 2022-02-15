@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Navigate } from "react-router-dom";
 
 const Landing = () => {
   const { isAuthenticated } = useAuth0();
@@ -59,10 +60,17 @@ const Landing = () => {
       {/* SECTION LANDING */}
       <section name="landing" className="m-5 md:pt-16 ">
         <div className="grid  pt-8 md:pt-0 grid-rows-1 md:grid-cols-2">
-          <div className="flex flex-col m-0 justify-center">
-            <h1 className="text-4xl text-center font-bold">JSekkers</h1>
-            <h2 className="text-3xl text-center">Optimized to make you grow</h2>
-          </div>
+          {isAuthenticated ? (
+            <Navigate to={"/register"} />
+          ) : (
+            <div className="flex flex-col m-0 justify-center">
+              <h1 className="text-4xl text-center font-bold">JSekkers</h1>
+              <h2 className="text-3xl text-center">
+                Optimized to make you grow
+              </h2>
+            </div>
+          )}
+
           <div className="flex flex-col m-0 justify-center">
             <img className="w-fit h-fit p-10" src="/Landing.png" alt="asd" />
           </div>
