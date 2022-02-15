@@ -163,7 +163,7 @@ routerVacancy.get("/", async (req, res) => {
           loginEmail: business,
         }
       });
- console.log(finderBusiness)
+ //console.log(finderBusiness)
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
         where: {
@@ -282,7 +282,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addTechnology(technologyInDB);
     }
-    console.log(newVacancyInDB);
+    //console.log(newVacancyInDB);
     res.status(200).json(newVacancyInDB);
   } catch (e) {
     console.log(e);
@@ -551,7 +551,7 @@ routerVacancy.get("/vac/:id", async (req, res) => {
         attributes: ["name"],
       })
       .then((postulant) => {
-        console.log(postulant);
+        //console.log(postulant);
         res.json(postulant.length);
       });
   });

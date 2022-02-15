@@ -103,7 +103,7 @@ router.post('/' , async (req, res) => {
         let valor=false;
         let valor2=false;
         let valor3=false;
-        console.log(totalVacancies[0].languages[0]._previousDataValues)
+        
         for(var i=0;i<totalVacancies.length;i++){
             if(language){                            
                 if(typeof language==="string"){
