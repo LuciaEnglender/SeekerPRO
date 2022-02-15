@@ -11,12 +11,11 @@ import CreateForm from "./component/postulantes/Create";
 import EditProfile from "./component/postulantes/EDIT2";
 import Notificaciones from "./component/postulantes/Notifications/Notificaciones";
 import Mensajes from "./component/postulantes/Messages/Mensajes";
-import MiPerfil from "./component/postulantes/MiPerfil";
+// import MiPerfil from "./component/postulantes/MiPerfil";
 import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
-import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLaterVacancies"
+import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLaterVacancies";
 import Postulations from "./component/postulantes/MyPostulations/Postulations";
-import EditProfile from "./component/postulantes/EDIT2";
 
 //Rutas de Empresa
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
@@ -31,14 +30,13 @@ import EditVcancy from "./component/empresas/modules/EditVcancy";
 import FormVacancy from "./component/empresas/modules/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
 
-
 function App() {
   return (
     <Routes>
       {/* LANDING */}
       <Route path="/" element={<Landing />} />
       <Route path="/register" element={<Register />} />
-        <Route element={<PrivateRoute />}>
+      <Route element={<PrivateRoute />}>
         {/* RUTAS DE PERFIL */}
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
@@ -48,8 +46,8 @@ function App() {
         <Route path="/homep/favourites" element={<Business />} />
         <Route path="/homep/create/modifyprofile" element={<EditProfile />} />
         <Route path="/homep/postdetail/:id" element={<DetailPost />} />
-        <Route path="/homep/seelater" element={<SeeLaterVancancies/>}/>
-        <Route path="/homep/mypostulations" element={<Postulations/>}/>
+        <Route path="/homep/seelater" element={<SeeLaterVancancies />} />
+        <Route path="/homep/mypostulations" element={<Postulations />} />
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
         <Route path="/homee/create" element={<FormPerfil />} />
