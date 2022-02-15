@@ -137,26 +137,29 @@ Rejected.belongsTo(Vacancy);
 // Postulant.hasOne(New,{foreignKey:"fk_postulant"})
 // New.belongsTo(Postulant);
 
-Postulant.hasOne(Contact,{foreignKey:"fk_postulant"})
-Contact.belongsTo(Postulant);
+Postulant.belongsToMany(Contact,{through:"contact_postulant"})
+Contact.belongsToMany(Postulant, {through:"contact_postulant"});
 
-Postulant.hasOne(InterviewRRHH,{foreignKey:"fk_postulant"})
-InterviewRRHH.belongsTo(Postulant);
+Postulant.belongsToMany(InterviewRRHH,{through:"interviewrrhh_postulant"})
+InterviewRRHH.belongsToMany(Postulant, {through:"interviewrrhh_postulant"});
 
-Postulant.hasOne(InterviewTech,{foreignKey:"fk_postulant"})
-InterviewTech.belongsTo(Postulant);
+Postulant.belongsToMany(InterviewTech,{through:"interviewtech_postulant"})
+InterviewTech.belongsToMany(Postulant, {through:"interviewtech_postulant"});
 
-Postulant.hasOne(Offered,{foreignKey:"fk_postulant"})
-Offered.belongsTo(Postulant);
+Postulant.belongsToMany(Offered,{through:"offered_postulant"})
+Offered.belongsToMany(Postulant, {through:"offered_postulant"});
 
-Postulant.hasOne(Hired,{foreignKey:"fk_postulant"})
-Hired.belongsTo(Postulant);
+Postulant.belongsToMany(Hired,{through:"hired_postulant"})
+Hired.belongsToMany(Postulant, {through:"hired_postulant"});
 
-Postulant.hasOne(Rejected,{foreignKey:"fk_postulant"})
-Rejected.belongsTo(Postulant);
+Postulant.belongsToMany(Rejected,{through:"rejected_postulant"})
+Rejected.belongsToMany(Postulant, {through:"rejected_postulant"});
 
-New.hasOne(Postulant,{foreignKey:"fk_new"})
-Postulant.belongsTo(New);
+Postulant.belongsToMany(New,{through:"new_postulant"})
+New.belongsToMany(Postulant,{through:"new_postulant"});
+
+Postulant.belongsToMany(Review,{through:"review_postulant"})
+Review.belongsToMany(Postulant, {through:"review_postulant"});
 
 
 module.exports = {
