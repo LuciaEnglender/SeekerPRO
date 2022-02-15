@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   getVacancy,
   getTech,
@@ -7,15 +8,21 @@ import {
   getLanguage,
   filterVacancies,
   getSearchBar,
+  getProfile
 } from "../../../redux/actions/index";
 import { GrFormClose } from "react-icons/gr";
 
 function SearcHome() {
   const dispatch = useDispatch();
+  const { user, isAuthenticated } = useAuth0();
+
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
   const filtro = useSelector((state) => state.rootReducer.vacancies);
+  const empresa = useSelector((state) => state.rootReducer.business);
   const [name, setName] = useState("");
   const [input, setInput] = useState({
     technology: [],
@@ -26,6 +33,7 @@ function SearcHome() {
     dispatch(getTech());
     dispatch(getSeniority());
     dispatch(getLanguage());
+    dispatch(getProfile(email2));
   }, [dispatch]);
 
   function handleSelectTechno(e) {
@@ -111,8 +119,19 @@ function SearcHome() {
     <div>
       <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
         <div className="bg-grey 300 p-2 px-10">
+          
           <div className="bg-verdeMedio rounded-2xl p-6 w-full h-full">
-            <h1 className=" font-bold  text-center mb-3"> </h1>
+            <h1 className=" font-bold  text-center mb-3">{empresa.name}</h1>
+            <hr />
+            <div className="flex m-0 justify-content">
+          {isAuthenticated && (
+            <img
+              className="h-300 w-300 rounded-full"
+              src={user.picture}
+              alt=""
+            />
+          )}
+        </div>
             <hr />
             <div>
               <div className="w-full flex flex-col m-0 justify-center pt-5">

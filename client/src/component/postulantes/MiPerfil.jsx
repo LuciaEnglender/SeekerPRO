@@ -9,7 +9,7 @@ import { getUsers } from "../../redux/actions/indexL";
 
 function MiPerfil() {
   const dispatch = useDispatch();
-  const perfil = useSelector((state) => state.rootReducerPostulante.profile);
+  const perfil = useSelector((state) => state.rootReducer.profile);
   console.log(perfil)
   
   const { user, isAuthenticated } = useAuth0();
