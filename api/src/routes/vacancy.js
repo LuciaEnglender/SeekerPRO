@@ -71,6 +71,13 @@ routerVacancy.get("/", async (req, res) => {
     const ALLVACS = await Vacancy.findAll({
       include: [
         {
+          model: Business,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
           model: Language,
           attributes: ["name"],
           through: {
@@ -98,13 +105,6 @@ routerVacancy.get("/", async (req, res) => {
             attributes: [],
           },
         },
-        {
-          model: Business,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        }
       ],
     });
     
@@ -116,6 +116,13 @@ routerVacancy.get("/", async (req, res) => {
           id: id,
         },
         include: [
+          {
+            model: Business,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -144,14 +151,7 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-          {
-            model: Business,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          }
-        ]
+        ],
       });
       //si no está es porque no existe
       vacanciesInDB
@@ -163,13 +163,20 @@ routerVacancy.get("/", async (req, res) => {
           loginEmail: business,
         }
       });
- console.log(finderBusiness)
+ 
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
         where: {
           businessId: finderBusiness.id,
         },
         include: [
+          {
+            model: Business,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
           {
             model: Language,
             attributes: ["name"],
@@ -250,14 +257,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addLanguage(lenguageInDB);
     }
-    /*if (location) {
-			let locationInDB = await Location.findAll({
-				where: {
-					name: location,
-				},
-			});
-			await newVacancyInDB.addLocation(locationInDB);
-		}*/
+
     if (seniority) {
       let seniorityInDB = await Seniority.findAll({
         where: {
@@ -266,14 +266,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addSeniority(seniorityInDB);
     }
-    // if (skill) {
-    //   let skillInDB = await Skill.findAll({
-    //     where: {
-    //       name: skill,
-    //     },
-    //   });
-    //   await newVacancyInDB.addSkill(skillInDB);
-    // }
+
     if (technology) {
       let technologyInDB = await Technology.findAll({
         where: {

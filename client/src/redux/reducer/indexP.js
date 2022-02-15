@@ -33,7 +33,16 @@ import {
   FILTER_COMBINATED,
   //EDITOR POSTULANTE
   EDIT_LOCATION_DELETE_POSTULANT,
-  EDIT_LOCATION_ADD_POSTULANT
+  EDIT_LOCATION_ADD_POSTULANT,
+  EDIT_TECHNOLOGY_DELETE_POSTULANT,
+  EDIT_TECHNOLOGY_ADD_POSTULANT,
+  EDIT_LANGUAGE_ADD_POSTULANT,
+  EDIT_LANGUAGE_DELETE_POSTULANT,
+  EDIT_SKILL_DELETE_POSTULANT,
+  EDIT_SKILL_ADD_POSTULANT,
+  EDIT_SEÑORITY_DELETE_POSTULANT,
+  EDIT_SEÑORITY_ADD_POSTULANT,
+
 } from "../actions/indexP";
 
 import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
@@ -190,6 +199,38 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state
       }
     case EDIT_LOCATION_ADD_POSTULANT :
+      return {
+        ...state
+      }
+      case EDIT_TECHNOLOGY_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_TECHNOLOGY_ADD_POSTULANT :
+      return {
+        ...state
+      }
+      case EDIT_LANGUAGE_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_LANGUAGE_ADD_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_SKILL_ADD_POSTULANT:
+      return {
+      ...state
+     }
+    case EDIT_SKILL_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+      case EDIT_SEÑORITY_DELETE_POSTULANT:
+      return {
+      ...state
+     }
+    case EDIT_SEÑORITY_ADD_POSTULANT:
       return {
         ...state
       }

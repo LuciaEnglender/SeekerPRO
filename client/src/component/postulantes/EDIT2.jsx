@@ -2,15 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  editProfile,
-  getTechnology,
-  getSkill,
-  getLanguage,
-  getSeniority,
-  getLocation,
-  deleteLocation
-} from "../../redux/actions/indexP";
+import { editProfile,getTechnology,getSkill,getLanguage, deleteTechnology,getSeniority,getLocation,
+  deleteLanguage, deleteSkill,deleteSeñority, addTechnology, addLanguage, addSeñority, addSkill, addLocation, deleteLocation} from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 //import validate from "./Validation";
 import NavBar from "./NavBar";
@@ -53,7 +46,7 @@ export default function EditProfile(){
         extras:profileState.extras,
         //loginId:id,
       });
-
+  
       
       function handleChange(e) {
         setInput({
@@ -73,7 +66,7 @@ export default function EditProfile(){
         ...input,
         CV: e.target.files[0]
       })
-      console.log(e.target.files)
+ 
     }
       
     
@@ -106,6 +99,8 @@ export default function EditProfile(){
             ...input,
             technologies: [...input.technologies, e.target.value],
           });
+          dispatch(addTechnology(id, e.target.value))
+          console.log(e.target.value)
         }
       }
     
@@ -117,6 +112,7 @@ export default function EditProfile(){
             ...input,
             languages: [...input.languages, e.target.value],
           });
+          dispatch(addLanguage(id, e.target.value))
         }
       }
     
@@ -128,6 +124,7 @@ export default function EditProfile(){
             ...input,
             skills: [...input.skills, e.target.value],
           });
+          dispatch(addSkill(id, e.target.value))
         }
       }
     
@@ -139,6 +136,7 @@ export default function EditProfile(){
             ...input,
             seniorities: [e.target.value],
           });
+          dispatch(addSeñority(id, e.target.value))
         }
       }
     
@@ -150,9 +148,11 @@ export default function EditProfile(){
           setInput({
             ...input,
             locations:[e.target.value]
-          });
+          }); 
+          dispatch(addLocation(id, e.target.value))
         }
-        console.log(input.locations)
+        
+       
       }
     
       function handleExtra(e) {
@@ -164,6 +164,7 @@ export default function EditProfile(){
     
     
       function handleLanguage(e) {
+      
         if (input.languages.includes(e.target.value)) {
           alert("Already in the list");
         } else {
@@ -171,43 +172,49 @@ export default function EditProfile(){
             ...input,
             languages: [...input.languages, e.target.value],
           });
+          dispatch(addLanguage(id, e.target.value))
+          console.log(input.languages)
         }
       }
 
       const handleDelete = (e) => {
         setInput({
           ...input,
-          technologies: input.technologies.filter((el) => el !== e),
+          technologies: input.technologies.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e),
         });
-        console.log(input.technologies)     
+       
+        dispatch(deleteTechnology(id, e.name))
        };
     
       const handleDeleteLanguage = (e) => {
         setInput({
           ...input,
-          languages: input.languages.filter((el) => el !== e),
+          languages: input.languages.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e),
         });
+        
+        dispatch(deleteLanguage(id, e.name))
       };
       const handleDeleteSkills = (e) => {
         setInput({
           ...input,
-          skills: input.skills.filter((el) => el !== e),
-        });
+          skills: input.skills.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e),});
+        dispatch(deleteSkill(id, e.name))
       };
     
       const handleDeleteSeniority = (e) => {
         setInput({
           ...input,
-          seniorities: input.seniorities.filter((el) => el !== e),
-        });
+          seniorities: input.seniorities.filter((el) =>  typeof el === 'object'? el.name !== e.name : el !== e), });
+        dispatch(deleteSeñority(id, e.name))
       };
     
       const handleDeleteLocation = (e) => {
+        console.log(e.target.value)
         setInput({
           ...input,
-          locations: input.locations.filter((el) => el !== e),
-        });
-        console.log(input.locations)
+          locations: input.locations.filter((el) =>  el.name !== e.target.value),});
+        dispatch(deleteLocation(id, e.target.value))
+ 
       }
       
       function handleCheck(e) {
@@ -460,6 +467,7 @@ return (
                 </select>
                 <div>
                   {input.technologies?.map((el, i) => (
+                    typeof el === 'object' ?
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
@@ -472,7 +480,21 @@ return (
                       >
                         <GrFormClose />
                       </button>
-                    </li>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDelete(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
+
                   ))}
                 </div>
               </div>
@@ -507,6 +529,7 @@ return (
                 </select>
                 <div>
                   {input.languages?.map((el, i) => (
+                    typeof el === 'object' ?
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
@@ -517,9 +540,22 @@ return (
                         type="reset"
                         onClick={() => handleDeleteLanguage(el)}
                       >
-                        X
+                        <GrFormClose />
                       </button>
-                    </li>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
                   ))}
                 </div>
               </div>
@@ -554,21 +590,33 @@ return (
                 </select>
                 <div>
                   {input.skills?.map((el, i) => (
+                    typeof el === 'object' ?
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      
                       {el.name}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
                         onClick={() => handleDeleteSkills(el)}
                       >
-                        
-                        X
+                        <GrFormClose />
                       </button>
-                    </li>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
                   ))}
                 </div>
               </div>
@@ -603,20 +651,33 @@ return (
                 </select>
                 <div>
                   {input.seniorities?.map((el, i) => (
+                    typeof el === 'object' ?
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      
                       {el.name}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
                         onClick={() => handleDeleteSeniority(el)}
-                      > 
-                        X
+                      >
+                        <GrFormClose />
                       </button>
-                    </li>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
                   ))}
                 </div>
               </div>
