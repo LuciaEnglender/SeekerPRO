@@ -68,16 +68,16 @@ routerBusiness.get("/find/:email", async (req, res) => {
 
 routerBusiness.get("/", async (req, res) => {
   const { business } = req.query;
-  
+
   //console.log(allBusiness)
   try {
     if (business) {
       const business = await Business.findOne({
         where: {
-          loginEmail: business
-        }
-      })
-      res.status(200).json(business)
+          loginEmail: business,
+        },
+      });
+      res.status(200).json(business);
     } else {
       const allBusiness = await Business.findAll();
       allBusiness
@@ -100,7 +100,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
       where: {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
-          location: { [Op.iLike]: `%${name}%` },
           github: { [Op.iLike]: `%${name}%` },
           linkedIn: { [Op.iLike]: `%${name}%` },
           portfolio: { [Op.iLike]: `%${name}%` },

@@ -67,7 +67,6 @@ routerVacancy.get("/", async (req, res) => {
   const { id, business } = req.query;
 
   try {
-
     const ALLVACS = await Vacancy.findAll({
       include: [
         {
@@ -107,7 +106,7 @@ routerVacancy.get("/", async (req, res) => {
         },
       ],
     });
-    
+
     //si tiene id (o sea que se requiere el detalle) entra acá
     if (id) {
       const vacanciesInDB = await Vacancy.findAll({
@@ -161,9 +160,8 @@ routerVacancy.get("/", async (req, res) => {
       const finderBusiness = await Business.findOne({
         where: {
           loginEmail: business,
-        }
+        },
       });
- 
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
         where: {
@@ -206,17 +204,17 @@ routerVacancy.get("/", async (req, res) => {
             },
           },
           {
-            model: Business
-          }
+            model: Business,
+          },
         ],
       });
       vacanciesInDB
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
     } else {
-     
-      ALLVACS? res.status(200).json(ALLVACS)
-      : res.status(400).send('not vacancies yet')
+      ALLVACS
+        ? res.status(200).json(ALLVACS)
+        : res.status(400).send("not vacancies yet");
     }
   } catch (e) {
     console.log(e);
@@ -544,7 +542,7 @@ routerVacancy.get("/vac/:id", async (req, res) => {
         attributes: ["name"],
       })
       .then((postulant) => {
-        console.log(postulant);
+        // console.log(postulant);
         res.json(postulant.length);
       });
   });
