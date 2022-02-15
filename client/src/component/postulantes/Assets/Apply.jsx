@@ -17,7 +17,6 @@ function handleApply() {
 }
 
 useEffect(()=>{
- dispatch(getMyPostulations())
   dispatch(getProfile(email2));
 }, [dispatch])
 

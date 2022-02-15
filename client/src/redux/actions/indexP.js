@@ -428,6 +428,9 @@ export function apply(id, postulanteId){
 //EDITOR DE PSTULANTES
 
 export function deleteLocation(id, input){
+  console.log('soy id', id)
+  console.log('soy input', input)
+
   return async function (dispatch){
     try{
       const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationDelete`, {input: input})
@@ -442,6 +445,8 @@ export function deleteLocation(id, input){
 }
 
 export function addLocation(id, input){
+  console.log('soy id', id)
+  console.log('soy input', input)
   return async function (dispatch){
     try{
       const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationAdd`, {input: input})

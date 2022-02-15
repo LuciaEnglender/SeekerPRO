@@ -46,6 +46,7 @@ export default function EditProfile(){
         extras:profileState.extras,
         //loginId:id,
       });
+      console.log(input.locations)
   
       
       function handleChange(e) {
@@ -140,19 +141,16 @@ export default function EditProfile(){
         }
       }
     
-      function handleSelectLocation(e) {
-     
+       function handleSelectLocation(e) {
+
         if (input.locations.includes(e.target.value)) {
           alert("Already in the list");
         } else {
           setInput({
             ...input,
-            locations:[e.target.value]
-          }); 
-          dispatch(addLocation(id, e.target.value))
+            locations: [e.target.value]
+          })
         }
-        
-       
       }
     
       function handleExtra(e) {
@@ -173,7 +171,7 @@ export default function EditProfile(){
             languages: [...input.languages, e.target.value],
           });
           dispatch(addLanguage(id, e.target.value))
-          console.log(input.languages)
+        
         }
       }
 
@@ -209,11 +207,12 @@ export default function EditProfile(){
       };
     
       const handleDeleteLocation = (e) => {
-        console.log(e.target.value)
-        setInput({
+        console.log(e.name)
+       setInput({
           ...input,
-          locations: input.locations.filter((el) =>  el.name !== e.target.value),});
-        dispatch(deleteLocation(id, e.target.value))
+          locations: input.locations.filter((el) => el !== e),
+        });
+        dispatch(deleteLocation(id, e.name))
  
       }
       
@@ -234,6 +233,8 @@ export default function EditProfile(){
     function handleSubmit(e){
       e.preventDefault();
       dispatch(editProfile(id, input));
+      dispatch(addLocation(id, input.locations))
+
       navigate("/homep");
     }
       useEffect(() => {
@@ -270,7 +271,7 @@ return (
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="location"
-                  // value={input.locations}
+                  value={input.locations}
                   name="locations"
                   onChange={(e) => handleSelectLocation(e)}
                 >
@@ -294,20 +295,33 @@ return (
                 </select>
                 <div>
                   {input.locations?.map((el, i) => (
+                    typeof el === 'object' ?
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
-                      value={el.name}
                     >
                       {el.name}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
-                        onClick={(el) => handleDeleteLocation(el)}
+                        onClick={() => handleDeleteLocation(el)}
                       >
-                        X
+                        <GrFormClose />
                       </button>
-                    </li>
+                    </li> :
+                    <li
+                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLocation(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
                   ))}
                 </div>
               </div>

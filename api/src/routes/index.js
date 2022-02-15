@@ -9,6 +9,7 @@ const routerAdmin = require("./admin");
 const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
 const routerEditing = require('./postulantEdit')
+const routerEditingVacancy= require('./editVacancy')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -39,5 +40,6 @@ router.use("/languages", language);
 router.use("/skills", skill);
 router.use("/tech", tech);
 router.use("/seniority", seniority);
+router.use('/vacancyEdit', routerEditingVacancy)
 
 module.exports = router;
