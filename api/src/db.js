@@ -39,8 +39,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant,Pending ,Skill,Technology,Vacancy,Seniority} = sequelize.models;
-
+const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant,Pending ,Skill,Technology,Vacancy,Seniority,
+    New, Review, Contact, InterviewRRHH,InterviewTech, Offered, Hired, Rejected } =sequelize.models
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 //Tabla intermedia ente Postulante y Vacante muchos  a  muchos
@@ -104,13 +104,59 @@ Admin.belongsTo(Login);
 Business.hasMany(Vacancy, {foreignKey : "fk_business"});
 Vacancy.belongsTo(Business);
 
+//relaciones para la PIPILINE
 // //Tablas intermedias de uno a uno
 
 Vacancy.hasOne(PipeLine,{foreignKey:"fk_vacancy"})
 PipeLine.belongsTo(Vacancy);
 
-///lo Trabajado probando para agragar un postulante a una vacante
+Vacancy.hasOne(New,{foreignKey:"fk_vacancy"})
+New.belongsTo(Vacancy);
 
+Vacancy.hasOne(Review,{foreignKey:"fk_vacancy"})
+Review.belongsTo(Vacancy);
+
+Vacancy.hasOne(Contact,{foreignKey:"fk_vacancy"})
+Contact.belongsTo(Vacancy);
+
+Vacancy.hasOne(InterviewRRHH,{foreignKey:"fk_vacancy"})
+InterviewRRHH.belongsTo(Vacancy);
+
+Vacancy.hasOne(InterviewTech,{foreignKey:"fk_vacancy"})
+InterviewTech.belongsTo(Vacancy);
+
+Vacancy.hasOne(Offered,{foreignKey:"fk_vacancy"})
+Offered.belongsTo(Vacancy);
+
+Vacancy.hasOne(Hired,{foreignKey:"fk_vacancy"})
+Hired.belongsTo(Vacancy);
+
+Vacancy.hasOne(Rejected,{foreignKey:"fk_vacancy"})
+Rejected.belongsTo(Vacancy);
+
+// Postulant.hasOne(New,{foreignKey:"fk_postulant"})
+// New.belongsTo(Postulant);
+
+Postulant.hasOne(Contact,{foreignKey:"fk_postulant"})
+Contact.belongsTo(Postulant);
+
+Postulant.hasOne(InterviewRRHH,{foreignKey:"fk_postulant"})
+InterviewRRHH.belongsTo(Postulant);
+
+Postulant.hasOne(InterviewTech,{foreignKey:"fk_postulant"})
+InterviewTech.belongsTo(Postulant);
+
+Postulant.hasOne(Offered,{foreignKey:"fk_postulant"})
+Offered.belongsTo(Postulant);
+
+Postulant.hasOne(Hired,{foreignKey:"fk_postulant"})
+Hired.belongsTo(Postulant);
+
+Postulant.hasOne(Rejected,{foreignKey:"fk_postulant"})
+Rejected.belongsTo(Postulant);
+
+New.hasOne(Postulant,{foreignKey:"fk_new"})
+Postulant.belongsTo(New);
 
 
 module.exports = {
