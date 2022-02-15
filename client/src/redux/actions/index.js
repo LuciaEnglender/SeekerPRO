@@ -292,7 +292,7 @@ export function deleteTechnology(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/technologyDelete`, {input: input})
       return dispatch({
-        type: 'EDIT_TECHNOLOGY_DELETE_POSTULANT',
+        type: 'EDIT_TECHNOLOGY_DELETE_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -309,7 +309,7 @@ export function addTechnology(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/technologyAdd`, {input: input})
       return dispatch({
-        type: 'EDIT_TECHNOLOGY_ADD_POSTULANT',
+        type: 'EDIT_TECHNOLOGY_ADD_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -324,7 +324,7 @@ export function deleteLanguage(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/languageDelete`, {input: input})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_POSTULANT',
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -340,7 +340,7 @@ export function addLanguage(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/languageAdd`, {input: input})
       return dispatch({
-        type: 'EDIT_LANGUAGE_ADD_POSTULANT',
+        type: 'EDIT_LANGUAGE_ADD_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -355,7 +355,7 @@ export function deleteSkill(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/skillDelete`, {input: input})
       return dispatch({
-        type: 'EDIT_SKILL_DELETE_POSTULANT',
+        type: 'EDIT_SKILL_DELETE_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -369,7 +369,7 @@ export function addSkill(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/skillAdd`, {input: input})
       return dispatch({
-        type: 'EDIT_SKILL_ADD_POSTULANT',
+        type: 'EDIT_SKILL_ADD_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -384,7 +384,7 @@ export function deleteSeñority(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/seniorityDelete`, {input: input})
       return dispatch({
-        type: 'EDIT_SEÑORITY_DELETE_POSTULANT',
+        type: 'EDIT_SEÑORITY_DELETE_VACANCY',
         payload : edit.data
       })
     } catch (e){
@@ -398,7 +398,7 @@ export function addSeñority(id, input){
     try{
       const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/seniorityAdd`, {input: input})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_POSTULANT',
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
       })
     } catch (e){

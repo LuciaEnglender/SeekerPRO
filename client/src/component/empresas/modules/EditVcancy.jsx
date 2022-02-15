@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import NavHomeE from "./NavHomeE";
-import { getVacancyDetail, editVacancy } from "../../../redux/actions/index";
+import { getVacancyDetail, editVacancy , addLanguage, addSeñority, addSkill, addTechnology, deleteLanguage, deleteSeñority, deleteSkill, deleteTechnology} from "../../../redux/actions/index";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
 
@@ -23,7 +23,7 @@ function EditVcancy() {
     seniorities: detalle[0].seniorities.map((ele) => ele.name),
     languages: detalle[0]?.languages.map((ele) => ele.name),
   });
-
+console.log(input)
   useEffect(() => {
     dispatch(getVacancyDetail(id))
   }, [dispatch, id])
@@ -42,7 +42,7 @@ function EditVcancy() {
     navigate(-2);
   }
   function handleSelectTechno(e) {
-    console.log(input.technologies);
+    console.log(input);
     if (input.technologies.includes(e.target.value)) {
       alert("Already in the list");
     } else {
@@ -50,6 +50,8 @@ function EditVcancy() {
         ...input,
         technologies: [...input.technologies, e.target.value],
       });
+    
+      dispatch(addTechnology(id, e.target.value))
     }
   }
   function handleSelectLenguge(e) {
@@ -88,10 +90,12 @@ function EditVcancy() {
   };
 
   const handleDeleteTechnology = (e) => {
+    
     setInput({
       ...input,
       technologies: input.technologies.filter((el) => el !== e),
     });
+    dispatch(deleteTechnology(id, input.technologies))
   };
 
 
@@ -123,11 +127,12 @@ function EditVcancy() {
           </select>
           <div>
             {input.technologies.map((el, i) => (
+              typeof el === 'object' ?
               <li
                 className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                 key={i}
               >
-                {el}
+                {el.name}
                 <button
                   className="rounded-2xl hover:bg-verdeClaro"
                   type="reset"
@@ -135,7 +140,22 @@ function EditVcancy() {
                 >
                   <GrFormClose />
                 </button>
-              </li>
+              </li> :
+              <li
+              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+              key={i}
+              value={el}
+            >
+              {el}
+              <button
+                className="rounded-2xl hover:bg-verdeClaro"
+                type="reset"
+                onClick={(el) => handleDeleteTechnology(el)}
+              >
+                <GrFormClose />
+              </button>
+            </li>
+
             ))}
           </div>
           <label> Seniority:</label>
