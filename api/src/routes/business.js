@@ -49,7 +49,7 @@ routerBusiness.get("/count/:id", async (req, res) => {
   //res.json(numVacancy)
 });
 
-//Busca empresa por nombre o trae todas
+//Busca empresa por nombre o trae todas solo lo usa dentro de la aplicacion 
 routerBusiness.get("/find/:email", async (req, res) => {
   const email = req.params.email;
 
@@ -100,7 +100,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
       where: {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
-          location: { [Op.iLike]: `%${name}%` },
           github: { [Op.iLike]: `%${name}%` },
           linkedIn: { [Op.iLike]: `%${name}%` },
           portfolio: { [Op.iLike]: `%${name}%` },

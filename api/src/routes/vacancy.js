@@ -347,6 +347,14 @@ routerVacancy.get("/search/:name", async (req, res) => {
             attributes: [],
           },
         },
+        {
+          model: Business,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+
       ],
     });
     if (vacancy.length !== 0) acum.push(vacancy);
