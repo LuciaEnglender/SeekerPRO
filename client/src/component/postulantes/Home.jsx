@@ -13,6 +13,7 @@ import BusinessCard from '../postulantes/FollowBusiness/BusinessCard'
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
+import Metrics from './Metrics/Metrics'
 
 //import Business from './FollowBusiness/Business'
 //import Postulations from "../postulantes/MyPostulations/Postulations";
@@ -95,7 +96,11 @@ const handleAll = (e) => {
                     </div>
                   </div>
  </div>
-                <FiltroDinamico />
+                <div> 
+                  <FiltroDinamico />
+              
+                </div>
+                
                 <div className=" flex m-0 justify-center">           
                        <button
                       className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
@@ -193,45 +198,40 @@ const handleAll = (e) => {
                 > <AiOutlineArrowRight />
                   
                 </button>
-                     <h1> 
+                     <h1 > 
                       <Pagination
                      vacancyPerPage={vacancyPerPage}
                      filtradas={filtradas}
                      paginado={paginado}
                    />
                    </h1>
-                 </div>
-             
-             
-             
-             
+                 </div>                                                 
             </div>
           </div>
         </div>
-        {/* CUARTO GRID */}
-        {/* <div className="bg-verdeOscuro p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <h1> Metrics & Trends</h1>
-            <div className="flex flex-col m-0 justify-center">
-              <img
-                className="rounded-xl mt-3 shadow-lg shadow-black"
-                src={prueba}
-                alt=""
-              />
-              <p className=" text-center mt-2">Trends in technologies</p>
-              <p className=" text-center mt-2">January 2022</p>
-            </div>
-            <div className="flex flex-col m-0 justify-center">
-              <img
-                className="rounded-xl mt-3 shadow-lg shadow-black"
-                src={prueba}
-                alt=""
-              />
-              <p className=" text-center mt-2">Trends in soft-skills</p>
-              <p className=" text-center mt-2">January 2022</p>
-            </div>
-          </div>
-        </div> */}
+         {/* CUARTO GRID */}
+ 
+     <div className="bg-verdeMedio rounded-2xl p-2 text-zinc-400 w-full h-full">
+           <div className="flex flex-col m-0 justify-center">
+       <Metrics/>           
+                 </div>
+       <div className="flex flex-col m-0 justify-center">
+         <p className=" text-center mt-2">Trends in soft-skills</p>
+         <p className=" text-center mt-2">January 2022</p>
+       </div>
+     </div>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+      
         {/* SPAN */}
         <div></div>
         <div></div>

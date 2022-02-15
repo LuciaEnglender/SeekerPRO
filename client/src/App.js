@@ -16,7 +16,7 @@ import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
 import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLaterVacancies"
 import Postulations from "./component/postulantes/MyPostulations/Postulations";
-import EditProfile from "./component/postulantes/EDIT2";
+
 
 //Rutas de Empresa
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
