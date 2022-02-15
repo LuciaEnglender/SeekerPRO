@@ -13,6 +13,7 @@ export const GET_SENIORITY = "GET_SENIORITY"
 //VACANCIES
 export const GET_VACANCY="GET_VACANCY"
 export const GET_VACANCY_ID="GET_VACANCY_ID"
+export const CLEAR_BUSINESS="CLEAR_BUSINESS"
 //FILTERS
 export const GET_SEARCH_BAR="GET_SEARCH_BAR"
 export const FILTER_BY_LANGUAGE = "FILTER_BY_LANGUAGE"
@@ -141,7 +142,7 @@ export function getVacancyDetail(id) {
 }
 
 export function getSearchBar(payload) {
-  console.log(payload)
+  console.log('search', payload)
   return async function (dispatch) {
       try {
           var json = await axios(`http://localhost:3001/vacancy/search/${payload}`);
@@ -303,7 +304,7 @@ export function unfollow(postulanteId, businessId){
   } 
   }
   export function getFollowed(postulanteId) {
-    console.log("postulante siguiendo", postulanteId)
+    //console.log("postulante siguiendo", postulanteId)
     return async function (dispatch) {
       try {
         const followed = await axios.get(`http://localhost:3001/favorite/${postulanteId}/business`);
@@ -312,11 +313,16 @@ export function unfollow(postulanteId, businessId){
           payload:followed.data,
         });
       } catch (error) {
-        console.log("Try later");
+        alert("Try later");
       }
     };
   }
   
+  export function clearBusiness(){
+return{
+  type: CLEAR_BUSINESS
+}
+  }
   //APPLY POSTULATION
 
 export function apply(id, postulanteId){
@@ -396,6 +402,7 @@ export function apply(id, postulanteId){
           } 
           }
           export function getSeeLater(postulanteId) {
+            console.log('getLater', postulanteId)
             return async function (dispatch) {
               try {
                 const later = await axios.get(`http://localhost:3001/pending/${postulanteId}/vacancy`);

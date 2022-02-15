@@ -3,7 +3,6 @@ const initialState = {
   allVacancies: [],
   vacancyDetail: [],
   business: [],
-
   profiles: [],
   allProfiles: [],
   postulados: [],

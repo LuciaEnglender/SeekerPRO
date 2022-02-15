@@ -21,6 +21,7 @@ import {
   GET_FOLLOWED,
   UNFOLLOW,
   FOLLOW,
+  CLEAR_BUSINESS,
   //PENDING
   GET_SEE_LATER,
   SEE_LATER,
@@ -171,7 +172,11 @@ export default function rootReducerPostulante(state = initialState, action) {
       ...state,
       followedBusiness: action.payload
         }
-        
+        case CLEAR_BUSINESS:
+          return {
+              ...state,
+              business : []
+          }
     case SEE_LATER:
       return {
         ...state,

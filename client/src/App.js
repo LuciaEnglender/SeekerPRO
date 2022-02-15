@@ -8,7 +8,7 @@ import Register from "./private/Register";
 //Rutas de Postulantes
 import Home from "./component/postulantes/Home";
 import CreateForm from "./component/postulantes/Create";
-import Perfil from "./component/postulantes/Perfil";
+import EditProfile from "./component/postulantes/EDIT2";
 import Notificaciones from "./component/postulantes/Notifications/Notificaciones";
 import Mensajes from "./component/postulantes/Messages/Mensajes";
 import MiPerfil from "./component/postulantes/MiPerfil";

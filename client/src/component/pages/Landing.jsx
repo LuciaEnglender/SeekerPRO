@@ -1,67 +1,83 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, animateScroll as scroll } from "react-scroll";
+import {
+  AiOutlineFacebook,
+  AiOutlineInstagram,
+  AiOutlineLinkedin,
+  AiOutlineWhatsApp,
+} from "react-icons/ai";
 import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
-import ButtonSignIn from "../../private/ButtonSignIn";
 import { useAuth0 } from "@auth0/auth0-react";
-import { AiOutlineWhatsApp } from "react-icons/ai";
+import { Navigate } from "react-router-dom";
 
 const Landing = () => {
   const { isAuthenticated } = useAuth0();
-  // const dispatch = useDispatch();
-  // const profileState = useSelector(
-  //   (state) => state.rootReducerLanding.perfiles
-  // );
-
-  // useEffect(() => {
-  //   dispatch(getUsers(profileState.email));
-  // }, [dispatch, profileState]);
-
   return (
-    <div className="p-9 bg-gray-300">
-      <nav className=" grid grid-cols-2">
-        <Link to="/">
-          <h1 className="font-bold  text-2xl">JSeekers</h1>
-        </Link>
-        <div>
-          <div className="float-right">
-            <div className="float-right">
+    <div className="w-full h-full bg-colorFondo1">
+      {/* NAVBAR LANDING */}
+      <div className="h-14 md:h-16 w-full">
+        <nav className="grid grid-cols-5 grid-rows-1 shadow-lg fixed h-14 md:h-16 w-full bg-colorFondo2 rounded-b-2xl">
+          <div className="flex m-0 justify-center">
+            <div className="mt-3 md:mt-4  ml-8">
+              <Link to="landing" smooth={"easeInOutQuad"} duration={1500}>
+                <button className="font-bold  text-2xl">JSeekers</button>
+              </Link>
+            </div>
+          </div>
+          <div></div>
+          <div className="col-span-2">
+            <div className="flex m-0 justify-center mt-4 md:mt-5 mr-16">
+              <div className="mr-2 md:mr-10">
+                <Link to="FAQ" smooth={"easeInOutQuad"} duration={1500}>
+                  <button className="hover:opacity-100 rounded-2xl opacity-70 text-lg">
+                    FAQ
+                  </button>
+                </Link>
+              </div>
+              <div>
+                <Link to="about" smooth={"easeInOutQuad"} duration={1500}>
+                  <button className="hover:opacity-100 rounded-2xl  opacity-70 text-lg">
+                    About
+                  </button>
+                </Link>
+              </div>
+              <div className="ml-2 md:ml-10">
+                <Link to="contact" smooth={"easeInOutQuad"} duration={1500}>
+                  <button className="hover:opacity-100 rounded-2xl  opacity-70 text-lg">
+                    Contact
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="flex m-0 justify-center">
+            <div className="mt-3 md:mt-4 mr-5  w-32">
               {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
             </div>
-            <a
-              href="#about"
-              className="hover:opacity-100 opacity-70 text-lg mr-4"
-            >
-              About
-            </a>
-            <a
-              href="#about"
-              className="hover:opacity-100 mr-4 opacity-70 text-lg"
-            >
-              Contact
-            </a>
-            <a href="https://wa.me/número?text=Hola%somos%hired%pro">
-              <AiOutlineWhatsApp />
-            </a>
           </div>
-        </div>
-      </nav>
-      <section className="px-16 mt-32 mb-32">
-        <div className="grid grid-cols-2">
+        </nav>
+      </div>
+      {/* SECTION LANDING */}
+      <section name="landing" className="m-5 md:pt-16 ">
+        <div className="grid  pt-8 md:pt-0 grid-rows-1 md:grid-cols-2">
           {isAuthenticated ? (
             <Navigate to={"/register"} />
           ) : (
-            <div>
-              <h2 className="text-5xl font-bold pb-4">Welcome!</h2>
-              <p className="pb-4">Optimized to make you grow</p>
+            <div className="flex flex-col m-0 justify-center">
+              <h1 className="text-4xl text-center font-bold">JSekkers</h1>
+              <h2 className="text-3xl text-center">
+                Optimized to make you grow
+              </h2>
             </div>
           )}
-          <div>
-            <img className="max-w-sm" src="/Landing.png" alt="asd" />
+
+          <div className="flex flex-col m-0 justify-center">
+            <img className="w-fit h-fit p-10" src="/Landing.png" alt="asd" />
           </div>
         </div>
       </section>
-
-      <section className="text-center mb-32">
+      {/* SECTION FAQ */}
+      <section name="FAQ" className="text-center p-14 md:p-16 mb-32">
         <div className="max-w-xl inline-block">
           <h1 className="text-4xl font-bold mb-4">How it Works?</h1>
           <p className="mb-4">
@@ -70,7 +86,6 @@ const Landing = () => {
             system, it makes finding the right developer or the ideal position
             easier every day!
           </p>
-
           <div className="grid grid-cols-2 tex-center gap-4">
             <div className="pt-8">
               <h2 className="font-bold text-2xl"> Step 1</h2>
@@ -94,8 +109,9 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section id="about" className="px-16 mb-32">
-        <div>
+      {/* SECTION ABOUT */}
+      <section name="about" className="text-center pt-14 md:p-16 mb-32">
+        <div className="max-w-xl inline-block">
           <h2 className="text-5xl font-bold pb-4">About</h2>
           <p className="pb-4">
             JSeeker is an application that emerges to efficiently connect
@@ -115,8 +131,9 @@ const Landing = () => {
           </p>
         </div>
       </section>
-      <section id="contact" className="px-16 mb-32">
-        <div>
+      {/* SECTION CONTACT */}
+      <section name="contact" className="text-center pt-14 md:p-16 mb-32">
+        <div className="max-w-xl inline-block">
           <h2 className="text-5xl font-bold pb-4">Contact</h2>
           <p className="pb-4">
             Doubts? Wanting to have the premium? ... Feel free to cantact us!{" "}
@@ -125,14 +142,35 @@ const Landing = () => {
             +5490303456 <br />
             Cordoba, Argentina{" "}
           </p>
-          <Link to="/homep">
-            {" "}
-            <button className="p-4 py-2 inline-block bg-gradient-to-r from-verdeClaro to-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow">
-              Contact us!
-            </button>{" "}
-          </Link>
+          <div className="flex m-0 justify-center">
+            <a
+              className="m-2"
+              href="https://wa.me/número?text=Hola%somos%hired%pro"
+            >
+              <AiOutlineWhatsApp className="hover:opacity-100 opacity-70 text-lg" />
+            </a>
+            <a
+              className="m-2"
+              href="https://wa.me/número?text=Hola%somos%hired%pro"
+            >
+              <AiOutlineFacebook className="hover:opacity-100 opacity-70 text-lg" />
+            </a>
+            <a
+              className="m-2"
+              href="https://wa.me/número?text=Hola%somos%hired%pro"
+            >
+              <AiOutlineInstagram className="hover:opacity-100 opacity-70 text-lg" />
+            </a>
+            <a
+              className="m-2"
+              href="https://wa.me/número?text=Hola%somos%hired%pro"
+            >
+              <AiOutlineLinkedin className="hover:opacity-100 opacity-70 text-lg" />
+            </a>
+          </div>
         </div>
       </section>
+      {/* SECTION FOOTER */}
       <footer className="text-center py-8 border-t">
         <a className="hover:opacity-100 opacity-70 mr-4" href="a">
           JSeekers

@@ -10,7 +10,7 @@ import { getUsers } from "../../redux/actions/indexL";
 function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
-  console.log(perfil)
+ // console.log(perfil)
   
   const { user, isAuthenticated } = useAuth0();
 
@@ -54,8 +54,9 @@ function MiPerfil() {
             </h2>
             <h2 className={s.items}>
               {" "}
-              {perfil[0].technologies?.map((t) => t.name).join(" - ")}{" "}
+              {perfil[0].gender}{" "}
             </h2>
+            <h2 className={s.items}>{" "}{perfil[0].technologies?.map((t) => t.name).join(" - ")}{" "} </h2>
             <h2 className={s.items} > {perfil[0].locations?.map((loc) => loc.name).join(" - ")}</h2>
             <h2 className={s.items}>
               {" "}

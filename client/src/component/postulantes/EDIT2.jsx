@@ -257,7 +257,9 @@ return (
            name= 'name'
            onChange={(e) => handleChange(e)}
         />         
-                        <label className="text-center"> Phone</label>
+       
+                        <label className="text-center"> ET TELEFONO CASA</label>
+                
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="number"
@@ -310,7 +312,7 @@ return (
                     </li>
                   ))}
                 </div>
-              </div>
+              </div>  
 
 
 
@@ -320,7 +322,8 @@ return (
 
 
 
-                
+
+
     {/*gender*/}
     <div className="w-44 flex flex-col my-2 justify-center">
                 <label className="text-center">Gender:</label>

@@ -49,6 +49,7 @@ routerVacancy.get("/:id", async (req, res) => {
               attributes: [],
             },
           },
+          
         ],
       });
       //si no está es porque no existe
@@ -273,7 +274,7 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addTechnology(technologyInDB);
     }
-    console.log(newVacancyInDB);
+    //console.log(newVacancyInDB);
     res.status(200).json(newVacancyInDB);
   } catch (e) {
     console.log(e);
@@ -314,8 +315,9 @@ routerVacancy.get("/search/:name", async (req, res) => {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
-        },
+          },
       },
+     attributes: ['name','id', 'description'],
       include: [
         {
           model: Technology,
@@ -338,6 +340,13 @@ routerVacancy.get("/search/:name", async (req, res) => {
             attributes: [],
           },
         },
+        {
+          model: Business,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
       ],
     });
     if (vacancy.length !== 0) acum.push(vacancy);
@@ -350,8 +359,8 @@ routerVacancy.get("/search/:name", async (req, res) => {
       include: [
         {
           model: Vacancy,
-          attributes: ["name"],
-          inlcude: [
+          attributes: ["name", 'id', 'description'],
+          include: [
             {
               model: Technology,
               attributes: ["name"],
@@ -368,6 +377,13 @@ routerVacancy.get("/search/:name", async (req, res) => {
             },
             {
               model: Language,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Business,
               attributes: ["name"],
               through: {
                 attributes: [],
@@ -377,13 +393,13 @@ routerVacancy.get("/search/:name", async (req, res) => {
         },
       ],
     });
-
+   
     for (let i = 0; i < languageSearch.length; i++) {
       if (languageSearch[i].vacancies.length !== 0) {
         acum.push(languageSearch[i].vacancies);
       }
     }
-
+    
     const techSearch = await Technology.findAll({
       where: {
         name: { [Op.iLike]: `%${name}%` },
@@ -392,11 +408,11 @@ routerVacancy.get("/search/:name", async (req, res) => {
       include: [
         {
           model: Vacancy,
-          attributes: ["name", "description"],
+          attributes: ["name", "description", 'id'],
           include: [
             {
               model: Language,
-              attributes: ["name"],
+              attributes: ["name", 'id'],
               through: {
                 attributes: [],
               },
@@ -415,6 +431,13 @@ routerVacancy.get("/search/:name", async (req, res) => {
                 attributes: [],
               },
             },
+            {
+              model: Business,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            }
           ],
         },
       ],
@@ -429,10 +452,10 @@ routerVacancy.get("/search/:name", async (req, res) => {
       where: {
         name: { [Op.iLike]: `%${name}%` },
       },
-      attributes: ["name"],
+      attributes: ["name", 'id'],
       include: {
         model: Vacancy,
-        attributes: ["name", "description"],
+        attributes: ["name", "description", 'id'],
         include: [
           {
             model: Language,
