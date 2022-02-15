@@ -34,8 +34,17 @@ export const REMOVE_POST = "REMOVE_POST"
 export const REMOVE_SEE_LATER = "REMOVE_SEE_LATER"
 export const GET_SEE_LATER = "GET_SEE_LATER"
 export const SEE_LATER= "SEE_LATER"
-
-
+//EDITOR
+export const EDIT_LOCATION_ADD_POSTULANT ='EDIT_LOCATION_ADD_POSTULANT'
+export const EDIT_LOCATION_DELETE_POSTULANT ='EDIT_LOCATION_DELETE_POSTULANT'
+export const EDIT_TECHNOLOGY_ADD_POSTULANT='EDIT_TECHNOLOGY_ADD_POSTULANT'
+export const EDIT_TECHNOLOGY_DELETE_POSTULANT='EDIT_TECHNOLOGY_DELETE_POSTULANT'
+export const EDIT_LANGUAGE_DELETE_POSTULANT='EDIT_LANGUAGE_DELETE_POSTULANT'
+export const EDIT_LANGUAGE_ADD_POSTULANT= 'EDIT_LANGUAGE_ADD_POSTULANT'
+export const EDIT_SKILL_DELETE_POSTULANT='EDIT_SKILL_DELETE_POSTULANT'
+export const EDIT_SKILL_ADD_POSTULANT=' EDIT_SKILL_ADD_POSTULANT'
+export const EDIT_SEÑORITY_DELETE_POSTULANT='EDIT_SEÑORITY_DELETE_POSTULANT'
+export const EDIT_SEÑORITY_ADD_POSTULANT='EDIT_SEÑORITY_ADD_POSTULANT'
 
 //ACTIONS
 export function createPostulante(payload) {
@@ -415,3 +424,157 @@ export function apply(id, postulanteId){
               }
             };
           }
+
+//EDITOR DE PSTULANTES
+
+export function deleteLocation(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationDelete`, {input: input})
+      return dispatch({
+        type: EDIT_LOCATION_DELETE_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addLocation(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationAdd`, {input: input})
+      return dispatch({
+        type: EDIT_LOCATION_ADD_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteTechnology(id, input){
+  console.log('soy id postulante', id)
+  console.log('soy input', input)
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/technologyDelete`, {input: input})
+      return dispatch({
+        type: EDIT_TECHNOLOGY_DELETE_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addTechnology(id, input){
+  console.log('soy id', id)
+  console.log('input', input)
+
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/technologyAdd`, {input: input})
+      return dispatch({
+        type: EDIT_TECHNOLOGY_ADD_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteLanguage(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/languageDelete`, {input: input})
+      return dispatch({
+        type: EDIT_LANGUAGE_DELETE_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addLanguage(id, input){
+  console.log('soy id', id)
+  console.log('soy input', input)
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/languageAdd`, {input: input})
+      return dispatch({
+        type: EDIT_LANGUAGE_ADD_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteSkill(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/skillDelete`, {input: input})
+      return dispatch({
+        type: EDIT_SKILL_DELETE_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addSkill(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/skillAdd`, {input: input})
+      return dispatch({
+        type: EDIT_SKILL_ADD_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteSeñority(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/seniorityDelete`, {input: input})
+      return dispatch({
+        type: EDIT_SEÑORITY_DELETE_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addSeñority(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/seniorityAdd`, {input: input})
+      return dispatch({
+        type: EDIT_SEÑORITY_ADD_POSTULANT,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+
