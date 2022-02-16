@@ -49,7 +49,13 @@ routerVacancy.get("/:id", async (req, res) => {
               attributes: [],
             },
           },
-          
+          {
+            model: Business,
+            attributes: ["name", 'id', 'description'],
+            through: {
+              attributes: [],
+            },
+          }
         ],
       });
       //si no está es porque no existe
@@ -91,13 +97,7 @@ routerVacancy.get("/", async (req, res) => {
             attributes: [],
           },
         },
-        // {
-        //   model: Skill,
-        //   attributes: ["name"],
-        //   through: {
-        //     attributes: [],
-        //   },
-        // },
+
         {
           model: Technology,
           attributes: ["name"],
@@ -105,6 +105,13 @@ routerVacancy.get("/", async (req, res) => {
             attributes: [],
           },
         },
+        {
+          model: Business,
+          attributes: ["name", 'id', 'description'],
+          through: {
+            attributes: [],
+          },
+        }
       ],
     });
 
@@ -137,13 +144,7 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-          // {
-          //   model: Skill,
-          //   attributes: ["name"],
-          //   through: {
-          //     attributes: [],
-          //   },
-          // },
+
           {
             model: Technology,
             attributes: ["name"],
@@ -190,13 +191,7 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-          // {
-          //   model: Skill,
-          //   attributes: ["name"],
-          //   through: {
-          //     attributes: [],
-          //   },
-          // },
+
           {
             model: Technology,
             attributes: ["name"],
@@ -206,7 +201,11 @@ routerVacancy.get("/", async (req, res) => {
           },
           {
             model: Business,
-          },
+            attributes: ["name", 'id', 'description'],
+            through: {
+              attributes: [],
+            },
+          }
         ],
       });
       vacanciesInDB
@@ -246,7 +245,7 @@ routerVacancy.post("/", async (req, res) => {
       },
     });
     //le agrego la empresa a la vacante;
-    await newVacancyInDB.setBusiness(businessInDB);
+    await newVacancyInDB.addBusiness(businessInDB);
     //repito lo mismo con las otras tablas
     if (language) {
       let lenguageInDB = await Language.findAll({

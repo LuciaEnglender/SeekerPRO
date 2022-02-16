@@ -20,8 +20,5 @@ module.exports = {
     },
   },
   plugins: [],
-  fontFamily: {
-    sans: ["Montserrat"],
-    serif: ["Merriweather", "serif"],
-  },
+  fontFamily: {},
 };

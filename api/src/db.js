@@ -39,8 +39,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant,Pending ,Skill,Technology,Vacancy,Seniority} = sequelize.models;
-
+const {Admin, Business, Language, Location, Login,Message, PipeLine,Postulant,Pending ,Skill,Technology,Vacancy,Seniority,
+    New, Review, Contact, InterviewRRHH,InterviewTech, Offered, Hired, Rejected } =sequelize.models
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 //Tabla intermedia ente Postulante y Vacante muchos  a  muchos
@@ -104,13 +104,62 @@ Admin.belongsTo(Login);
 Business.hasMany(Vacancy, {foreignKey : "fk_business"});
 Vacancy.belongsTo(Business);
 
+//relaciones para la PIPILINE
 // //Tablas intermedias de uno a uno
 
 Vacancy.hasOne(PipeLine,{foreignKey:"fk_vacancy"})
 PipeLine.belongsTo(Vacancy);
 
-///lo Trabajado probando para agragar un postulante a una vacante
+Vacancy.hasOne(New,{foreignKey:"fk_vacancy"})
+New.belongsTo(Vacancy);
 
+Vacancy.hasOne(Review,{foreignKey:"fk_vacancy"})
+Review.belongsTo(Vacancy);
+
+Vacancy.hasOne(Contact,{foreignKey:"fk_vacancy"})
+Contact.belongsTo(Vacancy);
+
+Vacancy.hasOne(InterviewRRHH,{foreignKey:"fk_vacancy"})
+InterviewRRHH.belongsTo(Vacancy);
+
+Vacancy.hasOne(InterviewTech,{foreignKey:"fk_vacancy"})
+InterviewTech.belongsTo(Vacancy);
+
+Vacancy.hasOne(Offered,{foreignKey:"fk_vacancy"})
+Offered.belongsTo(Vacancy);
+
+Vacancy.hasOne(Hired,{foreignKey:"fk_vacancy"})
+Hired.belongsTo(Vacancy);
+
+Vacancy.hasOne(Rejected,{foreignKey:"fk_vacancy"})
+Rejected.belongsTo(Vacancy);
+
+// Postulant.hasOne(New,{foreignKey:"fk_postulant"})
+// New.belongsTo(Postulant);
+
+Postulant.belongsToMany(Contact,{through:"contact_postulant"})
+Contact.belongsToMany(Postulant, {through:"contact_postulant"});
+
+Postulant.belongsToMany(InterviewRRHH,{through:"interviewrrhh_postulant"})
+InterviewRRHH.belongsToMany(Postulant, {through:"interviewrrhh_postulant"});
+
+Postulant.belongsToMany(InterviewTech,{through:"interviewtech_postulant"})
+InterviewTech.belongsToMany(Postulant, {through:"interviewtech_postulant"});
+
+Postulant.belongsToMany(Offered,{through:"offered_postulant"})
+Offered.belongsToMany(Postulant, {through:"offered_postulant"});
+
+Postulant.belongsToMany(Hired,{through:"hired_postulant"})
+Hired.belongsToMany(Postulant, {through:"hired_postulant"});
+
+Postulant.belongsToMany(Rejected,{through:"rejected_postulant"})
+Rejected.belongsToMany(Postulant, {through:"rejected_postulant"});
+
+Postulant.belongsToMany(New,{through:"new_postulant"})
+New.belongsToMany(Postulant,{through:"new_postulant"});
+
+Postulant.belongsToMany(Review,{through:"review_postulant"})
+Review.belongsToMany(Postulant, {through:"review_postulant"});
 
 
 module.exports = {
