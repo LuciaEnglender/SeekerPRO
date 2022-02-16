@@ -20,15 +20,14 @@ const SectionNuevo = () => {
 
   const [inpute, setInpute] = useState({
     email: email,
-    profile:"BUSINESS",
+    profile: "BUSINESS",
   });
-
 
   function handleSubmitP(e) {
     e.preventDefault();
     console.log(inputp);
     dispatch(postEmail(inputp));
-    alert("Cuenta DEVELOPER creada!")
+    alert("Cuenta DEVELOPER creada!");
     setInputp({
       email: "",
       profile: "",
@@ -40,7 +39,7 @@ const SectionNuevo = () => {
     e.preventDefault();
     console.log(inpute);
     dispatch(postEmail(inpute));
-    alert("Cuenta EMPRESA creada!")
+    alert("Cuenta EMPRESA creada!");
     setInpute({
       email: "",
       profile: "",
@@ -52,33 +51,35 @@ const SectionNuevo = () => {
     <div>
       <div className="grid grid-cols-2">
         <div className="m-10">
-          <h2 className="text-5xl font-bold pb-4">Como Developer</h2>
+          <h2 className="text-5xl font-bold pb-4">Como Candidato</h2>
           <p className="pb-4 text-justify">
-            We will help you to get in contact with recruiters all over the world, from the most relevant IT  companies.
+            We will help you to get in contact with recruiters all over the
+            world, from the most relevant IT companies.
           </p>
           <div className="flex m-0 justify-center">
             <button
-              className="p-4 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow  focus:outline-none focus:ring focus:ring-orange-600"
+              className="p-4 py-2 inline-block bg-gradient-to-r to-colorBoton from-colorFondo3 text-white font-bold rounded-3xl filter hover:drop-shadow  focus:outline-none focus:ring focus:ring-orange-600"
               value="DEVELOPER"
               onClick={(e) => handleSubmitP(e)}
             >
-              Developer
+              Candidate
             </button>
           </div>
         </div>
         <div className="m-10">
           <div>
-            <h2 className="text-5xl font-bold pb-4">Como Recruiter</h2>
+            <h2 className="text-5xl font-bold pb-4">Como Administrador</h2>
             <p className="pb-4 text-justify">
-              We offer efficiency in the selection process in recruiting developers specialized in all technologies.
+              We offer efficiency in the selection process in recruiting
+              developers specialized in all technologies.
             </p>
             <div className="flex m-0 justify-center">
               <button
-                className="p-4 py-2 inline-block bg-gradient-to-r to-verdeClaro from-verdeMedio text-white font-bold rounded-3xl filter hover:drop-shadow  focus:outline-none focus:ring focus:ring-orange-600"
+                className="p-4 py-2 inline-block bg-gradient-to-r to-colorBoton from-colorFondo3 text-white font-bold rounded-3xl filter hover:drop-shadow  focus:outline-none focus:ring focus:ring-orange-600"
                 value="BUSINESS"
                 onClick={(e) => handleSubmitE(e)}
               >
-                Recruiter
+                Administrator
               </button>
             </div>
           </div>

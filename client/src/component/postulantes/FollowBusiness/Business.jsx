@@ -43,7 +43,7 @@ function Business() {
           <h1 className="font-bold my-4 mx-4 text-centermb-3 text-zinc-300"> Business followed </h1>   
     <div>
     {followedBusiness.length === 0 ? (
-   <div>  <p className=" font-bold text-center text-zinc-300 mb-3">No followed business? Search know!  
+   <div>  <p className=" font-bold text-center text-zinc-300 mb-3">In this moment you are not following business. Dont loose time, search now!  
     <button className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                 onClick={(e) => handleAllBusiness(e)} >
                       all business{" "}

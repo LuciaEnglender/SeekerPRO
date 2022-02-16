@@ -13,7 +13,9 @@ const initialState = {
   skill: [],
   language: [],
   pipeline: [],
-  filteredVacancy:[],
+  filteredVacancy: [],
+  filteredBusiness: [],
+  filterPostulant: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -36,7 +38,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         profiles: action.payload,
-        allProfiles: action.payload,
+        //allProfiles: action.payload,
       };
     case "GET_BISSNESS_DETAIL":
       return {
@@ -51,7 +53,7 @@ function rootReducer(state = initialState, action) {
     case "GET_DETAIL_POSTULANTE":
       return {
         ...state,
-        detailPostulante: action.payload,
+        profiles: action.payload,
       };
     case "CLEAR_DETAIL":
       return {
@@ -137,12 +139,50 @@ function rootReducer(state = initialState, action) {
       };
     case "GET_VACANCY_ID":
       return { ...state, vacancyDetail: action.payload };
-      case "FILTER_VACANCIES":
+    case "FILTER_VACANCIES":
       return {
         ...state,
         vacancies: action.payload,
       };
-
+    case "GET_VACANCY_NAME":
+      return {
+        ...state,
+        vacancies: action.payload,
+      };
+    case "FILTER_POSTULANT":
+      return {
+        ...state,
+        profiles: action.payload,
+      };
+    case 'EDIT_SEÑORITY_ADD_VACANCY':
+      return {
+        ...state
+      };
+    case 'EDIT_SEÑORITY_DELETE_VACANCY':
+      return {
+        ...state
+      }
+    case 'EDIT_TECHNOLOGY_DELETE_VACANCY':
+      return{...state,}
+    case 'EDIT_TECHNOLOGY_ADD_VACANCY':
+      return{...state,};
+      case 'EDIT_LANGUAGE_DELETE_VACANCY':
+        return{...state,};
+        
+    
+    case 'EDIT_SKILL_ADD_VACANCY':
+      return {
+        ...state
+      }
+    case 'EDIT_SKILL_DELETE_VACANCY':
+      return {
+        ...state
+      }
+    case 'EDIT_LANGUAGE_ADD_VACANCY':
+      return {
+        ...state
+      };
+    
     default:
       return state;
   }

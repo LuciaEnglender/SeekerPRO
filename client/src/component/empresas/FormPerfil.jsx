@@ -97,7 +97,7 @@ export default function FormPerfil() {
               />
             </div>
             <div className="w-full flex flex-col m-0 justify-center">
-              <h3 className="text-center">CUIT:</h3>
+              <h3 className="text-center">CUIT/CUIL</h3>
               <input
                 className="w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                 type="text"

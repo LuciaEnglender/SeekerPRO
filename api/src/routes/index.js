@@ -8,9 +8,11 @@ const routerSignUp = require("./registroManual");
 const routerAdmin = require("./admin");
 const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
-// const routerEditing = require('./postulantEdit')
+const routerEditing = require('./postulantEdit')
+const routerEditingVacancy= require('./editVacancy')
 const routerMetric = require("./metric");
 const routerPipeLine = require("./pipeline")
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -35,7 +37,7 @@ router.use("/allFiltersBusiness", allFiltersBuss);
 router.use("/admin", routerAdmin);
 router.use("/favorite", routerFavorite);
 router.use("/pending", routerPending);
-// router.use('/postulantEdit', routerEditing);
+router.use('/postulantEdit', routerEditing);
 router.use("/metric", routerMetric);
 router.use("/pipeline", routerPipeLine);
 
@@ -44,5 +46,6 @@ router.use("/languages", language);
 router.use("/skills", skill);
 router.use("/tech", tech);
 router.use("/seniority", seniority);
+router.use('/vacancyEdit', routerEditingVacancy)
 
 module.exports = router;

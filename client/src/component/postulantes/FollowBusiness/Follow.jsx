@@ -15,7 +15,7 @@ const navigate = useNavigate()
 function handleClick () {
     dispatch(followBusiness(postulanteId, id));
     alert("Now you're following this business")
-    navigate(-1)
+    navigate("/homep")
 }
 
   return <div>

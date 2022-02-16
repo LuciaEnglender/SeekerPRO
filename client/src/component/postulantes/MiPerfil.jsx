@@ -10,6 +10,7 @@ import { getUsers } from "../../redux/actions/indexL";
 function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
+ // console.log(perfil)
   
   const { user, isAuthenticated } = useAuth0();
 
@@ -53,9 +54,10 @@ function MiPerfil() {
             </h2>
             <h2 className={s.items}>
               {" "}
-              {perfil[0].technologies?.map((t) => t.name).join(" - ")}{" "}
+              {perfil[0].gender}{" "}
             </h2>
-            <h2> {perfil[0].locations?.map((loc) => loc.name).join(" - ")}</h2>
+            <h2 className={s.items}>{" "}{perfil[0].technologies?.map((t) => t.name).join(" - ")}{" "} </h2>
+            <h2 className={s.items} > {perfil[0].locations?.map((loc) => loc.name).join(" - ")}</h2>
             <h2 className={s.items}>
               {" "}
               {perfil[0].seniorities?.map((s) => s.name).join(" - ")}{" "}
@@ -82,6 +84,8 @@ function MiPerfil() {
               {" "}
               LinkedIn <br /> {perfil[0].linkedIn}{" "}
             </h2>
+            <h3> Want to be premium? </h3>
+            <a href="https://mpago.la/1ooRuhT"> MERCADO PAGO </a>
           </div>
         )}
       </div>

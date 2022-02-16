@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import { getProfile, getVacancy } from "../../redux/actions/indexP";
+import { getProfile, getBusiness, getVacancy, clearBusiness } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
@@ -20,9 +20,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function Home() {
   const dispatch = useDispatch();
 
-  const filtradas = useSelector(
-    (state) => state.rootReducerPostulante.filteredVacancy);
-  
+  const filtradas = useSelector((state) => state.rootReducerPostulante.filteredVacancy);
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,12 +44,22 @@ export default function Home() {
 
 //Renderizacions todas las vacantes
 const handleAll = (e) => {
-  dispatch(getVacancy(email2));
+  dispatch(clearBusiness());
+  dispatch(getVacancy(email2)); 
   };
+
+//Renderizacion de todas las empresas
+  const business = useSelector((state) =>state.rootReducerPostulante.business)
+  const handleAllBusiness = (e) => {
+    e.preventDefault()
+    dispatch(getBusiness());
+    };
+
+//console.log("business", business)
 
   useEffect(() => {
     dispatch(getProfile(email2));   
-  }, [dispatch]);
+  }, []);
 
 
   
@@ -77,7 +85,7 @@ const handleAll = (e) => {
             <div className="items-center justify-center grid grid-row-7">
               <div className="grid-span-2 bg-verdeMedio w-fit">
                 <div className="flex m-0 justify-center">
-                  <h1 className="font-bold text-center text-zinc-400 mb-3">Opportunities!</h1>
+                  <h1 className="font-bold text-center text-zinc-400 mb-3"></h1>
                 </div>
                 {/* SEARCHBAR */}
                 <div className=" flex m-0 justify-center">
@@ -85,24 +93,47 @@ const handleAll = (e) => {
                     <div className="mx-2">
                       <SearchBar />
                     </div>
-                   <div>           
+                  </div>
+ </div>
+                <FiltroDinamico />
+                <div className=" flex m-0 justify-center">           
                        <button
                       className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                       onClick={(e) => handleAll(e)}
                     >
                       all vacancies{" "}
                     </button> 
+    <button className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                onClick={(e) => handleAllBusiness(e)} >
+                      all business{" "}
+   </button>
+
                   </div>
-                  </div>
-                </div>
-                <FiltroDinamico />
+
+
               </div>
               <div className="grid-span-4 h-full">
                  {currentVacancy.length === 0 ? (
                   <p className=" font-bold text-center text-zinc-400 my-4 mb-3">Don't wait for opportunities, go for them!</p>
                 ) : (
                   <div>        
-                    {currentVacancy[0].createBus? 
+                    { business.length > 0 ?                                         
+                    business?.map((el)=> {
+                                          return (
+                                            <div className="m-4" key={el.id}>
+                                            <BusinessCard
+                                              id = {el.id}
+                                               name={el.name}
+                                              description={el.description}
+                                              location={el.location}  
+                                                                                                                                                                                                                                                                   />
+                                          </div>
+                                          )
+                                        }) :
+                    
+
+                    
+                    currentVacancy[0].cuit? 
                                         currentVacancy?.map((el)=> {
                                           return (
                                             <div className="m-4" key={el.id}>
@@ -110,12 +141,12 @@ const handleAll = (e) => {
                                               id = {el.id}
                                                name={el.name}
                                               description={el.description}
-                                              languages={el.languages}                                                                                                                                                                                                                                                         />
+                                              location={el.location}                                                                                                                                                                                                                                                         />
                                           </div>
                                           )
                                         })
                     
-                    : 
+                    :  
                     currentVacancy?.map((el) => {
                       return (
                         <div className="m-4" key={el.id}>
@@ -139,7 +170,7 @@ const handleAll = (e) => {
                     }) 
 
                     
-                    
+
                     }
                   </div>
                 )}
@@ -157,10 +188,10 @@ const handleAll = (e) => {
                 <button
                   className="m-3 text-zinc-400"
                   onClick={() =>
-                    paginado( currentPage + 1)
+                    paginado( pageMax <= currentPage? currentPage : currentPage + 1)
                   }
-                >
-                  <AiOutlineArrowRight />
+                > <AiOutlineArrowRight />
+                  
                 </button>
                      <h1> 
                       <Pagination

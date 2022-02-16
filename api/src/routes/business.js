@@ -68,16 +68,16 @@ routerBusiness.get("/find/:email", async (req, res) => {
 
 routerBusiness.get("/", async (req, res) => {
   const { business } = req.query;
-  
+
   //console.log(allBusiness)
   try {
     if (business) {
       const business = await Business.findOne({
         where: {
-          loginEmail: business
-        }
-      })
-      res.status(200).json(business)
+          loginEmail: business,
+        },
+      });
+      res.status(200).json(business);
     } else {
       const allBusiness = await Business.findAll();
       allBusiness
@@ -191,8 +191,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
     });
 
     if (vacancies.length !== 0) acum.push(vacancies);
-    console.log(vacancies);
-
     //   //Busco por Skill
     const skills = await Skill.findAll({
       where: {
@@ -412,8 +410,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
       }
     }
     if (seniority.length !== 0) acum.push(seniority);
-
-    console.log(acum);
     res.json(acum[0]);
   } catch (e) {
     console.log(e);
@@ -433,11 +429,9 @@ routerBusiness.post(
         description,
         location,
         cuit,
-        //createBus
       });
 
       let finderLogin = await Login.findByPk(emailId);
-      console.log(finderLogin);
       await createBusiness.setLogin(finderLogin);
       res.json(createBusiness);
     } catch (error) {
