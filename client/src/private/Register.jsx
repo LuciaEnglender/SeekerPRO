@@ -23,9 +23,9 @@ function Register() {
   }, []);
 
   return (
-    <div className="p-9 bg-gray-300">
-      <nav className=" grid grid-cols-2">
-        <h3 className="font-bold  text-2xl">JSeekers</h3>
+    <div className="bg-colorFondo2 h-screen">
+      <nav className="p-4 px-10 md:px-16 grid grid-cols-2">
+        <h3 className="font-bold md:text-5xl text-2xl">JSeekers</h3>
         <div>
           <div className="float-right">
             <div className="float-right">
@@ -34,7 +34,7 @@ function Register() {
           </div>
         </div>
       </nav>
-      <section className="px-16 mt-32 mb-32">
+      <section>
         {profileState.email === undefined ? (
           <SectionNuevo></SectionNuevo>
         ) : (
