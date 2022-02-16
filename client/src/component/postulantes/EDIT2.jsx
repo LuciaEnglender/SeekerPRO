@@ -55,9 +55,9 @@ export default function EditProfile() {
     gender: profileState.gender,
     github: profileState.github,
     linkedIn: profileState.linkedIn,
-    portfolio: profileState.porfolio,
-    // CV:profileState.cv,
-    // file:profileState.file,
+    portfolio: profileState.portfolio,
+     CV:profileState.cv,
+    file:profileState.file,
     technologies: profileState.technologies,
     languages: profileState.languages,
     skills: profileState.skills,
@@ -65,6 +65,9 @@ export default function EditProfile() {
     extras: profileState.extras,
     //loginId:id,
   });
+
+  const asd = input.seniorities
+  console.log(asd)
 
   function handleChange(e) {
     setInput({
@@ -148,6 +151,7 @@ export default function EditProfile() {
     if (input.seniorities.includes(e.target.value)) {
       alert("Already in the list");
     } else {
+    dispatch(deleteSeñority(id, asd[0].name))
       setInput({
         ...input,
         seniorities: [e.target.value],
@@ -257,6 +261,7 @@ export default function EditProfile() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(input);
+
     dispatch(editProfile(id, input));
     navigate("/homep");
   }
@@ -459,7 +464,7 @@ export default function EditProfile() {
                   className="text-center  text-verdeHover"
                   htmlFor="github"
                 >
-                  GitHub:
+                  GitHub
                 </label>
                 <div className="flex m-0 justify-center">
                   <input
@@ -477,7 +482,7 @@ export default function EditProfile() {
                   className="text-center  text-verdeHover"
                   htmlFor="linkedin"
                 >
-                  LinkedIn:
+                  LinkedIn*
                 </label>
                 <div className="flex m-0 justify-center">
                   <input
@@ -549,7 +554,7 @@ export default function EditProfile() {
               {/*TECHNO*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover">
-                  Technology
+                  Technology*
                 </label>
                 <div className="flex m-0 justify-center">
                   <select
@@ -619,7 +624,7 @@ export default function EditProfile() {
               {/*LENGUA*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover">
-                  Languages
+                  Languages*
                 </label>
                 <div className="flex m-0 justify-center">
                   <select
@@ -688,7 +693,7 @@ export default function EditProfile() {
               </div>
               {/*SKILLS*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover"> Skill</label>
+                <label className="text-center  text-verdeHover"> Skill*</label>
                 <div className="flex m-0 justify-center">
                   <select
                     className="w-fit text-center xl:w-52 rounded-2xl bg-verdeClaro"
@@ -744,7 +749,7 @@ export default function EditProfile() {
                           <button
                             className="rounded-2xl hover:bg-verdeClaro"
                             type="reset"
-                            onClick={() => handleDeleteLanguage(el)}
+                            onClick={() => handleDeleteSkills(el)}
                           >
                             <GrFormClose />
                           </button>
@@ -757,7 +762,7 @@ export default function EditProfile() {
               {/*SENIORITY*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover">
-                  Siniority
+                  Siniority*
                 </label>
                 <div className="flex m-0 justify-center">
                   <select
@@ -814,7 +819,7 @@ export default function EditProfile() {
                           <button
                             className="rounded-2xl hover:bg-verdeClaro"
                             type="reset"
-                            onClick={() => handleDeleteLanguage(el)}
+                            onClick={() => handleDeleteSeniority(el)}
                           >
                             <GrFormClose />
                           </button>
