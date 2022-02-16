@@ -191,8 +191,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
     });
 
     if (vacancies.length !== 0) acum.push(vacancies);
-    console.log(vacancies);
-
     //   //Busco por Skill
     const skills = await Skill.findAll({
       where: {
@@ -412,8 +410,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
       }
     }
     if (seniority.length !== 0) acum.push(seniority);
-
-    console.log(acum);
     res.json(acum[0]);
   } catch (e) {
     console.log(e);
@@ -433,11 +429,9 @@ routerBusiness.post(
         description,
         location,
         cuit,
-        //createBus
       });
 
       let finderLogin = await Login.findByPk(emailId);
-      console.log(finderLogin);
       await createBusiness.setLogin(finderLogin);
       res.json(createBusiness);
     } catch (error) {

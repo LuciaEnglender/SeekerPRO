@@ -9,9 +9,7 @@ const routerAdmin = require("./admin");
 const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
 const routerEditing = require('./postulantEdit')
-
 const routerEditingVacancy= require('./editVacancy')
-
 const routerMetric = require("./metric");
 const routerPipeLine = require("./pipeline")
 
