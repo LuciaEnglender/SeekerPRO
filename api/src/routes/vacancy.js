@@ -76,13 +76,7 @@ routerVacancy.get("/", async (req, res) => {
   try {
     const ALLVACS = await Vacancy.findAll({
       include: [
-        {
-          model: Business,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
+       
         {
           model: Language,
           attributes: ["name"],
@@ -159,20 +153,23 @@ routerVacancy.get("/", async (req, res) => {
         ? res.status(200).send(vacanciesInDB)
         : res.status(400).send("doesnt exist this vacancy");
     } else if (business) {
+      
       const finderBusiness = await Business.findOne({
         where: {
           loginEmail: business,
         },
       });
+  
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
-        where: {
-          businessId: finderBusiness.id,
+        where : {
+          businessId : finderBusiness.id
         },
         include: [
           {
             model: Business,
-            attributes: ["name"],
+            attributes: ["name",'description', 'id'],
+
             through: {
               attributes: [],
             },
@@ -199,15 +196,10 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-          {
-            model: Business,
-            attributes: ["name", 'id', 'description'],
-            through: {
-              attributes: [],
-            },
-          }
+        
         ],
       });
+     
       vacanciesInDB
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
@@ -245,6 +237,7 @@ routerVacancy.post("/", async (req, res) => {
       },
     });
     //le agrego la empresa a la vacante;
+    await newVacancyInDB.setBusiness(businessInDB)
     await newVacancyInDB.addBusiness(businessInDB);
     //repito lo mismo con las otras tablas
     if (language) {

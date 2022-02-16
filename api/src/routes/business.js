@@ -39,7 +39,7 @@ routerBusiness.get("/count/:id", async (req, res) => {
       limit: 2,
     }).then((result) => {
       const resp = result.count;
-      console.log(result.count);
+    
       res.json(resp);
     });
   } catch (erro) {
@@ -59,7 +59,7 @@ routerBusiness.get("/find/:email", async (req, res) => {
         loginEmail: email,
       },
     });
-    console.log(businessFinder);
+  
     res.json(businessFinder);
   } catch (e) {
     console.log(e);
