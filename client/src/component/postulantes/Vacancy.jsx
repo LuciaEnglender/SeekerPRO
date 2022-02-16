@@ -7,7 +7,7 @@ import Follow from './FollowBusiness/Follow'
 // import AddToFavourite from "./Assets/AddToFavourite";
 
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
-function Vacancy({ name, description, languages, seniorities, id, technologies, business}) {
+function Vacancy({ name, description, languages, seniorities, id, technologies, business, date}) {
 
 console.log('id', id)
 //
@@ -27,6 +27,7 @@ console.log('id', id)
             </p>
             <p> {business}</p>
             <div class="flex flex-row">
+            <p> Fecha de publicacion: {date.substr(0, 10)}</p> <br/>
               <p
                 tabindex="0"
                 class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"

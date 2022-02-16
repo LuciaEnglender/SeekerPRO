@@ -391,7 +391,7 @@ export function apply(id, postulanteId){
           console.log(postulanteId)
           return async function (){
             try{
-              await axios.put(`http://localhost:3001/pending/${postulanteId}`, id);
+              await axios.put(`http://localhost:3001/pending/${postulanteId}`, {id:id});
               return {
                   type: REMOVE_SEE_LATER,
                   }

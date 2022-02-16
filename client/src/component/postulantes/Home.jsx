@@ -33,7 +33,7 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 3
 
-  console.log("current", currentVacancy.businesses)
+  console.log("current", currentVacancy)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -168,10 +168,11 @@ const handleAll = (e) => {
                             seniorities={el.seniorities
                               ?.map((s) => s.name)
                               .join(", ")}
-                            skills={el.skills?.map((sk) => sk.name).join(", ")}
                             technologies={el.technologies
                               ?.map((t) => t.name)
-                              .join(", ")}
+                              .join(", ") }
+                            date={el.createdAt}
+                         
                           />
                         </div>
                       );

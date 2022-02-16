@@ -6,9 +6,11 @@ import {
   getProfile,
 } from "../../../redux/actions/indexP";
 import { useAuth0, isAuthenticated } from "@auth0/auth0-react";
+import {useNavigate} from "react-router-dom"
 
 function Apply(id) {
 const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
+const navigate = useNavigate()
 console.log("apply", postulanteId)
 const  dispatch = useDispatch()
 const { user } = useAuth0();
@@ -18,6 +20,7 @@ const email2 = email.substring(1, email.length - 1);
   function handleApply() {
     dispatch(apply(id, postulanteId));
     alert("you applied for this job... Good luck!");
+    navigate("/homep")
   }
 
 
