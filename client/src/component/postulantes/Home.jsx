@@ -14,6 +14,8 @@ import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import Metrics from './Metrics/Metrics'
+import Slides from './Metrics/Slides'
+
 
 //import Business from './FollowBusiness/Business'
 //import Postulations from "../postulantes/MyPostulations/Postulations";
@@ -31,7 +33,7 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 3
 
-  console.log("current", currentVacancy)
+  console.log("current", currentVacancy.businesses)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -130,8 +132,7 @@ const handleAll = (e) => {
                                               id = {el.id}
                                                name={el.name}
                                               description={el.description}
-                                              location={el.location}  
-                                                                                                                                                                                                                                                                   />
+                                              location={el.location}                                                                                                                                                                                                                                                                     />
                                           </div>
                                           )
                                         }) :
@@ -146,7 +147,8 @@ const handleAll = (e) => {
                                               id = {el.id}
                                                name={el.name}
                                               description={el.description}
-                                              location={el.location}                                                                                                                                                                                                                                                         />
+                                              location={el.location}    
+                                                                                                                                                                                                                                                                                          />
                                           </div>
                                           )
                                         })
@@ -157,6 +159,7 @@ const handleAll = (e) => {
                         <div className="m-4" key={el.id}>
                           <Vacancy
                             id = {el.id}
+                            business = {el.businesses[0].name}   
                              name={el.name}
                             description={el.description}
                             languages={el.languages
@@ -205,7 +208,8 @@ const handleAll = (e) => {
                      paginado={paginado}
                    />
                    </h1>
-                 </div>                                                 
+                 </div>   
+                                                          
             </div>
           </div>
         </div>
@@ -213,12 +217,9 @@ const handleAll = (e) => {
  
      <div className="bg-verdeMedio rounded-2xl p-2 text-zinc-400 w-full h-full">
            <div className="flex flex-col m-0 justify-center">
-       <Metrics/>           
+       <Metrics/>     
+            
                  </div>
-       <div className="flex flex-col m-0 justify-center">
-         <p className=" text-center mt-2">Trends in soft-skills</p>
-         <p className=" text-center mt-2">January 2022</p>
-       </div>
      </div>
      
      
@@ -233,7 +234,7 @@ const handleAll = (e) => {
      
       
         {/* SPAN */}
-        <div></div>
+        <div>  <Slides/>   </div>
         <div></div>
       </div>
     </div>

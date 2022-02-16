@@ -18,7 +18,7 @@ function PostCard({name, description, id}) {
                   class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
                 > 
                   {name} <br/>
-                  Vacante {id}
+                
                 </p>      
               </div>
               </Link>

@@ -52,6 +52,7 @@ const Landing = () => {
           </div>
           <div className="flex m-0 justify-center">
             <div className="mt-3 md:mt-4 mr-5  w-32">
+    
               {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
             </div>
           </div>

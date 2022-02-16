@@ -246,7 +246,7 @@ routerVacancy.post("/", async (req, res) => {
       },
     });
     //le agrego la empresa a la vacante;
-    await newVacancyInDB.setBusiness(businessInDB);
+    await newVacancyInDB.addBusiness(businessInDB);
     //repito lo mismo con las otras tablas
     if (language) {
       let lenguageInDB = await Language.findAll({

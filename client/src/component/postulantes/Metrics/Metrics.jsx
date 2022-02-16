@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {useSelector} from "react-redux"
+import QRCode from "react-qr-code";
 
 function Metrics() {
 
@@ -76,8 +77,16 @@ setGender(!gender);
    </div>
    </div>
 <div>    
-  <h2>Do you want to know more?</h2>
-  <a href= "https://sueldos.openqube.io/encuesta-sueldos-2021.02/#Salarios-Segun-Tecnologia">Open Quebe Base </a>    
+<div className="flex flex-col my-4 m-0 justify-center">    
+<h2 className="text-center">Do you want to know more?</h2>   
+         <QRCode className="flex flex-col my-4 m-0 justify-center" value=" https://sueldos.openqube.io/encuesta-sueldos-2021.02/#Salarios-Segun-Tecnologia" size={160} bgColor="#282c34" fgColor="#fff" level="H" />
+         
+         <a className="flex flex-col my-4 m-0 justify-center" href= "https://sueldos.openqube.io/encuesta-sueldos-2021.02/#Salarios-Segun-Tecnologia">Open Quebe Base </a>    
+         <p className=" text-center mt-2">Trends February 20200</p>
+       </div>
+
+ 
+  
   </div>
  
     </div>
