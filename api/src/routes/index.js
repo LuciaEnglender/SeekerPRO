@@ -8,7 +8,7 @@ const routerSignUp = require("./registroManual");
 const routerAdmin = require("./admin");
 const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
-const routerEditing = require('./postulantEdit')
+// const routerEditing = require('./postulantEdit')
 const routerMetric = require("./metric");
 const routerPipeLine = require("./pipeline")
 
@@ -35,7 +35,7 @@ router.use("/allFiltersBusiness", allFiltersBuss);
 router.use("/admin", routerAdmin);
 router.use("/favorite", routerFavorite);
 router.use("/pending", routerPending);
-router.use('/postulantEdit', routerEditing);
+// router.use('/postulantEdit', routerEditing);
 router.use("/metric", routerMetric);
 router.use("/pipeline", routerPipeLine);
 
