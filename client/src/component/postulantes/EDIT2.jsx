@@ -164,6 +164,7 @@ export default function EditProfile() {
         ...input,
         locations: [e.target.value],
       });
+
       dispatch(addLocation(id, e.target.value));
     }
   }
@@ -186,6 +187,7 @@ export default function EditProfile() {
       dispatch(addLanguage(id, e.target.value));
       console.log(input.languages);
     }
+
   }
 
   const handleDelete = (e) => {
@@ -289,6 +291,7 @@ export default function EditProfile() {
               </div>
               {/*NAME*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
+
                 <label className="text-center text-verdeHover"> Name* </label>
                 <div className="flex m-0 justify-center">
                   <input
@@ -325,6 +328,7 @@ export default function EditProfile() {
                     // value={input.locations}
                     name="locations"
                     onChange={(e) => handleSelectLocation(e)}
+
                   >
                     <option
                       className="rounded-2xl bg-verdeClaro"
@@ -334,6 +338,7 @@ export default function EditProfile() {
                     >
                       Location Selection
                     </option>
+
                     {locat?.map((el) => (
                       <option
                         className="rounded-2xl bg-verdeClaro"
@@ -347,19 +352,20 @@ export default function EditProfile() {
                 </div>
                 {input.locations?.map((el, i) => (
                   <div className="flex m-0 justify-center">
+
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
-                      value={el.name}
                     >
                       {el.name}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
-                        onClick={(el) => handleDeleteLocation(el)}
+                        onClick={() => handleDeleteLocation(el)}
                       >
-                        X
+                        <GrFormClose />
                       </button>
+
                     </li>
                   </div>
                 ))}
@@ -416,6 +422,7 @@ export default function EditProfile() {
                     </label>
                     <h2>Other</h2>
                   </div>
+
                 </div>
               </div>
               {/*PHOTO*/}

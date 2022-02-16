@@ -282,3 +282,128 @@ export function filterSelects(info) {
 //     }
 //   };
 // }
+
+/////////////ACÁ ARRANCA EL BENDITO EDIT
+
+export function deleteTechnology(id, input){
+  console.log('soy id vacancy', id)
+  console.log('soy input', input)
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/technologyDelete`, {input: input})
+      return dispatch({
+        type: 'EDIT_TECHNOLOGY_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addTechnology(id, input){
+  console.log('soy id', id)
+  console.log('input', input)
+
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/technologyAdd`, {input: input})
+      return dispatch({
+        type: 'EDIT_TECHNOLOGY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteLanguage(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/languageDelete`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addLanguage(id, input){
+  console.log('soy id', id)
+  console.log('soy input', input)
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/languageAdd`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteSkill(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/skillDelete`, {input: input})
+      return dispatch({
+        type: 'EDIT_SKILL_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addSkill(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/skillAdd`, {input: input})
+      return dispatch({
+        type: 'EDIT_SKILL_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function deleteSeñority(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/seniorityDelete`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+
+export function addSeñority(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/vacancyEdit/${id}/seniorityAdd`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+}
+

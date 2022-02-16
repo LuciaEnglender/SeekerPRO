@@ -97,6 +97,7 @@ routerVacancy.get("/", async (req, res) => {
             attributes: [],
           },
         },
+
         {
           model: Technology,
           attributes: ["name"],
@@ -143,7 +144,7 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-         
+
           {
             model: Technology,
             attributes: ["name"],
@@ -190,6 +191,7 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
+
           {
             model: Technology,
             attributes: ["name"],

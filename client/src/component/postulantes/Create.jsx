@@ -9,6 +9,7 @@ import {
   getLanguage,
   getSeniority,
   getLocation,
+  getProfile
 } from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
@@ -29,7 +30,7 @@ export default function CreateForm() {
     (state) => state.rootReducerPostulante.seniority
   );
   const locat = useSelector((state) => state.rootReducerPostulante.location)
-
+  
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
   );
@@ -286,7 +287,8 @@ const handleCv=(e)=>{
     dispatch(getLanguage());
     dispatch(getSeniority());
     dispatch(getLocation());
-    dispatch(getUsers(email2));
+    dispatch(getProfile(email2))
+
   }, []);
 
   return (
