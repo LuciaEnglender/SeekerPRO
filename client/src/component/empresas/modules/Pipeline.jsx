@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostulados, filterStatusPipeline } from "../../../redux/actions";
-// import { ejemploPipe } from "./MOCKS/ejemploPipe";
 import { Link } from "react-router-dom";
 import PostulantesVacancy from "../PostulantesVacancy";
 import { useAuth0 } from "@auth0/auth0-react";
