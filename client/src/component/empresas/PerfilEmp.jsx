@@ -7,7 +7,7 @@ import NavHomeE from "./modules/NavHomeE";
 
 const PerfilEmp = () => {
   const dispatch = useDispatch();
-  const empresa = useSelector((state) => state.rootReducer.business);
+  
   const { user, isAuthenticated } = useAuth0();
 
   const email = JSON.stringify(user.email);
@@ -17,7 +17,8 @@ const PerfilEmp = () => {
     dispatch(getProfile(email2));
     console.log(empresa);
   }, [dispatch]);
-
+  //lo pongo abajo porque primero se monta la action
+  const empresa = useSelector((state) => state.rootReducer.business);
   return (
     <div>
       <NavHomeE titulo={"PerfilUser"} />

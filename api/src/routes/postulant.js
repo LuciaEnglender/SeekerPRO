@@ -300,19 +300,21 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
   });
 });
 
-//Cuenta cuantos vacantes tiene un postulante
-routerPostulant.get("/:id/vacancy", async (req, res) => {
-  Postulant.findByPk(req.params.id).then((postulant) => {
-    postulant
-      .getVacancies({
-        attributes: ["name", "description"],
-      })
-      .then((vacancy) => {
-        console.log(vacancy);
-        res.json(vacancy.length);
-      });
-  });
-});
+// //Cuenta cuantos vacantes tiene un postulante
+// routerPostulant.get("/:id/vacancy", async (req, res) => {
+//   try{Postulant.findByPk(req.params.id).then((postulant) => {
+//     postulant
+//       .getVacancies({
+//         attributes: ["name", "description"],
+//       })
+//       .then((vacancy) => {
+//         console.log(vacancy);
+//         res.json(vacancy.length);
+//       });
+//   });}catch(e){
+//     console.log(e)
+//   }
+// });
 
 //put para modificar datos de un detalle / perfil de postulante
 routerPostulant.put("/:id", async (req, res) => {
