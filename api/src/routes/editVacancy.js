@@ -9,6 +9,7 @@ const {
   Vacancy,
   Location,
   Login,
+
 } = require("../db");
 
 const { check, validationResult } = require("express-validator");
@@ -28,53 +29,53 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-routerEditing.put('/:id/locationDelete', async (req, res) => {
-    try {
-        console.log('sou delete body',  req.body)
-        let finderPostulant = await Postulant.findByPk(req.params.id)
-        let finderLocation = await Location.findAll({
-            where: {
-                name: req.body.input
-            }
-        });
+// routerEditing.put('/:id/locationDelete', async (req, res) => {
+//     try {
+//         console.log('sou delete body',  req.body)
+//         let finderPostulant = await Postulant.findByPk(req.params.id)
+//         let finderLocation = await Location.findAll({
+//             where: {
+//                 name: req.body.input
+//             }
+//         });
 
-        await finderPostulant.removeLocation(finderLocation)
-        res.status(200).json('hecho')
-    } catch (e) {
-        console.log(e)
-    }
-})
+//         await finderPostulant.removeLocation(finderLocation)
+//         res.status(200).json('hecho')
+//     } catch (e) {
+//         console.log(e)
+//     }
+// })
 
-routerEditing.put('/:id/locationAdd', async (req, res) => {
-    console.log('soy add body', req.body)
-    try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+// routerEditing.put('/:id/locationAdd', async (req, res) => {
+//     console.log('soy add body', req.body)
+//     try {
+//         let finderPostulant = await Postulant.findByPk(req.params.id)
 
-        let finderLocation = await Location.findAll({
-            where: {
-                name: req.body.input
-            }
-        });
+//         let finderLocation = await Location.findAll({
+//             where: {
+//                 name: req.body.input
+//             }
+//         });
 
-        await finderPostulant.addLocation(finderLocation)
-        res.status(200).json('hecho')
-    }catch (e) {
-        console.log(e)
-    }
-})
+//         await finderPostulant.addLocation(finderLocation)
+//         res.status(200).json('hecho')
+//     }catch (e) {
+//         console.log(e)
+//     }
+// })
 
 
 routerEditing.put('/:id/technologyDelete', async (req, res) => {
     try {
         console.log(req.body)
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderTech = await Technology.findAll({
             where: {
                 name: req.body.input
             }
         });
        
-        await finderPostulant.removeTechnology(finderTech)
+        await finderVacancy.removeTechnology(finderTech)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -84,14 +85,14 @@ routerEditing.put('/:id/technologyDelete', async (req, res) => {
 routerEditing.put('/:id/technologyAdd', async (req, res) => {
     console.log(req.body)
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderTech = await Technology.findAll({
             where: {
                 name: req.body.input
             }
         });
         
-        await finderPostulant.addTechnology(finderTech)
+        await finderVacancy.addTechnology(finderTech)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -102,14 +103,14 @@ routerEditing.put('/:id/technologyAdd', async (req, res) => {
 routerEditing.put('/:id/skillDelete', async (req, res) => {
     
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderSkill = await Skill.findAll({
             where: {
                 name: req.body.input
             }
         });
        
-        await finderPostulant.removeSkill(finderSkill)
+        await finderVacancy.removeSkill(finderSkill)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -119,14 +120,14 @@ routerEditing.put('/:id/skillDelete', async (req, res) => {
 
 routerEditing.put('/:id/skillAdd', async (req, res) => {
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderSkill = await Skill.findAll({
             where: {
                 name: req.body.input
             }
         });
         
-        await finderPostulant.addSkill(finderSkill)
+        await finderVacancy.addSkill(finderSkill)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -135,14 +136,14 @@ routerEditing.put('/:id/skillAdd', async (req, res) => {
 
 routerEditing.put('/:id/languageDelete', async (req, res) => {
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderLang = await Language.findAll({
             where: {
                 name: req.body.input
             }
         });
        
-        await finderPostulant.removeLanguage(finderLang)
+        await finderVacancy.removeLanguage(finderLang)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -153,14 +154,14 @@ routerEditing.put('/:id/languageDelete', async (req, res) => {
 routerEditing.put('/:id/languageAdd', async (req, res) => {
     console.log(req.body)
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderLang = await Language.findAll({
             where: {
                 name: req.body.input
             }
         });
         
-        await finderPostulant.addLanguage(finderLang)
+        await finderVacancy.addLanguage(finderLang)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -169,14 +170,14 @@ routerEditing.put('/:id/languageAdd', async (req, res) => {
 
 routerEditing.put('/:id/seniorityDelete', async (req, res) => {
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderSeniority = await Seniority.findAll({
             where: {
                 name: req.body.input
             }
         });
        
-        await finderPostulant.removeSeniority(finderSeniority)
+        await finderVacancy.removeSeniority(finderSeniority)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)
@@ -185,14 +186,14 @@ routerEditing.put('/:id/seniorityDelete', async (req, res) => {
 
 routerEditing.put('/:id/seniorityAdd', async (req, res) => {
     try {
-        let finderPostulant = await Postulant.findByPk(req.params.id)
+        let finderVacancy = await Vacancy.findByPk(req.params.id)
         let finderSeniority = await Seniority.findAll({
             where: {
                 name: req.body.input
             }
         });
         
-        await finderPostulant.addSeniority(finderSeniority)
+        await finderVacancy.addSeniority(finderSeniority)
         res.status(200).json('hecho')
     } catch (e) {
         console.log(e)

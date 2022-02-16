@@ -20,9 +20,11 @@ const email2 = email.substring(1, email.length - 1);
     alert("you applied for this job... Good luck!");
   }
 
+
   useEffect(() => {
     dispatch(getProfile(email2));
   }, [dispatch]);
+
 
   return (
     <div>

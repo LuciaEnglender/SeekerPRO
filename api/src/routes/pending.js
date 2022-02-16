@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const { Pending, Vacancy } = require("../db");
+const { Pending, Vacancy, Language, Technology, Seniority, Business } = require("../db");
 const routerPending = Router();
 
 //(2)este get debe traer de la tabla de relacionada las vacantes pendientes del postulante
@@ -58,7 +58,7 @@ routerPending.post('/:idPostulant', async (req, res) => {
     //verificar perque lo recibo como string el idPostulant de pending para probar
     try {
         let createBusiness = await Pending.create({
-            idPostulant        
+            idPostulant
         });
         let pending = await Pending.findByPk(idPostulant)
         let vacancy = await Vacancy.findByPk(id)
