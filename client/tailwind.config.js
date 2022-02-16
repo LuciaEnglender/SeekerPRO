@@ -4,10 +4,11 @@ module.exports = {
     extend: {
       colors: {
         //NUEVOS
-        colorFondo1: "#CAC5C4",
-        colorFondo2: "#CAC5C4",
-        colorFondo3: "#A2928E",
-        colorBoton: "#E94E2D",
+        colorFondo1: "#353535",
+        colorFondo2: "#3c6e71",
+        colorFondo3: "#ffffff",
+        colorBotones: "#d9d9d9",
+        colorDetalles: "#284b63",
 
         //NUEVOS
         verdeOscuro: "#242121",
