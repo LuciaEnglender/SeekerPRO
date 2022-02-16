@@ -45,6 +45,7 @@ function Postulations() {
                 ?.map((t) => t.name)
                 .join(", ")}
                 date= {el.postulant_vacancy.createdAt}
+                
             />
           </div>
         );

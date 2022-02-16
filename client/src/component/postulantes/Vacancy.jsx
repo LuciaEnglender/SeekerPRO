@@ -27,7 +27,8 @@ console.log('id', id)
             </p>
             <p> {business}</p>
             <div class="flex flex-row">
-            <p> Fecha de publicacion: {date.substr(0, 10)}</p> <br/>
+           
+           
               <p
                 tabindex="0"
                 class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"
@@ -51,7 +52,7 @@ console.log('id', id)
           {description}
         </p>
         <div tabindex="0" class="focus:outline-none flex">
-          <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+          <div class="py-2 px-4 text-xs leading-3 ">
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
@@ -62,6 +63,8 @@ console.log('id', id)
         <SeeLater
         id= {id}/>
         </div>
+        <div> 
+ <p> Publication date: {date.substr(0, 10)}</p> </div><br/>
          </div>
       </div>
     </div>
