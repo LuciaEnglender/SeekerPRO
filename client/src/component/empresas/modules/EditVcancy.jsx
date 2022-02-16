@@ -23,7 +23,7 @@ function EditVcancy() {
     seniorities: detalle[0].seniorities.map((ele) => ele.name),
     languages: detalle[0]?.languages.map((ele) => ele.name),
   });
-console.log(input)
+
   useEffect(() => {
     dispatch(getVacancyDetail(id))
   }, [dispatch, id])
@@ -62,6 +62,7 @@ console.log(input)
         ...input,
         languages: [...input.languages, e.target.value],
       });
+      dispatch(addLanguage(id, e.target.value))
     }
   }
   function handleSelectSeniority(e) {
@@ -72,6 +73,7 @@ console.log(input)
         ...input,
         seniorities: [...input.seniorities, e.target.value],
       });
+      dispatch(addSeñority(id, e.target.value))
     }
   }
   ///////////delete///////
@@ -80,22 +82,25 @@ console.log(input)
       ...input,
       seniorities: input.seniorities.filter((el) => el !== e),
     });
+   dispatch(deleteSeñority(id, e))
   };
 
   const handleDeleteLanguage = (e) => {
-    setInput({
+     setInput({
       ...input,
       languages: input.languages.filter((el) => el !== e),
     });
+    dispatch(deleteLanguage(id, e))
+    console.log(e)
   };
 
   const handleDeleteTechnology = (e) => {
-    
     setInput({
       ...input,
       technologies: input.technologies.filter((el) => el !== e),
     });
-    dispatch(deleteTechnology(id, input.technologies))
+    dispatch(deleteTechnology(id, e))
+    console.log(e)
   };
 
 
@@ -127,20 +132,7 @@ console.log(input)
           </select>
           <div>
             {input.technologies.map((el, i) => (
-              typeof el === 'object' ?
-              <li
-                className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                key={i}
-              >
-                {el.name}
-                <button
-                  className="rounded-2xl hover:bg-verdeClaro"
-                  type="reset"
-                  onClick={() => handleDeleteTechnology(el)}
-                >
-                  <GrFormClose />
-                </button>
-              </li> :
+              
               <li
               className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
               key={i}
@@ -150,7 +142,7 @@ console.log(input)
               <button
                 className="rounded-2xl hover:bg-verdeClaro"
                 type="reset"
-                onClick={(el) => handleDeleteTechnology(el)}
+                onClick={() => handleDeleteTechnology(el)}
               >
                 <GrFormClose />
               </button>
