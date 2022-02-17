@@ -16,6 +16,7 @@ import {
   GET_MY_POSTULATIONS,
   REMOVE_POST,
   APPLY,
+  TO_PIPELINE
   //FOLLOW
   GET_BUSINESS,
   GET_FOLLOWED,
@@ -251,6 +252,10 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state
       }
+      case TO_PIPELINE :
+        return {
+          ...state
+        }
     case EDIT_LANGUAGE_ADD_POSTULANT:
       return {
         ...state
