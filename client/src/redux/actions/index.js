@@ -417,3 +417,223 @@ export function addSeñority(id, input){
   }
 }
 
+///ACA EMPIEZAN ACTIONS PARA LA PIPELINE////
+
+export function addNew(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeNew(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeNew`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function addReview(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addReview`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeReview(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeReview`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function addContact(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addContact`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeContact(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeContact`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function addInterviewRRHH(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addInterviewRRHH`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeInterviewRRHH(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeInterviewRRHH`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function addInterviewTech(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addInterviewTech`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeInterviewTech(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeInterviewTech`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+
+export function addOffered(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addOffered`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeOffered(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeOffered`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function addHired(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addHired`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeHired(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeHired`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function addRejected(id, input){
+ 
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addRejected`, {input: input})
+      return dispatch({
+        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+export function removeRejected(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeRejected`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+///////////////////////////////////////////////
