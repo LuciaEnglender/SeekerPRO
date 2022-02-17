@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostulados, filterStatusPipeline } from "../../../redux/actions";
+import { getPostulados, filterStatusPipeline, postVacancyPipeline } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import PostulantesVacancy from "../PostulantesVacancy";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -12,7 +12,8 @@ function Pipeline({ id }) {
   const postulados = useSelector((state) => state.rootReducer.postulados);
   console.log(postulados)
   useEffect(() => {
-    dispatch(getPostulados(id));
+    dispatch(getPostulados(id))
+    dispatch(postVacancyPipeline(id))
   }, [dispatch]);
 
   // function handlePipeline(e) {

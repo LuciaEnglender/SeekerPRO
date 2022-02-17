@@ -17,6 +17,7 @@ const email2 = email.substring(1, email.length - 1);
 
   function handleApply() {
     dispatch(apply(id, postulanteId));
+  
     alert("you applied for this job... Good luck!");
   }
 

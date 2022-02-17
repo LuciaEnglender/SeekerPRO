@@ -20,6 +20,16 @@ export function postVacancy(payload) {
     return res;
   };
 }
+//POST PARA CREAR VACANTES
+export function postVacancyPipeline(id) {
+  return async function (dispatch) {
+    const res = await axios.post(`http://localhost:3001/pipeline/${id}`);
+    return dispatch({
+      type: 'POST_PIPELINE',
+      payload: res
+    })
+  };
+}
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAS
 export function getVacancy(business) {
   return async function (dispatch) {

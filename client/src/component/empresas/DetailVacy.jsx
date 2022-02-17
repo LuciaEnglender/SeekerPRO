@@ -6,7 +6,7 @@ import NavHomeE from "./modules/NavHomeE";
 import Pipeline from "./modules/Pipeline";
 import { getPostulados, getVacancyDetail } from "../../redux/actions/index"
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
-import { deleteVacancy } from "../../redux/actions/index"
+import { deleteVacancy, postVacancyPipeline } from "../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -22,6 +22,11 @@ function DetailVacy() {
   }, [dispatch, id])
   console.log(detalle)
 
+  function handlePipeline(e){
+    //e.preventDefault();
+    dispatch(postVacancyPipeline(id))
+    
+  }
   function handleDelete(e) {
     e.preventDefault();
     dispatch(deleteVacancy(id))
@@ -54,6 +59,9 @@ function DetailVacy() {
             <div class="flex justify-end mt-4">
               <button className="text-xs font-medium text-indigo-500" onClick={e => { handleDelete(e) }} >Delete Vacancy</button>
             </div>
+            {/* <div class="flex justify-end mt-4">
+              <button className="text-xs font-medium text-indigo-500" onClick={e => { handlePipeline(e) }} >Pipeline</button>
+            </div> */}
           </div>
 
         </div>

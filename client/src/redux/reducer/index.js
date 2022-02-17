@@ -28,6 +28,10 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+    case "POST_PIPELINE" :
+      return {
+        ...state,
+      }
     case "GET_VACANCY":
       return {
         ...state,
