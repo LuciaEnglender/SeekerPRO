@@ -13,7 +13,7 @@ function Pipeline({ id }) {
   console.log(postulados)
   useEffect(() => {
     dispatch(getPostulados(id))
-    dispatch(postVacancyPipeline(id))
+    //dispatch(postVacancyPipeline(id))
   }, [dispatch]);
 
   // function handlePipeline(e) {
