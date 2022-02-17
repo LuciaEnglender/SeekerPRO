@@ -11,7 +11,7 @@ import ButtonLogOut from "../../private/ButtonLogOut";
 // TAILWIND
 const navigation = [
   { name: "Home", href: "/homep", current: false },
-    { name: "Messages", href: "/homep/mensajes", current: false },
+  { name: "Messages", href: "/homep/mensajes", current: false },
   { name: "Notifications", href: "/homep/notificaciones", current: false },
 ];
 
