@@ -418,9 +418,21 @@ export function addSeñority(id, input){
 }
 
 ///ACA EMPIEZAN ACTIONS PARA LA PIPELINE////
+export function removeAll(id, input){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeAll`, {input: input})
+      return dispatch({
+        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
 
 export function addNew(id, input){
- 
   return async function (dispatch){
     try{
       const edit = await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, {input: input})
