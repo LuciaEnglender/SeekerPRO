@@ -12,6 +12,7 @@ const {
 
 const { Op } = require("sequelize");
 const e = require("express");
+const res = require("express/lib/response");
 
 const routerVacancy = Router();
 
@@ -544,18 +545,29 @@ routerVacancy.get("/filterByTech", async (req, res) => {
 // });
 
 routerVacancy.get("/vacs/:id", async (req, res) => {
-  //Trae todos los pustulantes de una vacante
+  // Trae todos los pustulantes de una vacante
+ 
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
       .getPostulants({
         attributes: ["name"],
       })
       .then((postulant) => {
-        console.log(postulant);
-        res.json(postulant);
+       res.json(postulant);
       });
   });
+  //  console.log(nuevar)
+// const vacancy = await Vacancy.findByPk(req.params.id, {
+//   include: [
+//  {
+//    model: Postulant,
+//    }
+//   ]
+// })
+// console.log(vacancy)
+// res.json(vacancy)
 });
+
 
 routerVacancy.get("/vac/:id", async (req, res) => {
   //cuantos postulantes tiene cada vacante

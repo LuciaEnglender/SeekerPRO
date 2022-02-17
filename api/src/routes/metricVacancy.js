@@ -289,23 +289,35 @@ routerMetric.post('/vacpost', async (req, res) => {
         for (var y = 0; y < filteredArray.length; y++) {
             var numPostulant = []
 
-            Vacancy.findByPk(y).then((vacancy) => {
-                vacancy
-                    .getPostulants({
+            // Vacancy.findByPk(y).then((vacancy) => {
+            //     vacancy
+            //         .getPostulants({
 
-                        attributes: ["id"],
+            //             attributes: ["id"],
 
-                    })
-                    .then((postulant) => {
-                        console.log(postulant.length);
+            //         })
+            //         .then((postulant) => {
+            //             console.log(postulant.length);
 
-                        Object.defineProperty(newObjVacPost, filteredArray[y], {
-                            value: postulant.length,
-                            writable: true,
-                            enumerable: true,
-                            configurable: true
-                        });
-                    });
+                        
+            //         });
+            // });
+            const vacancy = await Vacancy.findByPk(req.params.id, {
+                include: [
+               {
+                 model: Postulant,
+                 }
+                ]
+              })
+              console.log(vacancy)
+             ///quedo aqui agrgar la metrica.
+              
+
+            Object.defineProperty(newObjVacPost, filteredArray[y], {
+                value: postulant.length,
+                writable: true,
+                enumerable: true,
+                configurable: true
             });
         }
         allMetric.push(newObjVacPost)
@@ -326,6 +338,8 @@ routerMetric.post('/vacpost', async (req, res) => {
 
 //Trae todos los pustulantes de una vacante de la tabla
 routerMetric.get("/vacs/:id", async (req, res) => {
+    var nuevar = []
+
     Vacancy.findByPk(req.params.id).then((vacancy) => {
         vacancy
             .getPostulants({
@@ -333,8 +347,11 @@ routerMetric.get("/vacs/:id", async (req, res) => {
             })
             .then((postulant) => {
                 console.log(postulant);
+                nuevar.push(postulant )
             });
     });
+console.log(nuevar)
 });
+
 
 module.exports = routerMetric;
