@@ -13,10 +13,10 @@ import { Navigate } from "react-router-dom";
 const Landing = () => {
   const { isAuthenticated } = useAuth0();
   return (
-    <div className="w-full h-full bg-colorFondo1">
+    <div className="w-full h-full bg-colorFondo2">
       {/* NAVBAR LANDING */}
-      <div className="h-14 md:h-16 w-full">
-        <nav className="grid grid-cols-5 grid-rows-1 shadow-lg fixed h-14 md:h-16 w-full bg-colorFondo2 rounded-b-2xl">
+      <div className="h-14 md:h-16 w-screen">
+        <nav className="grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1  shadow-lg fixed h-20 md:h-16 w-screen bg-colorFondo2 rounded-b-2xl">
           <div className="flex m-0 justify-center">
             <div className="mt-3 md:mt-4  ml-8">
               <Link to="landing" smooth={"easeInOutQuad"} duration={1500}>
@@ -24,43 +24,43 @@ const Landing = () => {
               </Link>
             </div>
           </div>
-          <div></div>
-          <div className="col-span-2">
-            <div className="flex m-0 justify-center mt-4 md:mt-5 mr-16">
-              <div className="mr-2 md:mr-10">
+          <div className="col-span-2 row-start-2 md:row-start-1 md:col-start-2">
+            <div className="flex m-0 justify-center py-1 md:mt-5">
+              <div className="mx-7 md:mx-5">
                 <Link to="FAQ" smooth={"easeInOutQuad"} duration={1500}>
                   <button className="hover:opacity-100 rounded-2xl opacity-70 text-lg">
                     FAQ
                   </button>
                 </Link>
               </div>
-              <div>
+              <div className="mx-7 md:mx-5">
                 <Link to="about" smooth={"easeInOutQuad"} duration={1500}>
-                  <button className="hover:opacity-100 rounded-2xl  opacity-70 text-lg">
+                  <button className="hover:opacity-100 rounded-2xl opacity-70 text-lg">
                     About
                   </button>
                 </Link>
               </div>
-              <div className="ml-2 md:ml-10">
+              <div className="mx-7 md:mx-5">
                 <Link to="contact" smooth={"easeInOutQuad"} duration={1500}>
-                  <button className="hover:opacity-100 rounded-2xl  opacity-70 text-lg">
+                  <button className="hover:opacity-100 rounded-2xl opacity-70 text-lg">
                     Contact
                   </button>
                 </Link>
               </div>
             </div>
           </div>
-          <div className="flex m-0 justify-center">
-            <div className="mt-3 md:mt-4 mr-5  w-32">
-    
-              {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
+          <div className=" col-start-2 md:col-start-4">
+            <div className="flex m-0 justify-center">
+              <div className="mt-3 md:mt-4  mr-7">
+                {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
+              </div>
             </div>
           </div>
         </nav>
       </div>
       {/* SECTION LANDING */}
-      <section name="landing" className="m-5 md:pt-16 ">
-        <div className="grid  pt-8 md:pt-0 grid-rows-1 md:grid-cols-2">
+      <section name="landing" className="m-5">
+        <div className="grid pt-8 md:pt-0 grid-rows-1 grid-cols-1 md:grid-cols-2 md:grid-rows-1">
           {isAuthenticated ? (
             <Navigate to={"/register"} />
           ) : (
@@ -72,13 +72,13 @@ const Landing = () => {
             </div>
           )}
 
-          <div className="flex flex-col m-0 justify-center">
-            <img className="w-fit h-fit p-10" src="/Landing.png" alt="asd" />
+          <div className="flex m-0 justify-center">
+            <img className=" p-10" src="/Landing.png" alt="asd" />
           </div>
         </div>
       </section>
       {/* SECTION FAQ */}
-      <section name="FAQ" className="text-center p-14 md:p-16 mb-32">
+      <section name="FAQ" className="text-center pt-14 md:p-16 mb-32">
         <div className="max-w-xl inline-block">
           <h1 className="text-4xl font-bold mb-4">How it Works?</h1>
           <p className="mb-4">

@@ -2,14 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroDinamico from "./Assets/FiltroDinamico";
-import { getProfile, getBusiness, getVacancy, clearBusiness } from "../../redux/actions/indexP";
+import {
+  getProfile,
+  getBusiness,
+  getVacancy,
+  clearBusiness,
+} from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
 import Vacancy from "./Vacancy";
-import BusinessCard from '../postulantes/FollowBusiness/BusinessCard'
+import BusinessCard from "../postulantes/FollowBusiness/BusinessCard";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -23,7 +28,9 @@ import Slides from './Metrics/Slides'
 export default function Home() {
   const dispatch = useDispatch();
 
-  const filtradas = useSelector((state) => state.rootReducerPostulante.filteredVacancy);
+  const filtradas = useSelector(
+    (state) => state.rootReducerPostulante.filteredVacancy
+  );
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,15 +38,15 @@ export default function Home() {
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
-  const pageMax = filtradas.length / 3
+  const pageMax = filtradas.length / 3;
 
-  console.log("current", currentVacancy)
+  console.log("current", currentVacancy);
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  
+
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
-  
+
   const { user, isAuthenticated } = useAuth0();
 
   const email = JSON.stringify(user.email);
@@ -51,21 +58,18 @@ const handleAll = (e) => {
   dispatch(getVacancy()); 
   };
 
-//Renderizacion de todas las empresas
-  const business = useSelector((state) =>state.rootReducerPostulante.business)
+  //Renderizacion de todas las empresas
+  const business = useSelector((state) => state.rootReducerPostulante.business);
   const handleAllBusiness = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(getBusiness());
-    };
+  };
 
-//console.log("business", business)
+  //console.log("business", business)
 
   useEffect(() => {
-    dispatch(getProfile(email2));   
+    dispatch(getProfile(email2));
   }, []);
-
-
-  
 
   return (
     <div className="absolute bg-gray-300 h-screen w-screen">
@@ -78,8 +82,8 @@ const handleAll = (e) => {
       <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-gray-300  h-auto pt-7">
         {/* MI PERFIL */}
         <div className="bg-gray-300 p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">        
-                <MiPerfil /> 
+          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
+            <MiPerfil />
           </div>
         </div>
         {/* VACAN */}
@@ -97,90 +101,80 @@ const handleAll = (e) => {
                       <SearchBar />
                     </div>
                   </div>
- </div>
-                <div> 
-                  <FiltroDinamico />
-              
                 </div>
-                
-                <div className=" flex m-0 justify-center">           
-                       <button
-                      className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-                      onClick={(e) => handleAll(e)}
-                    >
-                      all vacancies{" "}
-                    </button> 
-    <button className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-                onClick={(e) => handleAllBusiness(e)} >
-                      all business{" "}
-   </button>
-
-                  </div>
-
-
+                <FiltroDinamico />
+                <div className=" flex m-0 justify-center">
+                  <button
+                    className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                    onClick={(e) => handleAll(e)}
+                  >
+                    all vacancies{" "}
+                  </button>
+                  <button
+                    className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                    onClick={(e) => handleAllBusiness(e)}
+                  >
+                    all business{" "}
+                  </button>
+                </div>
               </div>
               <div className="grid-span-4 h-full">
-                 {currentVacancy.length === 0 ? (
-                  <p className=" font-bold text-center text-zinc-400 my-4 mb-3">Don't wait for opportunities, go for them!</p>
+                {currentVacancy.length === 0 ? (
+                  <p className=" font-bold text-center text-zinc-400 my-4 mb-3">
+                    Don't wait for opportunities, go for them!
+                  </p>
                 ) : (
-                  <div>        
-                    { business.length > 0 ?                                         
-                    business?.map((el)=> {
-                                          return (
-                                            <div className="m-4" key={el.id}>
-                                            <BusinessCard
-                                              id = {el.id}
-                                               name={el.name}
-                                              description={el.description}
-                                              location={el.location}                                                                                                                                                                                                                                                                     />
-                                          </div>
-                                          )
-                                        }) :
-                    
-
-                    
-                    currentVacancy[0].cuit? 
-                                        currentVacancy?.map((el)=> {
-                                          return (
-                                            <div className="m-4" key={el.id}>
-                                            <BusinessCard
-                                              id = {el.id}
-                                               name={el.name}
-                                              description={el.description}
-                                              location={el.location}    
-                                                                                                                                                                                                                                                                                          />
-                                          </div>
-                                          )
-                                        })
-                    
-                    :  
-                    currentVacancy?.map((el) => {
-                      return (
-                        <div className="m-4" key={el.id}>
-                          <Vacancy
-                            id = {el.id}
-                            business = {el.businesses[0].name}   
-                             name={el.name}
-                            description={el.description}
-                            languages={el.languages
-                              ?.map((l) => l.name)
-                              .join(", ")}
-                            seniorities={el.seniorities
-                              ?.map((s) => s.name)
-                              .join(", ")}
-                            technologies={el.technologies
-                              ?.map((t) => t.name)
-                              .join(", ") }
-                            date={el.createdAt}
-                         
-                          />
-                        </div>
-                      );
-                    }) 
-
-                    
-
-                    }
+                  <div>
+                    {business.length > 0
+                      ? business?.map((el) => {
+                          return (
+                            <div className="m-4" key={el.id}>
+                              <BusinessCard
+                                id={el.id}
+                                name={el.name}
+                                description={el.description}
+                                location={el.location}
+                              />
+                            </div>
+                          );
+                        })
+                      : currentVacancy[0].cuit
+                      ? currentVacancy?.map((el) => {
+                          return (
+                            <div className="m-4" key={el.id}>
+                              <BusinessCard
+                                id={el.id}
+                                name={el.name}
+                                description={el.description}
+                                location={el.location}
+                              />
+                            </div>
+                          );
+                        })
+                      : currentVacancy?.map((el) => {
+                          return (
+                            <div className="m-4" key={el.id}>
+                              <Vacancy
+                                id={el.id}
+                                name={el.name}
+                                description={el.description}
+                                phone={el.phone}
+                                languages={el.languages
+                                  ?.map((l) => l.name)
+                                  .join(", ")}
+                                seniorities={el.seniorities
+                                  ?.map((s) => s.name)
+                                  .join(", ")}
+                                skills={el.skills
+                                  ?.map((sk) => sk.name)
+                                  .join(", ")}
+                                technologies={el.technologies
+                                  ?.map((t) => t.name)
+                                  .join(", ")}
+                              />
+                            </div>
+                          );
+                        })}
                   </div>
                 )}
               </div>
@@ -193,24 +187,26 @@ const handleAll = (e) => {
                 >
                   <AiOutlineArrowLeft />
                 </button>
-                
+
                 <button
                   className="m-3 text-zinc-400"
                   onClick={() =>
-                    paginado( pageMax <= currentPage? currentPage : currentPage + 1)
+                    paginado(
+                      pageMax <= currentPage ? currentPage : currentPage + 1
+                    )
                   }
-                > <AiOutlineArrowRight />
-                  
+                >
+                  {" "}
+                  <AiOutlineArrowRight />
                 </button>
-                     <h1 > 
-                      <Pagination
-                     vacancyPerPage={vacancyPerPage}
-                     filtradas={filtradas}
-                     paginado={paginado}
-                   />
-                   </h1>
-                 </div>   
-                                                          
+                <h1>
+                  <Pagination
+                    vacancyPerPage={vacancyPerPage}
+                    filtradas={filtradas}
+                    paginado={paginado}
+                  />
+                </h1>
+              </div>
             </div>
           </div>
         </div>
@@ -241,8 +237,6 @@ const handleAll = (e) => {
     </div>
   );
 }
-
-
 
 /*  const [postulaciones, setPostulaciones] = useState(false);
   function handlePostulations() {
