@@ -6,12 +6,9 @@ import {
   AiOutlineLinkedin,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
-import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router-dom";
+import { ButtonLogIn } from "../../private/ButtonLogIn";
 
 const Landing = () => {
-  const { isAuthenticated } = useAuth0();
   return (
     <div className="w-full h-full bg-colorFondo2">
       {/* NAVBAR LANDING */}
@@ -52,7 +49,7 @@ const Landing = () => {
           <div className=" col-start-2 md:col-start-4">
             <div className="flex m-0 justify-center">
               <div className="mt-3 md:mt-4  mr-7">
-                {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
+                <ButtonLogIn />
               </div>
             </div>
           </div>
@@ -61,17 +58,10 @@ const Landing = () => {
       {/* SECTION LANDING */}
       <section name="landing" className="m-5">
         <div className="grid pt-8 md:pt-0 grid-rows-1 grid-cols-1 md:grid-cols-2 md:grid-rows-1">
-          {isAuthenticated ? (
-            <Navigate to={"/register"} />
-          ) : (
-            <div className="flex flex-col m-0 justify-center">
-              <h1 className="text-4xl text-center font-bold">JSekkers</h1>
-              <h2 className="text-3xl text-center">
-                Optimized to make you grow
-              </h2>
-            </div>
-          )}
-
+          <div className="flex flex-col m-0 justify-center">
+            <h1 className="text-4xl text-center font-bold">JSekkers</h1>
+            <h2 className="text-3xl text-center">Optimized to make you grow</h2>
+          </div>
           <div className="flex m-0 justify-center">
             <img className=" p-10" src="/Landing.png" alt="asd" />
           </div>
