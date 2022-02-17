@@ -15,7 +15,8 @@ function Vacancy({
   seniorities,
   id,
   technologies,
-  businessId,
+  business,
+  date
 }) {
   console.log("id", id);
   //
@@ -74,7 +75,7 @@ function Vacancy({
  <p> Publication date: {date.substr(0, 10)}</p> </div><br/>
          </div>
       </div>
-    </div>
+  
   );
 }
 

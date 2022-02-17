@@ -29,13 +29,23 @@ import { getUsers } from "../../redux/actions/indexL";
 export default function EditProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSkill());
+    dispatch(getTechnology());
+    dispatch(getLanguage());
+    dispatch(getSeniority());
+    dispatch(getLocation());
+    dispatch(getUsers(email2));
+  }, []);
+
   const tecno = useSelector((state) => state.rootReducerPostulante.technology);
   const habilidades = useSelector((state) => state.rootReducerPostulante.skill);
   const lenguaje = useSelector((state) => state.rootReducerPostulante.language);
   const experiencia = useSelector(
-    (state) => state.rootReducerPostulante.seniority
+    (state) => state.rootReducerPostulante.seniority?.map(e => e.name)
   );
-  const locat = useSelector((state) => state.rootReducerPostulante.location);
+  const locat = useSelector((state) => state.rootReducerPostulante.location?.map(e => e.name));
 
   const profileState = useSelector(
     (state) => state.rootReducerPostulante.profile[0]
@@ -51,20 +61,23 @@ export default function EditProfile() {
     id: profileState.id,
     name: profileState.name,
     phone: profileState.phone,
-    locations: profileState.locations,
+    locations: profileState.locations?.map(l => l.name),
     gender: profileState.gender,
     github: profileState.github,
     linkedIn: profileState.linkedIn,
-    portfolio: profileState.porfolio,
-    // CV:profileState.cv,
-    // file:profileState.file,
+    portfolio: profileState.portfolio,
+    CV:profileState.cv,
+    file:profileState.file,
     technologies: profileState.technologies,
     languages: profileState.languages,
     skills: profileState.skills,
-    seniorities: profileState.seniorities,
+    seniorities: profileState.seniorities?.map(s => s.name),
     extras: profileState.extras,
     //loginId:id,
   });
+console.log(input.seniorities)
+  const asd = input.seniorities
+  const asd2 = input.locations
 
   function handleChange(e) {
     setInput({
@@ -148,6 +161,7 @@ export default function EditProfile() {
     if (input.seniorities.includes(e.target.value)) {
       alert("Already in the list");
     } else {
+    dispatch(deleteSeñority(id, asd))
       setInput({
         ...input,
         seniorities: [e.target.value],
@@ -160,6 +174,7 @@ export default function EditProfile() {
     if (input.locations.includes(e.target.value)) {
       alert("Already in the list");
     } else {
+      dispatch(deleteLocation(id, asd2))
       setInput({
         ...input,
         locations: [e.target.value],
@@ -232,12 +247,12 @@ export default function EditProfile() {
   };
 
   const handleDeleteLocation = (e) => {
-    console.log(e.target.value);
+    console.log(e);
     setInput({
       ...input,
-      locations: input.locations.filter((el) => el.name !== e.target.value),
+      locations: input.locations.filter((el) => el !== e),
     });
-    dispatch(deleteLocation(id, e.target.value));
+    dispatch(deleteLocation(id, e));
   };
 
   function handleCheck(e) {
@@ -260,14 +275,7 @@ export default function EditProfile() {
     dispatch(editProfile(id, input));
     navigate("/homep");
   }
-  useEffect(() => {
-    dispatch(getSkill());
-    dispatch(getTechnology());
-    dispatch(getLanguage());
-    dispatch(getSeniority());
-    dispatch(getLocation());
-    dispatch(getUsers(email2));
-  }, []);
+
   return (
     <div className="w-screen bg-colorFondo2">
       <div>
@@ -339,13 +347,13 @@ export default function EditProfile() {
                       Location Selection
                     </option>
 
-                    {locat?.map((el) => (
+                    {locat?.map((el, i) => (
                       <option
                         className="rounded-2xl bg-verdeClaro"
-                        value={el.name}
-                        key={el.id}
+                        value={el}
+                        key={i}
                       >
-                        {el.name}
+                        {el}
                       </option>
                     ))}
                   </select>
@@ -356,8 +364,9 @@ export default function EditProfile() {
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
+                      value={el}
                     >
-                      {el.name}
+                      {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
@@ -459,7 +468,7 @@ export default function EditProfile() {
                   className="text-center  text-verdeHover"
                   htmlFor="github"
                 >
-                  GitHub:
+                  GitHub
                 </label>
                 <div className="flex m-0 justify-center">
                   <input
@@ -477,7 +486,7 @@ export default function EditProfile() {
                   className="text-center  text-verdeHover"
                   htmlFor="linkedin"
                 >
-                  LinkedIn:
+                  LinkedIn*
                 </label>
                 <div className="flex m-0 justify-center">
                   <input
@@ -549,7 +558,7 @@ export default function EditProfile() {
               {/*TECHNO*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover">
-                  Technology
+                  Technology*
                 </label>
                 <div className="flex m-0 justify-center">
                   <select
@@ -619,7 +628,7 @@ export default function EditProfile() {
               {/*LENGUA*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover">
-                  Languages
+                  Languages*
                 </label>
                 <div className="flex m-0 justify-center">
                   <select
@@ -688,7 +697,7 @@ export default function EditProfile() {
               </div>
               {/*SKILLS*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover"> Skill</label>
+                <label className="text-center  text-verdeHover"> Skill*</label>
                 <div className="flex m-0 justify-center">
                   <select
                     className="w-fit text-center xl:w-52 rounded-2xl bg-verdeClaro"
@@ -744,7 +753,7 @@ export default function EditProfile() {
                           <button
                             className="rounded-2xl hover:bg-verdeClaro"
                             type="reset"
-                            onClick={() => handleDeleteLanguage(el)}
+                            onClick={() => handleDeleteSkills(el)}
                           >
                             <GrFormClose />
                           </button>
@@ -757,7 +766,7 @@ export default function EditProfile() {
               {/*SENIORITY*/}
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover">
-                  Siniority
+                  Siniority*
                 </label>
                 <div className="flex m-0 justify-center">
                   <select
@@ -775,13 +784,13 @@ export default function EditProfile() {
                     >
                       Seniority Selection
                     </option>
-                    {experiencia?.map((el) => (
+                    {experiencia?.map((el, i) => (
                       <option
                         className="rounded-2xl bg-verdeClaro"
-                        value={el.name}
-                        key={el.id}
+                        value={el}
+                        key={i}
                       >
-                        {el.name}
+                        {el}
                       </option>
                     ))}
                   </select>
@@ -814,7 +823,7 @@ export default function EditProfile() {
                           <button
                             className="rounded-2xl hover:bg-verdeClaro"
                             type="reset"
-                            onClick={() => handleDeleteLanguage(el)}
+                            onClick={() => handleDeleteSeniority(el)}
                           >
                             <GrFormClose />
                           </button>
