@@ -31,6 +31,7 @@ export const ADD_FAVOURITES = "ADD_FAVOURITES"
 export const APPLY = "APPLY"
 export const GET_MY_POSTULATIONS = "GET_MY_POSTULATIONS"
 export const REMOVE_POST = "REMOVE_POST" 
+export const TO_PIPELINE = "TO_PIPELINE"
 //PENDING
 export const REMOVE_SEE_LATER = "REMOVE_SEE_LATER"
 export const GET_SEE_LATER = "GET_SEE_LATER"
@@ -326,8 +327,8 @@ return{
   //APPLY POSTULATION
 
 export function apply(id, postulanteId){
-  console.log(id)
-  console.log(postulanteId)
+  //console.log(id)
+  //console.log(postulanteId)
   return async function (){
     try{
       await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
@@ -339,6 +340,18 @@ export function apply(id, postulanteId){
         alert("Postulation failed")
       }
   } 
+  }
+  export function toPipeline(id, postulanteId){
+  return async function () {
+    try {
+      await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, postulanteId)
+      return {
+        type: TO_PIPELINE
+      }
+    }
+    catch(error){
+      console.log("Pipeline failed")
+    }
   }
 
     export function removePost(id, postulanteId){
@@ -391,7 +404,7 @@ export function apply(id, postulanteId){
           console.log(postulanteId)
           return async function (){
             try{
-              await axios.put(`http://localhost:3001/pending/${postulanteId}`, id);
+              await axios.put(`http://localhost:3001/pending/${postulanteId}`, {id:id});
               return {
                   type: REMOVE_SEE_LATER,
                   }
