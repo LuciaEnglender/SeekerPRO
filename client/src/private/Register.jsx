@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SectionViejo from "../component/pages/SectionViejo";
 import SectionNuevo from "../component/pages/SectionNuevo";
 import { getUsers } from "../redux/actions/indexL";
-import { ButtonLogOutLanding } from "./ButtonLogIn";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Navigate } from "react-router-dom";
 
 function Register() {
   const { user } = useAuth0();
@@ -23,10 +22,14 @@ function Register() {
 
   return (
     <>
-      {profileState.email === undefined ? (
+      {email === undefined ? (
+        <h2> Cargando.... </h2>
+      ) : profileState.email === undefined ? (
         <SectionNuevo></SectionNuevo>
+      ) : profileState.profile === "DEVELOPER" ? (
+        <Navigate to="/homep" />
       ) : (
-        <SectionViejo></SectionViejo>
+        <Navigate to="/homee" />
       )}
     </>
   );
