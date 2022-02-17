@@ -10,7 +10,9 @@ const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
 const routerEditing = require('./postulantEdit')
 const routerEditingVacancy= require('./editVacancy')
-const routerMetric = require("./metric");
+const routerMetric = require("./metricVacancy");
+const routerMetricP = require("./metricPostulant");
+
 const routerPipeLine = require("./pipeline")
 
 
@@ -39,6 +41,7 @@ router.use("/favorite", routerFavorite);
 router.use("/pending", routerPending);
 router.use('/postulantEdit', routerEditing);
 router.use("/metric", routerMetric);
+router.use("/metricp", routerMetricP);
 router.use("/pipeline", routerPipeLine);
 
 router.use("/location", location);
