@@ -1,5 +1,11 @@
 const { Router } = require("express");
 const {
+  New,
+    Review,
+    Contact,
+    InterviewTech,
+    InterviewRRHH,
+    Offered, Hired, Rejected,
   Vacancy,
   Business,
   Language,
@@ -223,12 +229,14 @@ routerVacancy.post("/", async (req, res) => {
     seniority,
     // skill,
     technology,
+    phone
   } = req.body;
 
   try {
     let newVacancyInDB = await Vacancy.create({
       name,
       description,
+      phone
     });
     //busco la empresa para obtener su nombre;
     let businessInDB = await Business.findOne({
@@ -266,7 +274,46 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addTechnology(technologyInDB);
     }
-    //console.log(newVacancyInDB);
+
+    const newStatus = await New.create({
+      name: name
+  })
+
+  const reviewStatus = await Review.create({
+      name: name
+  })
+
+  const contactStatus = await Contact.create({
+      name: name
+  })
+
+  const interviewRRHHStatus = await InterviewRRHH.create({
+      name: name
+  })
+
+  const interviewTechStatus = await InterviewTech.create({
+      name: name
+  })
+  const offeredStatus = await Offered.create({
+      name: name
+  })
+  const hiredStatus = await Hired.create({
+      name: name
+  })
+  const rejectedStatus = await Rejected.create({
+      name: name
+  })
+
+ 
+  await newVacancyInDB.setNew(newStatus)
+  await newVacancyInDB.setReview(reviewStatus)
+  await newVacancyInDB.setContact(contactStatus)
+  await newVacancyInDB.setInterviewRRHH(interviewRRHHStatus)
+  await newVacancyInDB.setInterviewTech(interviewTechStatus)
+  await newVacancyInDB.setOffered(offeredStatus)
+  await newVacancyInDB.setHired(hiredStatus)
+  await newVacancyInDB.setRejected(rejectedStatus)
+    
     res.status(200).json(newVacancyInDB);
   } catch (e) {
     console.log(e);
@@ -539,9 +586,7 @@ routerVacancy.get("/vacs/:id", async (req, res) => {
   //Trae todos los pustulantes de una vacante
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
-      .getPostulants({
-        attributes: ["name"],
-      })
+      .getPostulants()
       .then((postulant) => {
         console.log(postulant);
         res.json(postulant);

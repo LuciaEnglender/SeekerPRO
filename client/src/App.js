@@ -29,6 +29,7 @@ import FormPerfil from "./component/empresas/FormPerfil";
 import EditVcancy from "./component/empresas/modules/EditVcancy";
 import FormVacancy from "./component/empresas/modules/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
+import MercadoPago from "./component/empresas/MercadoPago";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/homep/mypostulations" element={<Postulations />} />
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
+        <Route path="/homee/mercado" element={<MercadoPago />} />
         <Route path="/homee/create" element={<FormPerfil />} />
         <Route path="/homee/notification" element={<NotiEmp />} />
         <Route path="/homee/message" element={<MensajeEmp />} />

@@ -22,16 +22,10 @@ function DetailVacy() {
   }, [dispatch, id])
   console.log(detalle)
 
-  function handlePipeline(e){
-    //e.preventDefault();
-    dispatch(postVacancyPipeline(id))
-    
-  }
   function handleDelete(e) {
     e.preventDefault();
     dispatch(deleteVacancy(id))
     alert("Vacante eliminada correctamente ! ")
-    console.log(id)
     navigate(-1);
   }
 

@@ -12,7 +12,16 @@ function DetailPostulante() {
   //     dispatch(postulanteDetail(id));
   // }, [dispatch, id])
 
-  //detalle del postulante
+  function handleSelect(e) {
+   
+    dispatch(deleteSeñority(id, asd))
+      setInput({
+        ...input,
+        seniorities: [e.target.value],
+      });
+      dispatch(addSeñority(id, e.target.value));
+    
+  }
   return (
     <div>
       {/* <div>
@@ -29,16 +38,19 @@ function DetailPostulante() {
           <p>{el.portfolio}</p>
       </div> */}
       <div>
+        <div>
+        <button>Change candidate status</button>
+        </div>
         {/* SELECT PARA PONER ESTADO EN LA PIPELINE */}
         <select>
-          <option value="nuevo">nuevo</option>
-          <option value="revision">revision</option>
-          <option value="contactado">contactado</option>
-          <option value="entrevista">entrevista</option>
-          <option value="tech">entrevista técnica</option>
-          <option value="ofrecido">ofrecido</option>
-          <option value="contratado">contratado</option>
-          <option value="rechazado">rechazado</option>
+          <option value="nuevo">new</option>
+          <option value="revision">review</option>
+          <option value="contactado">contacted</option>
+          <option value="entrevista">interview</option>
+          <option value="tech">tech interview</option>
+          <option value="ofrecido">offered</option>
+          <option value="contratado">hired</option>
+          <option value="rechazado">rejected</option>
         </select>
       </div>
       <Link to="/homee">

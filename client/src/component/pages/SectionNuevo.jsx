@@ -3,6 +3,7 @@ import { postEmail } from "../../redux/actions/indexL";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { ButtonLogOutLanding } from "../../private/ButtonLogIn";
 
 const SectionNuevo = () => {
   const navigate = useNavigate();
@@ -48,43 +49,71 @@ const SectionNuevo = () => {
   }
 
   return (
-    <div>
-      <div className="grid grid-cols-2">
-        <div className="m-10">
-          <h2 className="text-5xl font-bold pb-4">Como Candidato</h2>
-          <p className="pb-4 text-justify">
-            We will help you to get in contact with recruiters all over the
-            world, from the most relevant IT companies.
-          </p>
-          <div className="flex m-0 justify-center">
-            <button
-              className="p-4 py-2 inline-block bg-gradient-to-r to-colorBoton from-colorFondo3 text-white font-bold rounded-3xl filter hover:drop-shadow  focus:outline-none focus:ring focus:ring-orange-600"
-              value="DEVELOPER"
-              onClick={(e) => handleSubmitP(e)}
-            >
-              Candidate
-            </button>
-          </div>
-        </div>
-        <div className="m-10">
-          <div>
-            <h2 className="text-5xl font-bold pb-4">Como Administrador</h2>
-            <p className="pb-4 text-justify">
-              We offer efficiency in the selection process in recruiting
-              developers specialized in all technologies.
-            </p>
-            <div className="flex m-0 justify-center">
-              <button
-                className="p-4 py-2 inline-block bg-gradient-to-r to-colorBoton from-colorFondo3 text-white font-bold rounded-3xl filter hover:drop-shadow  focus:outline-none focus:ring focus:ring-orange-600"
-                value="BUSINESS"
-                onClick={(e) => handleSubmitE(e)}
-              >
-                Administrator
-              </button>
+    <div className="bg-colorFondo2 h-screen">
+      <nav className="p-4 px-10 md:px-16 grid grid-cols-2">
+        <h3 className="font-bold md:text-5xl text-2xl">JSeekers</h3>
+        <div>
+          <div className="float-right">
+            <div className="float-right">
+              <ButtonLogOutLanding />
             </div>
           </div>
         </div>
-      </div>
+      </nav>
+      <section>
+        <div className=" pt-35% px-10   bg-colorFondo2">
+          <div className="flex flex-col  md:flex-row ">
+            <div className="my-7">
+              <div className="md:mb-10">
+                <h2 className="text-3xl md:text-5xl text-center font-bold pb-4">
+                  Candidate
+                </h2>
+              </div>
+              <div className="md:px-14 ">
+                <p className="text-center md:text-center text-base">
+                  We will help you to get in contact with recruiters all over
+                  the world, from the most relevant IT companies.
+                </p>
+              </div>
+              <div>
+                <div className="flex mt-1 md:mt-10 justify-center">
+                  <button
+                    className="p-4 py-1 inline-block bg-gradient-to-r to-colorFondo1 from-colorDetalles text-white font-bold rounded-3xl filter hover:drop-shadow transition ease-in-out hover:-translate-y-1 hover:scale-105 "
+                    value="DEVELOPER"
+                    onClick={(e) => handleSubmitP(e)}
+                  >
+                    Candidate
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="my-7">
+              <div className="md:mb-10">
+                <h2 className="text-3xl md:text-5xl text-center  font-bold pb-4">
+                  Administrator
+                </h2>
+              </div>
+              <div className="md:px-14 ">
+                <p className="text-center md:text-center text-base">
+                  We offer efficiency in the selection process in recruiting
+                  developers specialized in all technologies.
+                </p>
+              </div>
+              <div>
+                <div className="flex mt-1 md:mt-10 justify-center">
+                  <button
+                    className="text-center p-4 py-1 inline-block bg-gradient-to-r to-colorFondo1 from-colorDetalles text-white font-bold rounded-3xl filter hover:drop-shadow transition ease-in-out hover:-translate-y-1 hover:scale-105 "
+                    value="BUSINESS"
+                    onClick={(e) => handleSubmitE(e)}
+                  >
+                    Administrator
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

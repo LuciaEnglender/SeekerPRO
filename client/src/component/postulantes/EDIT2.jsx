@@ -272,7 +272,6 @@ console.log(input.seniorities)
   function handleSubmit(e) {
     e.preventDefault();
     console.log(input);
-
     dispatch(editProfile(id, input));
     navigate("/homep");
   }
