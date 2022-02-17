@@ -18,30 +18,17 @@ function Register() {
   const email2 = email.substring(1, email.length - 1);
 
   useEffect(() => {
-    console.log(profileState.email);
     dispatch(getUsers(email2));
   }, []);
 
   return (
-    <div className="p-9 bg-gray-300">
-      <nav className=" grid grid-cols-2">
-        <h3 className="font-bold  text-2xl">JSeekers</h3>
-        <div>
-          <div className="float-right">
-            <div className="float-right">
-              <ButtonLogOutLanding />
-            </div>
-          </div>
-        </div>
-      </nav>
-      <section className="px-16 mt-32 mb-32">
-        {profileState.email === undefined ? (
-          <SectionNuevo></SectionNuevo>
-        ) : (
-          <SectionViejo></SectionViejo>
-        )}
-      </section>
-    </div>
+    <>
+      {profileState.email === undefined ? (
+        <SectionNuevo></SectionNuevo>
+      ) : (
+        <SectionViejo></SectionViejo>
+      )}
+    </>
   );
 }
 
