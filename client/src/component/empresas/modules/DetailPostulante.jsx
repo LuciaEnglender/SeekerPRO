@@ -39,7 +39,7 @@ function DetailPostulante() {
       </div> */}
       <div>
         <div>
-         <label htmlFor="">Change candidate status</label>
+        <button>Change candidate status</button>
         </div>
         {/* SELECT PARA PONER ESTADO EN LA PIPELINE */}
         <select>
