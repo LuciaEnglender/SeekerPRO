@@ -292,6 +292,36 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
     postulant
       .getVacancies({
         attributes: ["name", "description"],
+        include: [
+          {
+              model: Language,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+          {
+              model: Seniority,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+          {
+              model: Technology,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+          {
+              model: Business,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+      ],
       })
       .then((vacancy) => {
         console.log(vacancy);
