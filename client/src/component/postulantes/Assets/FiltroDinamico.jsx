@@ -79,12 +79,12 @@ export default function FiltroDinamico() {
       });
     }
   }
- // function handleChange(e) {
- //   setInput({
- //     ...input,
- //     [e.target.name]: e.target.value,
- //   });
- // }
+  // function handleChange(e) {
+  //   setInput({
+  //     ...input,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // }
   const handleDelete = (e) => {
     setInput({
       ...input,
@@ -99,12 +99,12 @@ export default function FiltroDinamico() {
     });
   };
 
- // const handleDeleteSkills = (e) => {
- //   setInput({
- //     ...input,
- //     skill: input.skill.filter((el) => el !== e),
- //   });
- // };
+  // const handleDeleteSkills = (e) => {
+  //   setInput({
+  //     ...input,
+  //     skill: input.skill.filter((el) => el !== e),
+  //   });
+  // };
 
   const handleDeleteSeniority = (e) => {
     setInput({
@@ -121,11 +121,14 @@ export default function FiltroDinamico() {
 
   return (
     <div className=" flex flex-col">
-      <form className=" flex flex-row " onSubmit={(e) => handleSubmit(e)}>
+      <form
+        className=" flex flex-col md:flex-row "
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <div className="m-3 flex flex-col justify-center ">
           <label className="text-gray-400"> Technology</label>
           <select
-            className="xl:w-52 rounded-2xl bg-verdeClaro"
+            className="w-52 rounded-2xl bg-verdeClaro"
             placeholder="technology"
             value={input.technology}
             name="technology"
@@ -253,17 +256,16 @@ export default function FiltroDinamico() {
           </div>
         </div>
         <div>
-        <div className="  my-3 flex m-0 justify-center">
-          <button
-            className=" mt-5 ml-3 w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-            type="submit"
-          >
-            filter
-          </button>
+          <div className="  my-3 flex m-0 justify-center">
+            <button
+              className=" mt-5 ml-3 w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+              type="submit"
+            >
+              filter
+            </button>
+          </div>
         </div>
-      </div>
       </form>
-      
     </div>
   );
 }

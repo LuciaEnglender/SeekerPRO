@@ -91,9 +91,6 @@ const handleAll = (e) => {
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
             <div className="items-center justify-center grid grid-row-7">
               <div className="grid-span-2 bg-verdeMedio w-fit">
-                <div className="flex m-0 justify-center">
-                  <h1 className="font-bold text-center text-zinc-400 mb-3"></h1>
-                </div>
                 {/* SEARCHBAR */}
                 <div className=" flex m-0 justify-center">
                   <div className=" flex m-0 justify-center bg-verdeMedio w-fit">
@@ -158,7 +155,6 @@ const handleAll = (e) => {
                                 id={el.id}
                                 name={el.name}
                                 description={el.description}
-                                phone={el.phone}
                                 languages={el.languages
                                   ?.map((l) => l.name)
                                   .join(", ")}

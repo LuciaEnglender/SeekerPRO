@@ -7,7 +7,7 @@ const NotiEmp = () => {
     <div>
       <NavHomeE titulo={"Notificaciones"} />
       <Link to="/homee">
-        <button>Volvers</button>
+        <button>go back</button>
       </Link>
     </div>
   );

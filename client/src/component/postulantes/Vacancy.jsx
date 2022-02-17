@@ -10,7 +10,6 @@ import { AiOutlineWhatsApp } from "react-icons/ai";
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
 function Vacancy({
   name,
-  phone,
   description,
   languages,
   seniorities,

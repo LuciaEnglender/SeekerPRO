@@ -8,7 +8,7 @@ import {
   getLanguage,
   filterVacancies,
   getSearchBar,
-  getProfile
+  getProfile,
 } from "../../../redux/actions/index";
 import { GrFormClose } from "react-icons/gr";
 
@@ -119,19 +119,18 @@ function SearcHome() {
     <div>
       <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
         <div className="bg-grey 300 p-2 px-10">
-          
           <div className="bg-verdeMedio rounded-2xl p-6 w-full h-full">
             <h1 className=" font-bold  text-center mb-3">{empresa.name}</h1>
             <hr />
             <div className="flex m-0 justify-content">
-          {isAuthenticated && (
-            <img
-              className="h-300 w-300 rounded-full"
-              src={user.picture}
-              alt=""
-            />
-          )}
-        </div>
+              {isAuthenticated && (
+                <img
+                  className="h-300 w-300 rounded-full"
+                  src={user.picture}
+                  alt=""
+                />
+              )}
+            </div>
             <hr />
             <div>
               <div className="w-full flex flex-col m-0 justify-center pt-5">
