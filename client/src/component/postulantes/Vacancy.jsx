@@ -10,7 +10,6 @@ import { AiOutlineWhatsApp } from "react-icons/ai";
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
 function Vacancy({
   name,
-  phone,
   description,
   languages,
   seniorities,
@@ -36,12 +35,7 @@ function Vacancy({
               >
                 {name}
               </p>
-              <a
-                className="m-2"
-                href={`https://wa.me/${phone}?text=Hola%somos%hired%pro`}
-              >
-                <AiOutlineWhatsApp className="hover:opacity-100 opacity-70 text-lg" />
-              </a>
+
             </div>
             <div class="flex flex-row">
               <p

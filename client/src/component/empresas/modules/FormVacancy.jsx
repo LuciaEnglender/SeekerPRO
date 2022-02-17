@@ -35,7 +35,6 @@ const FormVacancy = () => {
     technology: [],
     seniority: [],
     language: [],
-    phone: "",
     business: email2,
   });
 
@@ -56,7 +55,6 @@ const FormVacancy = () => {
       technology: [],
       seniority: [],
       language: [],
-      phone: "",
       business: email2,
     });
     navigate(-1);
@@ -134,16 +132,6 @@ const FormVacancy = () => {
               type="text"
               name="name"
               value={input.name}
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="w-full flex flex-col m-0 justify-center">
-            <label> Phone:</label>
-            <input
-              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-              type="text"
-              name="phone"
-              value={input.phone}
               onChange={(e) => handleChange(e)}
             />
           </div>

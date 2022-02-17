@@ -19,9 +19,7 @@ server.get("/", (req, res, next) => {
 
   //Cargamos el carrido de la bd
   const carrito = [
-    {title: "Producto 1", quantity: 5, price: 10.52},
-    {title: "Producto 2", quantity: 15, price: 100.52},
-    {title: "Producto 3", quantity: 6, price: 200}
+    {title: "PlanPro", quantity: 1, price: 100},
   ]
   
   const items_ml = carrito.map(i => ({
@@ -40,7 +38,6 @@ server.get("/", (req, res, next) => {
           id: "atm"
         }
       ],
-      installments: 3  //Cantidad máximo de cuotas
     },
     back_urls: {
       success: 'http://localhost:3001/mercadopago/pagos',

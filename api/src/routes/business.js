@@ -9,6 +9,7 @@ const {
   Skill,
   Login,
   Seniority,
+  // Pro
 } = require("../db");
 const { Op } = require("sequelize");
 const { check, validationResult } = require("express-validator");
@@ -49,7 +50,7 @@ routerBusiness.get("/count/:id", async (req, res) => {
   //res.json(numVacancy)
 });
 
-//Busca empresa por nombre o trae todas solo lo usa dentro de la aplicacion 
+//Busca empresa por nombre o trae todas solo lo usa dentro de la aplicacion
 routerBusiness.get("/find/:email", async (req, res) => {
   const email = req.params.email;
 
@@ -421,7 +422,7 @@ routerBusiness.post(
   "/",
 
   async (req, res) => {
-    let { name, description, location, cuit, emailId } = req.body;
+    let { name, description, location, cuit, emailId, pro } = req.body;
 
     try {
       let createBusiness = await Business.create({
@@ -429,10 +430,12 @@ routerBusiness.post(
         description,
         location,
         cuit,
+        pro
       });
 
       let finderLogin = await Login.findByPk(emailId);
       await createBusiness.setLogin(finderLogin);
+
       res.json(createBusiness);
     } catch (error) {
       console.log(error);

@@ -152,7 +152,6 @@ export default function Home() {
                                 id={el.id}
                                 name={el.name}
                                 description={el.description}
-                                phone={el.phone}
                                 languages={el.languages
                                   ?.map((l) => l.name)
                                   .join(", ")}

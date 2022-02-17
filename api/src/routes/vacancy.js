@@ -214,7 +214,6 @@ routerVacancy.post("/", async (req, res) => {
   const {
     name,
     description,
-    phone,
     business,
     language,
     //location,
@@ -227,7 +226,6 @@ routerVacancy.post("/", async (req, res) => {
     let newVacancyInDB = await Vacancy.create({
       name,
       description,
-      phone,
     });
     //busco la empresa para obtener su nombre;
     let businessInDB = await Business.findOne({
