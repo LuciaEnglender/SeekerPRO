@@ -156,6 +156,78 @@ pipeline.put('/:idVacancy/removeReview', async (req, res) => {
         console.log(e)
     }
 });
+
+pipeline.put('/:idVacancy/removeAll', async (req, res) => {
+    const { idPostulant } = req.body
+    const { idVacancy } = req.params
+
+    try {
+        const finderPostulant = await Postulant.findByPk(idPostulant);
+
+        const finderNew = await New.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+
+        if(finderNew) await finderPostulant.removeNew(finderNew)
+
+        const finderReview = await Review.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderReview)  await finderPostulant.removeReview(finderReview);
+
+        const finderContact = await Contact.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderContact) await finderPostulant.removeContact(finderContact)
+
+        const finderInterviewRRHH = await InterviewRRHH.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderInterviewRRHH) await finderPostulant.removeInterviewRRHH(finderInterviewRRHH)
+
+        const finderInterviewTech = await InterviewTech.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+       if(finderInterviewTech) await finderPostulant.removeInterviewTech(finderInterviewTech)
+
+        const finderOffered = await Offered.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if (finderOffered) await finderPostulant.removeOffered(finderOffered)
+
+        const finderHired = await Hired.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if (finderHired) await finderPostulant.removeHired(finderHired)
+
+        const finderRejected = await Rejected.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderRejected) await finderPostulant.removeRejected(finderRejected)
+
+        res.status(200).json('hechoooooo')
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
 //***********CONTACT************* */
 
 pipeline.put('/:idVacancy/addContact', async (req, res) => {

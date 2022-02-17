@@ -16,7 +16,8 @@ import {
   GET_MY_POSTULATIONS,
   REMOVE_POST,
   APPLY,
-  TO_PIPELINE
+  TO_PIPELINE,
+  REMOVE_PIPELINE,
   //FOLLOW
   GET_BUSINESS,
   GET_FOLLOWED,
@@ -225,6 +226,10 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state
       }
     case REMOVE_POST:
+      return {
+        ...state,
+      }
+      case REMOVE_PIPELINE:
       return {
         ...state,
       }
