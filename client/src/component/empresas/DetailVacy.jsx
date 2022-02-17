@@ -26,7 +26,6 @@ function DetailVacy() {
     e.preventDefault();
     dispatch(deleteVacancy(id))
     alert("Vacante eliminada correctamente ! ")
-    console.log(id)
     navigate(-1);
   }
 
