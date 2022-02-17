@@ -3,20 +3,10 @@ const { DataTypes } = require("sequelize");
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
 	// defino el modelo
-	sequelize.define("message", {
-		message: {
-			type: DataTypes.TEXT,
+	sequelize.define("conversation", {
+		members: {
+			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false,
-		},
-		conversationId: {
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
-		sender: {
-			type: DataTypes.STRING,
-		},
-		text: {
-			type: DataTypes.STRING,
 		},
 	});
 };
