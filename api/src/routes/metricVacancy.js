@@ -5,6 +5,9 @@ const { Vacancy, Language, Technology, Seniority } = require("../db");
 const routerMetric = Router();
 
 // Traer las vacantes para contabiliza tecnologia language y seniority
+
+
+/*
 routerMetric.get('/:name', async (req, res) => {
     try {
         const numLanguage = await Vacancy.findAll({
@@ -70,7 +73,7 @@ routerMetric.get('/:name', async (req, res) => {
 
     }
 });
-
+*/
 routerMetric.get('/', async (req, res) => {
     ///*************************INICIO*************************** */
 
@@ -264,6 +267,74 @@ routerMetric.get('/', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
+});
+//metricas de vacante mas postulada
+routerMetric.post('/vacpost', async (req, res) => {
+    try {
+        var allMetric = []
+
+        const arrVacancy = await Vacancy.findAll()
+
+        //sacamos todos los name de las vacancies
+        var arrNameVac = []
+        for (let i = 0; i < arrVacancy.length; i++) {
+            arrNameVac.push(arrVacancy[i].name)
+        }
+
+        const filteredArray = arrNameVac.filter(function (ele, pos) {
+            return arrNameVac.indexOf(ele) == pos;
+        })
+
+        const newObjVacPost = {}
+        for (var y = 0; y < filteredArray.length; y++) {
+            var numPostulant = []
+
+            Vacancy.findByPk(y).then((vacancy) => {
+                vacancy
+                    .getPostulants({
+
+                        attributes: ["id"],
+
+                    })
+                    .then((postulant) => {
+                        console.log(postulant.length);
+
+                        Object.defineProperty(newObjVacPost, filteredArray[y], {
+                            value: postulant.length,
+                            writable: true,
+                            enumerable: true,
+                            configurable: true
+                        });
+                    });
+            });
+        }
+        allMetric.push(newObjVacPost)
+        // console.log(numPostulant)
+        res.json(newObjVacPost)
+    } catch (e) {
+        console.log(e)
+    }
+})
+//1 traer todas las vacantes en orden id y su nombre en el orfen que aparece dacarlo en un array 
+//para que luego sea la propiedad del objecto y el id sea el parametro de busqueda del findByPk(i)
+//hacer un for grade donde me incluya primero el nombre  por el id pasarcelo como findByPk(i) 
+
+//2 traer vacantes por postuante
+
+//3 hacer el obje con name de vacante y numero de postulantes
+
+
+//Trae todos los pustulantes de una vacante de la tabla
+routerMetric.get("/vacs/:id", async (req, res) => {
+    Vacancy.findByPk(req.params.id).then((vacancy) => {
+        vacancy
+            .getPostulants({
+                attributes: ["name"],
+            })
+            .then((postulant) => {
+                console.log(postulant);
+            });
+    });
 });
 
 module.exports = routerMetric;
