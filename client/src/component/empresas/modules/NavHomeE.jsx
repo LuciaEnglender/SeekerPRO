@@ -13,6 +13,7 @@ const navigation = [
   { name: "Home", href: "/homee", current: false },
   { name: "Mails", href: "/homee/message", current: false },
   { name: "Search", href: "/homee/search", current: false },
+  { name: "Mercado", href: "/homee/mercado", current: false },
 ];
 
 function classNames(...classes) {
