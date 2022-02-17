@@ -90,7 +90,7 @@ pipeline.put('/:idVacancy/addNew', async (req, res) => {
         console.log(finderPostulant)
 
         await finderPostulant.addNew(finderNew)
-        res.send('hecho')
+        res.send('New, waiting for review')
     } catch (e) {
         console.log(e)
     }
@@ -131,7 +131,7 @@ pipeline.put('/:idVacancy/addReview', async (req, res) => {
 
 
         await finderPostulant.addReview(finderReview)
-        res.send('hecho')
+        res.send('New, wainting for rewiew')
     } catch (e) {
         console.log(e)
     }
@@ -282,7 +282,7 @@ pipeline.put('/:idVacancy/addInterviewRRHH', async (req, res) => {
         const finderPostulant = await Postulant.findByPk(idPostulant);
 
         await finderPostulant.addInterviewRRHH(finderInterviewRRHH)
-        res.send('hecho')
+        res.send('You pass to RRHH interview')
     } catch (e) {
         console.log(e)
     }
