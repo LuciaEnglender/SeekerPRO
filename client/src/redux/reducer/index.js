@@ -28,6 +28,10 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+    case "POST_PIPELINE" :
+      return {
+        ...state,
+      }
     case "GET_VACANCY":
       return {
         ...state,
@@ -156,14 +160,14 @@ function rootReducer(state = initialState, action) {
       };
     case 'EDIT_SEÑORITY_ADD_VACANCY':
       return {
-        ...state
+        ...state,
       };
     case 'EDIT_SEÑORITY_DELETE_VACANCY':
       return {
-        ...state
-      }
+        ...state,
+      };
     case 'EDIT_TECHNOLOGY_DELETE_VACANCY':
-      return{...state,}
+      return{...state,};
     case 'EDIT_TECHNOLOGY_ADD_VACANCY':
       return{...state,};
       case 'EDIT_LANGUAGE_DELETE_VACANCY':
@@ -172,8 +176,8 @@ function rootReducer(state = initialState, action) {
     
     case 'EDIT_SKILL_ADD_VACANCY':
       return {
-        ...state
-      }
+        ...state,
+      };
     case 'EDIT_SKILL_DELETE_VACANCY':
       return {
         ...state

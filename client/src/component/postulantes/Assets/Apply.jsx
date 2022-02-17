@@ -19,6 +19,7 @@ function Apply({id}) {
 
   function handleApply() {
     dispatch(apply(id, postulanteId));
+  
     alert("you applied for this job... Good luck!");
     dispatch(toPipeline(id, postulanteId))
     navigate("/homep")
