@@ -4,6 +4,7 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+<<<<<<< Updated upstream
 //const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 // const { DATABASE_URL } = process.env;
 const DATABASE_URL = "postgres://aykxrszxwncsal:29f8b65477e84d79d840eafeeb43fadcdef4146b4e253b96d22608544be0c253@ec2-34-194-171-47.compute-1.amazonaws.com:5432/d9m2ne6s1g1a79"
@@ -11,15 +12,32 @@ const DATABASE_URL = "postgres://aykxrszxwncsal:29f8b65477e84d79d840eafeeb43fadc
 
 const sequelize = new Sequelize(
 	DATABASE_URL,
+=======
+
+//const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+
+// const { DATABASE_URL } = process.env;
+//const DATABASE_URL = "postgres://bbvsylwlpvhgqq:3535d924e0c63721da39debabe7a096db94d691e97174e22ee6a9d9d99732191@ec2-52-73-29-239.compute-1.amazonaws.com:5432/d9kbdiduvvh4e"
+
+// const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
+// const proConfig = DB_DATABASE_URL;
+// console.log(`data: ${DB_DATABASE_URL}`)
+// console.log(process.env)
+const DB_USER="postgres"
+const DB_PASSWORD="Na29G06"
+const DB_HOST="localhost"
+
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
+>>>>>>> Stashed changes
 	{
 		logging: false, // set to console.log to see the raw SQL queries
 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-		dialectOptions: {
+	/*	dialectOptions: {
 			ssl: {
 				require: true,
 				rejectUnauthorized: false,
 			},
-		},
+		},*/
 	}
 );
 const basename = path.basename(__filename);
