@@ -52,7 +52,7 @@ export default function Home() {
   //Renderizacions todas las vacantes
   const handleAll = (e) => {
     dispatch(clearBusiness());
-    dispatch(getVacancy(email2));
+    dispatch(getVacancy());
   };
 
   //Renderizacion de todas las empresas
