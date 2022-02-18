@@ -6,8 +6,6 @@ const routerMetric = Router();
 
 // Traer las vacantes para contabiliza tecnologia language y seniority
 
-
-
 routerMetric.get('/:name', async (req, res) => {
     try {
         const numLanguage = await Vacancy.findAll({
@@ -270,7 +268,7 @@ routerMetric.get('/', async (req, res) => {
 });
 
 
-//metricas de vacante mas postulada
+//metricas de vacante mas postulada o solicitada
 routerMetric.post('/vac', async (req, res) => {
     try {
         var allMetric = []
