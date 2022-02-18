@@ -4,9 +4,15 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+
 // const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 // const { DATABASE_URL } = process.env;
-const DATABASE_URL = "postgres://aykxrszxwncsal:29f8b65477e84d79d840eafeeb43fadcdef4146b4e253b96d22608544be0c253@ec2-34-194-171-47.compute-1.amazonaws.com:5432/d9m2ne6s1g1a79"
+const DATABASE_URL = "postgres://bbvsylwlpvhgqq:3535d924e0c63721da39debabe7a096db94d691e97174e22ee6a9d9d99732191@ec2-52-73-29-239.compute-1.amazonaws.com:5432/d9kbdiduvvh4e"
+
+// const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
+// const proConfig = DB_DATABASE_URL;
+// console.log(`data: ${DB_DATABASE_URL}`)
+// console.log(process.env)
 
 const sequelize = new Sequelize(DATABASE_URL,
 	{
@@ -51,6 +57,7 @@ const {Admin, Business, Language, Location, Login, PipeLine,Postulant,Pending ,S
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 //Tabla intermedia ente Postulante y Vacante muchos  a  muchos
+
 Business.belongsToMany(Vacancy, {through : "business_vacancy" });
 Vacancy.belongsToMany(Business, {through : "business_vacancy" });
 

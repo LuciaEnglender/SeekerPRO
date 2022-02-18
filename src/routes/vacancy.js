@@ -306,7 +306,7 @@ routerVacancy.get("/search/:name", async (req, res) => {
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
-        },
+          },
       },
       attributes: ["name", "id", "description"],
       include: [
@@ -561,5 +561,6 @@ routerVacancy.get("/vac/:id", async (req, res) => {
       });
   });
 });
+
 
 module.exports = routerVacancy;

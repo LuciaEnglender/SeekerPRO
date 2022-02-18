@@ -80,7 +80,6 @@ export function getProfiles() {
 export function getSearchName(name) {
   return async function (dispatch) {
     var res = await axios.get(`/postulant/search/${name}`);
-
     return dispatch({
       type: "GET_NAME_PROFILE",
       payload: res.data,

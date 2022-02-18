@@ -1,54 +1,24 @@
 const { Router } = require("express");
 
-const { Pending, Vacancy, Language, Technology, Seniority, Business } = require("../db");
+const { Pending, Vacancy } = require("../db");
 const routerPending = Router();
 
 //(2)este get debe traer de la tabla de relacionada las vacantes pendientes del postulante
 routerPending.get('/:id/vacancy', async (req, res) => {
 
-    try {
+  try{
         Pending.findByPk(req.params.id).then((pending) => {
-            pending
-                .getVacancies({
-                    attributes: ["id", "name", "description",],
-                    include: [
-                        {
-                            model: Language,
-                            attributes: ["name"],
-                            through: {
-                                attributes: [],
-                            },
-                        },
-                        {
-                            model: Seniority,
-                            attributes: ["name"],
-                            through: {
-                                attributes: [],
-                            },
-                        },
-                        {
-                            model: Technology,
-                            attributes: ["name"],
-                            through: {
-                                attributes: [],
-                            },
-                        },
-                        {
-                            model: Business,
-                            attributes: ["name"],
-                            through: {
-                                attributes: [],
-                            },
-                        },
-                    ],
-                })
-                .then((vacancy) => {
-                    res.json(vacancy)
-                });
-        });
-    } catch (error) {
-        coonsole.log(error)
-    }
+        pending
+            .getVacancies({
+                attributes: ["name", "description"],
+            })
+            .then((vacancy) => {
+                res.json(vacancy)
+            });
+    });
+}catch(error){
+    coonsole.log(error)
+}
 });
 
 //(1)crea el idPostulant modelo pendiente y  postea la relacion en la tabla pending_postulant
@@ -59,7 +29,7 @@ routerPending.post('/:idPostulant', async (req, res) => {
     //verificar perque lo recibo como string el idPostulant de pending para probar
     try {
         let createBusiness = await Pending.create({
-            idPostulant
+            idPostulant        
         });
         let pending = await Pending.findByPk(idPostulant)
         let vacancy = await Vacancy.findByPk(id)
