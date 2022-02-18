@@ -2,6 +2,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./src/**/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      padding: {
+        "20%": "20vh",
+        "25%": "20vh",
+        "30%": "20vh",
+        "35%": "20vh",
+      },
       colors: {
         //NUEVOS
         colorFondo1: "#353535",

@@ -74,6 +74,252 @@ pipeline.post('/:id', async (req, res) => {
     }
 })
 
+pipeline.put('/:idVacancy/removeAll', async (req, res) => {
+    const { idPostulant } = req.body
+    const { idVacancy } = req.params
+
+    try {
+        const finderPostulant = await Postulant.findByPk(idPostulant);
+
+        const finderNew = await New.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+
+        if(finderNew) await finderPostulant.removeNew(finderNew)
+
+        const finderReview = await Review.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderReview)  await finderPostulant.removeReview(finderReview);
+
+        const finderContact = await Contact.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderContact) await finderPostulant.removeContact(finderContact)
+
+        const finderInterviewRRHH = await InterviewRRHH.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderInterviewRRHH) await finderPostulant.removeInterviewRRHH(finderInterviewRRHH)
+
+        const finderInterviewTech = await InterviewTech.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+       if(finderInterviewTech) await finderPostulant.removeInterviewTech(finderInterviewTech)
+
+        const finderOffered = await Offered.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if (finderOffered) await finderPostulant.removeOffered(finderOffered)
+
+        const finderHired = await Hired.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if (finderHired) await finderPostulant.removeHired(finderHired)
+
+        const finderRejected = await Rejected.findAll({
+            where: {
+                fk_vacancy: idVacancy
+            }
+        })
+        if(finderRejected) await finderPostulant.removeRejected(finderRejected)
+
+        res.status(200).json('hechoooooo')
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+//ruta que trae los postulantes en un estado determinado en una vacante especifica (id vacante)
+pipeline.get('/getPostulantsNew/:id', async (req , res) => {
+    const {id} = req.params
+  
+    try{
+
+        const statusNew = await New.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+    const result = statusNew[0].postulants
+     res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+});
+
+pipeline.get('/getPostulantsReview/:id', async (req , res) => {
+    const {id} = req.params
+
+    try{
+
+        const statusReview = await Review.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+     
+        const result = statusReview[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+});
+
+pipeline.get('/getPostulantsContact/:id', async (req , res) => {
+    const {id} = req.params
+ 
+    try{
+
+        const statusContact = await Contact.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+     
+        const result = statusContact[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+});
+
+
+pipeline.get('/getPostulantsInterviewRRHH/:id', async (req , res) => {
+    const {id} = req.params
+ 
+    try{
+
+        const statusInterviewRRHH = await InterviewRRHH.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+     
+        const result = statusInterviewRRHH[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+});
+
+
+pipeline.get('/getPostulantsInterviewTech/:id', async (req , res) => {
+    const {id} = req.params
+   
+    try{
+
+        const statusInterviewTech = await InterviewTech.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+     
+        const result = statusInterviewTech[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+});
+
+
+
+pipeline.get('/getPostulantsOffered/:id', async (req, res) => {
+    const {id} = req.params
+  
+    try{
+
+        const statusOffered = await Offered.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+
+     
+        const result = statusOffered[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+})
+
+pipeline.get('/getPostulantsHired/:id', async (req, res) => {
+    const {id} = req.params
+    
+    try{
+
+        const statusHired = await Hired.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+
+     
+        const result = statusHired[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+})
+
+pipeline.get('/getPostulantsRejected/:id', async (req, res) => {
+    const {id} = req.params
+ 
+    try{
+
+        const statusRejected = await Rejected.findAll({
+            where : {
+                fk_vacancy : id
+            },
+            include : [
+                {model : Postulant}
+            ]
+        })
+
+     
+        const result = statusRejected[0].postulants
+        res.status(200).json(result)
+    }catch(e){
+        console.log(e)
+    }
+})
+
 //***********NEW************* */
 
 pipeline.put('/:idVacancy/addNew', async (req, res) => {
@@ -90,7 +336,9 @@ pipeline.put('/:idVacancy/addNew', async (req, res) => {
         console.log(finderPostulant)
 
         await finderPostulant.addNew(finderNew)
+
         res.send('New, waiting for review')
+
     } catch (e) {
         console.log(e)
     }
@@ -243,7 +491,7 @@ pipeline.put('/:idVacancy/addContact', async (req, res) => {
         const finderPostulant = await Postulant.findByPk(idPostulant);
 
         await finderPostulant.addContact(finderContact)
-        res.send('hecho')
+        res.send('Serás contactado a la brevedad')
     } catch (e) {
         console.log(e)
     }
@@ -322,7 +570,7 @@ pipeline.put("/:idVacancy/addInterviewTech", async (req, res) => {
             }
         })
         await finderPostulant.addInterviewTech(finderInterviewTech)
-        res.send('hecho')
+        res.send('Se te contactará para definir una fecha para entrevista técnica')
     } catch (e) {
         console.log(e)
     }
@@ -380,7 +628,7 @@ pipeline.put("/:idVacancy/addOffered", async (req, res) => {
             }
         })
         await finderPostulant.addOffered(finderOffered)
-        res.send('hecho')
+        res.send('Felicitaciones! Has recibido una nueva propuesta laboral!')
     } catch (e) {
         console.log(e)
     }
@@ -419,7 +667,7 @@ pipeline.put("/:idVacancy/addHired", async (req, res) => {
             }
         })
         await finderPostulant.addHired(finderHired)
-        res.send('hecho')
+        res.send('Felicitaciones! Has sido contratado!')
     } catch (e) {
         console.log(e)
     }
@@ -439,7 +687,7 @@ pipeline.put("/:idVacancy/addRejected", async (req, res) => {
             }
         })
         await finderPostulant.addRejected(finderRejected)
-        res.send('hecho')
+        res.send('Lamentablemente se ha rechazado tu postulación.')
     } catch (e) {
         console.log(e)
     }

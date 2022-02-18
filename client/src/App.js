@@ -30,6 +30,8 @@ import EditVcancy from "./component/empresas/modules/EditVcancy";
 import FormVacancy from "./component/empresas/modules/FormVacancy";
 import PrivateRoute from "./private/PrivateRoute";
 import DetailPostulante from "./component/empresas/modules/DetailPostulante";
+import MercadoPago from "./component/empresas/MercadoPago";
+// >>>>>>> 99b51181f2b36a215479c47115b710119d4d87ba
 
 function App() {
   return (
@@ -51,6 +53,7 @@ function App() {
         <Route path="/homep/mypostulations" element={<Postulations />} />
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
+        <Route path="/homee/mercado" element={<MercadoPago />} />
         <Route path="/homee/create" element={<FormPerfil />} />
         <Route path="/homee/notification" element={<NotiEmp />} />
         <Route path="/homee/message" element={<MensajeEmp />} />

@@ -24,7 +24,6 @@ function Apply({id}) {
     navigate("/homep")
   }
 
-
   useEffect(() => {
     dispatch(getProfile(email2));
   }, [dispatch]);

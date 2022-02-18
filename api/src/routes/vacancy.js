@@ -586,9 +586,7 @@ routerVacancy.get("/vacs/:id", async (req, res) => {
   //Trae todos los pustulantes de una vacante
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
-      .getPostulants({
-        attributes: ["name"],
-      })
+      .getPostulants()
       .then((postulant) => {
         console.log(postulant);
         res.json(postulant);

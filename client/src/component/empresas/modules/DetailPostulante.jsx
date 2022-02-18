@@ -11,7 +11,9 @@ function DetailPostulante() {
   const { id } = useParams();
   
   useEffect(() => {
+
       dispatch(postulantDetail(id));
+
   }, [dispatch, id])
 
   const postulante = useSelector((state) => state.rootReducer.postulados)
