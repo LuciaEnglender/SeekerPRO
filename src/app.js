@@ -7,6 +7,7 @@ const routes = require('./routes/index.js');
 const path = require('path');
 
 require('./db.js');
+const path = require('path');
 
 const server = express();
 
@@ -42,5 +43,9 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
+
+
+
+
 
 module.exports = server;

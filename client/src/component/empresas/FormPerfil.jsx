@@ -22,12 +22,11 @@ export default function FormPerfil() {
     location: "",
     cuit: "",
     emailId: email2,
-    // createBus: true,
   });
 
   useEffect(() => {
-    console.log(email2);
     dispatch(getUsers(email2));
+    console.log(email2);
   }, [dispatch, email2]);
 
   function handleSubmit(e) {
@@ -41,7 +40,6 @@ export default function FormPerfil() {
       location: "",
       cuit: "",
       emailId: email2,
-      // createBus: true,
     });
     navigate("/homee");
   }

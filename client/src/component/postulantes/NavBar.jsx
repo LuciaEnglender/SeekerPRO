@@ -11,7 +11,7 @@ import ButtonLogOut from "../../private/ButtonLogOut";
 // TAILWIND
 const navigation = [
   { name: "Home", href: "/homep", current: false },
-    { name: "Messages", href: "/homep/mensajes", current: false },
+  { name: "Messages", href: "/homep/mensajes", current: false },
   { name: "Notifications", href: "/homep/notificaciones", current: false },
 ];
 
@@ -117,7 +117,7 @@ const NavBar = ({ titulo }) => {
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                            My profile
+                            Edit profile
                           </Link>
                         )}
                       </Menu.Item>

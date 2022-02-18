@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {removePost} from '../../../redux/actions/indexP'
+import {removePost, removePipeline} from '../../../redux/actions/indexP'
+
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
@@ -12,6 +13,7 @@ function RemovePost({id}) {
     function handleRemove() {
         dispatch(removePost(id, postulanteId));
         alert ("This applied was remove")
+        dispatch(removePipeline(id, postulanteId))
         navigate("/homep")
       }
   return <div>

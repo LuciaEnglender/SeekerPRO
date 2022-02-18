@@ -10,13 +10,13 @@ import { AiOutlineWhatsApp } from "react-icons/ai";
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
 function Vacancy({
   name,
-  phone,
   description,
   languages,
   seniorities,
   id,
   technologies,
-  businessId,
+  business,
+  date
 }) {
   console.log("id", id);
   //
@@ -29,21 +29,15 @@ function Vacancy({
       <div class="flex items-center  border-b border-gray-400 pb-6">
         <div class="flex items-start justify-between w-full">
           <div class="pl-3 w-full">
-            <div className="flex">
-              <p
-                tabindex="0"
-                class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-              >
-                {name}
-              </p>
-              <a
-                className="m-2"
-                href={`https://wa.me/${phone}?text=Hola%somos%hired%pro`}
-              >
-                <AiOutlineWhatsApp className="hover:opacity-100 opacity-70 text-lg" />
-              </a>
-            </div>
+            <p
+              tabindex="0"
+              class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
+            >  {name}
+            </p>
+            <p> {business}</p>
             <div class="flex flex-row">
+           
+           
               <p
                 tabindex="0"
                 class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"
@@ -67,7 +61,7 @@ function Vacancy({
           {description}
         </p>
         <div tabindex="0" class="focus:outline-none flex">
-          <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+          <div class="py-2 px-4 text-xs leading-3 ">
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
@@ -77,8 +71,11 @@ function Vacancy({
             <SeeLater id={id} />
           </div>
         </div>
+        <div> 
+ <p> Publication date: {date.substr(0, 10)}</p> </div><br/>
+         </div>
       </div>
-    </div>
+  
   );
 }
 

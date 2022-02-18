@@ -1,15 +1,15 @@
-import React  from "react";
+import React, {useEffect}  from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import {getSeeLater} from '../../../redux/actions/indexP'
 import SeeLaterCard from "./SeeLaterCard";
 import NavBar from "../NavBar";
-import MiPerfil from '../MiPerfil';
+
 
 
 function SeeLaterVacancies() {
   const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
   const dispatch = useDispatch();
-  useDispatch(()=>{
+  useEffect(()=>{
     dispatch(getSeeLater(postulanteId))
   },[dispatch])
   const pending = useSelector((state) =>state.rootReducerPostulante.pending)

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import Follow from './Follow';
 
 function BusinessCard({name, description, location, id}) {
+
     return (
         <div
           tabindex="0"
@@ -18,7 +19,7 @@ function BusinessCard({name, description, location, id}) {
                   class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
                 > 
                 {name} <br/>
-                  {id}
+             
                 </p>      
               </div>
               </Link>

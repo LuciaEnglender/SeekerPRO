@@ -16,6 +16,8 @@ import {
   GET_MY_POSTULATIONS,
   REMOVE_POST,
   APPLY,
+  TO_PIPELINE,
+  REMOVE_PIPELINE,
   //FOLLOW
   GET_BUSINESS,
   GET_FOLLOWED,
@@ -43,6 +45,8 @@ import {
   EDIT_SKILL_ADD_POSTULANT,
   EDIT_SEÑORITY_DELETE_POSTULANT,
   EDIT_SEÑORITY_ADD_POSTULANT,
+  //METRICS
+
 
 } from "../actions/indexP";
 
@@ -60,7 +64,9 @@ const initialState = {
   postulations: [],
   pending: [],
   business: [],
-  followedBusiness: []
+  followedBusiness: [],
+  pipeline: [],
+  metrics: [{ } ]
 };
 
 export default function rootReducerPostulante(state = initialState, action) {
@@ -129,6 +135,7 @@ export default function rootReducerPostulante(state = initialState, action) {
       ...state,
       pending: action.payload,
     }
+  
 
     case FILTER_BY_SENIORITY:
       return {
@@ -195,6 +202,10 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state,
       }
+      case REMOVE_PIPELINE:
+      return {
+        ...state,
+      }
       case REMOVE_SEE_LATER:
         return {
           ...state
@@ -219,6 +230,11 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state
       }
+      case TO_PIPELINE :
+        return {
+          ...state,
+          pipeline: action.payload
+        }
     case EDIT_LANGUAGE_ADD_POSTULANT:
       return {
         ...state

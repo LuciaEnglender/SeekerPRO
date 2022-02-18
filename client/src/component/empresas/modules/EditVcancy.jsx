@@ -71,7 +71,7 @@ function EditVcancy() {
     } else {
       setInput({
         ...input,
-        seniorities: [...input.seniorities, e.target.value],
+        seniorities: [ e.target.value],
       });
       dispatch(addSeñority(id, e.target.value))
     }

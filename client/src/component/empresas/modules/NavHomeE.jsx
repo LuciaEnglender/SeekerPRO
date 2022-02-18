@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
@@ -7,12 +7,16 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import ButtonLogOut from "../../../private/ButtonLogOut";
+import { AiOutlineWhatsApp } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../../redux/actions";
 
 // TAILWIND
 const navigation = [
   { name: "Home", href: "/homee", current: false },
   { name: "Mails", href: "/homee/message", current: false },
   { name: "Search", href: "/homee/search", current: false },
+  { name: "Mercado", href: "/homee/mercado", current: false },
 ];
 
 function classNames(...classes) {
@@ -21,6 +25,17 @@ function classNames(...classes) {
 
 const NavHomeE = () => {
   const { user, isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const profileState = useSelector(
+    (state) => state.rootReducerLanding.perfiles
+  );
+
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);
+
+  useEffect(() => {
+    dispatch(getProfile(email2));
+  }, [dispatch]);
 
   return (
     <Disclosure
@@ -67,6 +82,25 @@ const NavHomeE = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                {
+                  (profileState.pro === true ? (
+                    <button
+                      type="button"
+                      target="_blank"
+                      href={`https://wa.me/3518112156?text=Hola%somos%hired%pro`}
+                      className="bg-verdeMedio mx-1 hover:bg-verdeHover p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <AiOutlineWhatsApp
+                        className="h-6 w-6"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  ) : (
+                    <span></span>
+                  ))
+                }
+
                 <button
                   type="button"
                   className="bg-verdeMedio hover:bg-verdeHover p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"

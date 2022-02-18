@@ -18,6 +18,9 @@ import BusinessCard from "../postulantes/FollowBusiness/BusinessCard";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
+import Metrics from './Metrics/Metrics'
+import Slides from './Metrics/Slides'
+
 
 //import Business from './FollowBusiness/Business'
 //import Postulations from "../postulantes/MyPostulations/Postulations";
@@ -28,6 +31,7 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy
   );
+  console.log(filtradas)
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,9 +92,6 @@ export default function Home() {
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
             <div className="items-center justify-center grid grid-row-7">
               <div className="grid-span-2 bg-verdeMedio w-fit">
-                <div className="flex m-0 justify-center">
-                  <h1 className="font-bold text-center text-zinc-400 mb-3"></h1>
-                </div>
                 {/* SEARCHBAR */}
                 <div className=" flex m-0 justify-center">
                   <div className=" flex m-0 justify-center bg-verdeMedio w-fit">
@@ -155,7 +156,6 @@ export default function Home() {
                                 id={el.id}
                                 name={el.name}
                                 description={el.description}
-                                phone={el.phone}
                                 languages={el.languages
                                   ?.map((l) => l.name)
                                   .join(", ")}
@@ -168,6 +168,8 @@ export default function Home() {
                                 technologies={el.technologies
                                   ?.map((t) => t.name)
                                   .join(", ")}
+                                  business={el.businesses[0].name}
+                                  date={el.createdAt}
                               />
                             </div>
                           );
@@ -207,32 +209,28 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* CUARTO GRID */}
-        {/* <div className="bg-verdeOscuro p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <h1> Metrics & Trends</h1>
-            <div className="flex flex-col m-0 justify-center">
-              <img
-                className="rounded-xl mt-3 shadow-lg shadow-black"
-                src={prueba}
-                alt=""
-              />
-              <p className=" text-center mt-2">Trends in technologies</p>
-              <p className=" text-center mt-2">January 2022</p>
-            </div>
-            <div className="flex flex-col m-0 justify-center">
-              <img
-                className="rounded-xl mt-3 shadow-lg shadow-black"
-                src={prueba}
-                alt=""
-              />
-              <p className=" text-center mt-2">Trends in soft-skills</p>
-              <p className=" text-center mt-2">January 2022</p>
-            </div>
-          </div>
-        </div> */}
+         {/* CUARTO GRID */}
+ 
+     <div className="bg-verdeMedio rounded-2xl p-2 text-zinc-400 w-full h-full">
+           <div className="flex flex-col m-0 justify-center">
+       <Metrics/>     
+            
+                 </div>
+     </div>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+      
         {/* SPAN */}
-        <div></div>
+        <div>  <Slides/>   </div>
         <div></div>
       </div>
     </div>

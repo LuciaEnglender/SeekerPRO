@@ -17,6 +17,7 @@
     "react-hook-form": "^7.25.3",
     "react-icons": "^4.3.1",
     "react-json-pretty": "^2.2.0",
+    "react-qr-code": "^2.0.3",
     "react-query": "^3.34.14",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",

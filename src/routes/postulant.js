@@ -9,6 +9,7 @@ const {
   Vacancy,
   Location,
   Login,
+  Business
 } = require("../db");
 
 const { check, validationResult } = require("express-validator");
@@ -287,11 +288,42 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
   }
 });
 //Trae las vacantes  por postulante
+//paso 2
 routerPostulant.get("/:id/vacancy", async (req, res) => {
   Postulant.findByPk(req.params.id).then((postulant) => {
     postulant
       .getVacancies({
         attributes: ["name", "description"],
+        include: [
+          {
+              model: Language,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+          {
+              model: Seniority,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+          {
+              model: Technology,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+          {
+              model: Business,
+              attributes: ["name"],
+              through: {
+                  attributes: [],
+              },
+          },
+      ],
       })
       .then((vacancy) => {
         console.log(vacancy);
@@ -300,21 +332,21 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
   });
 });
 
-// //Cuenta cuantos vacantes tiene un postulante
-// routerPostulant.get("/:id/vacancy", async (req, res) => {
-//   try{Postulant.findByPk(req.params.id).then((postulant) => {
-//     postulant
-//       .getVacancies({
-//         attributes: ["name", "description"],
-//       })
-//       .then((vacancy) => {
-//         console.log(vacancy);
-//         res.json(vacancy.length);
-//       });
-//   });}catch(e){
-//     console.log(e)
-//   }
-// });
+  //Cuenta cuantos vacantes tiene un postulante
+  routerPostulant.get("/:id/vacancy", async (req, res) => {
+    try{Postulant.findByPk(req.params.id).then((postulant) => {
+      postulant
+        .getVacancies({
+          attributes: ["name", "description"],
+        })
+        .then((vacancy) => {
+          console.log(vacancy);
+          res.json(vacancy.length);
+        });
+    });}catch(e){
+      console.log(e)
+    }
+  });
 
 //put para modificar datos de un detalle / perfil de postulante
 routerPostulant.put("/:id", async (req, res) => {
@@ -378,11 +410,7 @@ routerPostulant.put("/editProfile/:id", async (req, res) => {
           name : location
         }
       });
-
-      
     }
-
-
   } catch (e) {
     console.log (e)
   }
@@ -398,61 +426,5 @@ routerPostulant.delete("/:id", async (req, res) => {
     res.status(400).send("ERROR" + error);
   }
 });
-
-//*************PROBANDO vacName *************** */
-
-routerPostulant.get("/vacName", async (req, res) => {
-  const { name } = req.query;
-
-  // const allVacancy = await Vacancy.findAll();
-  console.log(name);
-
-  try {
-    const allVacancy = await Vacancy.findOne({
-      where: { name: name },
-    });
-
-    res.status(200).json(allVacancy);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-routerPostulant.post('/postulate/:id', async (req, res) => {
-  const {id} = req.body
- 
-  const postulanteId = req.params.id
-  try {
-    let postulante = await Postulant.findByPk(postulanteId)
-   
-    let vacancy = await Vacancy.findByPk(id)
-   
-    await postulante.addVacancy(vacancy);
-    
-      res.status(200).json(postulante);
-
-  }catch(e){
-    console.log(e)
-  }
-})
-
-routerPostulant.put('/postulate/:id', async (req, res) =>{
-  const id = req.body.id
-
-  const postulantId = req.params.id
-
-  try {
-      
-    let postulante = await Postulant.findByPk(postulantId)
-   
-    let vacancy = await Vacancy.findByPk(id)
-
-    await postulante.removeVacancy(vacancy) 
-
-    res.status(200).json('Remove succsessfully')
-  }catch (e) {
-    console.log(e)
-  }
-})
 
 module.exports = routerPostulant;
