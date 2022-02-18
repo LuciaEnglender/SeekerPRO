@@ -9,6 +9,7 @@ import {
   getLanguage,
   getSeniority,
   getLocation,
+  getProfile
 } from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
@@ -29,7 +30,7 @@ export default function CreateForm() {
     (state) => state.rootReducerPostulante.seniority
   );
   const locat = useSelector((state) => state.rootReducerPostulante.location)
-
+  
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
   );
@@ -286,11 +287,12 @@ const handleCv=(e)=>{
     dispatch(getLanguage());
     dispatch(getSeniority());
     dispatch(getLocation());
-    dispatch(getUsers(email2));
+    dispatch(getProfile(email2))
+
   }, []);
 
   return (
-    <div className="bg-verdeOscuro w-screen h-screen">
+    <div className="bg-verdeOscuro w-screen h-full">
       <div>
         <NavBar />
       </div>
@@ -599,25 +601,23 @@ const handleCv=(e)=>{
                   ))}
                 </select>
                 <div>
-                  {input.skills.map((el, i) => (
+                  {input.skills?.map((el, i) => (
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      {" "}
-                      {el}
+                      .name                      {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
                         onClick={() => handleDeleteSkills(el)}
                       >
-                        {" "}
-                        X
+                                                X
                       </button>
                     </li>
-                  ))}{" "}
-                </div>
+                  ))}                </div>
               </div>
+              
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center text-verdeHover">Siniority</label>
                 <select
@@ -648,18 +648,17 @@ const handleCv=(e)=>{
                 <div>
                   {input.seniority?.map((el, i) => (
                     <li
-                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={i}
-                    >
-                      {" "}
-                      {el}{" "}
+                      Name="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={el.id}               >
+                      
+                      {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
-                        onClick={() => handleDeleteSeniority(el)}
+                        ok={() => handleDeleteSeniority(el)}
                       >
-                        {" "}
-                        X{" "}
+                        
+                        X
                       </button>
                     </li>
                   ))}
@@ -670,8 +669,6 @@ const handleCv=(e)=>{
               <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center text-verdeHover">Extras</label>
                 <textarea
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder=""
                   type="text"
                   value={input.extras}
                   name="extras"

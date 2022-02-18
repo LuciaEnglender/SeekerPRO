@@ -12,7 +12,7 @@ function Unfollow({id}) {
     function handleUnfollow() {
         dispatch(unfollow(postulanteId, id));
         alert ("Unfollowed business")
-        navigate("/home")
+        navigate("/homep")
       }
   return <div>
  <button 

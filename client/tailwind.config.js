@@ -3,19 +3,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        verdeOscuro:"#242121" ,
+        //NUEVOS
+        colorFondo1: "#353535",
+        colorFondo2: "#3c6e71",
+        colorFondo3: "#ffffff",
+        colorBotones: "#d9d9d9",
+        colorDetalles: "#284b63",
+
+        //NUEVOS
+        verdeOscuro: "#242121",
         verdeMedio: "#333333",
         verdeClaro: "#CDC7CB",
         verdeMuyClaro: "#cad2c5",
         verdeHover: "#c6e0b6",
         grisBoton: "#475569",
       },
-      //darkMode: 'class'
     },
   },
   plugins: [],
-  fontFamily: {
-    sans: ["Montserrat"],
-    serif: ["Merriweather", "serif"],
-  },
+  fontFamily: {},
 };

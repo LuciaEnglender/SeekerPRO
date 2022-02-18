@@ -1,16 +1,25 @@
 import React from "react";
 import Apply from "./Assets/Apply";
 import SeeLater from "./SeeLaterVacancies/SeeLater";
-import Follow from './FollowBusiness/Follow'
+import Follow from "./FollowBusiness/Follow";
+import { AiOutlineWhatsApp } from "react-icons/ai";
 
 //import {getVacancy} from actions
 // import AddToFavourite from "./Assets/AddToFavourite";
 
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
-function Vacancy({ name, description, languages, seniorities, id, technologies, businessId}) {
-
-console.log(id)
-//
+function Vacancy({
+  name,
+  phone,
+  description,
+  languages,
+  seniorities,
+  id,
+  technologies,
+  businessId,
+}) {
+  console.log("id", id);
+  //
   return (
     <div
       tabindex="0"
@@ -20,12 +29,20 @@ console.log(id)
       <div class="flex items-center  border-b border-gray-400 pb-6">
         <div class="flex items-start justify-between w-full">
           <div class="pl-3 w-full">
-            <p
-              tabindex="0"
-              class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-            >
-              {name}
-            </p>
+            <div className="flex">
+              <p
+                tabindex="0"
+                class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
+              >
+                {name}
+              </p>
+              <a
+                className="m-2"
+                href={`https://wa.me/${phone}?text=Hola%somos%hired%pro`}
+              >
+                <AiOutlineWhatsApp className="hover:opacity-100 opacity-70 text-lg" />
+              </a>
+            </div>
             <div class="flex flex-row">
               <p
                 tabindex="0"
@@ -54,14 +71,12 @@ console.log(id)
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <Apply
-        id= {id}/>
+            <Apply id={id} />
+          </div>
+          <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+            <SeeLater id={id} />
+          </div>
         </div>
-        <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <SeeLater
-        id= {id}/>
-        </div>
-         </div>
       </div>
     </div>
   );

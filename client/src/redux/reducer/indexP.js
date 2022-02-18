@@ -2,6 +2,7 @@ import {
   //POSTULANT
   POST_POSTULANTE,
   GET_PROFILE,
+  PUT_EDIT_PROFILE,
   //GET
   GET_TECHNOLOGY,
   GET_SKILL,
@@ -20,6 +21,7 @@ import {
   GET_FOLLOWED,
   UNFOLLOW,
   FOLLOW,
+  CLEAR_BUSINESS,
   //PENDING
   GET_SEE_LATER,
   SEE_LATER,
@@ -30,6 +32,18 @@ import {
   FILTER_BY_TECHNOLOGY,
   FILTER_BY_SKILL,
   FILTER_COMBINATED,
+  //EDITOR POSTULANTE
+  EDIT_LOCATION_DELETE_POSTULANT,
+  EDIT_LOCATION_ADD_POSTULANT,
+  EDIT_TECHNOLOGY_DELETE_POSTULANT,
+  EDIT_TECHNOLOGY_ADD_POSTULANT,
+  EDIT_LANGUAGE_ADD_POSTULANT,
+  EDIT_LANGUAGE_DELETE_POSTULANT,
+  EDIT_SKILL_DELETE_POSTULANT,
+  EDIT_SKILL_ADD_POSTULANT,
+  EDIT_SEÑORITY_DELETE_POSTULANT,
+  EDIT_SEÑORITY_ADD_POSTULANT,
+
 } from "../actions/indexP";
 
 import nuevasVacantes from "../../component/pages/JSON/nuevasVacantes.json";
@@ -55,6 +69,10 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state,
       };
+      case PUT_EDIT_PROFILE:
+        return{
+          ...state
+        };
     case GET_TECHNOLOGY:
       return {
         ...state,
@@ -154,7 +172,11 @@ export default function rootReducerPostulante(state = initialState, action) {
       ...state,
       followedBusiness: action.payload
         }
-        
+        case CLEAR_BUSINESS:
+          return {
+              ...state,
+              business : []
+          }
     case SEE_LATER:
       return {
         ...state,
@@ -177,6 +199,46 @@ export default function rootReducerPostulante(state = initialState, action) {
         return {
           ...state
         }
+    case EDIT_LOCATION_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_LOCATION_ADD_POSTULANT :
+      return {
+        ...state
+      }
+      case EDIT_TECHNOLOGY_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_TECHNOLOGY_ADD_POSTULANT :
+      return {
+        ...state
+      }
+      case EDIT_LANGUAGE_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_LANGUAGE_ADD_POSTULANT:
+      return {
+        ...state
+      }
+    case EDIT_SKILL_ADD_POSTULANT:
+      return {
+      ...state
+     }
+    case EDIT_SKILL_DELETE_POSTULANT:
+      return {
+        ...state
+      }
+      case EDIT_SEÑORITY_DELETE_POSTULANT:
+      return {
+      ...state
+     }
+    case EDIT_SEÑORITY_ADD_POSTULANT:
+      return {
+        ...state
+      }
     default:
       return state;
   }

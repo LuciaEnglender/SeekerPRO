@@ -24,7 +24,6 @@ server.use((req, res, next) => {
   next();
 });
 
-
 //server.use(express.static(path.join(__dirname.slice(0,-4), "client/build")))
 // server.use(express.static("client/build"))
 
@@ -32,7 +31,7 @@ if(process.env.NODE_ENV === "production"){
   server.use(express.static(path.join(__dirname.slice(0,-4), "client/build")))
 }
 
-console.log(path.join(__dirname.slice(0,-4), "client/build"))
+// console.log(path.join(__dirname.slice(0,-4), "client/build"))
 
 server.use('/', routes);
 

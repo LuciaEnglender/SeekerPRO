@@ -23,7 +23,10 @@ const NavHomeE = () => {
   const { user, isAuthenticated } = useAuth0();
 
   return (
-    <Disclosure as="nav" className="bg-verdeMedio">
+    <Disclosure
+      as="nav"
+      className="bg-colorFondo2 fixed w-full shadow-2xl rounded-b-2xl"
+    >
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -96,19 +99,6 @@ const NavHomeE = () => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-verdeClaro ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/homee/perfil"
-                            className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Perfil
-                          </Link>
-                        )}
-                      </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link

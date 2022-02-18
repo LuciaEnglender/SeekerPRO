@@ -1,4 +1,3 @@
-//Comentario de Aly
 //const middleware = require('./Middlewares/loginMiddleware')
 const { Router } = require("express");
 const routerBusiness = require("./business");
@@ -8,6 +7,13 @@ const routerSignUp = require("./registroManual");
 const routerAdmin = require("./admin");
 const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
+const routerEditing = require('./postulantEdit')
+
+const routerEditingVacancy= require('./editVacancy')
+
+const routerMetric = require("./metric");
+const routerPipeLine = require("./pipeline")
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -18,6 +24,10 @@ const seniority = require("./Filters/seniority");
 const allFilters = require("./Filters/allFiltersVacancy");
 const allFiltersBuss = require("./Filters/allFiltersBusiness");
 const location = require("./Filters/location");
+
+//       Chat Online
+const conversations = require("./Chat/conversation");
+const messages = require("./Chat/messages");
 
 const router = Router();
 
@@ -32,11 +42,19 @@ router.use("/allFiltersBusiness", allFiltersBuss);
 router.use("/admin", routerAdmin);
 router.use("/favorite", routerFavorite);
 router.use("/pending", routerPending);
+router.use('/postulantEdit', routerEditing);
+router.use("/metric", routerMetric);
+router.use("/pipeline", routerPipeLine);
 
 router.use("/location", location);
 router.use("/languages", language);
 router.use("/skills", skill);
 router.use("/tech", tech);
 router.use("/seniority", seniority);
+router.use('/vacancyEdit', routerEditingVacancy)
+
+//       Chat Online
+router.use("/messages", messages);
+router.use("/conversations", conversations);
 
 module.exports = router;
