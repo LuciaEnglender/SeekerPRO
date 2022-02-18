@@ -315,7 +315,7 @@ const handleCv=(e)=>{
                 {errors.name && <p className="error">{errors.name}</p>}
               </div>
               <div className="w-44 flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover"> Phone</label>
+                <label className="text-center text-verdeHover"> Phone*</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   type="number"
@@ -372,7 +372,7 @@ const handleCv=(e)=>{
                 </div>
               </div>
               <div className="w-44 flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover">Gender:</label>
+                <label className="text-center text-verdeHover">Gender*</label>
                 <label className="text-center text-verdeHover">
                   <input
                     className="text-center"
@@ -469,7 +469,7 @@ const handleCv=(e)=>{
               </div>
               {/* /////////////////CV/////////////// */}
               <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover">CV (.pdf)</label>
+                <label className="text-center text-verdeHover">CV (.pdf)*</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
                   placeholder=".pdf"
@@ -484,7 +484,7 @@ const handleCv=(e)=>{
 
             <div className="m-9">
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Technology</label>
+                <label className="text-center text-verdeHover">Technology*</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="technology"
@@ -529,7 +529,7 @@ const handleCv=(e)=>{
                 </div>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Languages</label>
+                <label className="text-center text-verdeHover">Languages*</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="languages"
@@ -574,7 +574,7 @@ const handleCv=(e)=>{
                 </div>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover"> Skill</label>
+                <label className="text-center text-verdeHover"> Skill*</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="skill"
@@ -619,7 +619,7 @@ const handleCv=(e)=>{
               </div>
               
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Siniority</label>
+                <label className="text-center text-verdeHover">Siniority*</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   placeholder="Seniority"

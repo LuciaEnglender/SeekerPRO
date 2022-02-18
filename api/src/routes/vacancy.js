@@ -1,5 +1,11 @@
 const { Router } = require("express");
 const {
+  New,
+    Review,
+    Contact,
+    InterviewTech,
+    InterviewRRHH,
+    Offered, Hired, Rejected,
   Vacancy,
   Business,
   Language,
@@ -77,13 +83,7 @@ routerVacancy.get("/", async (req, res) => {
   try {
     const ALLVACS = await Vacancy.findAll({
       include: [
-        {
-          model: Business,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
+       
         {
           model: Language,
           attributes: ["name"],
@@ -160,20 +160,23 @@ routerVacancy.get("/", async (req, res) => {
         ? res.status(200).send(vacanciesInDB)
         : res.status(400).send("doesnt exist this vacancy");
     } else if (business) {
+      
       const finderBusiness = await Business.findOne({
         where: {
           loginEmail: business,
         },
       });
+  
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
-        where: {
-          businessId: finderBusiness.id,
+        where : {
+          businessId : finderBusiness.id
         },
         include: [
           {
             model: Business,
-            attributes: ["name"],
+            attributes: ["name",'description', 'id'],
+
             through: {
               attributes: [],
             },
@@ -200,15 +203,10 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-          {
-            model: Business,
-            attributes: ["name", 'id', 'description'],
-            through: {
-              attributes: [],
-            },
-          }
+        
         ],
       });
+     
       vacanciesInDB
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
@@ -232,12 +230,14 @@ routerVacancy.post("/", async (req, res) => {
     seniority,
     // skill,
     technology,
+    phone
   } = req.body;
 
   try {
     let newVacancyInDB = await Vacancy.create({
       name,
       description,
+      phone
     });
     //busco la empresa para obtener su nombre;
     let businessInDB = await Business.findOne({
@@ -275,7 +275,46 @@ routerVacancy.post("/", async (req, res) => {
       });
       await newVacancyInDB.addTechnology(technologyInDB);
     }
-    //console.log(newVacancyInDB);
+
+    const newStatus = await New.create({
+      name: name
+  })
+
+  const reviewStatus = await Review.create({
+      name: name
+  })
+
+  const contactStatus = await Contact.create({
+      name: name
+  })
+
+  const interviewRRHHStatus = await InterviewRRHH.create({
+      name: name
+  })
+
+  const interviewTechStatus = await InterviewTech.create({
+      name: name
+  })
+  const offeredStatus = await Offered.create({
+      name: name
+  })
+  const hiredStatus = await Hired.create({
+      name: name
+  })
+  const rejectedStatus = await Rejected.create({
+      name: name
+  })
+
+ 
+  await newVacancyInDB.setNew(newStatus)
+  await newVacancyInDB.setReview(reviewStatus)
+  await newVacancyInDB.setContact(contactStatus)
+  await newVacancyInDB.setInterviewRRHH(interviewRRHHStatus)
+  await newVacancyInDB.setInterviewTech(interviewTechStatus)
+  await newVacancyInDB.setOffered(offeredStatus)
+  await newVacancyInDB.setHired(hiredStatus)
+  await newVacancyInDB.setRejected(rejectedStatus)
+    
     res.status(200).json(newVacancyInDB);
   } catch (e) {
     console.log(e);
@@ -547,26 +586,26 @@ routerVacancy.get("/filterByTech", async (req, res) => {
 routerVacancy.get("/vacs/:id", async (req, res) => {
   // Trae todos los pustulantes de una vacante
  
-  // Vacancy.findByPk(req.params.id).then((vacancy) => {
-  //   vacancy
-  //     .getPostulants({
-  //       attributes: ["name"],
-  //     })
-  //     .then((postulant) => {
-  //      res.json(postulant);
-  //     });
-  // });
-  //  console.log(nuevar)
-const vacancy = await Vacancy.findByPk(req.params.id, {
-  include: [
- {
-   model: Postulant,
-   }
-  ]
-})
-console.log(vacancy)
-res.json(vacancy)
+  Vacancy.findByPk(req.params.id).then((vacancy) => {
+    vacancy
+      .getPostulants({
+        attributes: ["name"],
+      })
+      .then((postulant) => {
+       res.json(postulant);
+      });
+  });
 });
+  // cambio a async
+// const vacancy = await Vacancy.findByPk(req.params.id, {
+//   include: [
+//  {
+//    model: Postulant,
+//    }
+//   ]
+// })
+// console.log(vacancy)
+// res.json(vacancy)
 
 
 routerVacancy.get("/vac/:id", async (req, res) => {

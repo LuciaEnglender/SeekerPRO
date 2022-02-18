@@ -50,7 +50,6 @@ routerPending.get('/:id/vacancy', async (req, res) => {
         coonsole.log(error)
     }
 });
-
 //(1)crea el idPostulant modelo pendiente y  postea la relacion en la tabla pending_postulant
 routerPending.post('/:idPostulant', async (req, res) => {
     //setea la informacion en tabla Pending_vacancy

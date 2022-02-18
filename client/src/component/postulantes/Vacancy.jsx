@@ -1,16 +1,25 @@
 import React from "react";
 import Apply from "./Assets/Apply";
 import SeeLater from "./SeeLaterVacancies/SeeLater";
-import Follow from './FollowBusiness/Follow'
+import Follow from "./FollowBusiness/Follow";
+import { AiOutlineWhatsApp } from "react-icons/ai";
 
 //import {getVacancy} from actions
 // import AddToFavourite from "./Assets/AddToFavourite";
 
 //importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
-function Vacancy({ name, description, languages, seniorities, id, technologies, businessId}) {
-
-console.log('id', id)
-//
+function Vacancy({
+  name,
+  description,
+  languages,
+  seniorities,
+  id,
+  technologies,
+  business,
+  date
+}) {
+  console.log("id", id);
+  //
   return (
     <div
       tabindex="0"
@@ -23,10 +32,12 @@ console.log('id', id)
             <p
               tabindex="0"
               class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-            >
-              {name}
+            >  {name}
             </p>
+            <p> {business}</p>
             <div class="flex flex-row">
+           
+           
               <p
                 tabindex="0"
                 class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"
@@ -50,20 +61,21 @@ console.log('id', id)
           {description}
         </p>
         <div tabindex="0" class="focus:outline-none flex">
-          <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+          <div class="py-2 px-4 text-xs leading-3 ">
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <Apply
-        id= {id}/>
+            <Apply id={id} />
+          </div>
+          <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+            <SeeLater id={id} />
+          </div>
         </div>
-        <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <SeeLater
-        id= {id}/>
-        </div>
+        <div> 
+ <p> Publication date: {date.substr(0, 10)}</p> </div><br/>
          </div>
       </div>
-    </div>
+  
   );
 }
 

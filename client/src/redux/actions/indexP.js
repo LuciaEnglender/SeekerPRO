@@ -31,6 +31,8 @@ export const ADD_FAVOURITES = "ADD_FAVOURITES"
 export const APPLY = "APPLY"
 export const GET_MY_POSTULATIONS = "GET_MY_POSTULATIONS"
 export const REMOVE_POST = "REMOVE_POST" 
+export const TO_PIPELINE = "TO_PIPELINE"
+export const REMOVE_PIPELINE = "REMOVE_PIPELINE"
 //PENDING
 export const REMOVE_SEE_LATER = "REMOVE_SEE_LATER"
 export const GET_SEE_LATER = "GET_SEE_LATER"
@@ -326,13 +328,14 @@ return{
   //APPLY POSTULATION
 
 export function apply(id, postulanteId){
-  console.log(id)
-  console.log(postulanteId)
+  //console.log(id)
+  //console.log(postulanteId)
   return async function (){
     try{
-      await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, id);
+      await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, {id:id});
       return {
           type: APPLY,
+         
           }
       } 
   catch(error){
@@ -340,6 +343,39 @@ export function apply(id, postulanteId){
       }
   } 
   }
+  export function toPipeline(id, postulanteId){
+    console.log(id)
+  return async function (dispatch) {
+    try {
+     const newPipe = await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, {idPostulant:postulanteId})
+     console.log("newPipe", newPipe)
+     return dispatch ({
+        type: TO_PIPELINE,
+        payload : newPipe.data,       
+      })
+   
+    }
+  
+    catch(error){
+      console.log("Pipeline failed")
+    }
+  }
+}
+//por params id empresa, por body de postulante
+export function removePipeline(id, postulanteId){
+  return async function (dispatch){
+    try{
+      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeAll`, {idPostulant: postulanteId})
+      return dispatch({
+        type: REMOVE_PIPELINE,
+        payload : edit.data
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+};
+
 
     export function removePost(id, postulanteId){
       console.log(id)
@@ -391,7 +427,7 @@ export function apply(id, postulanteId){
           console.log(postulanteId)
           return async function (){
             try{
-              await axios.put(`http://localhost:3001/pending/${postulanteId}`, id);
+              await axios.put(`http://localhost:3001/pending/${postulanteId}`, {id:id});
               return {
                   type: REMOVE_SEE_LATER,
                   }

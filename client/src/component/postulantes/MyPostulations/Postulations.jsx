@@ -9,10 +9,12 @@ function Postulations() {
 
     const dispatch = useDispatch();
     const postulations = useSelector((state) =>state.rootReducerPostulante.postulations)
-   // console.log(postulations)
+    //console.log(postulations)
 
     const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
-    console.log("postulante id", postulanteId)
+   // console.log("postulante id", postulanteId)
+   
+   
 
   useEffect(() => {
       dispatch(getMyPostulations(postulanteId))
@@ -45,6 +47,7 @@ function Postulations() {
                 ?.map((t) => t.name)
                 .join(", ")}
                 date= {el.postulant_vacancy.createdAt}
+                
             />
           </div>
         );

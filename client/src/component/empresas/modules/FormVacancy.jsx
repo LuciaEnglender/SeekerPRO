@@ -119,145 +119,145 @@ const FormVacancy = () => {
   };
 
   return (
-    <div >
+    <div>
       {/* NAVEGACIOsN */}
       <NavHomeE titulo={"Crear"} />
       {/* FORM CREACION VACANTE */}
       <div className="bg-gray-300 w-fit m-10 rounded-2xl pb-4">
-      <form onSubmit={(e) => handleSubmit(e)} className="m-10 pt-10 ">
-        <div className="w-full flex flex-col m-0 justify-center">
-          <label> Name:</label>
-          <input
-            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-            type="text"
-            name="name"
-            value={input.name}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div className="w-full flex flex-col">
-          <label> Description:</label>
-          <textarea
-            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-            type="text-area"
-            name="description"
-            value={input.description}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div className="w-full my-3 flex flex-col m-0 justify-center">
-          <label> Tecnologias:</label>
-          <select
-            className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-            name="technology"
-            onChange={(e) => handleSelectTechno(e)}
-          >
-            <option className="rounded-2xl bg-verdeClaro" selected="false">
-              Select...
-            </option>
-            {technology.map((e) => (
-              <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
-            ))}
-          </select>
-          <div>
-            {input.technology.map((el, i) => (
-              <li
-                className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                key={i}
-              >
-                {el}
-                <button
-                  className="rounded-2xl hover:bg-verdeClaro"
-                  type="reset"
-                  onClick={() => handleDeleteTechnology(el)}
-                >
-                  <GrFormClose />
-                </button>
-              </li>
-            ))}
+        <form onSubmit={(e) => handleSubmit(e)} className="m-10 pt-10 ">
+          <div className="w-full flex flex-col m-0 justify-center">
+            <label> Name:</label>
+            <input
+              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+              type="text"
+              name="name"
+              value={input.name}
+              onChange={(e) => handleChange(e)}
+            />
           </div>
-          {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
-        </div>
-        <div className="w-full my-3 flex flex-col m-0 justify-center">
-          <label> Lenguaje:</label>
-          <select
-            className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-            name="language"
-            onChange={(e) => handleSelectLenguge(e)}
-          >
-            <option selected="false">Select...</option>
-            {language.map((e) => (
-              <option value={e.name}>{e.name}</option>
-            ))}
-          </select>
-          <div>
-            {input.language.map((el, i) => (
-              <li
-                className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                key={i}
-              >
-                {el}
-                <button
-                  className=" rounded-2xl hover:bg-verdeClaro"
-                  type="reset"
-                  onClick={() => handleDeleteLanguage(el)}
-                >
-                  <GrFormClose />
-                </button>
-              </li>
-            ))}
+          <div className="w-full flex flex-col">
+            <label> Description:</label>
+            <textarea
+              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+              type="text-area"
+              name="description"
+              value={input.description}
+              onChange={(e) => handleChange(e)}
+            />
           </div>
-          {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
-        </div>
-        <div className="w-full my-3 flex flex-col m-0 justify-center">
-          <label> Seniority:</label>
-          <select
-            className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-            name="seniority"
-            onChange={(e) => handleSelectSeniority(e)}
-          >
-            <option className="rounded-2xl bg-verdeClaro" selected="false">
-              Select...
-            </option>
-            {seniority.map((e) => (
-              <option className="rounded-2xl bg-verdeClaro" value={e.name}>
-                {e.name}
+          <div className="w-full my-3 flex flex-col m-0 justify-center">
+            <label> Tecnologias:</label>
+            <select
+              className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+              name="technology"
+              onChange={(e) => handleSelectTechno(e)}
+            >
+              <option className="rounded-2xl bg-verdeClaro" selected="false">
+                Select...
               </option>
-            ))}
-          </select>
-          <div>
-            {input.seniority.map((el, i) => (
-              <li
-                className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
-                key={i}
-              >
-                {el}
-                <button
-                  className=" rounded-2xl hover:bg-verdeClaro"
-                  type="reset"
-                  onClick={() => handleDeleteSeniority(el)}
+              {technology.map((e) => (
+                <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
+              ))}
+            </select>
+            <div>
+              {input.technology.map((el, i) => (
+                <li
+                  className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                  key={i}
                 >
-                  <GrFormClose />
-                </button>
-              </li>
-            ))}
+                  {el}
+                  <button
+                    className="rounded-2xl hover:bg-verdeClaro"
+                    type="reset"
+                    onClick={() => handleDeleteTechnology(el)}
+                  >
+                    <GrFormClose />
+                  </button>
+                </li>
+              ))}
+            </div>
+            {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
           </div>
-          {/*  <ul><li>{input.seniority.map(el => el + " ,")}</li></ul> */}
-        </div>
-        <div className="w-full  my-3 flex m-0 justify-center pt-10">
-          <button
-            type="submit"
-            className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-          >
-            Publicar vacante
-          </button>
-        </div>
-      </form>
+          <div className="w-full my-3 flex flex-col m-0 justify-center">
+            <label> Lenguaje:</label>
+            <select
+              className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+              name="language"
+              onChange={(e) => handleSelectLenguge(e)}
+            >
+              <option selected="false">Select...</option>
+              {language.map((e) => (
+                <option value={e.name}>{e.name}</option>
+              ))}
+            </select>
+            <div>
+              {input.language.map((el, i) => (
+                <li
+                  className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                  key={i}
+                >
+                  {el}
+                  <button
+                    className=" rounded-2xl hover:bg-verdeClaro"
+                    type="reset"
+                    onClick={() => handleDeleteLanguage(el)}
+                  >
+                    <GrFormClose />
+                  </button>
+                </li>
+              ))}
+            </div>
+            {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
+          </div>
+          <div className="w-full my-3 flex flex-col m-0 justify-center">
+            <label> Seniority:</label>
+            <select
+              className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+              name="seniority"
+              onChange={(e) => handleSelectSeniority(e)}
+            >
+              <option className="rounded-2xl bg-verdeClaro" selected="false">
+                Select...
+              </option>
+              {seniority.map((e) => (
+                <option className="rounded-2xl bg-verdeClaro" value={e.name}>
+                  {e.name}
+                </option>
+              ))}
+            </select>
+            <div>
+              {input.seniority.map((el, i) => (
+                <li
+                  className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
+                  key={i}
+                >
+                  {el}
+                  <button
+                    className=" rounded-2xl hover:bg-verdeClaro"
+                    type="reset"
+                    onClick={() => handleDeleteSeniority(el)}
+                  >
+                    <GrFormClose />
+                  </button>
+                </li>
+              ))}
+            </div>
+            {/*  <ul><li>{input.seniority.map(el => el + " ,")}</li></ul> */}
+          </div>
+          <div className="w-full  my-3 flex m-0 justify-center pt-10">
+            <button
+              type="submit"
+              className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+            >
+              Publicar vacante
+            </button>
+          </div>
+        </form>
       </div>
       <div className="ml-10">
-      <Link to="/homee">
-      <BsFillArrowLeftSquareFill />
-      </Link>
+        <Link to="/homee">
+          <BsFillArrowLeftSquareFill />
+        </Link>
       </div>
     </div>
   );
