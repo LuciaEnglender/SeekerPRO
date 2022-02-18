@@ -53,7 +53,7 @@ export const EDIT_SEÑORITY_ADD_POSTULANT='EDIT_SEÑORITY_ADD_POSTULANT'
 export function createPostulante(payload) {
     return async function (dispatch) {
     try {
-    const res= await axios.post("http://localhost:3001/postulant", payload);
+    const res= await axios.post("/postulant", payload);
       return dispatch({
         type: POST_POSTULANTE,
           payload: res
@@ -67,7 +67,7 @@ export function createPostulante(payload) {
 export function getTechnology() {
   return async function (dispatch) {
     try {
-      const tecno = await axios.get("http://localhost:3001/tech");
+      const tecno = await axios.get("/tech");
       return dispatch({
         type: GET_TECHNOLOGY,
         payload: tecno.data,
@@ -81,7 +81,7 @@ export function getTechnology() {
 export function getLocation() {
   return async function (dispatch) {
     try {
-      const loc = await axios.get("http://localhost:3001/location");
+      const loc = await axios.get("/location");
       return dispatch({
         type: GET_LOCATION,
         payload: loc.data,
@@ -96,7 +96,7 @@ export function getLocation() {
 export function getSkill() {
   return async function (dispatch) {
     try {
-      const skill = await axios.get("http://localhost:3001/skills");
+      const skill = await axios.get("/skills");
       return dispatch({
         type: GET_SKILL,
         payload: skill.data,
@@ -109,7 +109,7 @@ export function getSkill() {
 export function getLanguage() {
   return async function (dispatch) {
     try {
-      const language = await axios.get("http://localhost:3001/languages");
+      const language = await axios.get("/languages");
       return dispatch({
         type: GET_LANGUAGE,
         payload: language.data,
@@ -123,7 +123,7 @@ export function getLanguage() {
 export function getVacancy() {
   return async function (dispatch) {
     try {
-      const vacantes = await axios.get("http://localhost:3001/vacancy");
+      const vacantes = await axios.get("/vacancy");
       return dispatch({
         type: GET_VACANCY,
         payload:vacantes.data,
@@ -135,7 +135,7 @@ export function getVacancy() {
 }
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/vacancy/${id}`);
+    const res = await axios.get(`/vacancy/${id}`);
     return dispatch({
       type: "GET_VACANCY_ID",
       payload: res.data,
@@ -147,7 +147,7 @@ export function getSearchBar(payload) {
   console.log('search', payload)
   return async function (dispatch) {
       try {
-          var json = await axios(`http://localhost:3001/vacancy/search/${payload}`);
+          var json = await axios(`/vacancy/search/${payload}`);
           console.log(json.data)
           return dispatch ({
               type: GET_SEARCH_BAR,
@@ -162,7 +162,7 @@ export function getSearchBar(payload) {
 export function getSeniority() {
   return async function (dispatch) {
     try {
-      const seniority = await axios.get("http://localhost:3001/seniority");
+      const seniority = await axios.get("/seniority");
       return dispatch({
         type: GET_SENIORITY,
         payload: seniority.data,
@@ -177,7 +177,7 @@ export function getSeniority() {
 export function getProfile(payload) {
   return async function (dispatch) {
     try {
-      const profile = await axios.get(`http://localhost:3001/postulant?id=${payload}`);
+      const profile = await axios.get(`/postulant?id=${payload}`);
       return dispatch({
         type: GET_PROFILE,
         payload: profile.data,
@@ -191,7 +191,7 @@ export function getProfile(payload) {
 export function filterByLanguage (info) {
   return async function (dispatch) {
     try {
-      const language = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const language = await axios.post("/allFiltersVacancy", info);
       return dispatch({
         type: FILTER_BY_LANGUAGE,
         payload: language.data,
@@ -204,7 +204,7 @@ export function filterByLanguage (info) {
 export function filterBySeniority (info) {
   return async function (dispatch) {
     try {
-      const seniority = await axios.post(`http://localhost:3001/allFiltersVacancy`, info)
+      const seniority = await axios.post(`/allFiltersVacancy`, info)
       console.log( seniority.data)
       return dispatch({
         type: FILTER_BY_SENIORITY,
@@ -220,7 +220,7 @@ export function filterBySeniority (info) {
 export function filterByTechnology(info){
   return async function (dispatch) {
     try {
-      const techno = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const techno = await axios.post("/allFiltersVacancy", info);
       return dispatch({
         type: FILTER_BY_TECHNOLOGY,
         payload: techno.data,
@@ -234,7 +234,7 @@ export function filterByTechnology(info){
 export function filterBySkill(info){
   return async function (dispatch) {
     try {
-      const skill = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const skill = await axios.post("/allFiltersVacancy", info);
       return dispatch({
         type: FILTER_BY_SKILL,
         payload: skill.data,
@@ -247,7 +247,7 @@ export function filterBySkill(info){
 export function filterCombinated (info) {
   return async function (dispatch) {
     try {
-      const combinated = await axios.post("http://localhost:3001/allFiltersVacancy", info);
+      const combinated = await axios.post("/allFiltersVacancy", info);
       console.log(combinated)
       return dispatch({
         type: FILTER_COMBINATED,
@@ -264,7 +264,7 @@ export function getBusiness (){
   console.log("llego pedido a action")
   return async function (dispatch) {
     try{
-      const business = await axios.get("http://localhost:3001/business")
+      const business = await axios.get("/business")
       console.log("business", business.data)
       return dispatch( {
         type: GET_BUSINESS,
@@ -281,7 +281,7 @@ export function followBusiness (postulanteId, id) {
  console.log("postulanteId", postulanteId, "businessId", id)
   return async function(dispatch){
       try{
-          await axios.post(`http://localhost:3001/favorite/post/${postulanteId}`,{ id: id});
+          await axios.post(`/favorite/post/${postulanteId}`,{ id: id});
           return dispatch({
               type: FOLLOW,
               })
@@ -295,7 +295,7 @@ export function unfollow(postulanteId, businessId){
   console.log("postulante", postulanteId, "empresa" , businessId)
   return async function (){
     try{
-      await axios.put(`http://localhost:3001/favorite/post/${postulanteId}`, {id:businessId});
+      await axios.put(`/favorite/post/${postulanteId}`, {id:businessId});
       return {
           type: UNFOLLOW,
           }
@@ -309,7 +309,7 @@ export function unfollow(postulanteId, businessId){
     //console.log("postulante siguiendo", postulanteId)
     return async function (dispatch) {
       try {
-        const followed = await axios.get(`http://localhost:3001/favorite/${postulanteId}/business`);
+        const followed = await axios.get(`/favorite/${postulanteId}/business`);
         return dispatch({
           type: GET_FOLLOWED,
           payload:followed.data,
@@ -332,7 +332,7 @@ export function apply(id, postulanteId){
   //console.log(postulanteId)
   return async function (){
     try{
-      await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, {id:id});
+      await axios.post(`/postulant/postulate/${postulanteId}`, {id:id});
       return {
           type: APPLY,
          
@@ -347,7 +347,7 @@ export function apply(id, postulanteId){
     console.log(id)
   return async function (dispatch) {
     try {
-     const newPipe = await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, {idPostulant:postulanteId})
+     const newPipe = await axios.put(`/pipeline/${id}/addNew`, {idPostulant:postulanteId})
      console.log("newPipe", newPipe)
      return dispatch ({
         type: TO_PIPELINE,
@@ -365,7 +365,7 @@ export function apply(id, postulanteId){
 export function removePipeline(id, postulanteId){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/pipeline/${id}/removeAll`, {idPostulant: postulanteId})
+      const edit = await axios.put(`/pipeline/${id}/removeAll`, {idPostulant: postulanteId})
       return dispatch({
         type: REMOVE_PIPELINE,
         payload : edit.data
@@ -382,7 +382,7 @@ export function removePipeline(id, postulanteId){
       console.log(postulanteId)
       return async function (){
         try{
-          await axios.put(`http://localhost:3001/postulant/postulate/${postulanteId}`, {id:id});
+          await axios.put(`/postulant/postulate/${postulanteId}`, {id:id});
           return {
               type: REMOVE_POST,
               }
@@ -395,7 +395,7 @@ export function removePipeline(id, postulanteId){
       export function getMyPostulations(payload) {
         return async function (dispatch) {
           try {
-            const postulations = await axios.get(`http://localhost:3001/postulant/${payload}/vacancy`);
+            const postulations = await axios.get(`/postulant/${payload}/vacancy`);
             return dispatch({
               type: GET_MY_POSTULATIONS,
               payload: postulations.data,
@@ -411,7 +411,7 @@ export function removePipeline(id, postulanteId){
         console.log("see later", id, postulanteId)
         return async function (){
           try{
-            await axios.post(`http://localhost:3001/pending/${postulanteId}`, {id:id});
+            await axios.post(`/pending/${postulanteId}`, {id:id});
             return {
                 type: SEE_LATER,
                 }
@@ -427,7 +427,7 @@ export function removePipeline(id, postulanteId){
           console.log(postulanteId)
           return async function (){
             try{
-              await axios.put(`http://localhost:3001/pending/${postulanteId}`, {id:id});
+              await axios.put(`/pending/${postulanteId}`, {id:id});
               return {
                   type: REMOVE_SEE_LATER,
                   }
@@ -441,7 +441,7 @@ export function removePipeline(id, postulanteId){
             console.log('getLater', postulanteId)
             return async function (dispatch) {
               try {
-                const later = await axios.get(`http://localhost:3001/pending/${postulanteId}/vacancy`);
+                const later = await axios.get(`/pending/${postulanteId}/vacancy`);
                 return dispatch({
                   type: GET_SEE_LATER,
                   payload:later.data,
@@ -458,7 +458,7 @@ export function removePipeline(id, postulanteId){
             console.log("input action que enviamos",input)
             return async function(dispatch){
               try{
-                const edit= await axios.put(`http://localhost:3001/postulant/${id}`, input)
+                const edit= await axios.put(`/postulant/${id}`, input)
                 return dispatch({
                   type:PUT_EDIT_PROFILE,
                   payload: edit.data,
@@ -476,7 +476,7 @@ export function deleteLocation(id, input){
 
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationDelete`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/locationDelete`, {input: input})
       return dispatch({
         type: EDIT_LOCATION_DELETE_POSTULANT,
         payload : edit.data
@@ -492,7 +492,7 @@ export function addLocation(id, input){
   console.log('soy input', input)
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/locationAdd`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/locationAdd`, {input: input})
       return dispatch({
         type: EDIT_LOCATION_ADD_POSTULANT,
         payload : edit.data
@@ -508,7 +508,7 @@ export function deleteTechnology(id, input){
   console.log('soy input', input)
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/technologyDelete`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/technologyDelete`, {input: input})
       return dispatch({
         type: EDIT_TECHNOLOGY_DELETE_POSTULANT,
         payload : edit.data
@@ -525,7 +525,7 @@ export function addTechnology(id, input){
 
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/technologyAdd`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/technologyAdd`, {input: input})
       return dispatch({
         type: EDIT_TECHNOLOGY_ADD_POSTULANT,
         payload : edit.data
@@ -540,7 +540,7 @@ export function deleteLanguage(id, input){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/languageDelete`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/languageDelete`, {input: input})
       return dispatch({
         type: EDIT_LANGUAGE_DELETE_POSTULANT,
         payload : edit.data
@@ -556,7 +556,7 @@ export function addLanguage(id, input){
   console.log('soy input', input)
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/languageAdd`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/languageAdd`, {input: input})
       return dispatch({
         type: EDIT_LANGUAGE_ADD_POSTULANT,
         payload : edit.data
@@ -571,7 +571,7 @@ export function deleteSkill(id, input){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/skillDelete`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/skillDelete`, {input: input})
       return dispatch({
         type: EDIT_SKILL_DELETE_POSTULANT,
         payload : edit.data
@@ -585,7 +585,7 @@ export function deleteSkill(id, input){
 export function addSkill(id, input){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/skillAdd`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/skillAdd`, {input: input})
       return dispatch({
         type: EDIT_SKILL_ADD_POSTULANT,
         payload : edit.data
@@ -600,7 +600,7 @@ export function deleteSeñority(id, input){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/seniorityDelete`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/seniorityDelete`, {input: input})
       return dispatch({
         type: EDIT_SEÑORITY_DELETE_POSTULANT,
         payload : edit.data
@@ -614,7 +614,7 @@ export function deleteSeñority(id, input){
 export function addSeñority(id, input){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`http://localhost:3001/postulantEdit/${id}/seniorityAdd`, {input: input})
+      const edit = await axios.put(`/postulantEdit/${id}/seniorityAdd`, {input: input})
       return dispatch({
         type: EDIT_SEÑORITY_ADD_POSTULANT,
         payload : edit.data
