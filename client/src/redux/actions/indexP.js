@@ -408,7 +408,7 @@ export function removePipeline(id, postulanteId){
 
 //PENDING     
       export function seeLater(id, postulanteId){
-        console.log({id, postulanteId})
+        console.log("see later", id, postulanteId)
         return async function (){
           try{
             await axios.post(`http://localhost:3001/pending/${postulanteId}`, {id:id});

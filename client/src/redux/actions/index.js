@@ -32,6 +32,7 @@ export function postVacancyPipeline(id) {
 }
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAS
 export function getVacancy(business) {
+  console.log(business)
   return async function (dispatch) {
     const res = await axios.get(
       `http://localhost:3001/vacancy?business=${business}`
@@ -196,7 +197,7 @@ export function getLanguage() {
 
 //get para traerme un postulante particular y PARA LA SEARCHBAR ES EL MISMO
 
-export function postulanteDetail(name) {
+/*export function postulanteDetail(name) {
   return async function (dispatch) {
     try {
       let det = await axios.get(
@@ -210,7 +211,7 @@ export function postulanteDetail(name) {
       console.log(e);
     }
   };
-};
+};*/
 export function postulantDetail(id) {
   console.log(id)
   return async function (dispatch) {

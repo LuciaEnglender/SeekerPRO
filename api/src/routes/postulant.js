@@ -9,6 +9,7 @@ const {
   Vacancy,
   Location,
   Login,
+  Business
 } = require("../db");
 
 const { check, validationResult } = require("express-validator");
