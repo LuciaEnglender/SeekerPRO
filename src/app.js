@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
 require('./db.js');
+const path = require('path');
 
 const server = express();
 
@@ -22,6 +23,10 @@ server.use((req, res, next) => {
   next();
 });
 
+if(process.env.NODE_ENV === "production"){
+  server.use(express.static(path.join(__dirname.slice(0,-4), "client/build")))
+  
+}
 server.use('/', routes);
 
 // Error catching endware.
@@ -31,5 +36,9 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
+
+
+
+
 
 module.exports = server;
