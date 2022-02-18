@@ -153,11 +153,11 @@ Hired.belongsTo(Vacancy);
 Vacancy.hasOne(Rejected, { foreignKey: "fk_vacancy" });
 Rejected.belongsTo(Vacancy);
 
-// Postulant.hasOne(New,{foreignKey:"fk_postulant"})
-// New.belongsTo(Postulant);
+Postulant.belongsToMany(Contact,{through:"contact_postulant"})
+Contact.belongsToMany(Postulant, {through:"contact_postulant"});
 
-Postulant.belongsToMany(Contact, { through: "contact_postulant" });
-Contact.belongsToMany(Postulant, { through: "contact_postulant" });
+Postulant.belongsToMany(InterviewRRHH,{through:"interviewrrhh_postulant"})
+InterviewRRHH.belongsToMany(Postulant, {through:"interviewrrhh_postulant"});
 
 Postulant.belongsToMany(InterviewRRHH, { through: "interviewrrhh_postulant" });
 InterviewRRHH.belongsToMany(Postulant, { through: "interviewrrhh_postulant" });
