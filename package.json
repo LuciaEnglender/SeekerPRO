@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
- 
   "author": "PWA",
   "license": "ISC",
   "engines": {
