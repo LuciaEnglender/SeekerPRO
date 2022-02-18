@@ -9,6 +9,7 @@ function DetailPostulante() {
   const dispatch = useDispatch()
   
   const { id } = useParams();
+  console.log("id detail", id)
   
   useEffect(() => {
 
@@ -17,7 +18,7 @@ function DetailPostulante() {
   }, [dispatch, id])
 
   const postulante = useSelector((state) => state.rootReducer.postulados)
-    console.log(postulante)
+    console.log("postulante", postulante)
   return (
     <div>
        {/* <NavHomeE titulo={"Notificaciones"} /> */}

@@ -589,7 +589,7 @@ routerVacancy.get("/vacs/:id", async (req, res) => {
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
       .getPostulants({
-        attributes: ["name"],
+        
       })
       .then((postulant) => {
        res.json(postulant);
