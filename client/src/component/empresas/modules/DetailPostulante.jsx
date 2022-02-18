@@ -1,23 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postulanteDetail } from "../../../redux/actions";
+import { useParams, Link } from "react-router-dom";
+import {postulantDetail} from "../../../redux/actions/index"
 import { BsFillArrowLeftSquareFill, BsFillTelephoneFill } from "react-icons/bs";
+import NavHomeE from "./NavHomeE";
 
 function DetailPostulante() {
-  // const dispatch = useDispatch()
-  // const el = useSelector((state) => state.detail)
-  // const { id } = useParams();
+  const dispatch = useDispatch()
+  
+  const { id } = useParams();
+  
+  useEffect(() => {
+      dispatch(postulantDetail(id));
+  }, [dispatch, id])
 
-  // useEffect(() => {
-  //     dispatch(postulanteDetail(id));
-  // }, [dispatch, id])
-
-  //detalle del postulante
+  const postulante = useSelector((state) => state.rootReducer.postulados)
+    console.log(postulante)
   return (
     <div>
-      {/* <div>
-          <p>Nombre : {el.name}</p>
-          <p>genero: {el.gender}</p>
+       {/* <NavHomeE titulo={"Notificaciones"} /> */}
+       {postulante.length === 0 ? <p>No Details</p> : 
+       <div>
+          <p>Nombre : {postulante[0].name}</p>
+          {/* <p>genero: {el.gender}</p>
           <p><BsFillTelephoneFill/>{el.phone}</p>
           <p>{el.photo}</p>
           <p>{el.education}</p>
@@ -26,19 +31,23 @@ function DetailPostulante() {
           <p>{el.location}</p>
           <p>{el.github}</p>
           <p>{el.linkedIn}</p>
-          <p>{el.portfolio}</p>
-      </div> */}
+          <p>{el.portfolio}</p> */}
+      </div> 
+      }
       <div>
+        <div>
+        <button>Change candidate status</button>
+        </div>
         {/* SELECT PARA PONER ESTADO EN LA PIPELINE */}
         <select>
-          <option value="nuevo">nuevo</option>
-          <option value="revision">revision</option>
-          <option value="contactado">contactado</option>
-          <option value="entrevista">entrevista</option>
-          <option value="tech">entrevista técnica</option>
-          <option value="ofrecido">ofrecido</option>
-          <option value="contratado">contratado</option>
-          <option value="rechazado">rechazado</option>
+          <option value="nuevo">new</option>
+          <option value="revision">review</option>
+          <option value="contactado">contacted</option>
+          <option value="entrevista">interview</option>
+          <option value="tech">tech interview</option>
+          <option value="ofrecido">offered</option>
+          <option value="contratado">hired</option>
+          <option value="rechazado">rejected</option>
         </select>
       </div>
       <Link to="/homee">

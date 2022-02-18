@@ -1,10 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostulados, filterStatusPipeline } from "../../../redux/actions";
+import { getPostulados, postulantDetail } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import PostulantesVacancy from "../PostulantesVacancy";
 import { useAuth0 } from "@auth0/auth0-react";
+import DetailPostulante from "./DetailPostulante";
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function Pipeline({ id }) {
   const postulados = useSelector((state) => state.rootReducer.postulados);
   console.log(postulados)
   useEffect(() => {
-    dispatch(getPostulados(id));
+    dispatch(getPostulados(id))
   }, [dispatch]);
 
   // function handlePipeline(e) {
@@ -53,8 +54,10 @@ function Pipeline({ id }) {
           <div id="first" class="p-4">
             {postulados.length === 0 ? <p>Waiting for people...</p> :
               postulados.map((el) => {
+                console.log(el.loginEmail)
                 return (
-                  <Link to={`/postulant/${el.id}`}>
+                  <Link to={`/postulant/${el.loginEmail}`}>
+                  
                     <div >
                       <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
                         <div class="flex justify-center md:justify-end -mt-8">

@@ -188,6 +188,16 @@ export function postulanteDetail(name) {
       console.log(e);
     }
   };
+};
+export function postulantDetail(id) {
+  console.log(id)
+  return async function (dispatch) {
+    const res = await axios.get(`http://localhost:3001/postulant?id=${id}`);
+    return dispatch({
+      type: "GET_POSTULADOS",
+      payload: res.data,
+    });
+  };
 }
 //fn para filtrar segun estado de la pipeline
 export function filterStatusPipeline(estado) {
