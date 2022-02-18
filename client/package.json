@@ -70,5 +70,4 @@
     "tailwindcss": "^3.0.18"
   },
   "proxy": "http://localhost:3001"
-
 }

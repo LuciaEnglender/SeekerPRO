@@ -15,7 +15,7 @@ const path = require("path");
 // console.log(`data: ${DB_DATABASE_URL}`)
 // console.log(process.env)
 const DB_USER="postgres"
-const DB_PASSWORD="Na29G06"
+const DB_PASSWORD="Danna2021"
 const DB_HOST="localhost"
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
