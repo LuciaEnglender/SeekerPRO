@@ -446,7 +446,7 @@ export function removeAll(id, input){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeAll`, {input: input})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_ALL',
         payload : edit.data
       })
     } catch (e){
