@@ -9,6 +9,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
 import SearcHome from "./modules/SearcHome";
+import Sidebar from "./modules/Sidebar";
 
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ const HomeEmpresa = () => {
     setCurrentPage(pageNumber);
   };
 
-
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
@@ -35,15 +35,13 @@ const HomeEmpresa = () => {
 
   return (
     <div className="bg-gray-300 w-screen h-screen">
-      <div>
-        {/* NAVEGACION */}
-        <NavHomeE titulo={"Home"} />
-      </div>
       {/* BODY */}
-
+      <Sidebar />
       <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
         {/* AREA DE CREACION */}
-        <div className="ml-16"><SearcHome /></div>
+        <div className="ml-16">
+          <SearcHome />
+        </div>
         {/* AREA DE VACANTES */}
         <div className="col-span-2 bg-gray-300 p-2 mr-16">
           <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
