@@ -335,6 +335,7 @@ export function apply(id, postulanteId){
       await axios.post(`http://localhost:3001/postulant/postulate/${postulanteId}`, {id:id});
       return {
           type: APPLY,
+         
           }
       } 
   catch(error){
@@ -344,13 +345,17 @@ export function apply(id, postulanteId){
   }
   export function toPipeline(id, postulanteId){
     console.log(id)
-  return async function () {
+  return async function (dispatch) {
     try {
-      await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, {idPostulant:postulanteId})
-      return {
-        type: TO_PIPELINE
-      }
+     const newPipe = await axios.put(`http://localhost:3001/pipeline/${id}/addNew`, {idPostulant:postulanteId})
+     console.log("newPipe", newPipe)
+     return dispatch ({
+        type: TO_PIPELINE,
+        payload : newPipe.data,       
+      })
+   
     }
+  
     catch(error){
       console.log("Pipeline failed")
     }

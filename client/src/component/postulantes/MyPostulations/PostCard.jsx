@@ -1,8 +1,12 @@
 import React from 'react';
 import RemovePost from '../MyPostulations/RemovePost';
-import {Link} from 'react-router-dom'
+import {useSelector} from "react-redux";
+
 
 function PostCard({name, description, id, date}) {
+  //const pipeline = useSelector((state)=> state.rootReducerPostulante.pipeline)
+  //console.log(pipeline)
+
     return (
         <div
           tabindex="0"
@@ -41,7 +45,7 @@ function PostCard({name, description, id, date}) {
             <div>
      <p>Application date: {date.substr(0, 10)}</p>
    </div>
-   <div> Application state: New (waiting for review)</div>
+   <div> Application state: New, wainting for review</div>
           </div>
         </div>
       );

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import {postulanteDetail} from "../../../redux/actions/index"
+import {postulantDetail} from "../../../redux/actions/index"
 import { BsFillArrowLeftSquareFill, BsFillTelephoneFill } from "react-icons/bs";
 import NavHomeE from "./NavHomeE";
 
@@ -11,14 +11,16 @@ function DetailPostulante() {
   const { id } = useParams();
   
   useEffect(() => {
-      dispatch(postulanteDetail(id));
+
+      dispatch(postulantDetail(id));
+
   }, [dispatch, id])
 
   const postulante = useSelector((state) => state.rootReducer.postulados)
     console.log(postulante)
   return (
     <div>
-       <NavHomeE titulo={"Notificaciones"} />
+       {/* <NavHomeE titulo={"Notificaciones"} /> */}
        {postulante.length === 0 ? <p>No Details</p> : 
        <div>
           <p>Nombre : {postulante[0].name}</p>

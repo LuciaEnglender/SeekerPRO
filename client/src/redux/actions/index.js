@@ -195,21 +195,32 @@ export function getLanguage() {
 }
 
 //get para traerme un postulante particular y PARA LA SEARCHBAR ES EL MISMO
-// export function postulanteDetail(name) {
-//   return async function (dispatch) {
-//     try {
-//       let det = await axios.get(
-//         `http://localhost:3001/business/search/${name}`
-//       );
-//       return dispatch({
-//         type: "GET_DETAIL_POSTULANTE",
-//         payload: det.data,
-//       });
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   };
-// }
+
+export function postulanteDetail(name) {
+  return async function (dispatch) {
+    try {
+      let det = await axios.get(
+        `http://localhost:3001/business/search/${name}`
+      );
+      return dispatch({
+        type: "GET_DETAIL_POSTULANTE",
+        payload: det.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+export function postulantDetail(id) {
+  console.log(id)
+  return async function (dispatch) {
+    const res = await axios.get(`http://localhost:3001/postulant?id=${id}`);
+    return dispatch({
+      type: "GET_POSTULADOS",
+      payload: res.data,
+    });
+  };
+}
 //fn para filtrar segun estado de la pipeline
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
