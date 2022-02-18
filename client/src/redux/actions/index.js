@@ -140,17 +140,6 @@ export function getPostulados(id) {
     });
   };
 };
-export function postulanteDetail(id) {
-  console.log(id)
-  return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/postulant?id=${id}`);
-    return dispatch({
-      type: "GET_POSTULADOS",
-      payload: res.data,
-    });
-  };
-}
-
 
 // ESTA AREA ES PARA EL FORM DE CREACION DE VACANTES
 //treaer las tecnologias para el form
