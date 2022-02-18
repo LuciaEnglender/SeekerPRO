@@ -17,13 +17,8 @@ ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
         <Auth0Provider
-<<<<<<< Updated upstream
-          domain="dev-qme6fpnd.us.auth0.com"
-          clientId="3EYKoAz4HUS3pRM8EHiJaWK6fUFhkUqd"
-=======
           domain={domain}
           clientId={clientId}
->>>>>>> Stashed changes
           redirectUri={window.location.origin}
         >
           <App />
