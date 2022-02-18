@@ -117,7 +117,7 @@ const NavBar = ({ titulo }) => {
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                            My profile
+                            Edit profile
                           </Link>
                         )}
                       </Menu.Item>
