@@ -42,7 +42,8 @@
     width: 80%;
     height: 90px;
     padding: 10px;
-  }
+    border: rgb(224, 220, 220) 1px solid
+}
   
   .chatSubmitButton {
     width: 70px;

@@ -1,5 +1,6 @@
 .message {
     display: flex;
+    align-items: flex-end;
     flex-direction: column;
     margin-top: 20px;
 }
@@ -30,7 +31,7 @@ margin-top: 10px;
 }
 
 .message.own{
-align-items: flex-end;
+align-items: flex-start;
 }
 
 .message.own .messageText{
