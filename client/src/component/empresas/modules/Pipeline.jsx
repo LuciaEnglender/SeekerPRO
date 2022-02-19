@@ -54,9 +54,13 @@ function Pipeline({ id }) {
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#second">Review</a></li>
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#third">Contacted</a></li>
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#fourth">Interview</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#five">Tech Interview</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#six">Offered</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#seven">Hired</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#eight">Rejected</a></li>
         </ul>
         <div id="tab-contents">
-        {/* renderizado primer estado */}
+        {/* renderizado primer estado NEW */}
           <div id="first" class="p-4"> 
             {postulados.length === 0 ? <p>Waiting for people...</p> :
               postulados.map((el) => {
@@ -93,6 +97,7 @@ function Pipeline({ id }) {
               </select>
             </div>
           </div>
+           {/* renderizado estado REVIEW */}
           <div id="second" class="hidden p-4">
           {postulados.length === 0 ? <p>Enterview</p> :
               postulados.map((el) => {
@@ -131,6 +136,18 @@ function Pipeline({ id }) {
           </div>
           <div id="third" class="hidden p-4">
             Contactado
+          </div>
+          <div id="fourth" class="hidden p-4">
+            Contratado
+          </div>
+          <div id="fourth" class="hidden p-4">
+            Contratado
+          </div>
+          <div id="fourth" class="hidden p-4">
+            Contratado
+          </div>
+          <div id="fourth" class="hidden p-4">
+            Contratado
           </div>
           <div id="fourth" class="hidden p-4">
             Contratado
