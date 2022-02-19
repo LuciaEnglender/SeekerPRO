@@ -148,6 +148,20 @@ const NavHomeE = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
+                          <Link
+                            to="/homee/message"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            Messages
+                          </Link>
+                        )}
+                      </Menu.Item>
+
+                      <Menu.Item>
+                        {({ active }) => (
                           <ButtonLogOut
                             estilo={classNames(
                               active ? "bg-gray-100 hover:bg-verdeHover" : "",

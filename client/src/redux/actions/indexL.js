@@ -13,7 +13,7 @@ export function postEmail(payload) {
 export function getUsers(email) {
   return async function (dispatch) {
     const res = await axios.get(`/users/${email}`);
-    console.log(res.data);
+   // console.log(res.data);
     return dispatch({
       type: "GET_USER_PERFILE",
       payload: res.data,

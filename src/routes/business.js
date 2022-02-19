@@ -26,6 +26,9 @@ routerBusiness.get("/:id", async (req, res) => {
     where: {
       businessId: busId,
     },
+    include:[
+      {model: Business}
+    ]    
   });
   res.status(200).json(allVacancy);
 });
