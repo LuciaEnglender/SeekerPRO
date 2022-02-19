@@ -70,6 +70,7 @@ server.get("/pagos", (req, res)=>{
   const merchant_order_id= req.query.merchant_order_id
   console.log("EXTERNAL REFERENCE ", external_reference)
 
+
   //Aquí edito el status de mi orden
   Order.findByPk(external_reference)
   .then((order) => {

@@ -34,6 +34,7 @@ server.post("/", (req, res, next) => {
   });
 });
 
+
 server.get("/detalle/:id", (req, res, next) => {
   const id = req.params.id;
 

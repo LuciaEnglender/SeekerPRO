@@ -24,11 +24,16 @@ const PORT = process.env.PORT || 3001
 // Syncing all the models at once.
 
 conn.sync({ force: false }).then(() => {
-  server.listen(PORT, () => {
+  server.listen(3001, () => {
     console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
   });
 });
 
 
 
-
+/* curl -X POST \
+-H "Content-Type: application/json" \
+-H 'Authorization: Bearer TEST-8267019366989212-021713-76aeb122582efd463b75a1bf20744460-138152494' \
+"https://api.mercadopago.com/users/test_user" \
+-d '{"site_id":"MLA"}'
+ */

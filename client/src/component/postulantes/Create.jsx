@@ -232,7 +232,7 @@ const handleCv=(e)=>{
       !input.location ||
       !input.gender ||
       !input.linkedIn ||
-      !input.file||
+      //!input.file||
       !input.CV||
       !input.technologies ||
       !input.languages ||
@@ -250,7 +250,7 @@ const handleCv=(e)=>{
       data.append("github", input.github);
       data.append("linkedIn", input.linkedIn);
       data.append("portfolio", input.portfolio);
-      data.append("file", input.file);
+      //data.append("file", input.file);
       data.append("file", input.CV);
       data.append("technologies", [input.technologies]);
       data.append("languages", [input.languages]);
@@ -267,7 +267,7 @@ const handleCv=(e)=>{
         github: "",
         linkedIn: "",
         portfolio: "",
-        file: "",
+        //file: "",
         CV: "",
         technologies: [],
         languages: [],
@@ -416,7 +416,7 @@ const handleCv=(e)=>{
                 </label>
               </div>
               {/*  ///////////////////////PHOTO////////////////////// */}
-              <div className="w-fit flex flex-col my-2 justify-center">
+              {/* <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center text-verdeHover" htmlFor="file">
                   {" "}
                   Photo (.jpg)
@@ -430,7 +430,7 @@ const handleCv=(e)=>{
                   accept=".jpg"
                   onChange={(e) => handleFile(e)}
                 />
-              </div>
+              </div> */}
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center text-verdeHover" htmlFor="github">
                   GitHub:
@@ -445,7 +445,7 @@ const handleCv=(e)=>{
               </div>
               <div className="w-fit flex flex-col my-2 justify-center">
                 <label className="text-center text-verdeHover" htmlFor="linkedin">
-                  LinkedIn:
+                  LinkedI*
                 </label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
@@ -567,7 +567,7 @@ const handleCv=(e)=>{
                         type="reset"
                         onClick={() => handleDeleteLanguage(el)}
                       >
-                        X{" "}
+                        X
                       </button>
                     </li>
                   ))}
@@ -606,13 +606,13 @@ const handleCv=(e)=>{
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      .name                      {el}
+                                           {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
                         onClick={() => handleDeleteSkills(el)}
                       >
-                                                X
+                         X
                       </button>
                     </li>
                   ))}                </div>
@@ -648,16 +648,15 @@ const handleCv=(e)=>{
                 <div>
                   {input.seniority?.map((el, i) => (
                     <li
-                      Name="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={el.id}               >
+                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      key={el.id}>
                       
                       {el}
                       <button
-                        className="rounded-2xl hover:bg-verdeClaro"
+                        className="rounded-2xl bg-verdeClaro"
                         type="reset"
-                        ok={() => handleDeleteSeniority(el)}
+                        onClick={() => handleDeleteSeniority(el)}
                       >
-                        
                         X
                       </button>
                     </li>
@@ -684,6 +683,7 @@ const handleCv=(e)=>{
                   CREAR
                 </button>
               </div>
+                <h1 className=' text-yellow-500'>(*) Required Fields </h1>
             </div>
           </form>
         </div>

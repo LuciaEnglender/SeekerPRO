@@ -67,7 +67,7 @@ export default function EditProfile() {
     linkedIn: profileState.linkedIn,
     portfolio: profileState.portfolio,
     CV:profileState.cv,
-    file:profileState.file,
+    //file:profileState.file,
     technologies: profileState.technologies,
     languages: profileState.languages,
     skills: profileState.skills,
@@ -435,7 +435,7 @@ console.log(input.seniorities)
                 </div>
               </div>
               {/*PHOTO*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
+              {/* <div className="w-full my-3 flex flex-col m-0 justify-center">
                 <label className="text-center  text-verdeHover" htmlFor="file">
                   Photo (.jpg)*
                 </label>
@@ -450,7 +450,7 @@ console.log(input.seniorities)
                     onChange={(e) => handleFile(e)}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* INFORMACION LABORAL Y PROYECTOS */}

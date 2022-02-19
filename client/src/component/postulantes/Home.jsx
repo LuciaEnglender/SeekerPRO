@@ -217,17 +217,6 @@ const handleAll = (e) => {
             
                  </div>
      </div>
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
       
         {/* SPAN */}
         <div>  <Slides/>   </div>
