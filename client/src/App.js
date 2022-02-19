@@ -64,7 +64,7 @@ function App() {
         <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
         <Route path="/homee/setings" element={<SetingsEmp />} />
         <Route path="/homee/vacante" element={<FormVacancy />} />
-        <Route path="/postulant/:id" element={<DetailPostulante/>} />
+        <Route path="/postulant/:id" element={<DetailPostulante />} />
       </Route>
     </Routes>
   );
