@@ -4,6 +4,7 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 // const { DATABASE_URL } = process.env;
 const DATABASE_URL =
@@ -21,6 +22,7 @@ const sequelize = new Sequelize(
     // 	},
     // },
   }
+
 );
 const basename = path.basename(__filename);
 
@@ -70,6 +72,7 @@ const {
   Offered,
   Hired,
   Rejected,
+  Conversation,
 } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -188,6 +191,23 @@ New.belongsToMany(Postulant, { through: "new_postulant" });
 
 Postulant.belongsToMany(Review, { through: "review_postulant" });
 Review.belongsToMany(Postulant, { through: "review_postulant" });
+
+//CHAT
+
+Business.hasMany(Conversation, { foreignKey: "fk_business" });
+Conversation.belongsTo(Business);
+
+Postulant.hasMany(Conversation, { foreignKey: "fk_postulant" });
+Conversation.belongsTo(Postulant);
+
+Conversation.belongsToMany(Message, {through:"conversation_message"});
+Message.belongsToMany(Conversation, {through:"conversation_message"});
+
+Business.hasMany(Message, { foreignKey: "fk_business" });
+Message.belongsTo(Business);
+
+Postulant.hasMany(Message, { foreignKey: "fk_postulant" });
+Message.belongsTo(Postulant);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

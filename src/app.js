@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
 require('./db.js');
-const path = require('path');
+
 
 const server = express();
 
