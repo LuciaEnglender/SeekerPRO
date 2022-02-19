@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
-    <aside className=" h-screen bg-colorFondo3 drop-shadow-2xl">
+    <aside className=" h-screen bg-colorFondo3 rounded-r-xl drop-shadow-2xl shadow-2xl">
       <div className="bg-colorFondo3 flex items-center justify-between mt-6">
         <div className="flex gap-3">
           <img src="" alt="" className="w-8 h-8 " />
-          <h2 className=" text-gray-800">
-            J<span className="text-yellow-400"></span>seekers
+          <h2 className=" text-gray-800 text-3xl">
+            J<span className="text-colorDetalles2 text-2xl">seekers</span>
           </h2>
         </div>
         <div className="none" id="close-btn">
@@ -24,7 +24,7 @@ const SideBar = () => {
         </div>
       </div>
 
-      <div class="sidebar bg-colorFondo3">
+      <div class="sidebar pt-5 bg-colorFondo3">
         <Link
           to="/homee"
           className="sidebarLink pl-2 text-slate-800 rounded-l-2xl hover:rounded-l-2xl  focus:-translate-y-1  hover:-translate-y-1 active:translate-y-1 focus:rounded-l-2xl hover:bg-colorDetalles2 active:bg-colorFondo3 focus:bg-colorFondo1"
@@ -45,7 +45,7 @@ const SideBar = () => {
         >
           <BiMessageSquareDetail />
           <h3>Messages</h3>
-          <span className="rounded-full bg-colorDetalles1  text-center w-8">
+          <span className="rounded-full bg-colorDetalles1 mr-2 text-center w-8">
             <p className="mb-1">12</p>
           </span>
         </Link>

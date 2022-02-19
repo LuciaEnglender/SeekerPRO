@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
 import SearcHome from "./modules/SearcHome";
 import Sidebar from "./modules/Sidebar";
+import FormVacancy from "./modules/FormVacancy";
 
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
@@ -34,74 +35,44 @@ const HomeEmpresa = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-gray-300 w-screen h-screen">
+    <div className="flex">
       {/* BODY */}
       <Sidebar />
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
-        {/* AREA DE CREACION */}
-        <div className="ml-16">
-          <SearcHome />
+      <div className="flex flex-col shadow-2xl w-full ">
+        <div className="shadow-2xl drop-shadow-xl">
+          <NavHomeE />
         </div>
-        {/* AREA DE VACANTES */}
-        <div className="col-span-2 bg-gray-300 p-2 mr-16">
-          <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
-            <div className="lg:grid items-center justify-center ">
-              <h1 className=" font-bold text-center mb-3 pt-2">Vacancys:</h1>
-              <hr />
-              <div className="flex m-0 justify-center">
-                <Link to="/homee/vacante">
-                  <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
-                    Add Vacancy
-                  </button>
-                </Link>
-              </div>
-              <div className="mt-5">
-                {currentVacancy ? (
-                  currentVacancy.map((el) => {
-                    return (
-                      <Link to={`/vacancy/${el.id}`}>
-                        <CardVacante
-                          name={el.name}
-                          description={el.description}
-                          technologies={el.technologies}
-                          seniorities={el.seniorities}
-                          languages={el.languages}
-                        />
-                      </Link>
-                    );
-                  })
-                ) : (
-                  <h1>Crea tu vacante</h1>
-                )}
-              </div>
+        {/* AREA DE CREACION */}
+        <div className="grid grid-cols-3 h-full p-3 gap-3">
+          <div className="grid  col-span-2 grid-rows-5 p-4 rounded-xl shadow-2xl drop-shadow-xl bg-colorFondo1">
+            <div>
+              <SearcHome />
             </div>
-            <div className="w-full mt-3 flex justify-center">
-              <button
-                className="m-3"
-                onClick={() =>
-                  paginado(currentPage === 1 ? currentPage : currentPage - 1)
-                }
-              >
-                <AiOutlineArrowLeft />
-              </button>
-
-              <button
-                className="m-3"
-                onClick={() =>
-                  paginado(currentPage === 3 ? currentPage : currentPage + 1)
-                }
-              >
-                <AiOutlineArrowRight />
-              </button>
-              <Pagination
-                vacancyPerPage={vacancyPerPage}
-                vacancy={vacancy}
-                paginado={paginado}
-              />
+            {/* AREA DE VACANTES */}
+            <div className=" row-span-4 overflow-y-auto bg-white rounded-xl p-3">
+              {currentVacancy ? (
+                currentVacancy.map((el) => {
+                  return (
+                    <Link to={`/vacancy/${el.id}`}>
+                      <CardVacante
+                        name={el.name}
+                        description={el.description}
+                        technologies={el.technologies}
+                        seniorities={el.seniorities}
+                        languages={el.languages}
+                      />
+                    </Link>
+                  );
+                })
+              ) : (
+                <h1>No vacancies</h1>
+              )}
             </div>
           </div>
+          <div className="rounded-xl shadow-2xl p-4 drop-shadow-xl bg-colorFondo1">
+            <FormVacancy />
+          </div>
         </div>
-        <div></div>
       </div>
     </div>
   );

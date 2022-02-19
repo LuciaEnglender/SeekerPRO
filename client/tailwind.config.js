@@ -16,6 +16,7 @@ module.exports = {
       },
       colors: {
         //NUEVOS
+        colorGrisClaro: "#dee2e6",
         colorGris: "#81929e",
         colorNegro: "#353535",
         colorFondo1: "#e8edec",
