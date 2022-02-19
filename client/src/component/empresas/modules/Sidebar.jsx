@@ -13,8 +13,8 @@ const SideBar = () => {
       <div className="bg-colorFondo3 flex items-center justify-between mt-6">
         <div className="flex gap-3">
           <img src="" alt="" className="w-8 h-8 " />
-          <h2 className=" text-gray-800 text-3xl">
-            J<span className="text-colorDetalles2 text-2xl">seekers</span>
+          <h2 className=" text-gray-800 text-2xl">
+            J<span className="text-colorDetalles2 text-2xl">Seekers</span>
           </h2>
         </div>
         <div className="none" id="close-btn">

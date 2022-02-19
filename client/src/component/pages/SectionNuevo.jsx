@@ -61,7 +61,7 @@ const SectionNuevo = () => {
         </div>
       </nav>
       <section>
-        <div className=" pt-35% px-10   bg-colorFondo2">
+        <div className=" pt-35% px-10   bg-colorFondo3">
           <div className="flex flex-col  md:flex-row ">
             <div className="my-7">
               <div className="md:mb-10">
@@ -78,7 +78,7 @@ const SectionNuevo = () => {
               <div>
                 <div className="flex mt-1 md:mt-10 justify-center">
                   <button
-                    className="p-4 py-1 inline-block bg-gradient-to-r to-colorFondo1 from-colorDetalles text-white font-bold rounded-3xl filter hover:drop-shadow transition ease-in-out hover:-translate-y-1 hover:scale-105 "
+                    className="p-4 py-1 inline-block bg-gradient-to-r to-colorBotones1 from-colorNegro text-white font-bold rounded-3xl filter hover:drop-shadow transition ease-in-out hover:-translate-y-1 hover:scale-105 "
                     value="DEVELOPER"
                     onClick={(e) => handleSubmitP(e)}
                   >
@@ -102,7 +102,7 @@ const SectionNuevo = () => {
               <div>
                 <div className="flex mt-1 md:mt-10 justify-center">
                   <button
-                    className="text-center p-4 py-1 inline-block bg-gradient-to-r to-colorFondo1 from-colorDetalles text-white font-bold rounded-3xl filter hover:drop-shadow transition ease-in-out hover:-translate-y-1 hover:scale-105 "
+                    className="text-center p-4 py-1 inline-block bg-gradient-to-r to-colorBotones1 from-colorNegro text-white font-bold rounded-3xl filter hover:drop-shadow transition ease-in-out hover:-translate-y-1 hover:scale-105 "
                     value="BUSINESS"
                     onClick={(e) => handleSubmitE(e)}
                   >

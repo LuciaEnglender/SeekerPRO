@@ -5,7 +5,7 @@ export const ButtonsHomeE = () => {
   return (
     <Link to="/homee">
       {" "}
-      <button className="p-4 py-1 inline-block bg-gradient-to-r to-colorFondo1 from-colorDetalles text-white font-bold rounded-3xl filter hover:drop-shadow ">
+      <button className="p-4 py-1 inline-block bg-gradient-to-r to-colorBotones1 from-colorNegrotext-white font-bold rounded-3xl filter hover:drop-shadow ">
         Recruiter
       </button>{" "}
     </Link>

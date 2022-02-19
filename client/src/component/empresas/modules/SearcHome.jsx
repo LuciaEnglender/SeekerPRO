@@ -120,7 +120,7 @@ function SearcHome() {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="flex m-0 justify-center">
           <input
-            className="rounded-l-xl"
+            className="rounded-l-xl px-2"
             type="text"
             onChange={(e) => handleInputChange(e)}
           />
@@ -132,11 +132,11 @@ function SearcHome() {
             Search
           </button>
         </div>
-        <div className="flex flex-col w-full mt-3 mb-3">
+        <div className="flex flex-col w-full h-52 mt-3 mb-3">
           <div className="grid grid-cols-3 w-full gap-1">
-            <div className="flex flex-col w-full">
+            <div className="grid grid-rows-2">
               <select
-                className="rounded-xl bg-colorFondo2"
+                className="rounded-xl h-fit bg-colorFondo2"
                 name="technology"
                 onChange={(e) => handleSelectTechno(e)}
               >
@@ -147,21 +147,27 @@ function SearcHome() {
                   <option>{e.name}</option>
                 ))}
               </select>
-              {input.technology.map((el, i) => (
-                <li key={i}>
-                  {el}
-                  <button
-                    type="reset"
-                    onClick={() => handleDeleteTechnology(el)}
+              <div className="flex">
+                {input.technology.map((el, i) => (
+                  <li
+                    className="flex flex-row w-fit  list-none rounded-2xl bg-verdeHover"
+                    key={i}
                   >
-                    <GrFormClose />
-                  </button>
-                </li>
-              ))}
+                    {el}
+                    <button
+                      className=" rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteTechnology(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-col w-full">
+            <div className="grid grid-rows-2">
               <select
-                className="rounded-xl bg-colorFondo2"
+                className="rounded-xl  h-fit bg-colorFondo2"
                 name="language"
                 onChange={(e) => handleSelectLenguge(e)}
               >
@@ -173,17 +179,24 @@ function SearcHome() {
                 ))}
               </select>
               {input.language.map((el, i) => (
-                <li key={i}>
+                <li
+                  className="flex flex-row w-fit  list-none rounded-2xl bg-verdeHover"
+                  key={i}
+                >
                   {el}
-                  <button type="reset" onClick={() => handleDeleteLanguage(el)}>
+                  <button
+                    className=" rounded-2xl hover:bg-verdeClaro"
+                    type="reset"
+                    onClick={() => handleDeleteLanguage(el)}
+                  >
                     <GrFormClose />
                   </button>
                 </li>
               ))}
             </div>
-            <div className="flex flex-col w-full">
+            <div className="grid grid-rows-2">
               <select
-                className="rounded-xl bg-colorFondo2"
+                className="rounded-xl  h-fit bg-colorFondo2"
                 name="seniority"
                 onChange={(e) => handleSelectSeniority(e)}
               >
@@ -195,9 +208,13 @@ function SearcHome() {
                 ))}
               </select>
               {input.seniority.map((el, i) => (
-                <li key={i}>
+                <li
+                  className="flex flex-row w-fit list-none rounded-2xl bg-verdeHover"
+                  key={i}
+                >
                   {el}
                   <button
+                    className="rounded-2xl bg-verdeClaro"
                     type="reset"
                     onClick={() => handleDeleteSeniority(el)}
                   >
@@ -207,14 +224,11 @@ function SearcHome() {
               ))}
             </div>
           </div>
-          <div className="w-full flex m-0 my-1 justify-center">
+          <div className="w-full flex m-0 justify-center">
             <button className="rounded-xl bg-gradient-to-r to-colorDetalles1 from-colorBotones2 text-white font-ligth filter hover:drop-shadow transition ease-in-out hover:scale-105 px-2">
               Filter
             </button>
           </div>
-        </div>
-        <div>
-          <hr className="bg-colorDetalles2 h-1 rounded-xl px-2 shadow-xl" />
         </div>
       </form>
     </div>

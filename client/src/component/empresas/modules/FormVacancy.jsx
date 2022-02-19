@@ -119,47 +119,63 @@ const FormVacancy = () => {
   };
 
   return (
-    <div className="flex m-0 justify-center">
-      {/* FORM CREACION VACANTE */}
-      <form onSubmit={(e) => handleSubmit(e)} className="mt-10 w-full">
-        <div className=" m-2 flex flex-col">
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      className="grid grid-rows-6 p-4 rounded-xl shadow-2xl drop-shadow-xl bg-colorFondo1"
+    >
+      {/* NOMBRE Y DESCR */}
+      <div className=" row-span-2 ">
+        <h1 className="text-center">CREATE</h1>
+        {/* grid1 */}
+        <div className="flex flex-col my-2">
           <label className=" text-center"> Name:</label>
-          <input
-            className=" rounded-xl "
-            type="text"
-            name="name"
-            value={input.name}
-            onChange={(e) => handleChange(e)}
-          />
+          <div className="flex m-0 justify-center">
+            <input
+              className=" rounded-xl px-2"
+              type="text"
+              name="name"
+              value={input.name}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
         </div>
-        <div className="w-full m-2 flex flex-col">
+        <div className="w-full flex flex-col">
           <label className=" text-center"> Description:</label>
           <textarea
-            className=" rounded-xl "
+            className=" rounded-xl h-24 px-2"
             type="text-area"
             name="description"
             value={input.description}
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="w-full m-2 flex flex-col">
-          <label className=" text-center"> Tecnologias:</label>
-          <select
-            className=" rounded-xl bg-colorFondo2"
-            name="technology"
-            onChange={(e) => handleSelectTechno(e)}
-          >
-            <option className=" " selected="false">
-              Select...
-            </option>
-            {technology.map((e) => (
-              <option className=" ">{e.name}</option>
-            ))}
-          </select>
-          <div>
+      </div>
+      {/* SKILLS TECHNO  DFEMAS */}
+      <div className="row-span-3 my-8">
+        {/* TECHNO */}
+        <div className="w-full grid grid-rows-2">
+          <div className="flex h-fit flex-column m-0 justify-center">
+            <label className=" text-center"> Tecnologias:</label>
+            <select
+              className=" rounded-xl bg-colorFondo2 px-2"
+              name="technology"
+              onChange={(e) => handleSelectTechno(e)}
+            >
+              <option className=" " selected="false">
+                Select...
+              </option>
+              {technology.map((e) => (
+                <option className=" ">{e.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="scroll-smooth flex no-scrollbar overflow-x-auto">
             {input.technology.map((el, i) => (
-              <li className=" " key={i}>
-                {el}
+              <div
+                className="flex flex-row h-fit my-1  list-none rounded-2xl bg-verdeHover"
+                key={i}
+              >
+                <p className=" ">{el}</p>
                 <button
                   className=" "
                   type="reset"
@@ -167,26 +183,32 @@ const FormVacancy = () => {
                 >
                   <GrFormClose />
                 </button>
-              </li>
+              </div>
             ))}
           </div>
         </div>
-        <div className="w-full m-2 flex flex-col">
-          <label className=" text-center"> Lenguaje:</label>
-          <select
-            className=" rounded-xl bg-colorFondo2"
-            name="language"
-            onChange={(e) => handleSelectLenguge(e)}
-          >
-            <option selected="false">Select...</option>
-            {language.map((e) => (
-              <option value={e.name}>{e.name}</option>
-            ))}
-          </select>
-          <div>
+        {/* LANGUAJE */}
+        <div className="w-full grid grid-rows-2">
+          <div className="flex flex-column m-0 justify-center">
+            <label className=" "> Lenguaje:</label>
+            <select
+              className=" rounded-xl bg-colorFondo2 px-2"
+              name="language"
+              onChange={(e) => handleSelectLenguge(e)}
+            >
+              <option selected="false">Select...</option>
+              {language.map((e) => (
+                <option value={e.name}>{e.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="scroll-smooth flex  no-scrollbar overflow-x-auto">
             {input.language.map((el, i) => (
-              <li className=" " key={i}>
-                {el}
+              <li
+                className="flex flex-row h-fit my-1  list-none rounded-2xl bg-verdeHover"
+                key={i}
+              >
+                <p className=" ">{el}</p>
                 <button
                   className=" "
                   type="reset"
@@ -198,26 +220,32 @@ const FormVacancy = () => {
             ))}
           </div>
         </div>
-        <div className="w-full m-2 flex flex-col">
-          <label className=" text-center"> Seniority:</label>
-          <select
-            className=" rounded-xl bg-colorFondo2"
-            name="seniority"
-            onChange={(e) => handleSelectSeniority(e)}
-          >
-            <option className=" " selected="false">
-              Select...
-            </option>
-            {seniority.map((e) => (
-              <option className=" " value={e.name}>
-                {e.name}
+        {/* SENIORITY */}
+        <div className="w-full grid grid-rows-2">
+          <div className="flex flex-column m-0 justify-center">
+            <label className=" text-center"> Seniority:</label>
+            <select
+              className=" rounded-xl bg-colorFondo2 px-2"
+              name="seniority"
+              onChange={(e) => handleSelectSeniority(e)}
+            >
+              <option className=" " selected="false">
+                Select...
               </option>
-            ))}
-          </select>
-          <div>
+              {seniority.map((e) => (
+                <option className=" " value={e.name}>
+                  {e.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="scroll-smooth flex no-scrollbar overflow-x-auto">
             {input.seniority.map((el, i) => (
-              <li className=" " key={i}>
-                {el}
+              <li
+                className="flex flex-row  my-1 h-fit list-none rounded-2xl bg-verdeHover"
+                key={i}
+              >
+                <p className=" ">{el}</p>
                 <button
                   className=" "
                   type="reset"
@@ -229,13 +257,17 @@ const FormVacancy = () => {
             ))}
           </div>
         </div>
-        <div className="w-full m-2 flex flex-col">
-          <button type="submit" className=" text-center">
-            Publicar vacante
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      {/* BOTOn */}
+      <div className="flex m-0 justify-center">
+        <button
+          type="submit"
+          className=" text-center bg-gradient-to-r h-fit rounded-lg to-colorBotones1 from-colorNegro text-white font-ligth filter hover:drop-shadow transition ease-in-out hover:scale-105 px-2"
+        >
+          Publicar vacante
+        </button>
+      </div>
+    </form>
   );
 };
 

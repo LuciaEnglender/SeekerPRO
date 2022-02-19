@@ -43,13 +43,13 @@ const HomeEmpresa = () => {
           <NavHomeE />
         </div>
         {/* AREA DE CREACION */}
-        <div className="grid grid-cols-3 h-full p-3 gap-3">
+        <div className="grid grid-cols-3 h-full w-full p-4 gap-5">
           <div className="grid col-span-2 grid-rows-5 p-4 rounded-xl shadow-2xl drop-shadow-xl bg-colorFondo1">
-            <div className="min-h-full">
+            <div className=" h-32">
               <SearcHome />
             </div>
             {/* AREA DE VACANTES */}
-            <div className="row-span-4 scroll-smooth h-95%  no-scrollbar overflow-y-auto bg-colorFondo3 rounded-xl p-2 ">
+            <div className="row-span-4 scroll-smooth h-95% rounded-xl no-scrollbar overflow-y-auto bg-colorGris  p-2 ">
               {vacancy ? (
                 vacancy.map((el) => {
                   return (
@@ -69,9 +69,7 @@ const HomeEmpresa = () => {
               )}
             </div>
           </div>
-          <div className="rounded-xl shadow-2xl p-4 drop-shadow-xl bg-colorFondo1">
-            <FormVacancy />
-          </div>
+          <FormVacancy />
         </div>
       </div>
     </div>
