@@ -1,11 +1,12 @@
 import axios from "axios";
 
 //Get BUSINESS DETAIL DE PROFILE
-export function getProfile(email) {
+export function getProfile(email2) {
   return async function (dispatch) {
     const profile = await axios.get(
-      `/business/find/${email}`
+      `/business/find/${email2}`
     );
+    console.log(profile.data)
     return dispatch({
       type: "GET_BISSNESS_DETAIL",
       payload: profile.data,

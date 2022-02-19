@@ -14,6 +14,7 @@ export const GET_SENIORITY = "GET_SENIORITY"
 export const GET_VACANCY="GET_VACANCY"
 export const GET_VACANCY_ID="GET_VACANCY_ID"
 export const CLEAR_BUSINESS="CLEAR_BUSINESS"
+export const SORT="SORT"
 //FILTERS
 export const GET_SEARCH_BAR="GET_SEARCH_BAR"
 export const FILTER_BY_LANGUAGE = "FILTER_BY_LANGUAGE"
@@ -626,3 +627,10 @@ export function addSeñority(id, input){
 }
 
 
+
+export function sort(payload){
+  return {
+      type: SORT,
+      payload
+  }
+}

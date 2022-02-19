@@ -4,8 +4,7 @@ import { format } from "timeago.js";
 //Es el component propiamente dicho
 
 function Message({ message, own }) {
-  console.log("soy mensaje en message", message)
-
+ // console.log("soy mensaje en message", message)
   
   return (
     <>

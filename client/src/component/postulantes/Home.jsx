@@ -7,6 +7,7 @@ import {
   getBusiness,
   getVacancy,
   clearBusiness,
+  sort,
 } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -31,7 +32,7 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy
   );
-  console.log(filtradas)
+ // console.log(filtradas)
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,6 +73,14 @@ const handleAll = (e) => {
     dispatch(getProfile(email2));
   }, []);
 
+  //Ordenamiento de las vacantes
+  const [,setOrden] = useState('Default')
+function handleSort (e){
+    e.preventDefault()
+    dispatch(sort(e.target.value))
+    setCurrentPage(1)
+    setOrden(e.target.value)
+ }
   return (
     <div className="absolute bg-gray-300 h-screen w-screen">
       {/* NAVBAR */}
@@ -115,6 +124,15 @@ const handleAll = (e) => {
                     all business{" "}
                   </button>
                 </div>
+                <div >  
+        <select onChange = {e => handleSort(e)}>
+            <option value ="default"> Sort by.. </option>
+            <option value = "az"> A-Z</option>
+            <option value = "za"> Z-A </option>
+            <option value = "old"> Older </option>
+            <option value = "new"> Recently </option>
+        </select>
+        </div>  
               </div>
               <div className="grid-span-4 h-full">
                 {currentVacancy.length === 0 ? (

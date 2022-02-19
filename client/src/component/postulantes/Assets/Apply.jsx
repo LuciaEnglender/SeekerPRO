@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 function Apply({id}) {
   const postulanteId = useSelector((state) => state.rootReducerPostulante.profile[0].id)
   const navigate = useNavigate()
-  console.log("apply", id)
+  //console.log("apply", id)
   const dispatch = useDispatch()
   const { user } = useAuth0();
   const email = JSON.stringify(user.email);

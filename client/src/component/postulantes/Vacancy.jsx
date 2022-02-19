@@ -3,6 +3,7 @@ import Apply from "./Assets/Apply";
 import SeeLater from "./SeeLaterVacancies/SeeLater";
 import Follow from "./FollowBusiness/Follow";
 import { AiOutlineWhatsApp } from "react-icons/ai";
+import { format } from "timeago.js";
 
 //import {getVacancy} from actions
 // import AddToFavourite from "./Assets/AddToFavourite";
@@ -18,7 +19,7 @@ function Vacancy({
   business,
   date
 }) {
-  console.log("id", id);
+  //console.log("id", id);
   //
   return (
     <div
@@ -72,7 +73,7 @@ function Vacancy({
           </div>
         </div>
         <div> 
- <p> Publication date: {date.substr(0, 10)}</p> </div><br/>
+ <p> Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}</p> </div><br/>
          </div>
       </div>
   

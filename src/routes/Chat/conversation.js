@@ -79,4 +79,25 @@ routerConversation.get("/find/:businessId/:postulantId", async (req, res) => {
 	}
 });
 
+//get all data from a particular postulant
+
+routerConversation.get("/dataPostulant/:postulantId", async (req, res) => {
+	const { postulantId } = req.params;
+
+	try {
+		if (postulantId) {
+			const allPostulant = await Postulant.findAll({
+				where: {
+					id: postulantId,
+				},
+			})
+			allPostulant
+				? res.status(200).send(allPostulant)
+				: res.status(400).send("No applicant found");
+		}
+	} catch (error) {
+		res.status(400).send("ERROR" + error);
+	}
+});
+
 module.exports = routerConversation;

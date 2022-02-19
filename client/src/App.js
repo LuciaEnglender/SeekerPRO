@@ -4,7 +4,8 @@ import { Routes, Route } from "react-router-dom";
 // Rutas compartidas
 import Landing from "./component/pages/Landing";
 import Register from "./private/Register";
-import Messenger from './component/Chat/Messenger'
+import MessengerPostulant from './component/Chat/MessengerPostulant'
+import MessengerBussines from './component/Chat/MessengerBussines'
 
 //Rutas de Postulantes
 import Home from "./component/postulantes/Home";
@@ -45,7 +46,7 @@ function App() {
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
         <Route path="/homep/notificaciones" element={<Notificaciones />} />
-        <Route path="/homep/mensajes" element={<Messenger/>} />
+        <Route path="/homep/mensajes" element={<MessengerPostulant/>} />
         <Route path="/homep/miperfil" element={<EditProfile />} />
         <Route path="/homep/favourites" element={<Business />} />
         <Route path="/homep/create/modifyprofile" element={<EditProfile />} />
@@ -57,7 +58,7 @@ function App() {
         <Route path="/homee/mercado" element={<MercadoPago />} />
         <Route path="/homee/create" element={<FormPerfil />} />
         <Route path="/homee/notification" element={<NotiEmp />} />
-        <Route path="/homee/message" element={<Messenger/>} />
+        <Route path="/homee/message" element={<MessengerBussines/>} />
         {/*<Route path="/homee/message" element={<MensajeEmp />} />*/}
         <Route path="/homee/perfil" element={<PerfilEmp />} />
         <Route path="/vacancy" element={<DetailVacy />} />
