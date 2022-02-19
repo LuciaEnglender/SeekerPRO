@@ -125,7 +125,7 @@ function SearcHome() {
             onChange={(e) => handleInputChange(e)}
           />
           <button
-            className="rounded-r-xl bg-colorBotones1 px-2"
+            className="rounded-r-xl bg-gradient-to-r to-colorDetalles1 from-colorBotones2 text-white font-ligth filter hover:drop-shadow transition ease-in-out hover:scale-105 px-2"
             type="reset"
             onClick={(e) => handleSubmit2(e)}
           >
@@ -135,7 +135,11 @@ function SearcHome() {
         <div className="flex flex-col w-full mt-3 mb-3">
           <div className="grid grid-cols-3 w-full gap-1">
             <div className="flex flex-col w-full">
-              <select name="technology" onChange={(e) => handleSelectTechno(e)}>
+              <select
+                className="rounded-xl bg-colorFondo2"
+                name="technology"
+                onChange={(e) => handleSelectTechno(e)}
+              >
                 <option selected disabled value="">
                   Tech...
                 </option>
@@ -156,7 +160,11 @@ function SearcHome() {
               ))}
             </div>
             <div className="flex flex-col w-full">
-              <select name="language" onChange={(e) => handleSelectLenguge(e)}>
+              <select
+                className="rounded-xl bg-colorFondo2"
+                name="language"
+                onChange={(e) => handleSelectLenguge(e)}
+              >
                 <option selected disabled value="">
                   Lang...
                 </option>
@@ -175,6 +183,7 @@ function SearcHome() {
             </div>
             <div className="flex flex-col w-full">
               <select
+                className="rounded-xl bg-colorFondo2"
                 name="seniority"
                 onChange={(e) => handleSelectSeniority(e)}
               >
@@ -199,7 +208,9 @@ function SearcHome() {
             </div>
           </div>
           <div className="w-full flex m-0 my-1 justify-center">
-            <button className="bg-colorBotones1 rounded-xl px-2">Filter</button>
+            <button className="rounded-xl bg-gradient-to-r to-colorDetalles1 from-colorBotones2 text-white font-ligth filter hover:drop-shadow transition ease-in-out hover:scale-105 px-2">
+              Filter
+            </button>
           </div>
         </div>
         <div>

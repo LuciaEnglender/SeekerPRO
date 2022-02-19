@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
-    <aside className=" h-screen bg-colorFondo3 rounded-r-xl drop-shadow-2xl shadow-2xl">
+    <aside className=" h-screen bg-colorFondo3 drop-shadow-2xl shadow-2xl">
       <div className="bg-colorFondo3 flex items-center justify-between mt-6">
         <div className="flex gap-3">
           <img src="" alt="" className="w-8 h-8 " />

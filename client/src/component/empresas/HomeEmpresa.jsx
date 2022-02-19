@@ -44,31 +44,29 @@ const HomeEmpresa = () => {
         </div>
         {/* AREA DE CREACION */}
         <div className="grid grid-cols-3 h-full p-3 gap-3">
-          <div className="grid col-span-2  grid-rows-5 p-4 rounded-xl shadow-2xl drop-shadow-xl bg-colorFondo1">
+          <div className="grid col-span-2 grid-rows-5 p-4 rounded-xl shadow-2xl drop-shadow-xl bg-colorFondo1">
             <div className="min-h-full">
               <SearcHome />
             </div>
             {/* AREA DE VACANTES */}
-            <div className="row-span-4 bg-white rounded-xl p-3">
-              <div className="overflow-scroll bg-white ">
-                {vacancy ? (
-                  vacancy.map((el) => {
-                    return (
-                      <Link to={`/vacancy/${el.id}`}>
-                        <CardVacante
-                          name={el.name}
-                          description={el.description}
-                          technologies={el.technologies}
-                          seniorities={el.seniorities}
-                          languages={el.languages}
-                        />
-                      </Link>
-                    );
-                  })
-                ) : (
-                  <h1>No vacancies</h1>
-                )}
-              </div>
+            <div className="row-span-4 scroll-smooth h-95%  no-scrollbar overflow-y-auto bg-colorFondo3 rounded-xl p-2 ">
+              {vacancy ? (
+                vacancy.map((el) => {
+                  return (
+                    <Link to={`/vacancy/${el.id}`}>
+                      <CardVacante
+                        name={el.name}
+                        description={el.description}
+                        technologies={el.technologies}
+                        seniorities={el.seniorities}
+                        languages={el.languages}
+                      />
+                    </Link>
+                  );
+                })
+              ) : (
+                <h1>No vacancies</h1>
+              )}
             </div>
           </div>
           <div className="rounded-xl shadow-2xl p-4 drop-shadow-xl bg-colorFondo1">

@@ -119,11 +119,11 @@ const FormVacancy = () => {
   };
 
   return (
-    <div>
+    <div className="flex m-0 justify-center">
       {/* FORM CREACION VACANTE */}
-      <form onSubmit={(e) => handleSubmit(e)} className="">
-        <div className=" ">
-          <label> Name:</label>
+      <form onSubmit={(e) => handleSubmit(e)} className="mt-10 w-full">
+        <div className=" m-2 flex flex-col">
+          <label className=" text-center"> Name:</label>
           <input
             className=" rounded-xl "
             type="text"
@@ -132,8 +132,8 @@ const FormVacancy = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="w-full flex flex-col">
-          <label> Description:</label>
+        <div className="w-full m-2 flex flex-col">
+          <label className=" text-center"> Description:</label>
           <textarea
             className=" rounded-xl "
             type="text-area"
@@ -142,10 +142,10 @@ const FormVacancy = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className=" ">
-          <label> Tecnologias:</label>
+        <div className="w-full m-2 flex flex-col">
+          <label className=" text-center"> Tecnologias:</label>
           <select
-            className=" "
+            className=" rounded-xl bg-colorFondo2"
             name="technology"
             onChange={(e) => handleSelectTechno(e)}
           >
@@ -170,12 +170,11 @@ const FormVacancy = () => {
               </li>
             ))}
           </div>
-          {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
         </div>
-        <div className=" ">
-          <label> Lenguaje:</label>
+        <div className="w-full m-2 flex flex-col">
+          <label className=" text-center"> Lenguaje:</label>
           <select
-            className=" "
+            className=" rounded-xl bg-colorFondo2"
             name="language"
             onChange={(e) => handleSelectLenguge(e)}
           >
@@ -198,12 +197,11 @@ const FormVacancy = () => {
               </li>
             ))}
           </div>
-          {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
         </div>
-        <div className=" ">
-          <label> Seniority:</label>
+        <div className="w-full m-2 flex flex-col">
+          <label className=" text-center"> Seniority:</label>
           <select
-            className=" "
+            className=" rounded-xl bg-colorFondo2"
             name="seniority"
             onChange={(e) => handleSelectSeniority(e)}
           >
@@ -230,10 +228,9 @@ const FormVacancy = () => {
               </li>
             ))}
           </div>
-          {/*  <ul><li>{input.seniority.map(el => el + " ,")}</li></ul> */}
         </div>
-        <div className=" ">
-          <button type="submit" className="  ">
+        <div className="w-full m-2 flex flex-col">
+          <button type="submit" className=" text-center">
             Publicar vacante
           </button>
         </div>

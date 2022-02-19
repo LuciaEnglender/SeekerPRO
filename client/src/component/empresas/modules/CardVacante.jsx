@@ -11,7 +11,7 @@ export default function CardVacante({
 }) {
   const { user, isAuthenticated } = useAuth0();
   return (
-    <div className="flex bg-colorFondo1 rounded-xl m-px">
+    <div className="flex bg-colorFondo2 hover:bg-colorFondo1 transition ease-in-out hover:-translate-y-1 rounded-xl m-1">
       <div className="flex m-2 justify-center">
         {isAuthenticated && (
           <img
@@ -21,7 +21,7 @@ export default function CardVacante({
           />
         )}
       </div>
-      <div className=" flex flex-col">
+      <div className=" flex flex-col w-full">
         <div className="grid grid-cols-4">
           <div className="flex m-0 justify-center">
             <p>{name}</p>
