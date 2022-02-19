@@ -1,29 +1,22 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostulados, postulantDetail, removeAll } from "../../../redux/actions/index";
 import { Link } from "react-router-dom";
-import PostulantesVacancy from "../PostulantesVacancy";
+import {addNew, addReview, addContact, addInterviewRRHH, addInterviewTech, addOffered, addHired, addRejected } from "../../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";
-import DetailPostulante from "./DetailPostulante";
-import CardDetail from "./CardDetail";
+import { Fragment, useEffect, useRef, useState } from 'react'
+
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
   const { user } = useAuth0()
   const postulados = useSelector((state) => state.rootReducer.postulados);
   console.log(postulados)
-  //const [state, setState] = useState();
+  
   useEffect(() => {
     dispatch(getPostulados(id))
   }, [dispatch, id]);
-
-  // function handlePipeline(e) {
-  //   dispatch(filterStatusPipeline(e.target.value));
-  // }
-  // function handleClick(e) {
-  //   dispatch(removeAll(id, state))
-  // }
+ 
   useEffect(() => {
     let tabsContainer = document.querySelector("#tabs");
     let tabTogglers = tabsContainer.querySelectorAll("a")
@@ -45,6 +38,34 @@ function Pipeline({ id }) {
     document.getElementById("default-tab").click();
   }, [dispatch]);
 
+  const [input, setInput] = useState({
+    idPostulant: "",
+    action: "",
+})
+  //console.log(input)
+  
+  function handleSelect(e) {
+    setInput({
+        ...input, 
+        //idPostulant: e.target.key,
+        action: e.target.value
+    })
+}
+function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(removeAll(id, input.idPostulant));
+    if (input.action === "new" ) {
+        dispatch(addNew(id, input.idPostulant))
+        //setInput({})
+    }
+    if (input.action === "review" ) {
+      dispatch(addReview(id, input.idPostulant))}
+
+    else { alert("Choose an option") }
+
+}
+
+
   return (
     <div>
       <div class="w-1 mx-auto mt-4  rounded">
@@ -63,7 +84,7 @@ function Pipeline({ id }) {
           <div id="first" class="p-4">
             {postulados.length === 0 ? <p>Waiting for people...</p> :
               postulados.map((el) => {
-                console.log(el.loginEmail, id)
+                //console.log(el.loginEmail, id)
                 return (
                   <div >
                     <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
@@ -74,33 +95,34 @@ function Pipeline({ id }) {
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
                       </Link>
                       <div class="flex justify-center mt-2">
-                        <button onClick={() => dispatch(removeAll(id, el.id))}>change status</button>
+                        <button onClick={() => setInput({idPostulant: el.id})}>change status</button>
+                      {console.log(id, input.idPostulant)}
                       </div>
-                    </div>
-                    <div>
-              <select>
-               <button onClick={() => dispatch(removeAll(id, el.id))}>NEWy</button>
-                <option value="revision">review</option>
-                <option value="contactado">contacted</option>
-                <option value="entrevista">interview</option>
-                <option value="tech">tech interview</option>
-                <option value="ofrecido">offered</option>
-                <option value="contratado">hired</option>
-                <option value="rechazado">rejected</option>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                      <select onChange={(e) => handleSelect(e)}>
+                <option value="new" key={el.id}>new</option>
+                <option value="review" key={el.id}>review</option>
+                <option value="contacted" key={el.id}>contacted</option>
+                <option value="interview" key={el.id}>interview</option>
+                <option value="techInterview" key={el.id}>tech interview</option>
+                <option value="offered" key={el.id}>offered</option>
+                <option value="hired" key={el.id}>hired</option>
+                <option value="rejected" key={el.id}>rejected</option>
               </select>
-            </div>
+              <button type="submit">confirm</button>
+               
+            </form>
+                    </div>
                   </div>
-                  
                 )
               })
             }
-           
           </div>
           {/* renderizado estado REVIEW */}
           <div id="second" class="hidden p-4">
             {postulados.length === 0 ? <p>Enterview</p> :
               postulados.map((el) => {
-                console.log(el.loginEmail, id)
+                //console.log(el.loginEmail, id)
                 return (
                   <div >
                     <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >

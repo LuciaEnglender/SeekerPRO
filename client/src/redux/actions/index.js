@@ -450,11 +450,11 @@ export function addSeñority(id, input){
 }
 
 ///ACA EMPIEZAN ACTIONS PARA LA PIPELINE////
-export function removeAll(id, idpostulante){
-  console.log(id, idpostulante)
+export function removeAll(id, idPostulant){
+  console.log(id, idPostulant)
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeAll`, {idPostulant : idpostulante})
+      const edit = await axios.put(`/pipeline/${id}/removeAll`, {idPostulant : idPostulant})
       return dispatch({
         type: 'REMOVE_ALL',
         payload : edit.data
@@ -465,10 +465,10 @@ export function removeAll(id, idpostulante){
   }
 };
 
-export function addNew(id, input){
+export function addNew(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addNew`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addNew`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -478,10 +478,10 @@ export function addNew(id, input){
     }
   }
 };
-export function removeNew(id, input){
+export function removeNew(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeNew`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeNew`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -491,11 +491,11 @@ export function removeNew(id, input){
     }
   }
 };
-export function addReview(id, input){
+export function addReview(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addReview`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addReview`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -505,10 +505,10 @@ export function addReview(id, input){
     }
   }
 };
-export function removeReview(id, input){
+export function removeReview(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeReview`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeReview`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -518,11 +518,11 @@ export function removeReview(id, input){
     }
   }
 };
-export function addContact(id, input){
+export function addContact(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addContact`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addContact`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -532,10 +532,10 @@ export function addContact(id, input){
     }
   }
 };
-export function removeContact(id, input){
+export function removeContact(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeContact`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeContact`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -545,11 +545,11 @@ export function removeContact(id, input){
     }
   }
 };
-export function addInterviewRRHH(id, input){
+export function addInterviewRRHH(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addInterviewRRHH`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addInterviewRRHH`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -559,10 +559,10 @@ export function addInterviewRRHH(id, input){
     }
   }
 };
-export function removeInterviewRRHH(id, input){
+export function removeInterviewRRHH(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeInterviewRRHH`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeInterviewRRHH`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -572,11 +572,11 @@ export function removeInterviewRRHH(id, input){
     }
   }
 };
-export function addInterviewTech(id, input){
+export function addInterviewTech(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addInterviewTech`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addInterviewTech`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -586,10 +586,10 @@ export function addInterviewTech(id, input){
     }
   }
 };
-export function removeInterviewTech(id, input){
+export function removeInterviewTech(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeInterviewTech`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeInterviewTech`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -600,11 +600,11 @@ export function removeInterviewTech(id, input){
   }
 };
 
-export function addOffered(id, input){
+export function addOffered(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addOffered`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addOffered`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -614,10 +614,10 @@ export function addOffered(id, input){
     }
   }
 };
-export function removeOffered(id, input){
+export function removeOffered(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeOffered`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeOffered`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -627,11 +627,11 @@ export function removeOffered(id, input){
     }
   }
 };
-export function addHired(id, input){
+export function addHired(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addHired`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addHired`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -641,10 +641,10 @@ export function addHired(id, input){
     }
   }
 };
-export function removeHired(id, input){
+export function removeHired(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeHired`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeHired`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
@@ -654,11 +654,11 @@ export function removeHired(id, input){
     }
   }
 };
-export function addRejected(id, input){
+export function addRejected(id, idPostulant){
  
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/addRejected`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/addRejected`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
         payload : edit.data
@@ -668,10 +668,10 @@ export function addRejected(id, input){
     }
   }
 };
-export function removeRejected(id, input){
+export function removeRejected(id, idPostulant){
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeRejected`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeRejected`, {idPostulant : idPostulant})
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
         payload : edit.data
