@@ -1,23 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostulados, postulantDetail } from "../../../redux/actions";
+import { getPostulados, postulantDetail, removeAll } from "../../../redux/actions/index";
 import { Link } from "react-router-dom";
 import PostulantesVacancy from "../PostulantesVacancy";
 import { useAuth0 } from "@auth0/auth0-react";
 import DetailPostulante from "./DetailPostulante";
+import CardDetail from "./CardDetail";
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
   const { user } = useAuth0()
   const postulados = useSelector((state) => state.rootReducer.postulados);
   console.log(postulados)
+  //const [state, setState] = useState();
   useEffect(() => {
     dispatch(getPostulados(id))
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   // function handlePipeline(e) {
   //   dispatch(filterStatusPipeline(e.target.value));
+  // }
+  // function handleClick(e) {
+  //   dispatch(removeAll(id, state))
   // }
   useEffect(() => {
     let tabsContainer = document.querySelector("#tabs");
@@ -45,47 +50,84 @@ function Pipeline({ id }) {
     <div>
       <div class="w-1 mx-auto mt-4  rounded">
         <ul id="tabs" class="inline-flex w-full px-1 pt-2 ">
-          <li class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2 border-blue-400 rounded-t opacity-50"><a id="default-tab" href="#first">Nuevo</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#second">Entrevista</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#third">Contactado</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-50"><a href="#fourth">Contratado</a></li>
+          <li class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2 border-blue-400 rounded-t opacity-80"><a id="default-tab" href="#first">New</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#second">Review</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#third">Contacted</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#fourth">Interview</a></li>
         </ul>
         <div id="tab-contents">
-          <div id="first" class="p-4">
+        {/* renderizado primer estado */}
+          <div id="first" class="p-4"> 
             {postulados.length === 0 ? <p>Waiting for people...</p> :
               postulados.map((el) => {
-                console.log(el.loginEmail)
+                console.log(el.loginEmail, id)
                 return (
-                  <Link to={`/postulant/${el.loginEmail}`}>
-                    <div >
-                      <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
-                        <div class="flex justify-center md:justify-end -mt-8">
-                          {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
-                        </div>
-                        <div className="p-2">
-                          <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
-                          {/* <p class="mt-2 text-gray-600">Descripcion de la vacante: {detalle[0]?.description}</p>
-          <p class="mt-2 text-gray-600">Seniority: {detalle[0].seniorities.length ? detalle[0].seniorities.map((ele) => ele.name) : <p> No especificado</p>}</p>
-          <p class="mt-2 text-gray-600">Tecnologías Requeridas: {detalle[0].technologies.length ? detalle[0].technologies.map((ele) => ele.name + ", ") : <p> No especificado</p>}</p>
-          <p class="mt-2 text-gray-600">Idioma: {detalle[0].languages.length ? detalle[0]?.languages.map((ele) => ele.name) : <p> No especificado</p>}</p> */}
-                          {/* <div class="flex justify-end mt-1">
-          <Link to={`/vacancy/edit/${id}`}> */}
-                          {/* <EditVcancy id={id} /> */}
-                          {/* <button className="text-xs font-medium text-indigo-500">Edit Vacancy</button>
-          </Link>
-          </div>
-          <div class="flex justify-end mt-4">
-          <button className="text-xs font-medium text-indigo-500" onClick={e => { handleDelete(e) }} >Delete Vacancy</button>
-          </div> */}
-                        </div>
 
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                        {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                    <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => dispatch(removeAll(id, el.id))}>change status</button>
                       </div>
-                    </div> </Link>)
+                    </div>
+                  </div>
+                )
               })
             }
+            <div>
+
+              <select>
+                <option value="nuevo">new</option>
+                <option value="revision">review</option>
+                <option value="contactado">contacted</option>
+                <option value="entrevista">interview</option>
+                <option value="tech">tech interview</option>
+                <option value="ofrecido">offered</option>
+                <option value="contratado">hired</option>
+                <option value="rechazado">rejected</option>
+              </select>
+            </div>
           </div>
           <div id="second" class="hidden p-4">
-            Entrevista
+          {postulados.length === 0 ? <p>Enterview</p> :
+              postulados.map((el) => {
+                console.log(el.loginEmail, id)
+                return (
+
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                        {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                    <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => dispatch(removeAll(id, el.id))}>change status</button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+            <div>
+
+              <select>
+                <option value="nuevo">new</option>
+                <option value="revision">review</option>
+                <option value="contactado">contacted</option>
+                <option value="entrevista">interview</option>
+                <option value="tech">tech interview</option>
+                <option value="ofrecido">offered</option>
+                <option value="contratado">hired</option>
+                <option value="rechazado">rejected</option>
+              </select>
+            </div>
           </div>
           <div id="third" class="hidden p-4">
             Contactado

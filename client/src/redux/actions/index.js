@@ -132,9 +132,18 @@ export function clearDetail() {
 
 //GET PARA TRAER A LOS POSTULADOS DE UNA DE MIS VACANTES
 
+// export function getPostulados(id) {
+//   return async function (dispatch) {
+//     const res = await axios.get(`/vacancy/vacs/${id}`);
+//     return dispatch({
+//       type: "GET_POSTULADOS",
+//       payload: res.data,
+//     });
+//   };
+// };
 export function getPostulados(id) {
   return async function (dispatch) {
-    const res = await axios.get(`/vacancy/vacs/${id}`);
+    const res = await axios.get(`/pipeline/getPostulantsNew/${id}`);
     return dispatch({
       type: "GET_POSTULADOS",
       payload: res.data,
@@ -441,10 +450,11 @@ export function addSeñority(id, input){
 }
 
 ///ACA EMPIEZAN ACTIONS PARA LA PIPELINE////
-export function removeAll(id, input){
+export function removeAll(id, idpostulante){
+  console.log(id, idpostulante)
   return async function (dispatch){
     try{
-      const edit = await axios.put(`/pipeline/${id}/removeAll`, {input: input})
+      const edit = await axios.put(`/pipeline/${id}/removeAll`, {idPostulant : idpostulante})
       return dispatch({
         type: 'REMOVE_ALL',
         payload : edit.data
@@ -671,4 +681,5 @@ export function removeRejected(id, input){
     }
   }
 };
+
 ///////////////////////////////////////////////
