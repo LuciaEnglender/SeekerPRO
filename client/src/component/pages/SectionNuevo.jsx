@@ -26,7 +26,6 @@ const SectionNuevo = () => {
 
   function handleSubmitP(e) {
     e.preventDefault();
-    console.log(inputp);
     dispatch(postEmail(inputp));
     alert("Cuenta DEVELOPER creada!");
     setInputp({

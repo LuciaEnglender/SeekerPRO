@@ -70,6 +70,7 @@ const handleAll = (e) => {
   //console.log("business", business)
 
   useEffect(() => {
+    console.log("email2 acá",email2)
     dispatch(getProfile(email2));
   }, []);
 

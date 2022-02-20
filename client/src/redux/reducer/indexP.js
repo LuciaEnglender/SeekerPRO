@@ -68,7 +68,7 @@ const initialState = {
   business: [],
   followedBusiness: [],
   pipeline: [],
-  metrics: [{ } ]
+  metrics: [{}]
 };
 
 
@@ -78,10 +78,10 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state,
       };
-      case PUT_EDIT_PROFILE:
-        return{
-          ...state
-        };
+    case PUT_EDIT_PROFILE:
+      return {
+        ...state
+      };
     case GET_TECHNOLOGY:
       return {
         ...state,
@@ -97,19 +97,16 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         language: action.payload,
       };
-
     case GET_VACANCY:
-  
       return {
         ...state,
         filteredVacancy: action.payload,
       };
-      
-      case GET_VACANCY_ID:
-        return {
-          ...state,
-          filteredVacancy: action.payload,
-        };   
+    case GET_VACANCY_ID:
+      return {
+        ...state,
+        filteredVacancy: action.payload,
+      };
     case GET_SENIORITY:
       return {
         ...state,
@@ -130,42 +127,36 @@ export default function rootReducerPostulante(state = initialState, action) {
         ...state,
         profile: action.payload,
       };
-      case GET_BUSINESS:
-        return {
-          ...state,
-         business: action.payload,
-        };
-  case  GET_SEE_LATER:
-    return{
-      ...state,
-      pending: action.payload,
-    }
-  
-
+    case GET_BUSINESS:
+      return {
+        ...state,
+        business: action.payload,
+      };
+    case GET_SEE_LATER:
+      return {
+        ...state,
+        pending: action.payload,
+      }
     case FILTER_BY_SENIORITY:
       return {
         ...state,
         filteredVacancy: action.payload,
       };
-
     case FILTER_BY_TECHNOLOGY:
       return {
         ...state,
         filteredVacancy: action.payload,
       };
-
     case FILTER_BY_SKILL:
       return {
         ...state,
         filteredVacancy: action.payload,
       };
-
-    case FILTER_BY_LANGUAGE: 
+    case FILTER_BY_LANGUAGE:
       return {
         ...state,
         filteredVacancy: action.payload,
       };
-    
     case FILTER_COMBINATED:
       return {
         ...state,
@@ -174,21 +165,21 @@ export default function rootReducerPostulante(state = initialState, action) {
     case FOLLOW:
       return {
         ...state,
-              }
-      case UNFOLLOW:
-        return{
-          ...state,          
-        }
-        case GET_FOLLOWED:
-          return{
-      ...state,
-      followedBusiness: action.payload
-        }
-        case CLEAR_BUSINESS:
-          return {
-              ...state,
-              business : []
-          }
+      }
+    case UNFOLLOW:
+      return {
+        ...state,
+      }
+    case GET_FOLLOWED:
+      return {
+        ...state,
+        followedBusiness: action.payload
+      }
+    case CLEAR_BUSINESS:
+      return {
+        ...state,
+        business: []
+      }
     case SEE_LATER:
       return {
         ...state,
@@ -207,130 +198,127 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state,
       }
-      case REMOVE_PIPELINE:
+    case REMOVE_PIPELINE:
       return {
         ...state,
       }
-      case REMOVE_SEE_LATER:
-        return {
-          ...state
-        }
+    case REMOVE_SEE_LATER:
+      return {
+        ...state
+      }
     case EDIT_LOCATION_DELETE_POSTULANT:
       return {
         ...state
       }
-    case EDIT_LOCATION_ADD_POSTULANT :
+    case EDIT_LOCATION_ADD_POSTULANT:
       return {
         ...state
       }
-      case EDIT_TECHNOLOGY_DELETE_POSTULANT:
+    case EDIT_TECHNOLOGY_DELETE_POSTULANT:
       return {
         ...state
       }
-    case EDIT_TECHNOLOGY_ADD_POSTULANT :
+    case EDIT_TECHNOLOGY_ADD_POSTULANT:
       return {
         ...state
       }
-      case EDIT_LANGUAGE_DELETE_POSTULANT:
+    case EDIT_LANGUAGE_DELETE_POSTULANT:
       return {
         ...state
       }
-      case TO_PIPELINE :
-        return {
-          ...state,
-          pipeline: action.payload
-        }
+    case TO_PIPELINE:
+      return {
+        ...state,
+        pipeline: action.payload
+      }
     case EDIT_LANGUAGE_ADD_POSTULANT:
       return {
         ...state
       }
     case EDIT_SKILL_ADD_POSTULANT:
       return {
-      ...state
-     }
+        ...state
+      }
     case EDIT_SKILL_DELETE_POSTULANT:
       return {
         ...state
       }
-      case EDIT_SEÑORITY_DELETE_POSTULANT:
+    case EDIT_SEÑORITY_DELETE_POSTULANT:
       return {
-      ...state
-     }
+        ...state
+      }
     case EDIT_SEÑORITY_ADD_POSTULANT:
       return {
         ...state
       }
-    
-case SORT:
-        if (action.payload === "default"){
-            return {
-                ...state,
-                filteredVacancy: state.filteredVacancy
-            }
-        }
-    if (action.payload === "az") {
+    case SORT:
+      if (action.payload === "default") {
         return {
-            ...state,
-            filteredVacancy: state.filteredVacancy.sort(function (a, b) {
-                if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                    return 1;
-                }
-                if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                    return -1;
-                }
-                return 0
-             }) 
+          ...state,
+          filteredVacancy: state.filteredVacancy
         }
-    } 
-    if (action.payload === "za"){
-        return{
-            ...state,
-            filteredVacancy: state.filteredVacancy.sort (function (a, b) {
-                if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                    return -1;
-                }
-                if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                    return 1
-                }
-                return 0;
-            }) 
-
+      }
+      if (action.payload === "az") {
+        return {
+          ...state,
+          filteredVacancy: state.filteredVacancy.sort(function (a, b) {
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+              return 1;
+            }
+            if (b.name.toLowerCase() > a.name.toLowerCase()) {
+              return -1;
+            }
+            return 0
+          })
         }
-    }
-   if(action.payload === "old" ){
-       return {
-           ...state,
-           filteredVacancy: state.filteredVacancy.sort (function (a, b) {
-            if (a.createdAt > b.createdAt) {
-                return 1;
+      }
+      if (action.payload === "za") {
+        return {
+          ...state,
+          filteredVacancy: state.filteredVacancy.sort(function (a, b) {
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+              return -1;
             }
-            if (b.createdAt > a.createdAt) {
-                return -1;
-            }
-            return 0                        
-        }) 
-       }
-   }
-   if(action.payload === "new"){
-       return {
-           ...state,
-           filteredVacancy: state.filteredVacancy.sort (function (a, b) {
-            if (a.createdAt > b.createdAt) {
-                return -1;
-            }
-            if (b.createdAt> a.createdAt) {
-                return 1
+            if (b.name.toLowerCase() > a.name.toLowerCase()) {
+              return 1
             }
             return 0;
-        }) 
+          })
+        }
       }
-   }
-   else{
-       return {
-           ...state,
-       }
-   }
-
+      if (action.payload === "old") {
+        return {
+          ...state,
+          filteredVacancy: state.filteredVacancy.sort(function (a, b) {
+            if (a.createdAt > b.createdAt) {
+              return 1;
+            }
+            if (b.createdAt > a.createdAt) {
+              return -1;
+            }
+            return 0
+          })
+        }
+      }
+      if (action.payload === "new") {
+        return {
+          ...state,
+          filteredVacancy: state.filteredVacancy.sort(function (a, b) {
+            if (a.createdAt > b.createdAt) {
+              return -1;
+            }
+            if (b.createdAt > a.createdAt) {
+              return 1
+            }
+            return 0;
+          })
+        }
+      }
+      else {
+        return {
+          ...state,
+        }
+      }
     default:
       return state;
   }

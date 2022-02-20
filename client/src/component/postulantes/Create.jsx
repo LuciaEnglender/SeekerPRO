@@ -59,7 +59,6 @@ export default function CreateForm() {
     extras: "",
     loginId: email2,
   });
-  console.log(input)
 
   const handleFile=(e)=>{
     setInput({
@@ -606,7 +605,7 @@ const handleCv=(e)=>{
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
                     >
-                      .name                      {el}
+                      {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"

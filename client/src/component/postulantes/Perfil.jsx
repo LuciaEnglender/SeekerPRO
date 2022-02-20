@@ -24,7 +24,7 @@ export default function EditProfile(){
     const lenguaje = useSelector((state) => state.rootReducerPostulante.language);
     const experiencia = useSelector((state) => state.rootReducerPostulante.seniority);
     const locat = useSelector((state) => state.rootReducerPostulante.location)
-   
+
     const profileState = useSelector((state) => state.rootReducerPostulante.profile[0]);
     const id = useSelector((state) => state.rootReducerPostulante.profile[0].id);
    /*  console.log("profile:", profileState) */
