@@ -30,11 +30,9 @@ function Pipeline({ id }) {
     dispatch(getInterview(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
 
-  }, [postulados]);
 
-  useEffect(() => {
+  useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
     let tabTogglers = tabsContainer.querySelectorAll("a")
     tabTogglers.forEach(function (toggler) {
@@ -60,6 +58,11 @@ function Pipeline({ id }) {
     action: "",
   })
   //console.log(input)
+  // useEffect(() => {
+  
+  // }, [addNew(), addReview(), addContact(),
+  //   addInterviewRRHH(), addInterviewTech(),
+  //   addOffered(), addHired(), addRejected(), input]);
 
   function handleSelect(e) {
     setInput({
@@ -96,11 +99,10 @@ function Pipeline({ id }) {
     if (input.action === "rejected") {
       dispatch(addRejected(id, input.idPostulant))
     }
-    else { alert("Choose an option") };
-    navigate(+2);
+    //else { alert("Choose an option") };
+    navigate(+1);
 
   }
-
 
   return (
     <div>
@@ -110,10 +112,10 @@ function Pipeline({ id }) {
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#second">Review</a></li>
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#third">Contacted</a></li>
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#fourth">Interview</a></li>
-          {/* <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#five">Tech Interview</a></li>
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#five">Tech Interview</a></li>
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#six">Offered</a></li>
           <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#seven">Hired</a></li>
-          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#eight">Rejected</a></li> */}
+          <li class="px-4 py-2 font-semibold text-gray-800 rounded-t opacity-60"><a href="#eight">Rejected</a></li>
         </ul>
         <div id="tab-contents">
           {/* renderizado primer estado NEW */}
@@ -266,18 +268,153 @@ function Pipeline({ id }) {
             }
           </div>
           {/* renderizado estado TECH INTERVIEW */}
-          {/* <div id="five" class="hidden p-4">
-            Contratado
+          <div id="five" class="hidden p-4">
+          {tech.length === 0 ? <p>Waiting for people...</p> :
+              tech.map((el) => {
+                //console.log(el.loginEmail, id)
+                return (
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                        <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
+                      </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
+           {/* renderizado estado OFFERED */}
           <div id="six" class="hidden p-4">
-            Contratado
+          {offered.length === 0 ? <p>Waiting for people...</p> :
+              offered.map((el) => {
+                //console.log(el.loginEmail, id)
+                return (
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                        <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
+                      </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
+           {/* renderizado estado HIRED */}
           <div id="seven" class="hidden p-4">
-            Contratado
+          {hired.length === 0 ? <p>Waiting for people...</p> :
+              hired.map((el) => {
+                //console.log(el.loginEmail, id)
+                return (
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                        <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
+                      </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
+           {/* renderizado estado REJECTED */}
           <div id="eight" class="hidden p-4">
-            Contratado
-          </div> */}
+          {rejected.length === 0 ? <p>Waiting for people...</p> :
+              rejected.map((el) => {
+                //console.log(el.loginEmail, id)
+                return (
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                        <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
+                      </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     </div>
