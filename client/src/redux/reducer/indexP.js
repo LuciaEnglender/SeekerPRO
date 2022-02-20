@@ -65,36 +65,8 @@ const initialState = {
   pending: [],
   business: [],
   followedBusiness: [],
-  metrics: [{
-   language: {
-      "español": 5,
-      "inglés": 5,
-      "chino": 1,
-      "afrikáans": 1,
-      "albanés": 3,
-      "canarés": 1,
-      "birmano": 1
-  },
-  technology :{
-      "JavaScript": 8,
-      "HTML": 5,
-      "CSS": 5,
-      "React": 6,
-      "Redux": 5,
-      "Ruby": 1,
-      "Python": 3,
-      "Java": 1
-  },
- seniority : {
-      "Senior": 5,
-      "Trainee": 2,
-      "Expert, 10+ Años": 1,
-      "Semi Senior": 1,
-      "Trainee, 0-6 Meses   ": 1,
-      "Semi Junior": 1,
-      "Expert": 1
-  }
-   } ]
+  pipeline: [],
+  metrics: [{ } ]
 };
 
 export default function rootReducerPostulante(state = initialState, action) {
@@ -163,6 +135,7 @@ export default function rootReducerPostulante(state = initialState, action) {
       ...state,
       pending: action.payload,
     }
+  
 
     case FILTER_BY_SENIORITY:
       return {
@@ -259,7 +232,8 @@ export default function rootReducerPostulante(state = initialState, action) {
       }
       case TO_PIPELINE :
         return {
-          ...state
+          ...state,
+          pipeline: action.payload
         }
     case EDIT_LANGUAGE_ADD_POSTULANT:
       return {

@@ -120,7 +120,7 @@ function SearcHome() {
       <form className=" flex flex-row" onSubmit={(e) => handleSubmit(e)}>
         <div className="bg-grey 300 p-2 px-10">
           <div className="bg-verdeMedio rounded-2xl p-6 w-full h-full">
-            <h1 className=" font-bold  text-center mb-3">{empresa.name}</h1>
+            <h1 className=" font-bold  text-center mb-3">{empresa?.name}</h1>
             <hr />
             <div className="flex m-0 justify-content">
               {isAuthenticated && (

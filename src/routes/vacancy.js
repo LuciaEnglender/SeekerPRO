@@ -18,6 +18,7 @@ const {
 
 const { Op } = require("sequelize");
 const e = require("express");
+const res = require("express/lib/response");
 
 const routerVacancy = Router();
 
@@ -245,7 +246,7 @@ routerVacancy.post("/", async (req, res) => {
       },
     });
     //le agrego la empresa a la vacante;
-    await newVacancyInDB.setBusiness(businessInDB)
+    await newVacancyInDB.setBusiness(businessInDB);
     await newVacancyInDB.addBusiness(businessInDB);
     //repito lo mismo con las otras tablas
     if (language) {
@@ -583,16 +584,29 @@ routerVacancy.get("/filterByTech", async (req, res) => {
 // });
 
 routerVacancy.get("/vacs/:id", async (req, res) => {
-  //Trae todos los pustulantes de una vacante
+  // Trae todos los pustulantes de una vacante
+ 
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
-      .getPostulants()
+      .getPostulants({
+        
+      })
       .then((postulant) => {
-        console.log(postulant);
-        res.json(postulant);
+       res.json(postulant);
       });
   });
 });
+  // cambio a async
+// const vacancy = await Vacancy.findByPk(req.params.id, {
+//   include: [
+//  {
+//    model: Postulant,
+//    }
+//   ]
+// })
+// console.log(vacancy)
+// res.json(vacancy)
+
 
 routerVacancy.get("/vac/:id", async (req, res) => {
   //cuantos postulantes tiene cada vacante

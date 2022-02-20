@@ -148,7 +148,7 @@ pipeline.put('/:idVacancy/removeAll', async (req, res) => {
 //ruta que trae los postulantes en un estado determinado en una vacante especifica (id vacante)
 pipeline.get('/getPostulantsNew/:id', async (req , res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+  
     try{
 
         const statusNew = await New.findAll({
@@ -159,8 +159,8 @@ pipeline.get('/getPostulantsNew/:id', async (req , res) => {
                 {model : Postulant}
             ]
         })
-        console.log(statusNew)
-     res.json(statusNew)
+    const result = statusNew[0].postulants
+     res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -168,7 +168,7 @@ pipeline.get('/getPostulantsNew/:id', async (req , res) => {
 
 pipeline.get('/getPostulantsReview/:id', async (req , res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+
     try{
 
         const statusReview = await Review.findAll({
@@ -180,7 +180,8 @@ pipeline.get('/getPostulantsReview/:id', async (req , res) => {
             ]
         })
      
-     res.json(statusReview)
+        const result = statusReview[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -188,7 +189,7 @@ pipeline.get('/getPostulantsReview/:id', async (req , res) => {
 
 pipeline.get('/getPostulantsContact/:id', async (req , res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+ 
     try{
 
         const statusContact = await Contact.findAll({
@@ -200,7 +201,8 @@ pipeline.get('/getPostulantsContact/:id', async (req , res) => {
             ]
         })
      
-     res.json(statusContact)
+        const result = statusContact[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -209,7 +211,7 @@ pipeline.get('/getPostulantsContact/:id', async (req , res) => {
 
 pipeline.get('/getPostulantsInterviewRRHH/:id', async (req , res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+ 
     try{
 
         const statusInterviewRRHH = await InterviewRRHH.findAll({
@@ -221,7 +223,8 @@ pipeline.get('/getPostulantsInterviewRRHH/:id', async (req , res) => {
             ]
         })
      
-     res.json(statusInterviewRRHH)
+        const result = statusInterviewRRHH[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -230,7 +233,7 @@ pipeline.get('/getPostulantsInterviewRRHH/:id', async (req , res) => {
 
 pipeline.get('/getPostulantsInterviewTech/:id', async (req , res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+   
     try{
 
         const statusInterviewTech = await InterviewTech.findAll({
@@ -242,7 +245,8 @@ pipeline.get('/getPostulantsInterviewTech/:id', async (req , res) => {
             ]
         })
      
-     res.json(statusInterviewTech)
+        const result = statusInterviewTech[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -252,7 +256,7 @@ pipeline.get('/getPostulantsInterviewTech/:id', async (req , res) => {
 
 pipeline.get('/getPostulantsOffered/:id', async (req, res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+  
     try{
 
         const statusOffered = await Offered.findAll({
@@ -265,7 +269,8 @@ pipeline.get('/getPostulantsOffered/:id', async (req, res) => {
         })
 
      
-     res.json(statusOffered)
+        const result = statusOffered[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -273,7 +278,7 @@ pipeline.get('/getPostulantsOffered/:id', async (req, res) => {
 
 pipeline.get('/getPostulantsHired/:id', async (req, res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+    
     try{
 
         const statusHired = await Hired.findAll({
@@ -286,7 +291,8 @@ pipeline.get('/getPostulantsHired/:id', async (req, res) => {
         })
 
      
-     res.json(statusHired)
+        const result = statusHired[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -294,7 +300,7 @@ pipeline.get('/getPostulantsHired/:id', async (req, res) => {
 
 pipeline.get('/getPostulantsRejected/:id', async (req, res) => {
     const {id} = req.params
-    const {postulantId} = req.body
+ 
     try{
 
         const statusRejected = await Rejected.findAll({
@@ -307,7 +313,8 @@ pipeline.get('/getPostulantsRejected/:id', async (req, res) => {
         })
 
      
-     res.json(statusRejected)
+        const result = statusRejected[0].postulants
+        res.status(200).json(result)
     }catch(e){
         console.log(e)
     }
@@ -329,7 +336,9 @@ pipeline.put('/:idVacancy/addNew', async (req, res) => {
         console.log(finderPostulant)
 
         await finderPostulant.addNew(finderNew)
-        res.send('Tu postulación se ha recibido corectamente')
+
+        res.send('New, waiting for review')
+
     } catch (e) {
         console.log(e)
     }
@@ -370,7 +379,7 @@ pipeline.put('/:idVacancy/addReview', async (req, res) => {
 
 
         await finderPostulant.addReview(finderReview)
-        res.send('Tu postulación está en estado de revisión')
+        res.send('New, wainting for rewiew')
     } catch (e) {
         console.log(e)
     }
@@ -521,7 +530,7 @@ pipeline.put('/:idVacancy/addInterviewRRHH', async (req, res) => {
         const finderPostulant = await Postulant.findByPk(idPostulant);
 
         await finderPostulant.addInterviewRRHH(finderInterviewRRHH)
-        res.send('Se te contactará para definir una fecha para entrevista con recursos humanos')
+        res.send('You pass to RRHH interview')
     } catch (e) {
         console.log(e)
     }

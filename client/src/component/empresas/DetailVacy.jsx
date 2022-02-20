@@ -15,6 +15,7 @@ function DetailVacy() {
   const navigate = useNavigate();
   const detalle = useSelector((state) => state.rootReducer.vacancyDetail)
   const { id } = useParams()
+  console.log("soy un id en detail" )
   const { user } = useAuth0()
 
   useEffect(() => {

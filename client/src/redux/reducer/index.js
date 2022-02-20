@@ -57,7 +57,7 @@ function rootReducer(state = initialState, action) {
     case "GET_DETAIL_POSTULANTE":
       return {
         ...state,
-        profiles: action.payload,
+        detailPostulante: action.payload,
       };
     case "CLEAR_DETAIL":
       return {

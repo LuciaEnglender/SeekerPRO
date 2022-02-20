@@ -4,19 +4,36 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
+//const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+
+// const { DATABASE_URL } = process.env;
+//const DATABASE_URL = "postgres://bbvsylwlpvhgqq:3535d924e0c63721da39debabe7a096db94d691e97174e22ee6a9d9d99732191@ec2-52-73-29-239.compute-1.amazonaws.com:5432/d9kbdiduvvh4e"
+
+// const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
+// const proConfig = DB_DATABASE_URL;
+// console.log(`data: ${DB_DATABASE_URL}`)
+// console.log(process.env)
+const DB_USER="postgres"
+const DB_PASSWORD="Danna2021"
+const DB_HOST="localhost"
+
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
+	{
+		logging: false, // set to console.log to see the raw SQL queries
+		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+	/*	dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false,
+			},
+		},*/
+	}
 );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
-// dale boquita campeon
+// dale River campeon
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, "/models"))
   .filter(
@@ -61,6 +78,7 @@ const {
   Offered,
   Hired,
   Rejected,
+  Conversation,
 } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -153,11 +171,11 @@ Hired.belongsTo(Vacancy);
 Vacancy.hasOne(Rejected, { foreignKey: "fk_vacancy" });
 Rejected.belongsTo(Vacancy);
 
-// Postulant.hasOne(New,{foreignKey:"fk_postulant"})
-// New.belongsTo(Postulant);
+Postulant.belongsToMany(Contact,{through:"contact_postulant"})
+Contact.belongsToMany(Postulant, {through:"contact_postulant"});
 
-Postulant.belongsToMany(Contact, { through: "contact_postulant" });
-Contact.belongsToMany(Postulant, { through: "contact_postulant" });
+Postulant.belongsToMany(InterviewRRHH,{through:"interviewrrhh_postulant"})
+InterviewRRHH.belongsToMany(Postulant, {through:"interviewrrhh_postulant"});
 
 Postulant.belongsToMany(InterviewRRHH, { through: "interviewrrhh_postulant" });
 InterviewRRHH.belongsToMany(Postulant, { through: "interviewrrhh_postulant" });
@@ -179,6 +197,23 @@ New.belongsToMany(Postulant, { through: "new_postulant" });
 
 Postulant.belongsToMany(Review, { through: "review_postulant" });
 Review.belongsToMany(Postulant, { through: "review_postulant" });
+
+//CHAT
+
+Business.hasMany(Conversation, { foreignKey: "fk_business" });
+Conversation.belongsTo(Business);
+
+Postulant.hasMany(Conversation, { foreignKey: "fk_postulant" });
+Conversation.belongsTo(Postulant);
+
+Conversation.belongsToMany(Message, {through:"conversation_message"});
+Message.belongsToMany(Conversation, {through:"conversation_message"});
+
+Business.hasMany(Message, { foreignKey: "fk_business" });
+Message.belongsTo(Business);
+
+Postulant.hasMany(Message, { foreignKey: "fk_postulant" });
+Message.belongsTo(Postulant);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
