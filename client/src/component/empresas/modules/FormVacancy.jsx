@@ -36,6 +36,7 @@ const FormVacancy = () => {
     seniority: [],
     language: [],
     business: email2,
+    vacancies: "",
   });
 
   useEffect(() => {
