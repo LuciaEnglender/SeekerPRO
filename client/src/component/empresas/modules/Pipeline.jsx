@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getPostulados, removeAll, getReview, getContacted, getInterview  } from "../../../redux/actions/index";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { addNew, addReview, addContact, addInterviewRRHH, addInterviewTech, addOffered, addHired, addRejected } from "../../../redux/actions/index"
-import { useAuth0 } from "@auth0/auth0-react";
-
-
+import {
+getPostulados,
+removeAll, getReview,
+getContacted, getInterview,
+addNew, addReview, addContact,
+addInterviewRRHH, addInterviewTech,
+addOffered, addHired, addRejected
+} from "../../../redux/actions/index"
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
-  const { user } = useAuth0()
+  const navigate = useNavigate();
   const postulados = useSelector((state) => state.rootReducer.postulados);
   const review = useSelector((state) => state.rootReducer.review);
   const contacted = useSelector((state) => state.rootReducer.postulados);
@@ -76,26 +79,26 @@ function Pipeline({ id }) {
       dispatch(addReview(id, input.idPostulant))
     };
     if (input.action === "contacted") {
-      dispatch(addReview(id, input.idPostulant))
+      dispatch(addContact(id, input.idPostulant))
     };
     if (input.action === "interview") {
-      dispatch(addReview(id, input.idPostulant))
+      dispatch(addInterviewRRHH(id, input.idPostulant))
     };
     if (input.action === "techInterview") {
-      dispatch(addReview(id, input.idPostulant))
+      dispatch(addInterviewTech(id, input.idPostulant))
     };
     if (input.action === "offered") {
-      dispatch(addReview(id, input.idPostulant))
+      dispatch(addOffered(id, input.idPostulant))
     };
     if (input.action === "hired") {
-      dispatch(addReview(id, input.idPostulant))
+      dispatch(addHired(id, input.idPostulant))
     };
     if (input.action === "rejected") {
-      dispatch(addReview(id, input.idPostulant))
+      dispatch(addRejected(id, input.idPostulant))
     }
     else { alert("Choose an option") };
     navigate(+2);
-    
+
   }
 
 
@@ -153,7 +156,7 @@ function Pipeline({ id }) {
           </div>
           {/* renderizado estado REVIEW */}
           <div id="second" class="hidden p-4">
-             {review.length === 0 ? <p>Waiting for people...</p> :
+            {review.length === 0 ? <p>Waiting for people...</p> :
               review.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -188,9 +191,9 @@ function Pipeline({ id }) {
               })
             }
           </div>
-           {/* renderizado estado CONTACTED */}
+          {/* renderizado estado CONTACTED */}
           <div id="third" class="hidden p-4">
-          {contacted.length === 0 ? <p>Waiting for people...</p> :
+            {contacted.length === 0 ? <p>Waiting for people...</p> :
               contacted.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -225,9 +228,9 @@ function Pipeline({ id }) {
               })
             }
           </div>
-           {/* renderizado estado INTERVIEW */}
+          {/* renderizado estado INTERVIEW */}
           <div id="fourth" class="hidden p-4">
-          {interview.length === 0 ? <p>Waiting for people...</p> :
+            {interview.length === 0 ? <p>Waiting for people...</p> :
               interview.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -262,7 +265,7 @@ function Pipeline({ id }) {
               })
             }
           </div>
-           {/* renderizado estado TECH INTERVIEW */}
+          {/* renderizado estado TECH INTERVIEW */}
           {/* <div id="five" class="hidden p-4">
             Contratado
           </div>
