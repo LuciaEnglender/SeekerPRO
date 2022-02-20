@@ -19,8 +19,8 @@ import BusinessCard from "../postulantes/FollowBusiness/BusinessCard";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
-import Metrics from './Metrics/Metrics'
-import Slides from './Metrics/Slides'
+//import Metrics from './Metrics/Metrics'
+//import Slides from './Metrics/Slides'
 
 
 //import Business from './FollowBusiness/Business'
@@ -36,11 +36,11 @@ export default function Home() {
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const vacancyPerPage = 3;
+  const vacancyPerPage = 10;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
-  const pageMax = filtradas.length / 3;
+  const pageMax = filtradas.length / 10;
 
   console.log("current", currentVacancy);
   const paginado = (pageNumber) => {
@@ -228,14 +228,13 @@ function handleSort (e){
           </div>
         </div>
          {/* CUARTO GRID */}
+  
  
-     <div className="bg-verdeMedio rounded-2xl p-2 text-zinc-400 w-full h-full">
-           <div className="flex flex-col m-0 justify-center">
-       <Metrics/>     
-            
-                 </div>
-     </div>
-     
+ 
+ 
+ 
+ 
+ 
      
      
      
@@ -248,7 +247,7 @@ function handleSort (e){
      
       
         {/* SPAN */}
-        <div>  <Slides/>   </div>
+        <div>   </div>
         <div></div>
       </div>
     </div>
