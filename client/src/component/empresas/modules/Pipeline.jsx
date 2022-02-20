@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostulados, postulantDetail, removeAll } from "../../../redux/actions/index";
+import { getPostulados, removeAll, getReview } from "../../../redux/actions/index";
 import { Link } from "react-router-dom";
 import { addNew, addReview, addContact, addInterviewRRHH, addInterviewTech, addOffered, addHired, addRejected } from "../../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";

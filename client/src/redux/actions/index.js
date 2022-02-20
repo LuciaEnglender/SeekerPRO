@@ -470,7 +470,7 @@ export function addNew(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addNew`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_NEW',
         payload : edit.data
       })
     } catch (e){
@@ -483,7 +483,7 @@ export function removeNew(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeNew`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_NEW',
         payload : edit.data
       })
     } catch (e){
@@ -497,7 +497,7 @@ export function addReview(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addReview`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_REVIEW',
         payload : edit.data
       })
     } catch (e){
@@ -510,7 +510,7 @@ export function removeReview(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeReview`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_REVIEW',
         payload : edit.data
       })
     } catch (e){
@@ -524,7 +524,7 @@ export function addContact(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addContact`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_CONTACTED',
         payload : edit.data
       })
     } catch (e){
@@ -537,7 +537,7 @@ export function removeContact(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeContact`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_CONTACTED',
         payload : edit.data
       })
     } catch (e){
@@ -551,7 +551,7 @@ export function addInterviewRRHH(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addInterviewRRHH`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_INTERVIEW',
         payload : edit.data
       })
     } catch (e){
@@ -564,7 +564,7 @@ export function removeInterviewRRHH(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeInterviewRRHH`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_INTERVIEW',
         payload : edit.data
       })
     } catch (e){
@@ -578,7 +578,7 @@ export function addInterviewTech(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addInterviewTech`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_TECH_INTERVIEW',
         payload : edit.data
       })
     } catch (e){
@@ -591,7 +591,7 @@ export function removeInterviewTech(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeInterviewTech`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_TECH_INTERVIEW',
         payload : edit.data
       })
     } catch (e){
@@ -606,7 +606,7 @@ export function addOffered(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addOffered`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_OFFERED',
         payload : edit.data
       })
     } catch (e){
@@ -619,7 +619,7 @@ export function removeOffered(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeOffered`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_OFFERED',
         payload : edit.data
       })
     } catch (e){
@@ -633,7 +633,7 @@ export function addHired(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addHired`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_HIRED',
         payload : edit.data
       })
     } catch (e){
@@ -646,7 +646,7 @@ export function removeHired(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeHired`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_HIRED',
         payload : edit.data
       })
     } catch (e){
@@ -660,7 +660,7 @@ export function addRejected(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/addRejected`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_LANGUAGE_DELETE_VACANCY',
+        type: 'ADD_REJECTED',
         payload : edit.data
       })
     } catch (e){
@@ -673,7 +673,7 @@ export function removeRejected(id, idPostulant){
     try{
       const edit = await axios.put(`/pipeline/${id}/removeRejected`, {idPostulant : idPostulant})
       return dispatch({
-        type: 'EDIT_SEÑORITY_ADD_VACANCY',
+        type: 'REMOVE_REJECTED',
         payload : edit.data
       })
     } catch (e){
@@ -681,5 +681,14 @@ export function removeRejected(id, idPostulant){
     }
   }
 };
-
+export function getReview(id) {
+  return async function (dispatch) {
+    try{
+    const res = await axios.get(`/pipeline/getPostulantsReview/${id}`);
+    return dispatch({
+      type: "GET_REVIEW",
+      payload: res.data,
+    })
+  }catch(e){console.log(e)}
+}}
 ///////////////////////////////////////////////
