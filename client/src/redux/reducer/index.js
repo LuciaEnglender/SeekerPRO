@@ -16,6 +16,9 @@ const initialState = {
   filteredVacancy: [],
   filteredBusiness: [],
   filterPostulant: [],
+  review: [],
+  contacted: [],
+  interview: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -28,7 +31,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    case "POST_PIPELINE" :
+    case "POST_PIPELINE":
       return {
         ...state,
       }
@@ -96,8 +99,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf1
           : techs
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterByActivity,
@@ -109,8 +112,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf2
           : senior
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterBySenuirity,
@@ -122,8 +125,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf3
           : skills
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterBySkills,
@@ -135,8 +138,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allProf4
           : lenguage
-              .filter((a) => a.name === action.payload)[0]
-              .profiles.map((e) => e);
+            .filter((a) => a.name === action.payload)[0]
+            .profiles.map((e) => e);
       return {
         ...state,
         profiles: filterByLenguage,
@@ -167,13 +170,17 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
     case 'EDIT_TECHNOLOGY_DELETE_VACANCY':
-      return{...state,};
+      return {
+        ...state,
+      };
     case 'EDIT_TECHNOLOGY_ADD_VACANCY':
-      return{...state,};
-      case 'EDIT_LANGUAGE_DELETE_VACANCY':
-        return{...state,};
-        
-    
+      return {
+        ...state,
+      };
+    case 'EDIT_LANGUAGE_DELETE_VACANCY':
+      return {
+        ...state,
+      };
     case 'EDIT_SKILL_ADD_VACANCY':
       return {
         ...state,
@@ -186,7 +193,21 @@ function rootReducer(state = initialState, action) {
       return {
         ...state
       };
-    
+    case "GET_REVIEW":
+      return {
+        ...state,
+        review: action.payload
+      };
+    case "GET_CONTACTED":
+      return {
+        ...state,
+        contacted: action.payload
+      };
+      case "GET_INTERVIEW":
+      return {
+        ...state,
+        interview: action.payload
+      };
     default:
       return state;
   }

@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getPostulados, removeAll, getReview } from "../../../redux/actions/index";
+import { getPostulados, removeAll, getReview, getContacted, getInterview  } from "../../../redux/actions/index";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { addNew, addReview, addContact, addInterviewRRHH, addInterviewTech, addOffered, addHired, addRejected } from "../../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";
-import { Fragment, useEffect, useRef, useState } from 'react'
+
 
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
   const { user } = useAuth0()
   const postulados = useSelector((state) => state.rootReducer.postulados);
-  const review = useSelector((state) => state.rootReducer.postulados);
+  const review = useSelector((state) => state.rootReducer.review);
   const contacted = useSelector((state) => state.rootReducer.postulados);
   const interview = useSelector((state) => state.rootReducer.postulados);
   const tech = useSelector((state) => state.rootReducer.postulados);
@@ -20,7 +21,10 @@ function Pipeline({ id }) {
   const rejected = useSelector((state) => state.rootReducer.postulados);
 
   useEffect(() => {
-    dispatch(getPostulados(id))
+    dispatch(getPostulados(id));
+    dispatch(getReview(id));
+    dispatch(getContacted(id));
+    dispatch(getInterview(id));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -89,7 +93,9 @@ function Pipeline({ id }) {
     if (input.action === "rejected") {
       dispatch(addReview(id, input.idPostulant))
     }
-    else { alert("Choose an option") }
+    else { alert("Choose an option") };
+    navigate(+2);
+    
   }
 
 
@@ -147,8 +153,8 @@ function Pipeline({ id }) {
           </div>
           {/* renderizado estado REVIEW */}
           <div id="second" class="hidden p-4">
-            {postulados.length === 0 ? <p>Enterview</p> :
-              postulados.map((el) => {
+             {review.length === 0 ? <p>Waiting for people...</p> :
+              review.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
                   <div >
@@ -160,32 +166,103 @@ function Pipeline({ id }) {
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
                       </Link>
                       <div class="flex justify-center mt-2">
-                        <button onClick={() => dispatch(removeAll(id, el.id))}>change status</button>
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
                       </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
                     </div>
                   </div>
                 )
               })
             }
-            <div>
-              <select>
-                <option value="nuevo">new</option>
-                <option value="revision">review</option>
-                <option value="contactado">contacted</option>
-                <option value="entrevista">interview</option>
-                <option value="tech">tech interview</option>
-                <option value="ofrecido">offered</option>
-                <option value="contratado">hired</option>
-                <option value="rechazado">rejected</option>
-              </select>
-            </div>
           </div>
+           {/* renderizado estado CONTACTED */}
           <div id="third" class="hidden p-4">
-            Contactado
+          {contacted.length === 0 ? <p>Waiting for people...</p> :
+              contacted.map((el) => {
+                //console.log(el.loginEmail, id)
+                return (
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                        <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
+                      </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
+           {/* renderizado estado INTERVIEW */}
           <div id="fourth" class="hidden p-4">
-            Contratado
+          {interview.length === 0 ? <p>Waiting for people...</p> :
+              interview.map((el) => {
+                //console.log(el.loginEmail, id)
+                return (
+                  <div >
+                    <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
+                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
+                      {/* </div> */}
+                      <Link to={`/postulant/${el.loginEmail}`}>
+                        <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
+                      </Link>
+                      <div class="flex justify-center mt-2">
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
+                      </div>
+                      <form onSubmit={(e) => handleSubmit(e)}>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+                      </form>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
+           {/* renderizado estado TECH INTERVIEW */}
           {/* <div id="five" class="hidden p-4">
             Contratado
           </div>

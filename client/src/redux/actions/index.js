@@ -327,368 +327,391 @@ export function filterSelects(info) {
 
 /////////////ACÁ ARRANCA EL BENDITO EDIT
 
-export function deleteTechnology(id, input){
+export function deleteTechnology(id, input) {
   console.log('soy id vacancy', id)
   console.log('soy input', input)
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/technologyDelete`, {input: input})
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/technologyDelete`, { input: input })
       return dispatch({
         type: 'EDIT_TECHNOLOGY_DELETE_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function addTechnology(id, input){
+export function addTechnology(id, input) {
   console.log('soy id', id)
   console.log('input', input)
 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/technologyAdd`, {input: input})
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/technologyAdd`, { input: input })
       return dispatch({
         type: 'EDIT_TECHNOLOGY_ADD_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function deleteLanguage(id, input){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/languageDelete`, {input: input})
+export function deleteLanguage(id, input) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/languageDelete`, { input: input })
       return dispatch({
         type: 'EDIT_LANGUAGE_DELETE_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function addLanguage(id, input){
+export function addLanguage(id, input) {
   console.log('soy id', id)
   console.log('soy input', input)
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/languageAdd`, {input: input})
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/languageAdd`, { input: input })
       return dispatch({
         type: 'EDIT_LANGUAGE_ADD_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function deleteSkill(id, input){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/skillDelete`, {input: input})
+export function deleteSkill(id, input) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/skillDelete`, { input: input })
       return dispatch({
         type: 'EDIT_SKILL_DELETE_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function addSkill(id, input){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/skillAdd`, {input: input})
+export function addSkill(id, input) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/skillAdd`, { input: input })
       return dispatch({
         type: 'EDIT_SKILL_ADD_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function deleteSeñority(id, input){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/seniorityDelete`, {input: input})
+export function deleteSeñority(id, input) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/seniorityDelete`, { input: input })
       return dispatch({
         type: 'EDIT_SEÑORITY_DELETE_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
-export function addSeñority(id, input){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/vacancyEdit/${id}/seniorityAdd`, {input: input})
+export function addSeñority(id, input) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/vacancyEdit/${id}/seniorityAdd`, { input: input })
       return dispatch({
         type: 'EDIT_SEÑORITY_ADD_VACANCY',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 
 ///ACA EMPIEZAN ACTIONS PARA LA PIPELINE////
-export function removeAll(id, idPostulant){
+export function removeAll(id, idPostulant) {
   console.log(id, idPostulant)
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeAll`, {idPostulant : idPostulant})
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeAll`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_ALL',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
 
-export function addNew(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addNew`, {idPostulant : idPostulant})
+export function addNew(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addNew`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_NEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeNew(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeNew`, {idPostulant : idPostulant})
+export function removeNew(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeNew`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_NEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function addReview(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addReview`, {idPostulant : idPostulant})
+export function addReview(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addReview`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_REVIEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeReview(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeReview`, {idPostulant : idPostulant})
+export function removeReview(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeReview`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_REVIEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function addContact(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addContact`, {idPostulant : idPostulant})
+export function addContact(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addContact`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_CONTACTED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeContact(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeContact`, {idPostulant : idPostulant})
+export function removeContact(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeContact`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_CONTACTED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function addInterviewRRHH(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addInterviewRRHH`, {idPostulant : idPostulant})
+export function addInterviewRRHH(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addInterviewRRHH`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_INTERVIEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeInterviewRRHH(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeInterviewRRHH`, {idPostulant : idPostulant})
+export function removeInterviewRRHH(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeInterviewRRHH`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_INTERVIEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function addInterviewTech(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addInterviewTech`, {idPostulant : idPostulant})
+export function addInterviewTech(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addInterviewTech`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_TECH_INTERVIEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeInterviewTech(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeInterviewTech`, {idPostulant : idPostulant})
+export function removeInterviewTech(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeInterviewTech`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_TECH_INTERVIEW',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
 
-export function addOffered(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addOffered`, {idPostulant : idPostulant})
+export function addOffered(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addOffered`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_OFFERED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeOffered(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeOffered`, {idPostulant : idPostulant})
+export function removeOffered(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeOffered`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_OFFERED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function addHired(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addHired`, {idPostulant : idPostulant})
+export function addHired(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addHired`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_HIRED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeHired(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeHired`, {idPostulant : idPostulant})
+export function removeHired(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeHired`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_HIRED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function addRejected(id, idPostulant){
- 
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/addRejected`, {idPostulant : idPostulant})
+export function addRejected(id, idPostulant) {
+
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/addRejected`, { idPostulant: idPostulant })
       return dispatch({
         type: 'ADD_REJECTED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
-export function removeRejected(id, idPostulant){
-  return async function (dispatch){
-    try{
-      const edit = await axios.put(`/pipeline/${id}/removeRejected`, {idPostulant : idPostulant})
+export function removeRejected(id, idPostulant) {
+  return async function (dispatch) {
+    try {
+      const edit = await axios.put(`/pipeline/${id}/removeRejected`, { idPostulant: idPostulant })
       return dispatch({
         type: 'REMOVE_REJECTED',
-        payload : edit.data
+        payload: edit.data
       })
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
   }
 };
 export function getReview(id) {
   return async function (dispatch) {
-    try{
-    const res = await axios.get(`/pipeline/getPostulantsReview/${id}`);
-    return dispatch({
-      type: "GET_REVIEW",
-      payload: res.data,
-    })
-  }catch(e){console.log(e)}
-}}
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsReview/${id}`);
+      return dispatch({
+        type: "GET_REVIEW",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
+export function getContacted(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsContact/${id}`);
+      return dispatch({
+        type: "GET_CONTACTED",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
+export function getInterview(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsInterviewRRHH/${id}`);
+      return dispatch({
+        type: "GET_INTERVIEW",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
 ///////////////////////////////////////////////
