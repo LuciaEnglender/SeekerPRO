@@ -8,6 +8,7 @@ export default function CardVacante({
   technologies,
   seniorities,
   languages,
+  createdAt,
 }) {
   const { user, isAuthenticated } = useAuth0();
   return (
@@ -73,6 +74,12 @@ export default function CardVacante({
             );
           })}
         </div>
+        <p
+          tabindex="0"
+          class="focus:outline-none text-sm leading-5 py-4 text-gray-600"
+        >
+         publication date: {createdAt.slice(0, 10)}
+        </p>
       </div>
     </div>
   );

@@ -68,6 +68,7 @@ const HomeEmpresa = () => {
                           technologies={el.technologies}
                           seniorities={el.seniorities}
                           languages={el.languages}
+                          createdAt={el.createdAt}
                         />
                       </Link>
                     );
