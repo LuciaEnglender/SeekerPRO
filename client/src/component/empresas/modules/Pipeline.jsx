@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostulados, postulantDetail, removeAll } from "../../../redux/actions/index";
 import { Link } from "react-router-dom";
-import {addNew, addReview, addContact, addInterviewRRHH, addInterviewTech, addOffered, addHired, addRejected } from "../../../redux/actions/index"
+import { addNew, addReview, addContact, addInterviewRRHH, addInterviewTech, addOffered, addHired, addRejected } from "../../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";
 import { Fragment, useEffect, useRef, useState } from 'react'
 
@@ -11,12 +11,22 @@ function Pipeline({ id }) {
   const dispatch = useDispatch();
   const { user } = useAuth0()
   const postulados = useSelector((state) => state.rootReducer.postulados);
-  console.log(postulados)
-  
+  const review = useSelector((state) => state.rootReducer.postulados);
+  const contacted = useSelector((state) => state.rootReducer.postulados);
+  const interview = useSelector((state) => state.rootReducer.postulados);
+  const tech = useSelector((state) => state.rootReducer.postulados);
+  const offered = useSelector((state) => state.rootReducer.postulados);
+  const hired = useSelector((state) => state.rootReducer.postulados);
+  const rejected = useSelector((state) => state.rootReducer.postulados);
+
   useEffect(() => {
     dispatch(getPostulados(id))
   }, [dispatch, id]);
- 
+
+  useEffect(() => {
+
+  }, [postulados]);
+
   useEffect(() => {
     let tabsContainer = document.querySelector("#tabs");
     let tabTogglers = tabsContainer.querySelectorAll("a")
@@ -41,29 +51,46 @@ function Pipeline({ id }) {
   const [input, setInput] = useState({
     idPostulant: "",
     action: "",
-})
+  })
   //console.log(input)
-  
+
   function handleSelect(e) {
     setInput({
-        ...input, 
-        //idPostulant: e.target.key,
-        action: e.target.value
+      ...input,
+      //idPostulant: e.target.key,
+      action: e.target.value
     })
-}
-function handleSubmit(e) {
+  }
+  function handleSubmit(e) {
     e.preventDefault()
     dispatch(removeAll(id, input.idPostulant));
-    if (input.action === "new" ) {
-        dispatch(addNew(id, input.idPostulant))
-        //setInput({})
+    if (input.action === "new") {
+      dispatch(addNew(id, input.idPostulant))
+      //setInput({})
+    };
+    if (input.action === "review") {
+      dispatch(addReview(id, input.idPostulant))
+    };
+    if (input.action === "contacted") {
+      dispatch(addReview(id, input.idPostulant))
+    };
+    if (input.action === "interview") {
+      dispatch(addReview(id, input.idPostulant))
+    };
+    if (input.action === "techInterview") {
+      dispatch(addReview(id, input.idPostulant))
+    };
+    if (input.action === "offered") {
+      dispatch(addReview(id, input.idPostulant))
+    };
+    if (input.action === "hired") {
+      dispatch(addReview(id, input.idPostulant))
+    };
+    if (input.action === "rejected") {
+      dispatch(addReview(id, input.idPostulant))
     }
-    if (input.action === "review" ) {
-      dispatch(addReview(id, input.idPostulant))}
-
     else { alert("Choose an option") }
-
-}
+  }
 
 
   return (
@@ -95,23 +122,23 @@ function handleSubmit(e) {
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
                       </Link>
                       <div class="flex justify-center mt-2">
-                        <button onClick={() => setInput({idPostulant: el.id})}>change status</button>
-                      {console.log(id, input.idPostulant)}
+                        <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
+                        {console.log(id, input.idPostulant)}
                       </div>
                       <form onSubmit={(e) => handleSubmit(e)}>
-                      <select onChange={(e) => handleSelect(e)}>
-                <option value="new" key={el.id}>new</option>
-                <option value="review" key={el.id}>review</option>
-                <option value="contacted" key={el.id}>contacted</option>
-                <option value="interview" key={el.id}>interview</option>
-                <option value="techInterview" key={el.id}>tech interview</option>
-                <option value="offered" key={el.id}>offered</option>
-                <option value="hired" key={el.id}>hired</option>
-                <option value="rejected" key={el.id}>rejected</option>
-              </select>
-              <button type="submit">confirm</button>
-               
-            </form>
+                        <select onChange={(e) => handleSelect(e)}>
+                          <option value="new" key={el.id}>new</option>
+                          <option value="review" key={el.id}>review</option>
+                          <option value="contacted" key={el.id}>contacted</option>
+                          <option value="interview" key={el.id}>interview</option>
+                          <option value="techInterview" key={el.id}>tech interview</option>
+                          <option value="offered" key={el.id}>offered</option>
+                          <option value="hired" key={el.id}>hired</option>
+                          <option value="rejected" key={el.id}>rejected</option>
+                        </select>
+                        <button type="submit">confirm</button>
+
+                      </form>
                     </div>
                   </div>
                 )
