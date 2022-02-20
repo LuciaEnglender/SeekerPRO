@@ -1,6 +1,12 @@
 const { Router } = require("express");
 const path = require("path");
 const {
+  New,
+  Review,
+  Contact,
+  InterviewTech,
+  InterviewRRHH,
+  Offered, Hired, Rejected,
   Postulant,
   Technology,
   Skill,
@@ -167,7 +173,7 @@ routerPostulant.put("/postulate/:id", async (req, res) => {
   }
 });
 
-routerPostulant.post("/", upload.any("file",2), async (req, res) => {
+routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
   //el campo de genero recibe un solo valor
   let {
     name,
@@ -189,17 +195,17 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
   let file = req.files;
   //let cv =req.file
   console.log(file);
-  if(file){
-     for(let i=0;i<file.length;i++){
-       if(file[i].mimetype==='image/jpeg'){
-         var photo=file[i].path
-       }
-       else{
-         var CV=file[i].path
-       }
-     }
+  if (file) {
+    for (let i = 0; i < file.length; i++) {
+      if (file[i].mimetype === 'image/jpeg') {
+        var photo = file[i].path
+      }
+      else {
+        var CV = file[i].path
+      }
+    }
   }
-  
+
 
 
   try {
@@ -232,7 +238,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
 
     if (languages) {
 
-      let arrL=languages.split(",")
+      let arrL = languages.split(",")
       let lenguageInDB = await Language.findAll({
         where: {
           name: arrL,
@@ -251,7 +257,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
     }
 
     if (skills) {
-      let skillArr=skills.split(",")
+      let skillArr = skills.split(",")
       let skillInDB = await Skill.findAll({
         where: {
           name: skillArr,
@@ -261,7 +267,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
     }
 
     if (technologies) {
-      let tecno=technologies.split(",")
+      let tecno = technologies.split(",")
       let technologyInDB = await Technology.findAll({
         where: {
           name: tecno,
@@ -287,54 +293,58 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
     console.log(error);
   }
 });
-//Trae las vacantes  por postulante
-//paso 2
-routerPostulant.get("/:id/vacancy", async (req, res) => {
-  Postulant.findByPk(req.params.id).then((postulant) => {
-    postulant
-      .getVacancies({
-        attributes: ["name", "description"],
-        include: [
-          {
-              model: Language,
-              attributes: ["name"],
-              through: {
-                  attributes: [],
-              },
-          },
-          {
-              model: Seniority,
-              attributes: ["name"],
-              through: {
-                  attributes: [],
-              },
-          },
-          {
-              model: Technology,
-              attributes: ["name"],
-              through: {
-                  attributes: [],
-              },
-          },
-          {
-              model: Business,
-              attributes: ["name"],
-              through: {
-                  attributes: [],
-              },
-          },
-      ],
-      })
-      .then((vacancy) => {
-        console.log(vacancy);
-        res.json(vacancy);
-      });
-  });
-});
 
-  //Cuenta cuantos vacantes tiene un postulante
-  routerPostulant.get("/:id/vacancy", async (req, res) => {
-    try{Postulant.findByPk(req.params.id).then((postulant) => {
+
+//Ruta que Trae las vacantes con sus estados  por postulante (recibo id de poestulante)
+
+const arr = [New, Review, Contact, InterviewTech, InterviewRRHH, Offered, Hired, Rejected]
+
+git a
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  // *************REVIEW****************
+//  postulant = postulant.dataValues.vacancies.map(el =>{ 
+//   return  el.review
+//  })
+//  if(postulant[0].postulants[0].review_postulant.reviewId){
+//     // console.log(postulant[0].postulants[0].review_postulant.reviewId)
+//     vacancies[0] = {"status" :"review"}
+//     vacancies[1] ={"idVacancies": postulant[0].postulants[0].review_postulant.reviewId}
+
+//     res.json(vacancies);
+//  }
+
+
+
+
+
+//Cuenta cuantos vacantes tiene un postulante
+routerPostulant.get("/:id/vacancy", async (req, res) => {
+  try {
+    Postulant.findByPk(req.params.id).then((postulant) => {
       postulant
         .getVacancies({
           attributes: ["name", "description"],
@@ -343,10 +353,11 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
           console.log(vacancy);
           res.json(vacancy.length);
         });
-    });}catch(e){
-      console.log(e)
-    }
-  });
+    });
+  } catch (e) {
+    console.log(e)
+  }
+});
 
 //put para modificar datos de un detalle / perfil de postulante
 routerPostulant.put("/:id", async (req, res) => {
@@ -389,16 +400,16 @@ routerPostulant.put("/editProfile/:id", async (req, res) => {
 
   try {
     const finderPostulant = await Postulant.findOne({
-      where : {
-        loginEmail : loginId
+      where: {
+        loginEmail: loginId
       }
     });
 
     finderPostulant.update({
-      name ,
-      gender ,
+      name,
+      gender,
       phone,
-      linkedIn ,
+      linkedIn,
       portfolio,
       github,
       extras,
@@ -406,13 +417,13 @@ routerPostulant.put("/editProfile/:id", async (req, res) => {
 
     if (location) {
       let locationInDB = await Location.findAll({
-        where : {
-          name : location
+        where: {
+          name: location
         }
       });
     }
   } catch (e) {
-    console.log (e)
+    console.log(e)
   }
 })
 

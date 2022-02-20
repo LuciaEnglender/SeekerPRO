@@ -605,8 +605,8 @@ const handleCv=(e)=>{
                     <li
                       className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
                       key={i}
-                    >
-                      .name                      {el}
+                      >
+                      {el}
                       <button
                         className="rounded-2xl hover:bg-verdeClaro"
                         type="reset"
