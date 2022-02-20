@@ -42,7 +42,7 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 10;
 
-  console.log("current", currentVacancy);
+  
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

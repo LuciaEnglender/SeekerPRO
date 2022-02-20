@@ -23,11 +23,10 @@ function ConversationBusiness({ conversation }) {
 
     useEffect(() => {
         const postulantId = conversation.fk_postulant
-        console.log(postulantId)
+       // console.log(postulantId)
         const getPostulantById = async () => {
             try {
                 const res = await axios.get(`/conversations/dataPostulant/${postulantId}`);
-                console.log(res.data)
                 setUserChat(res.data)
             }
             catch (err) { console.log(err) }

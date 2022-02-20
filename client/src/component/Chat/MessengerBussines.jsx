@@ -12,44 +12,54 @@ import "./Messenger.css";
 import { io } from "socket.io-client"
 
 
+
+
+
 // Es la page donde se va a renderizar el Chat Online, el conjunto de conversaciones.
 
 function MessengerBussines() {
+  const { user } = useAuth0();
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('')
-  const socket = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null)
+  const socket = useRef()
+  const scrollRef = useRef();
 
-  useEffect(() => {
-    socket.current = io("ws://localhost:8900");
-    socket.current.on("getMessage", (data) => {
-      /* setArrivalMessage({
-         sender: data.senderId,
-         text: data.text,
-         createdAt: Date.now(),
-       });*/
-    });
-  }, []);
-
-
+  // To bring business data
   const dispatch = useDispatch()
-  const { user } = useAuth0();
-
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
-
-  const perfil = useSelector((state) => state.rootReducerLanding.perfiles) //es el que me da auth0
   const profile = useSelector((state) => state.rootReducer.business);//es el que tengo en reducer empresa
-
-
   const id = profile[0]?.id
 
-  const scrollRef = useRef();
-  // es para obtener mis datos personales
+  //socket io////////////////////////////////////////////////////////
+  useEffect(()=> {
+    socket.current = io("ws://localhost:8900")
+    socket.current?.on("getMessage", data=>{
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text
+      })
+    })
+  },[])
+
+  
   useEffect(() => {
-    dispatch(getProfile(email2))
-  }, [])
+    arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage])
+  }, [arrivalMessage, currentChat])
+
+  useEffect(() => {
+    socket.current?.emit("addUser", id)
+    socket.current?.on("getUsers", users=>{
+      console.log(users)
+    })
+  },[id])
+
+
+  ////////////////////////////////////////////////////////////////////
 
   // es para obtener todas las conversaciones de un postulante en particular
   useEffect(() => {
@@ -68,12 +78,14 @@ function MessengerBussines() {
 
   useEffect(() => {
     const getMessage = async () => {
+      if(currentChat){ 
       try {
         const res = await axios.get(`/messages/${currentChat?.id}`);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
       }
+    }
     };
     getMessage();
   }, [currentChat, newMessage]);
@@ -87,6 +99,15 @@ function MessengerBussines() {
       text: newMessage,
       conversationId: currentChat.id
     };
+
+    const receiverId = currentChat?.members[1]
+    console.log(currentChat.members)
+
+    socket.current?.emit("sendMessage", {
+      senderId: id,
+      receiverId,
+      text: newMessage
+    })
     try {
       const res = await axios.post("/messages/business", message);
       setMessages([...messages, res.data]);
@@ -95,6 +116,7 @@ function MessengerBussines() {
       console.log(err);
     }
   }
+
 
   // La conversación se renderiza arriba, con esto "scrolleamos" a la última charla, abajo, y 
   useEffect(() => {

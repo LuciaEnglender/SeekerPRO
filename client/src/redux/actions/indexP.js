@@ -185,7 +185,7 @@ export function getProfile(payload) {
   return async function (dispatch) {
     try {
       const profile = await axios.get(`/postulant?id=${payload}`);
-      console.log(profile);
+  
       return dispatch({
         type: GET_PROFILE,
         payload: profile.data,
@@ -206,7 +206,7 @@ export function filterByLanguage(info) {
         payload: language.data,
       });
     } catch (error) {
-      console.log(info);
+     console.log(info);
     }
   };
 }

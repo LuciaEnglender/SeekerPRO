@@ -6,54 +6,63 @@ import ChatOnline from "./ChatOnline";
 import { useContext, useEffect, useRef, useState } from 'react'
 import { getUsers } from '../../redux/actions/indexL'
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import "./Messenger.css";
 import { io } from "socket.io-client"
 
 
 
+
+
 // Es la page donde se va a renderizar el Chat Online, el conjunto de conversaciones.
 
 function MessengerPostulant() {
+  const { user } = useAuth0();
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('')
-
-  //socket io////////////////////////////////////////////////////////
-  const socket = useRef();
-
-  useEffect(() => {
-    socket.current = io("ws://localhost:8900");
-    socket.current.on("getMessage", (data) => {
-      /*  setArrivalMessage({
-          sender: data.senderId,
-          text: data.text,
-          createdAt: Date.now(),
-        });*/
-    });
-  }, []);
-
-
-
-  /////////////////////////////////////////////////////////////////
-  const dispatch = useDispatch()
-  const { user } = useAuth0();
-
-  const email = JSON.stringify(user.email);
-  const email2 = email.substring(1, email.length - 1);
-
-  const perfil = useSelector((state) => state.rootReducerLanding.perfiles) //es el que me da de auth0
-  const profile = useSelector((state) => state.rootReducerPostulante.profile); //es el que tengo guardado
-
-  const id = profile[0]?.id
-  //console.log(id)
+  const [arrivalMessage, setArrivalMessage] = useState(null)
+  const socket = useRef()
   const scrollRef = useRef();
-  // es para obtener mis datos personales
+
+  // To bring my data
+  
+  const email = JSON.stringify(user.email);
+  const email2 = email.substring(1, email.length - 1);  
+  const profile = useSelector((state) => state.rootReducerPostulante.profile); //es el que tengo guardado
+  const id = profile[0]?.id
+  
+ 
+  //socket io////////////////////////////////////////////////////////
+useEffect(()=> {
+  socket.current = io("ws://localhost:8900")
+  socket.current?.on("getMessage", data => {
+    console.log(data)
+setArrivalMessage({
+  sender: data.senderId,
+  text: data.text,
+    })
+  
+  })
+},[])
+
+useEffect(()=> {
+  arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) && 
+  setMessages((prev) => [...prev, arrivalMessage])
+  console.log(arrivalMessage)
+}, [arrivalMessage, currentChat])
+
   useEffect(() => {
-    dispatch(getUsers(email2))
-  }, [])
+  socket.current?.emit("addUser", id)
+  socket.current?.on("getUsers", users => {
+    //console.log(users)
+  })
+}, [id])
+
+
+  ////////////////////////////////////////////////////////////////////
 
   // es para obtener todas las conversaciones de un postulante en particular
   useEffect(() => {
@@ -72,13 +81,15 @@ function MessengerPostulant() {
 
   useEffect(() => {
     const getMessage = async () => {
+      if(currentChat){
       try {
         const res = await axios.get(`/messages/${currentChat?.id}`);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
       }
-    };
+    }
+  };
     getMessage();
   }, [currentChat, newMessage]);
 
@@ -91,6 +102,15 @@ function MessengerPostulant() {
       text: newMessage,
       conversationId: currentChat.id
     };
+
+    const receiverId = currentChat?.members[0]
+    //console.log(currentChat.members)
+
+    socket.current?.emit("sendMessage", {
+      senderId: id,
+      receiverId,
+      text: newMessage
+    })
     try {
       const res = await axios.post("/messages/postulant", message);
       setMessages([...messages, res.data]);
@@ -99,7 +119,6 @@ function MessengerPostulant() {
       console.log(err);
     }
   }
-
   // La conversación se renderiza arriba, con esto "scrolleamos" a la última charla, abajo, y con movimiento "smooth"
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
