@@ -170,6 +170,7 @@ const handleAll = (e) => {
                                   .join(", ")}
                                   business={el.businesses[0].name}
                                   date={el.createdAt}
+                                  vacancies={el.vacancies}
                               />
                             </div>
                           );
