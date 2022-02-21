@@ -27,6 +27,9 @@ routerBusiness.get("/:id", async (req, res) => {
     where: {
       businessId: busId,
     },
+    include:[
+      {model: Business}
+    ]    
   });
   res.status(200).json(allVacancy);
 });
@@ -56,10 +59,11 @@ routerBusiness.get("/find/:email", async (req, res) => {
   const email = req.params.email;
 
   try {
-    const businessFinder = await Business.findOne({
+    const businessFinder = await Business.findAll({
       where: {
         loginEmail: email,
       },
+     
     });
   
     res.json(businessFinder);

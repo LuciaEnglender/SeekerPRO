@@ -40,7 +40,7 @@ const NavHomeE = () => {
   return (
     <Disclosure
       as="nav"
-      className="bg-colorFondo2 fixed w-full shadow-2xl rounded-b-2xl"
+      className="bg-colorFondo2  fixed w-full shadow-2xl rounded-b-2xl"
     >
       {({ open }) => (
         <>
@@ -82,24 +82,19 @@ const NavHomeE = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {
-                  (profileState.pro === true ? (
-                    <button
-                      type="button"
-                      target="_blank"
-                      href={`https://wa.me/3518112156?text=Hola%somos%hired%pro`}
-                      className="bg-verdeMedio mx-1 hover:bg-verdeHover p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <AiOutlineWhatsApp
-                        className="h-6 w-6"
-                        aria-hidden="true"
-                      />
-                    </button>
-                  ) : (
-                    <span></span>
-                  ))
-                }
+                {profileState.pro === true ? (
+                  <button
+                    type="button"
+                    target="_blank"
+                    href={`https://wa.me/3518112156?text=Hola%somos%hired%pro`}
+                    className="bg-verdeMedio mx-1 hover:bg-verdeHover p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  >
+                    <span className="sr-only">View notifications</span>
+                    <AiOutlineWhatsApp className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                ) : (
+                  <span></span>
+                )}
 
                 <button
                   type="button"
@@ -146,6 +141,20 @@ const NavHomeE = () => {
                           </Link>
                         )}
                       </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/homee/message"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            Messages
+                          </Link>
+                        )}
+                      </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <ButtonLogOut

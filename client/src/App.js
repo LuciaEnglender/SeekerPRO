@@ -4,13 +4,15 @@ import { Routes, Route } from "react-router-dom";
 // Rutas compartidas
 import Landing from "./component/pages/Landing";
 import Register from "./private/Register";
+import MessengerPostulant from './component/Chat/MessengerPostulant'
+import MessengerBussines from './component/Chat/MessengerBussines'
 
 //Rutas de Postulantes
 import Home from "./component/postulantes/Home";
 import CreateForm from "./component/postulantes/Create";
 import EditProfile from "./component/postulantes/EDIT2";
 import Notificaciones from "./component/postulantes/Notifications/Notificaciones";
-import Mensajes from "./component/postulantes/Messages/Mensajes";
+//import Message from "./component/postulantes/Messages/Mensajes";
 // import MiPerfil from "./component/postulantes/MiPerfil";
 import DetailPost from "./component/postulantes/MyPostulations/DetailPost";
 import Business from "./component/postulantes/FollowBusiness/Business";
@@ -45,7 +47,7 @@ function App() {
         <Route path="/homep" element={<Home />} />
         <Route path="/homep/create" element={<CreateForm />} />
         <Route path="/homep/notificaciones" element={<Notificaciones />} />
-        <Route path="/homep/mensajes" element={<Mensajes />} />
+        <Route path="/homep/mensajes" element={<MessengerPostulant/>} />
         <Route path="/homep/miperfil" element={<EditProfile />} />
         <Route path="/homep/favourites" element={<Business />} />
         <Route path="/homep/create/modifyprofile" element={<EditProfile />} />
@@ -58,7 +60,8 @@ function App() {
         <Route path="/homee/mercado" element={<MercadoPago />} />
         <Route path="/homee/create" element={<FormPerfil />} />
         <Route path="/homee/notification" element={<NotiEmp />} />
-        <Route path="/homee/message" element={<MensajeEmp />} />
+        <Route path="/homee/message" element={<MessengerBussines/>} />
+        {/*<Route path="/homee/message" element={<MensajeEmp />} />*/}
         <Route path="/homee/perfil" element={<PerfilEmp />} />
         <Route path="/vacancy" element={<DetailVacy />} />
         <Route path="/homee/search" element={<SearchPostu />} />
@@ -66,7 +69,7 @@ function App() {
         <Route path="/vacancy/edit/:id" element={<EditVcancy />} />
         <Route path="/homee/setings" element={<SetingsEmp />} />
         <Route path="/homee/vacante" element={<FormVacancy />} />
-        <Route path="/postulant/:id" element={<DetailPostulante/>} />
+        <Route path="/postulant/:id" element={<DetailPostulante />} />
       </Route>
     </Routes>
   );
