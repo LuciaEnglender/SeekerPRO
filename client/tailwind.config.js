@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "hero-pattern":"url('/src/component/postulantes/Styles/Imagenes/FOndo2.jpg')",
+        "hero-pattern":
+          "url('/src/component/postulantes/Styles/Imagenes/FOndo2.jpg')",
         "hero-pattern2": "url('/src/component/empresas/assets/landingEmp.jpg)",
       },
       padding: {
@@ -22,7 +23,8 @@ module.exports = {
 
         //DANI
         azul: "#044c7b",
-        gris: "#5a6462",
+        gris: "#212F3C",
+        azulp: "#212F3C",
 
         //NUEVOS
         verdeOscuro: "#242121",

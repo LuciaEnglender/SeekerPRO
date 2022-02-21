@@ -22,7 +22,7 @@ const NavBar = ({ titulo }) => {
   const { user, isAuthenticated } = useAuth0();
 
   return (
-    <Disclosure as="nav" className="bg-verdeMedio">
+    <Disclosure as="nav" className="bg-azulp">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -121,7 +121,7 @@ const NavBar = ({ titulo }) => {
                           </Link>
                         )}
                       </Menu.Item>
-                      
+
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -136,19 +136,19 @@ const NavBar = ({ titulo }) => {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                         {({ active }) => (
-                           <Link
-                             to="/homep/seelater"
-                             className={classNames(
-                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
-                             )}
-                           >
-                             Pending Vacancies
-                           </Link>
-                         )}
-                       </Menu.Item>
-                       <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/homep/seelater"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            Pending Vacancies
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/homep/mypostulations"
@@ -171,7 +171,7 @@ const NavBar = ({ titulo }) => {
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                           Notifications
+                            Notifications
                           </Link>
                         )}
                       </Menu.Item>

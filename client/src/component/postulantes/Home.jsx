@@ -22,7 +22,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 //import Metrics from './Metrics/Metrics'
 //import Slides from './Metrics/Slides'
 
-
 //import Business from './FollowBusiness/Business'
 //import Postulations from "../postulantes/MyPostulations/Postulations";
 
@@ -32,7 +31,7 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy
   );
- console.log(filtradas)
+  console.log(filtradas);
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +41,6 @@ export default function Home() {
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = filtradas.length / 10;
 
-  
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -54,10 +52,10 @@ export default function Home() {
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
-//Renderizacions todas las vacantes
-const handleAll = (e) => {
-  dispatch(clearBusiness());
-  dispatch(getVacancy()); 
+  //Renderizacions todas las vacantes
+  const handleAll = (e) => {
+    dispatch(clearBusiness());
+    dispatch(getVacancy());
   };
 
   //Renderizacion de todas las empresas
@@ -74,184 +72,179 @@ const handleAll = (e) => {
   }, []);
 
   //Ordenamiento de las vacantes
-  const [,setOrden] = useState('Default')
-function handleSort (e){
-    e.preventDefault()
-    dispatch(sort(e.target.value))
-    setCurrentPage(1)
-    setOrden(e.target.value)
- }
+  const [, setOrden] = useState("Default");
+  function handleSort(e) {
+    e.preventDefault();
+    dispatch(sort(e.target.value));
+    setCurrentPage(1);
+    setOrden(e.target.value);
+  }
   return (
-    <div className="absolute bg-gray-300 h-screen w-screen">
-      {/* NAVBAR */}
-      <div>
-        <NavBar />
-      </div>
+    <div className="min-h-full">
+      {/* NAVEGACION */}
+      <NavBar />
+      {/* BODY */}
 
-      {/* AREA */}
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-gray-300  h-auto pt-7">
-        {/* MI PERFIL */}
-        <div className="bg-gray-300 p-2">
-          <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <MiPerfil />
-          </div>
+      <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
         </div>
-        {/* VACAN */}
-        <div className="col-span-3 bg-gray-300 p-2">
-          <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <div className="items-center justify-center grid grid-row-7">
-              <div className="grid-span-2 bg-verdeMedio w-fit">
-                {/* SEARCHBAR */}
-                <div className=" flex m-0 justify-center">
-                  <div className=" flex m-0 justify-center bg-verdeMedio w-fit">
-                    <div className="mx-2">
-                      <SearchBar />
-                    </div>
-                  </div>
-                </div>
-                <FiltroDinamico />
-                <div className=" flex m-0 justify-center">
-                  <button
-                    className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-                    onClick={(e) => handleAll(e)}
-                  >
-                    all vacancies{" "}
-                  </button>
-                  <button
-                    className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-                    onClick={(e) => handleAllBusiness(e)}
-                  >
-                    all business{" "}
-                  </button>
-                </div>
-                <div >  
-        <select onChange = {e => handleSort(e)}>
-            <option value ="default"> Sort by.. </option>
-            <option value = "az"> A-Z</option>
-            <option value = "za"> Z-A </option>
-            <option value = "old"> Older </option>
-            <option value = "new"> Recently </option>
-        </select>
-        </div>  
-              </div>
-              <div className="grid-span-4 h-full">
-                {currentVacancy.length === 0 ? (
-                  <p className=" font-bold text-center text-zinc-400 my-4 mb-3">
-                    Don't wait for opportunities, go for them!
-                  </p>
-                ) : (
-                  <div>
-                    {business.length > 0
-                      ? business?.map((el) => {
-                          return (
-                            <div className="m-4" key={el.id}>
-                              <BusinessCard
-                                id={el.id}
-                                name={el.name}
-                                description={el.description}
-                                location={el.location}
-                              />
-                            </div>
-                          );
-                        })
-                      : currentVacancy[0].cuit
-                      ? currentVacancy?.map((el) => {
-                          return (
-                            <div className="m-4" key={el.id}>
-                              <BusinessCard
-                                id={el.id}
-                                name={el.name}
-                                description={el.description}
-                                location={el.location}
-                              />
-                            </div>
-                          );
-                        })
-                      : currentVacancy?.map((el) => {
-                          return (
-                            <div className="m-4" key={el.id}>
-                              <Vacancy
-                                id={el.id}
-                                name={el.name}
-                                description={el.description}
-                                languages={el.languages
-                                  ?.map((l) => l.name)
-                                  .join(", ")}
-                                seniorities={el.seniorities
-                                  ?.map((s) => s.name)
-                                  .join(", ")}
-                                skills={el.skills
-                                  ?.map((sk) => sk.name)
-                                  .join(", ")}
-                                technologies={el.technologies
-                                  ?.map((t) => t.name)
-                                  .join(", ")}
-                                  business={el.businesses[0]?.name}
-                                  businessId = {el.businessId}
-                                  date={el.createdAt}
-                                  vacancies={el.vacancies}
-                              />
-                            </div>
-                          );
-                        })}
-                  </div>
-                )}
-              </div>
-              <div className="w-full mt-3 flex justify-center ">
-                <button
-                  className="m-3 text-zinc-400"
-                  onClick={() =>
-                    paginado(currentPage === 1 ? currentPage : currentPage - 1)
-                  }
-                >
-                  <AiOutlineArrowLeft />
-                </button>
-
-                <button
-                  className="m-3 text-zinc-400"
-                  onClick={() =>
-                    paginado(
-                      pageMax <= currentPage ? currentPage : currentPage + 1
-                    )
-                  }
-                >
-                  {" "}
-                  <AiOutlineArrowRight />
-                </button>
-                <h1>
-                  <Pagination
-                    vacancyPerPage={vacancyPerPage}
-                    filtradas={filtradas}
-                    paginado={paginado}
-                  />
-                </h1>
+      </header>
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
+          {/* AREA */}
+          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-gray-300  h-auto pt-7">
+            {/* MI PERFIL */}
+            <div className="bg-gray-300 p-2">
+              <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
+                <MiPerfil />
               </div>
             </div>
+            {/* VACAN */}
+            <div className="col-span-3 bg-gray-300 p-2">
+              <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
+                <div className="items-center justify-center grid grid-row-7">
+                  <div className="grid-span-2 bg-verdeMedio w-fit">
+                    {/* SEARCHBAR */}
+                    <div className=" flex m-0 justify-center">
+                      <div className=" flex m-0 justify-center bg-verdeMedio w-fit">
+                        <div className="mx-2">
+                          <SearchBar />
+                        </div>
+                      </div>
+                    </div>
+                    <FiltroDinamico />
+                    <div className=" flex m-0 justify-center">
+                      <button
+                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                        onClick={(e) => handleAll(e)}
+                      >
+                        all vacancies{" "}
+                      </button>
+                      <button
+                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                        onClick={(e) => handleAllBusiness(e)}
+                      >
+                        all business{" "}
+                      </button>
+                    </div>
+                    <div>
+                      <select onChange={(e) => handleSort(e)}>
+                        <option value="default"> Sort by.. </option>
+                        <option value="az"> A-Z</option>
+                        <option value="za"> Z-A </option>
+                        <option value="old"> Older </option>
+                        <option value="new"> Recently </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="grid-span-4 h-full">
+                    {currentVacancy.length === 0 ? (
+                      <p className=" font-bold text-center text-zinc-400 my-4 mb-3">
+                        Don't wait for opportunities, go for them!
+                      </p>
+                    ) : (
+                      <div>
+                        {business.length > 0
+                          ? business?.map((el) => {
+                              return (
+                                <div className="m-4" key={el.id}>
+                                  <BusinessCard
+                                    id={el.id}
+                                    name={el.name}
+                                    description={el.description}
+                                    location={el.location}
+                                  />
+                                </div>
+                              );
+                            })
+                          : currentVacancy[0].cuit
+                          ? currentVacancy?.map((el) => {
+                              return (
+                                <div className="m-4" key={el.id}>
+                                  <BusinessCard
+                                    id={el.id}
+                                    name={el.name}
+                                    description={el.description}
+                                    location={el.location}
+                                  />
+                                </div>
+                              );
+                            })
+                          : currentVacancy?.map((el) => {
+                              return (
+                                <div className="m-4" key={el.id}>
+                                  <Vacancy
+                                    id={el.id}
+                                    name={el.name}
+                                    description={el.description}
+                                    languages={el.languages
+                                      ?.map((l) => l.name)
+                                      .join(", ")}
+                                    seniorities={el.seniorities
+                                      ?.map((s) => s.name)
+                                      .join(", ")}
+                                    skills={el.skills
+                                      ?.map((sk) => sk.name)
+                                      .join(", ")}
+                                    technologies={el.technologies
+                                      ?.map((t) => t.name)
+                                      .join(", ")}
+                                    business={el.businesses[0]?.name}
+                                    businessId={el.businessId}
+                                    date={el.createdAt}
+                                    vacancies={el.vacancies}
+                                  />
+                                </div>
+                              );
+                            })}
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-full mt-3 flex justify-center ">
+                    <button
+                      className="m-3 text-zinc-400"
+                      onClick={() =>
+                        paginado(
+                          currentPage === 1 ? currentPage : currentPage - 1
+                        )
+                      }
+                    >
+                      <AiOutlineArrowLeft />
+                    </button>
+
+                    <button
+                      className="m-3 text-zinc-400"
+                      onClick={() =>
+                        paginado(
+                          pageMax <= currentPage ? currentPage : currentPage + 1
+                        )
+                      }
+                    >
+                      {" "}
+                      <AiOutlineArrowRight />
+                    </button>
+                    <h1>
+                      <Pagination
+                        vacancyPerPage={vacancyPerPage}
+                        filtradas={filtradas}
+                        paginado={paginado}
+                      />
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* CUARTO GRID */}
+
+            {/* SPAN */}
+            <div> </div>
+            <div></div>
           </div>
+          {/* /End replace */}
         </div>
-         {/* CUARTO GRID */}
-  
- 
- 
- 
- 
- 
- 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-      
-        {/* SPAN */}
-        <div>   </div>
-        <div></div>
-      </div>
+      </main>
     </div>
   );
 }
