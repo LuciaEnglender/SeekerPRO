@@ -145,12 +145,11 @@ pipeline.put('/:idVacancy/removeAll', async (req, res) => {
     }
 })
 
-//rutas que trae los postulantes en un estado determinado en una vacante especifica (id vacante)
+//ruta que trae los postulantes en un estado determinado en una vacante especifica (id vacante)
+
 pipeline.get('/getPostulantsNew/:id', async (req , res) => {
     const {id} = req.params
-  
     try{
-
         const statusNew = await New.findAll({
             where : {
                 fk_vacancy : id
@@ -168,9 +167,7 @@ pipeline.get('/getPostulantsNew/:id', async (req , res) => {
 
 pipeline.get('/getPostulantsReview/:id', async (req , res) => {
     const {id} = req.params
-
     try{
-
         const statusReview = await Review.findAll({
             where : {
                 fk_vacancy : id
@@ -179,7 +176,6 @@ pipeline.get('/getPostulantsReview/:id', async (req , res) => {
                 {model : Postulant}
             ]
         })
-     
         const result = statusReview[0].postulants
         res.status(200).json(result)
     }catch(e){

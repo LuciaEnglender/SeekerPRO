@@ -7,11 +7,13 @@ import {
   GET_TECHNOLOGY,
   GET_SKILL,
   GET_LANGUAGE,
-  GET_VACANCY,
-  GET_VACANCY_ID,
   GET_SENIORITY,
   GET_LOCATION,
   GET_SEARCH_BAR,
+  //VACANCY
+  GET_VACANCY,
+  GET_VACANCY_ID,
+  SORT,
   //POSTULATION
   GET_MY_POSTULATIONS,
   REMOVE_POST,
@@ -69,6 +71,7 @@ const initialState = {
   metrics: [{ } ]
 };
 
+
 export default function rootReducerPostulante(state = initialState, action) {
   switch (action.type) {
     case POST_POSTULANTE:
@@ -96,10 +99,12 @@ export default function rootReducerPostulante(state = initialState, action) {
       };
 
     case GET_VACANCY:
+  
       return {
         ...state,
         filteredVacancy: action.payload,
       };
+      
       case GET_VACANCY_ID:
         return {
           ...state,
@@ -255,6 +260,77 @@ export default function rootReducerPostulante(state = initialState, action) {
       return {
         ...state
       }
+    
+case SORT:
+        if (action.payload === "default"){
+            return {
+                ...state,
+                filteredVacancy: state.filteredVacancy
+            }
+        }
+    if (action.payload === "az") {
+        return {
+            ...state,
+            filteredVacancy: state.filteredVacancy.sort(function (a, b) {
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return 1;
+                }
+                if (b.name.toLowerCase() > a.name.toLowerCase()) {
+                    return -1;
+                }
+                return 0
+             }) 
+        }
+    } 
+    if (action.payload === "za"){
+        return{
+            ...state,
+            filteredVacancy: state.filteredVacancy.sort (function (a, b) {
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return -1;
+                }
+                if (b.name.toLowerCase() > a.name.toLowerCase()) {
+                    return 1
+                }
+                return 0;
+            }) 
+
+        }
+    }
+   if(action.payload === "old" ){
+       return {
+           ...state,
+           filteredVacancy: state.filteredVacancy.sort (function (a, b) {
+            if (a.createdAt > b.createdAt) {
+                return 1;
+            }
+            if (b.createdAt > a.createdAt) {
+                return -1;
+            }
+            return 0                        
+        }) 
+       }
+   }
+   if(action.payload === "new"){
+       return {
+           ...state,
+           filteredVacancy: state.filteredVacancy.sort (function (a, b) {
+            if (a.createdAt > b.createdAt) {
+                return -1;
+            }
+            if (b.createdAt> a.createdAt) {
+                return 1
+            }
+            return 0;
+        }) 
+      }
+   }
+   else{
+       return {
+           ...state,
+       }
+   }
+
     default:
       return state;
   }

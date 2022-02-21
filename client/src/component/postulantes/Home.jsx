@@ -7,6 +7,7 @@ import {
   getBusiness,
   getVacancy,
   clearBusiness,
+  sort,
 } from "../../redux/actions/indexP";
 //import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -18,8 +19,8 @@ import BusinessCard from "../postulantes/FollowBusiness/BusinessCard";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
-import Metrics from './Metrics/Metrics'
-import Slides from './Metrics/Slides'
+//import Metrics from './Metrics/Metrics'
+//import Slides from './Metrics/Slides'
 
 
 //import Business from './FollowBusiness/Business'
@@ -31,17 +32,17 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy
   );
-  console.log(filtradas)
+ console.log(filtradas)
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const vacancyPerPage = 3;
+  const vacancyPerPage = 10;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
-  const pageMax = filtradas.length / 3;
+  const pageMax = filtradas.length / 10;
 
-  console.log("current", currentVacancy);
+  
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -72,6 +73,14 @@ const handleAll = (e) => {
     dispatch(getProfile(email2));
   }, []);
 
+  //Ordenamiento de las vacantes
+  const [,setOrden] = useState('Default')
+function handleSort (e){
+    e.preventDefault()
+    dispatch(sort(e.target.value))
+    setCurrentPage(1)
+    setOrden(e.target.value)
+ }
   return (
     <div className="absolute bg-gray-300 h-screen w-screen">
       {/* NAVBAR */}
@@ -115,6 +124,15 @@ const handleAll = (e) => {
                     all business{" "}
                   </button>
                 </div>
+                <div >  
+        <select onChange = {e => handleSort(e)}>
+            <option value ="default"> Sort by.. </option>
+            <option value = "az"> A-Z</option>
+            <option value = "za"> Z-A </option>
+            <option value = "old"> Older </option>
+            <option value = "new"> Recently </option>
+        </select>
+        </div>  
               </div>
               <div className="grid-span-4 h-full">
                 {currentVacancy.length === 0 ? (
@@ -168,8 +186,10 @@ const handleAll = (e) => {
                                 technologies={el.technologies
                                   ?.map((t) => t.name)
                                   .join(", ")}
-                                  business={el.businesses[0].name}
+                                  business={el.businesses[0]?.name}
+                                  businessId = {el.businessId}
                                   date={el.createdAt}
+                                  vacancies={el.vacancies}
                               />
                             </div>
                           );
@@ -210,14 +230,13 @@ const handleAll = (e) => {
           </div>
         </div>
          {/* CUARTO GRID */}
+  
  
-     <div className="bg-verdeMedio rounded-2xl p-2 text-zinc-400 w-full h-full">
-           <div className="flex flex-col m-0 justify-center">
-       <Metrics/>     
-            
-                 </div>
-     </div>
-     
+ 
+ 
+ 
+ 
+ 
      
      
      
@@ -230,7 +249,7 @@ const handleAll = (e) => {
      
       
         {/* SPAN */}
-        <div>  <Slides/>   </div>
+        <div>   </div>
         <div></div>
       </div>
     </div>

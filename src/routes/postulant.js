@@ -86,6 +86,8 @@ routerPostulant.get("/", async (req, res) => {
         ],
       });
 
+      console.log(allPostulant)
+
       allPostulant
         ? res.status(200).send(allPostulant)
         : res.status(400).send("No applicant found");
