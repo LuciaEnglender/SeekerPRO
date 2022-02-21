@@ -32,7 +32,7 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy
   );
- // console.log(filtradas)
+ console.log(filtradas)
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -186,7 +186,7 @@ function handleSort (e){
                                 technologies={el.technologies
                                   ?.map((t) => t.name)
                                   .join(", ")}
-                                  business={el.businesses[0].name}
+                                  business={el.businesses[0]?.name}
                                   date={el.createdAt}
                               />
                             </div>

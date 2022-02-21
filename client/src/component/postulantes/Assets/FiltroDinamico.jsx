@@ -27,6 +27,7 @@ export default function FiltroDinamico() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     dispatch(filterCombinated(input));
     setInput({
       technology: [],
@@ -34,6 +35,7 @@ export default function FiltroDinamico() {
       seniority: [],
       skill: [],
     });
+    
   }
   //console.log(input);
   function handleSelectTechnology(e) {
