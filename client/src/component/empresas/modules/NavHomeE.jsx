@@ -16,7 +16,7 @@ const navigation = [
   { name: "Home", href: "/homee", current: false },
   { name: "Messages", href: "/homee/message", current: false },
   { name: "Candidates", href: "/homee/search", current: false },
-  { name: "Mercado", href: "/homee/mercado", current: false },
+  { name: "Go Premium", href: "/homee/premiumDetail", current: false },
 ];
 
 const userNav = [{ name: "Edit", href: "/homee/create", current: false }];

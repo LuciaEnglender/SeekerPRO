@@ -3,8 +3,7 @@ import NavBar from "../postulantes/NavBar"
 import ConversationPostulant from "./ConversationPostulant";
 import Message from "./Message";
 import ChatOnline from "./ChatOnline";
-import { useContext, useEffect, useRef, useState } from 'react'
-import { getUsers } from '../../redux/actions/indexL'
+import { useEffect, useRef, useState } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
 import axios from "axios";

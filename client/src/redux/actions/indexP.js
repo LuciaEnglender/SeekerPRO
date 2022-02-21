@@ -42,14 +42,15 @@ export const SEE_LATER = "SEE_LATER";
 export const EDIT_LOCATION_ADD_POSTULANT = "EDIT_LOCATION_ADD_POSTULANT";
 export const EDIT_LOCATION_DELETE_POSTULANT = "EDIT_LOCATION_DELETE_POSTULANT";
 export const EDIT_TECHNOLOGY_ADD_POSTULANT = "EDIT_TECHNOLOGY_ADD_POSTULANT";
-export const EDIT_TECHNOLOGY_DELETE_POSTULANT =
-  "EDIT_TECHNOLOGY_DELETE_POSTULANT";
+export const EDIT_TECHNOLOGY_DELETE_POSTULANT =  "EDIT_TECHNOLOGY_DELETE_POSTULANT";
 export const EDIT_LANGUAGE_DELETE_POSTULANT = "EDIT_LANGUAGE_DELETE_POSTULANT";
 export const EDIT_LANGUAGE_ADD_POSTULANT = "EDIT_LANGUAGE_ADD_POSTULANT";
 export const EDIT_SKILL_DELETE_POSTULANT = "EDIT_SKILL_DELETE_POSTULANT";
 export const EDIT_SKILL_ADD_POSTULANT = " EDIT_SKILL_ADD_POSTULANT";
 export const EDIT_SEÑORITY_DELETE_POSTULANT = "EDIT_SEÑORITY_DELETE_POSTULANT";
 export const EDIT_SEÑORITY_ADD_POSTULANT = "EDIT_SEÑORITY_ADD_POSTULANT";
+//CHAT
+export const CHAT_ROOM_POST = "CHAT_ROOM_POST"
 
 //ACTIONS
 export function createPostulante(payload) {
@@ -400,6 +401,21 @@ export function getMyPostulations(payload) {
       });
     } catch (error) {
       console.log("Postulations not founded");
+    }
+  };
+}
+
+//ROOM CHAT CREATION
+export function chatRoomPost(postulantId, businessId) {
+  return async function (dispatch) {
+    try {
+      const room = await axios.post("/conversations", { businessId, postulantId});
+      return dispatch({
+        type: CHAT_ROOM_POST,
+        payload: room.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 }

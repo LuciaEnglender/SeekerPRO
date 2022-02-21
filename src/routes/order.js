@@ -1,38 +1,34 @@
-const server = require("express").Router();
+
 const { Order, Order_detail, Product } = require("../db");
+const {Business} = require("../db");
+const {Router} = require("express");
 
-server.post("/", (req, res, next) => {
-  const { userId, orderlines, status } = req.body;
 
-  Order.create({
-    userId: userId,
-    status: status,
-  }).then((response) => {
-    Promise.all(
-      orderlines.map((elem) => {
-        Product.findByPk(elem.id)
-          .then((producto) => {
-            const orderId = response.dataValues.id; //nos da el id de order
 
-            return Order_detail.create({
-              orderId: orderId,
-              productId: producto.id,
-              quantity: elem.quantity,
-              price: producto.price,
-            });
-          })
-          .then((secondResponse) => {
-            //nos da el arreglo creado
-            const cant = secondResponse.dataValues.quantity;
-            const prodId = secondResponse.dataValues.productId;
-            Product.decrement({ stock: cant }, { where: { id: prodId } });
-          });
-      })
-    )
-      .then((_) => res.send("OK"))
-      .catch((err) => next(err));
-  });
-});
+const server = Router()
+
+// server.post("/", async (req, res, next) => {
+//   const { userId } = req.body;
+//   console.log(req.body)
+//   try{
+//       const orden = await Order.create({
+//         status : 'created'
+//       })
+
+//       const empresa = await Business.findOne({
+//         where:{
+//           loginEmail: userId
+//         }
+//       })
+
+//       await orden.setBusiness(empresa)
+
+//       res.status(200).send(orden)
+  
+//     }catch(e){
+//       console.log(e)
+//     }
+// });
 
 server.get("/detalle/:id", (req, res, next) => {
   const id = req.params.id;
@@ -40,10 +36,6 @@ server.get("/detalle/:id", (req, res, next) => {
   Order.findOne({
     where: {
       id: id,
-    },
-    include: {
-      model: Order_detail,
-      where: { orderId: id },
     },
   })
     .then((obj) => {
