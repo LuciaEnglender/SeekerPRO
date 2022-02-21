@@ -17,6 +17,7 @@ import { GrFormClose } from "react-icons/gr";
 const SearchPostu = () => {
   const dispatch = useDispatch();
   const profiles = useSelector((state) => state.rootReducer.profiles);
+
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
@@ -117,7 +118,9 @@ const SearchPostu = () => {
   return (
     <div className="min-h-full">
       {/* NAVEGACION */}
-      <NavHomeE />
+      <div>
+        <NavHomeE titulo={"SearchPostu"} />
+      </div>
       {/* BODY */}
 
       <header className="bg-white shadow">

@@ -10,7 +10,10 @@ export default function CardVacante({
   languages,
   createdAt,
   vacancies,
+  business
 }) {
+
+
   const { user, isAuthenticated } = useAuth0();
   return (
     <div
@@ -87,6 +90,7 @@ export default function CardVacante({
         >
          vacancies available: {vacancies}
         </p>
+        <p>company: {business}</p>
       </div>
     </div>
   );

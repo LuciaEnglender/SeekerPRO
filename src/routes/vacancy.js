@@ -352,14 +352,16 @@ routerVacancy.get("/search/:name", async (req, res) => {
     });
     if (business.length !== 0) acum.push(business);
 
+
     const vacancy = await Vacancy.findAll({
       where: {
+        // businessId:business.id,
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
         },
       },
-      attributes: ['name', 'id', 'description'],
+    
       include: [
         {
           model: Technology,

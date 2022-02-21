@@ -200,7 +200,7 @@ export function postulanteDetail(id) {
     try {
       const res = await axios.get(`/postulant?id=${id}`);
       return dispatch({
-        type: "GET_POSTULADOS",
+        type: "GET_DETAIL_POSTULANTE",
         payload: res.data,
       });
     } catch (error) {
@@ -292,6 +292,7 @@ export function postulantDetail(id) {
   return async function (dispatch) {
     try {
       const res = await axios.get(`/postulant?id=${id}`);
+      console.log(res)
       return dispatch({
         type: "GET_POSTULADOS",
         payload: res.data,

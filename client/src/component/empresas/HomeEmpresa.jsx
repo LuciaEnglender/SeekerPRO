@@ -13,7 +13,7 @@ import SearcHome from "./modules/SearcHome";
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const vacancy = useSelector((state) => state.rootReducer.vacancies);
-  console.log(vacancy);
+  console.log('soy el home', vacancy);
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,6 +78,7 @@ const HomeEmpresa = () => {
                               languages={el.languages}
                               vacancies={el.vacancies}
                               createdAt={el.createdAt}
+                              business={el.businesses[0].name}
                             />
                           </Link>
                         );
