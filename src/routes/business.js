@@ -9,6 +9,7 @@ const {
   Skill,
   Login,
   Seniority,
+  Order
   // Pro
 } = require("../db");
 const { Op } = require("sequelize");
@@ -436,6 +437,14 @@ routerBusiness.post(
         cuit,
         pro
       });
+
+      
+      const orden = await Order.create({
+        status : 'created'
+      })
+
+      await createBusiness.setOrder(orden)
+
 
       let finderLogin = await Login.findByPk(emailId);
       await createBusiness.setLogin(finderLogin);
