@@ -2,8 +2,8 @@ import React from "react";
 import Apply from "../Assets/Apply"
 import RemoveSeeLater from './RemoveSeeLater'
 
-function seeLaterCard({ name, description, languages, seniorities, id, technologies}) {
-
+function seeLaterCard({ name, business, description, languages, seniorities, id, technologies}) {
+console.log({ name, business, description, languages, seniorities, id, technologies} )
 //
   return (
     <div className="absolute bg-verdeOscuro h-screen w-screen"> 
@@ -20,8 +20,8 @@ grid-cols-3 bg-verdeOscuro  h-auto pt-7">
             <p
               tabindex="0"
               class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-            >
-              {name}
+            >  {name} <br/>
+              {business}
             </p>
             <div class="flex flex-row">
               <p

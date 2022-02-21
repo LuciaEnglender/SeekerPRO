@@ -164,12 +164,7 @@ function MessengerPostulant() {
                 Open a conversation to start a chat.
               </span>}
           </div>
-        </div>
-        <div className="chatOnline">
-          <div className="chatOnlineWrapper">
-            <ChatOnline />
-          </div>
-        </div>
+        </div>    
       </div>
     </>
   )
