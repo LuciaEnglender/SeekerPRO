@@ -41,21 +41,32 @@ function Pipeline({ id }) {
 
   useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
-    let tabTogglers = tabsContainer.querySelectorAll("a")
+    let tabTogglers = tabsContainer.querySelectorAll("a");
     tabTogglers.forEach(function (toggler) {
       toggler.addEventListener("click", function (e) {
         e.preventDefault();
         let tabName = this.getAttribute("href");
         let tabContents = document.querySelector("#tab-contents");
         for (let i = 0; i < tabContents.children.length; i++) {
-          tabTogglers[i].parentElement.classList.remove("border-blue-400", "border-b", "-mb-px", "opacity-100"); tabContents.children[i].classList.remove("hidden");
+          tabTogglers[i].parentElement.classList.remove(
+            "border-blue-400",
+            "border-b",
+            "-mb-px",
+            "opacity-100"
+          );
+          tabContents.children[i].classList.remove("hidden");
           if ("#" + tabContents.children[i].id === tabName) {
             continue;
           }
           tabContents.children[i].classList.add("hidden");
         }
-        e.target.parentElement.classList.add("border-blue-400", "border-b-4", "-mb-px", "opacity-100");
-      })
+        e.target.parentElement.classList.add(
+          "border-blue-400",
+          "border-b-4",
+          "-mb-px",
+          "opacity-100"
+        );
+      });
     });
     document.getElementById("default-tab").click();
   }, []);
@@ -126,7 +137,9 @@ function Pipeline({ id }) {
         <div id="tab-contents">
           {/* renderizado primer estado NEW */}
           <div id="first" class="p-4">
-            {postulados.length === 0 ? <p>Waiting for people...</p> :
+            {postulados.length === 0 ? (
+              <p>Waiting for people...</p>
+            ) : (
               postulados.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -157,7 +170,7 @@ function Pipeline({ id }) {
                   </div>
                 )
               })
-            }
+            )}
           </div>
           {/* renderizado estado REVIEW */}
           <div id="second" class="hidden p-4">
