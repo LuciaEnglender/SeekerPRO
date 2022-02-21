@@ -10,8 +10,8 @@ import { getUsers } from "../../redux/actions/indexL";
 function MiPerfil() {
   const dispatch = useDispatch();
   const perfil = useSelector((state) => state.rootReducerPostulante.profile);
- // console.log(perfil)
-  
+  //console.log(perfil) --. Buscar la foto con "file\\1645198160606-batiseñal.jpg"
+
   const { user, isAuthenticated } = useAuth0();
 
   const email = JSON.stringify(user.email);
@@ -19,7 +19,7 @@ function MiPerfil() {
 
   useEffect(() => {
     dispatch(getProfile(email2));
-   
+
   }, [dispatch]);
   return (
     <div>
@@ -49,8 +49,8 @@ function MiPerfil() {
             </div>
 
             <h2 className={s.extras}>
-              {" "}
-              <br /> {perfil[0].extras}{" "}
+
+              <br /> {perfil[0].extras}
             </h2>
             <h2 className={s.items}>
               {" "}
@@ -60,7 +60,9 @@ function MiPerfil() {
             <h2 className={s.items} > {perfil[0].locations?.map((loc) => loc.name).join(" - ")}</h2>
             <h2 className={s.items}>
               {" "}
-              {perfil[0].seniorities?.map((s) => s.name).join(" - ")}{" "}
+              {perfil[0].seniorities?.map((s) => s.name).join(" - ")}
+
+
             </h2>
 
             <h2 className={s.items}>
@@ -83,6 +85,9 @@ function MiPerfil() {
             <h2>
               {" "}
               LinkedIn <br /> {perfil[0].linkedIn}{" "}
+            </h2>
+            <h2>
+              Portfolio <br /> {perfil[0].portfolio}
             </h2>
             <h3> Want to be premium? </h3>
             <a href="https://mpago.la/1ooRuhT"> MERCADO PAGO </a>

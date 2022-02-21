@@ -9,6 +9,7 @@ const {
   Vacancy,
   Location,
   Login,
+  vacancies,
 
 } = require("../db");
 

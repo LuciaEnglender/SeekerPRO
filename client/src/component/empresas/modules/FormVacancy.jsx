@@ -35,8 +35,8 @@ const FormVacancy = () => {
     technology: [],
     seniority: [],
     language: [],
-    phone: "",
     business: email2,
+    vacancies: "",
   });
 
   useEffect(() => {
@@ -56,8 +56,8 @@ const FormVacancy = () => {
       technology: [],
       seniority: [],
       language: [],
-      phone: "",
       business: email2,
+      vacancies: "",
     });
     navigate(-1);
   }
@@ -134,16 +134,6 @@ const FormVacancy = () => {
               type="text"
               name="name"
               value={input.name}
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="w-full flex flex-col m-0 justify-center">
-            <label> Phone:</label>
-            <input
-              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-              type="text"
-              name="phone"
-              value={input.phone}
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -255,6 +245,17 @@ const FormVacancy = () => {
               ))}
             </div>
             {/*  <ul><li>{input.seniority.map(el => el + " ,")}</li></ul> */}
+          </div>
+          <div className="w-full flex flex-col m-0 justify-center">
+            <label> vacancies available:</label>
+            <input
+              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+              type="number"
+              min={0}
+              name="vacancies"
+              value={input.vacancies}
+              onChange={(e) => handleChange(e)}
+            />
           </div>
           <div className="w-full  my-3 flex m-0 justify-center pt-10">
             <button

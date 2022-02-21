@@ -9,6 +9,8 @@ const {
   Skill,
   Login,
   Seniority,
+  Order
+  // Pro
 } = require("../db");
 const { Op } = require("sequelize");
 const { check, validationResult } = require("express-validator");
@@ -25,6 +27,9 @@ routerBusiness.get("/:id", async (req, res) => {
     where: {
       businessId: busId,
     },
+    include:[
+      {model: Business}
+    ]    
   });
   res.status(200).json(allVacancy);
 });
@@ -39,7 +44,7 @@ routerBusiness.get("/count/:id", async (req, res) => {
       limit: 2,
     }).then((result) => {
       const resp = result.count;
-      console.log(result.count);
+    
       res.json(resp);
     });
   } catch (erro) {
@@ -49,17 +54,18 @@ routerBusiness.get("/count/:id", async (req, res) => {
   //res.json(numVacancy)
 });
 
-//Busca empresa por nombre o trae todas solo lo usa dentro de la aplicacion 
+//Busca empresa por nombre o trae todas solo lo usa dentro de la aplicacion
 routerBusiness.get("/find/:email", async (req, res) => {
   const email = req.params.email;
 
   try {
-    const businessFinder = await Business.findOne({
+    const businessFinder = await Business.findAll({
       where: {
         loginEmail: email,
       },
+     
     });
-    console.log(businessFinder);
+  
     res.json(businessFinder);
   } catch (e) {
     console.log(e);
@@ -420,18 +426,28 @@ routerBusiness.get("/search/:name", async (req, res) => {
 routerBusiness.post(
   "/",
   async (req, res) => {
-    let { name, description, location, cuit, emailId } = req.body;
-    
+    let { name, description, location, cuit, emailId, pro } = req.body;
+
     try {
       let createBusiness = await Business.create({
         name,
         description,
         location,
         cuit,
+        pro
       });
+
+      
+      const orden = await Order.create({
+        status : 'created'
+      })
+
+      await createBusiness.setOrder(orden)
+
 
       let finderLogin = await Login.findByPk(emailId);
       await createBusiness.setLogin(finderLogin);
+
       res.json(createBusiness);
     } catch (error) {
       console.log(error);

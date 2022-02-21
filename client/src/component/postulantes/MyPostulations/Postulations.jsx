@@ -9,10 +9,12 @@ function Postulations() {
 
     const dispatch = useDispatch();
     const postulations = useSelector((state) =>state.rootReducerPostulante.postulations)
-   // console.log(postulations)
+    console.log(postulations.vacancies)
 
     const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
-    console.log("postulante id", postulanteId)
+   // console.log("postulante id", postulanteId)
+   
+   
 
   useEffect(() => {
       dispatch(getMyPostulations(postulanteId))
@@ -27,12 +29,13 @@ function Postulations() {
     <p className=" font-bold text-center mb-3">No applies? Search know!</p>
   ) : (
     <div  className="focus:outline-none bg-gray-300 w-screen h-screen pt-7">
-      {postulations?.map((el) => {
+      {postulations.vacancies?.map((el) => {
         return (
-          <div className="m-4" key={el.postulant_vacancy.vacancyId}>
+          <div className="m-4" key={el.id}>
             <PostCard
-              id = {el.postulant_vacancy.vacancyId}
+              id = {el.id}
               name={el.name}
+              business={el.businesses[0].name}
               description={el.description}
               languages={el.languages
                 ?.map((l) => l.name)
@@ -40,11 +43,11 @@ function Postulations() {
               seniorities={el.seniorities
                 ?.map((s) => s.name)
                 .join(", ")}
-              skills={el.skills?.map((sk) => sk.name).join(", ")}
-              technologies={el.technologies
+                technologies={el.technologies
                 ?.map((t) => t.name)
                 .join(", ")}
-                date= {el.postulant_vacancy.createdAt}
+                status={el.status}
+                
             />
           </div>
         );

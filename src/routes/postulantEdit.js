@@ -14,6 +14,7 @@ const {
 const { check, validationResult } = require("express-validator");
 const routerEditing = Router();
 const multer = require("multer");
+const { Console } = require("console");
 
 ////subida de archivos//// cv/photo
 
@@ -154,6 +155,7 @@ routerEditing.put('/:id/languageAdd', async (req, res) => {
     console.log(req.body)
     try {
         let finderPostulant = await Postulant.findByPk(req.params.id)
+
         let finderLang = await Language.findAll({
             where: {
                 name: req.body.input
@@ -169,7 +171,9 @@ routerEditing.put('/:id/languageAdd', async (req, res) => {
 
 routerEditing.put('/:id/seniorityDelete', async (req, res) => {
     try {
+        console.log(req.body)
         let finderPostulant = await Postulant.findByPk(req.params.id)
+
         let finderSeniority = await Seniority.findAll({
             where: {
                 name: req.body.input
@@ -185,7 +189,9 @@ routerEditing.put('/:id/seniorityDelete', async (req, res) => {
 
 routerEditing.put('/:id/seniorityAdd', async (req, res) => {
     try {
+       
         let finderPostulant = await Postulant.findByPk(req.params.id)
+
         let finderSeniority = await Seniority.findAll({
             where: {
                 name: req.body.input

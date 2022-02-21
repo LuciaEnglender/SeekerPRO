@@ -6,17 +6,17 @@ import {
   AiOutlineLinkedin,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
-import { ButtonLogIn, ButtonLogOutLanding } from "../../private/ButtonLogIn";
+import { ButtonLogIn } from "../../private/ButtonLogIn";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
 
 const Landing = () => {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return (
     <div className="w-full h-full bg-colorFondo2">
       {/* NAVBAR LANDING */}
       <div className="h-14 md:h-16 w-screen">
-        <nav className="grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1  shadow-lg fixed h-20 md:h-16 w-screen bg-colorFondo2 rounded-b-2xl">
+        <nav className=" w-screen grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 shadow-lg fixed h-20 md:h-16 bg-colorFondo2">
           <div className="flex m-0 justify-center">
             <div className="mt-3 md:mt-4  ml-8">
               <Link to="landing" smooth={"easeInOutQuad"} duration={1500}>
@@ -52,7 +52,7 @@ const Landing = () => {
           <div className=" col-start-2 md:col-start-4">
             <div className="flex m-0 justify-center">
               <div className="mt-3 md:mt-4  mr-7">
-                {isAuthenticated ? <ButtonLogOutLanding /> : <ButtonLogIn />}
+                <ButtonLogIn />
               </div>
             </div>
           </div>
@@ -64,17 +64,18 @@ const Landing = () => {
           {isAuthenticated ? (
             <Navigate to={"/register"} />
           ) : (
-            <div className="flex flex-col m-0 justify-center">
-              <h1 className="text-4xl text-center font-bold">JSekkers</h1>
-              <h2 className="text-3xl text-center">
-                Optimized to make you grow
-              </h2>
-            </div>
+            <>
+              <div className="flex flex-col m-0 justify-center">
+                <h1 className="text-4xl text-center font-bold">JSekkers</h1>
+                <h2 className="text-3xl text-center">
+                  Optimized to make you grow
+                </h2>
+              </div>
+              <div className="flex m-0 justify-center">
+                <img className=" p-10" src="/Landing.png" alt="asd" />
+              </div>
+            </>
           )}
-
-          <div className="flex m-0 justify-center">
-            <img className=" p-10" src="/Landing.png" alt="asd" />
-          </div>
         </div>
       </section>
       {/* SECTION FAQ */}

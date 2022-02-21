@@ -8,7 +8,12 @@ export default function CardVacante({
   technologies,
   seniorities,
   languages,
+  createdAt,
+  vacancies,
+  business
 }) {
+
+
   const { user, isAuthenticated } = useAuth0();
   return (
     <div
@@ -73,6 +78,19 @@ export default function CardVacante({
             );
           })}
         </div>
+        <p
+          tabindex="0"
+          class="focus:outline-none text-sm leading-5 text-gray-600"
+        >
+         publication date: {createdAt.slice(0, 10)}
+        </p>
+        <p
+          tabindex="0"
+          class="focus:outline-none text-sm leading-5 text-gray-600"
+        >
+         vacancies available: {vacancies}
+        </p>
+        <p>company: {business}</p>
       </div>
     </div>
   );

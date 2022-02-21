@@ -22,6 +22,7 @@ function EditVcancy() {
     technologies: detalle[0].technologies.map((ele) => ele.name),
     seniorities: detalle[0].seniorities.map((ele) => ele.name),
     languages: detalle[0]?.languages.map((ele) => ele.name),
+    vacancies: detalle[0]?.vacancies,
   });
 
   useEffect(() => {
@@ -38,7 +39,7 @@ function EditVcancy() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(editVacancy(id, input), console.log(input));
-    alert("Vacante editada");
+    alert("vacancy edited correctly !");
     navigate(-2);
   }
   function handleSelectTechno(e) {
@@ -71,7 +72,7 @@ function EditVcancy() {
     } else {
       setInput({
         ...input,
-        seniorities: [...input.seniorities, e.target.value],
+        seniorities: [ e.target.value],
       });
       dispatch(addSeñority(id, e.target.value))
     }
@@ -109,15 +110,15 @@ function EditVcancy() {
       <NavHomeE titulo={"Notificaciones"} />
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="w-full flex flex-col m-0 justify-center" key={detalle[0]?.id}>
-          <label>Buscamos:</label>
+          <label>We are looking for:</label>
           <input className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="name" type="text" value={input.name} onChange={(e) => handleChange(e)} />
         </div>
         <div className="w-full flex flex-col">
-          <label>Descripcion de la vacante:</label>
+          <label>Description:</label>
           <textarea className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="description" type="text-area" value={input.description} onChange={(e) => handleChange(e)} />
         </div>
         <div className="w-full my-3 flex flex-col m-0 justify-center">
-          <label> Tecnologias:</label>
+          <label> Technologies:</label>
           <select
             className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
             name="technologies"
@@ -182,7 +183,7 @@ function EditVcancy() {
           </div>
         </div>
         <div className="w-full my-3 flex flex-col m-0 justify-center">
-          <label> Idioma:</label>
+          <label> Language:</label>
           <select
             className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
             name="languages"
@@ -212,6 +213,10 @@ function EditVcancy() {
               </li>
             ))}
           </div>
+          <div className="w-full flex flex-col m-0 justify-center" key={detalle[0]?.id}>
+          <label>Vacancies available:</label>
+          <input className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="vacancies" type="number" min={0} value={input.vacancies} onChange={(e) => handleChange(e)} />
+        </div>
         </div>
 
         <div className="w-full  my-3 flex m-0 justify-center">

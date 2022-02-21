@@ -8,6 +8,7 @@ const path = require('path');
 
 require('./db.js');
 
+
 const server = express();
 
 server.name = 'API';
@@ -42,5 +43,9 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
+
+
+
+
 
 module.exports = server;
