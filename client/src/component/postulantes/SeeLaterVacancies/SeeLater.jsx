@@ -6,7 +6,7 @@ import {seeLater} from '../../../redux/actions/indexP'
 function SeeLater({id}) {
 
 const postulanteId= useSelector((state) => state.rootReducerPostulante.profile[0].id)
-//console.log(id, postulanteId)
+console.log(id, postulanteId)
 const  dispatch = useDispatch()
 
 function handleMasTarde() {

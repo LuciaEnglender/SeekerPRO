@@ -5,7 +5,7 @@ import QRCode from "react-qr-code";
 function Metrics() {
 
   const metrics = useSelector((state) => state.rootReducerPostulante.metrics)
-  //console.log(metrics)
+  console.log(metrics)
 
 
   const [seniority, setSeniority] = useState(false);

@@ -9,7 +9,6 @@ const {
   Skill,
   Login,
   Seniority,
-  Order
   // Pro
 } = require("../db");
 const { Op } = require("sequelize");
@@ -27,9 +26,6 @@ routerBusiness.get("/:id", async (req, res) => {
     where: {
       businessId: busId,
     },
-    include:[
-      {model: Business}
-    ]    
   });
   res.status(200).json(allVacancy);
 });
@@ -59,11 +55,10 @@ routerBusiness.get("/find/:email", async (req, res) => {
   const email = req.params.email;
 
   try {
-    const businessFinder = await Business.findAll({
+    const businessFinder = await Business.findOne({
       where: {
         loginEmail: email,
       },
-     
     });
   
     res.json(businessFinder);
@@ -437,14 +432,6 @@ routerBusiness.post(
         cuit,
         pro
       });
-
-      
-      const orden = await Order.create({
-        status : 'created'
-      })
-
-      await createBusiness.setOrder(orden)
-
 
       let finderLogin = await Login.findByPk(emailId);
       await createBusiness.setLogin(finderLogin);

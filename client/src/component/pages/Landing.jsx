@@ -16,7 +16,7 @@ const Landing = () => {
     <div className="w-full h-full bg-colorFondo2">
       {/* NAVBAR LANDING */}
       <div className="h-14 md:h-16 w-screen">
-        <nav className=" w-screen grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 shadow-lg fixed h-20 md:h-16 bg-colorFondo2">
+        <nav className="grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1  shadow-lg fixed h-20 md:h-16 w-screen bg-colorFondo2 rounded-b-2xl">
           <div className="flex m-0 justify-center">
             <div className="mt-3 md:mt-4  ml-8">
               <Link to="landing" smooth={"easeInOutQuad"} duration={1500}>

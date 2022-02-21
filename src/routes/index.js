@@ -32,11 +32,6 @@ const product = require("./product");
 const user = require("./user");
 const mercadopago = require("./mercadopago");
 
-//       Chat Online
-const conversations = require("./Chat/conversation");
-const messages = require("./Chat/message");
-
-
 const router = Router();
 
 //ROUTER DE MERCADOPAGO
@@ -66,10 +61,5 @@ router.use("/skills", skill);
 router.use("/tech", tech);
 router.use("/seniority", seniority);
 router.use("/vacancyEdit", routerEditingVacancy);
-
-//       Chat Online
-router.use("/messages", messages);
-router.use("/conversations", conversations);
-
 
 module.exports = router;

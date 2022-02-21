@@ -4,15 +4,6 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-  }
   body {
     font-family: "Playfair Display", serif;
   }

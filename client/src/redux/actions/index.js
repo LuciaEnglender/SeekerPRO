@@ -1,19 +1,15 @@
 import axios from "axios";
 
 //Get BUSINESS DETAIL DE PROFILE
-export function getProfile(email2) {
+export function getProfile(email) {
   return async function (dispatch) {
-    try {
-      const profile = await axios.get(
-        `/business/find/${email2}`
-      );
-      return dispatch({
-        type: "GET_BISSNESS_DETAIL",
-        payload: profile.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const profile = await axios.get(
+      `/business/find/${email}`
+    );
+    return dispatch({
+      type: "GET_BISSNESS_DETAIL",
+      payload: profile.data,
+    });
   };
 }
 
@@ -24,118 +20,84 @@ export function postVacancy(payload) {
     return res;
   };
 }
-
-//POST PARA CREAR VACANTES (pipeline)
+//POST PARA CREAR VACANTES
 export function postVacancyPipeline(id) {
   return async function (dispatch) {
-    try {
-      const res = await axios.post(`/pipeline/${id}`);
-      return dispatch({
-        type: 'POST_PIPELINE',
-        payload: res
-      })
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.post(`/pipeline/${id}`);
+    return dispatch({
+      type: 'POST_PIPELINE',
+      payload: res
+    })
   };
 }
-
 //GET PARA VER TODAS MIS VACANTES COMO EMPRESAS
 export function getVacancy(business) {
+  console.log(business)
   return async function (dispatch) {
-    try {
-      const res = await axios.get(
-        `/vacancy?business=${business}`
-      );
-      return dispatch({
-        type: "GET_VACANCY",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get(
+      `/vacancy?business=${business}`
+    );
+    return dispatch({
+      type: "GET_VACANCY",
+      payload: res.data,
+    });
   };
 }
-
-//GET PARA VER LOS DETALLES DE UNA DE MIS VACANTES
+//GET PARA VER LOS DETTALLES DE UNA DE MIS VACANTES
 export function getVacancyDetail(id) {
   return async function (dispatch) {
-    try {
-      const res = await axios.get(`/vacancy/${id}`);
-      return dispatch({
-        type: "GET_VACANCY_ID",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get(`/vacancy/${id}`);
+    return dispatch({
+      type: "GET_VACANCY_ID",
+      payload: res.data,
+    });
   };
 }
-
 //DELETE PARA BORRAR MI VACANTE
 export function deleteVacancy(id) {
   return async function (dispatch) {
-    try {
-      const res = await axios.delete(`/vacancy/${id}`);
-      return dispatch({
-        type: "DELETE_VACANCY_ID",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.delete(`/vacancy/${id}`);
+    return dispatch({
+      type: "DELETE_VACANCY_ID",
+      payload: res.data,
+    });
   };
 }
-
 //PUT PARA EDITAR MI VACANTE
 export function editVacancy(id, input) {
   return async function (dispatch) {
-    try {
-      const res = await axios.put(
-        `/vacancy/edit/${id}`,
-        input
-      );
-      return dispatch({
-        type: "EDIT_VACANCY_ID",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.put(
+      `/vacancy/edit/${id}`,
+      input
+    );
+    return dispatch({
+      type: "EDIT_VACANCY_ID",
+      payload: res.data,
+    });
   };
 }
-
-// ESTA AREA ES PARA BUSCAR A LOS USUARIOS QUE NO SON VACANTES O SEA DE TODA LA BASE DE DATOS
-//get para traer a todos los usuarios
+// ESTA AREA ES PARA BUSCAR A LOS USUARIOS QUE NO SON VACANTES O SEA DEL TODA LA BASE DE DATOS
+//get para traer a todos los usuario
 export function getProfiles() {
   return async function (dispatch) {
-    try {
-      const res = await axios.get("/postulant");
-      return dispatch({
-        type: "GET_PROFILES",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get("/postulant");
+    return dispatch({
+      type: "GET_PROFILES",
+      payload: res.data,
+    });
   };
 }
-
 //get para buscar por nombre "searchBar"
 export function getSearchName(name) {
   return async function (dispatch) {
-    try {
-      var res = await axios.get(`/postulant/search/${name}`);
-      return dispatch({
-        type: "GET_NAME_PROFILE",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    var res = await axios.get(`/postulant/search/${name}`);
+
+    return dispatch({
+      type: "GET_NAME_PROFILE",
+      payload: res.data,
+    });
   };
 }
-
 //filtros para el searchbar////////////////////////////////
 export function byTech(payload) {
   return {
@@ -143,21 +105,18 @@ export function byTech(payload) {
     payload,
   };
 }
-
 export function bySenior(payload) {
   return {
     type: "BY_SENIOR",
     payload,
   };
 }
-
 export function bySkills(payload) {
   return {
     type: "BY_SKILLS",
     payload,
   };
 }
-
 export function byLengua(payload) {
   return {
     type: "BY_LENGUAGE",
@@ -173,104 +132,80 @@ export function clearDetail() {
 
 //GET PARA TRAER A LOS POSTULADOS DE UNA DE MIS VACANTES
 
-//export function getPostulados(id) {
-  //return async function (dispatch) {
-    //const res = await axios.get(`/pipeline/getPostulantsNew/${id}`);
-    //return dispatch({
-     // type: "GET_POSTULADOS",
-      //payload: res.data,
-    //});
-
+// export function getPostulados(id) {
+//   return async function (dispatch) {
+//     const res = await axios.get(`/vacancy/vacs/${id}`);
+//     return dispatch({
+//       type: "GET_POSTULADOS",
+//       payload: res.data,
+//     });
+//   };
+// };
 export function getPostulados(id) {
   return async function (dispatch) {
-    try {
-      const res = await axios.get(`/vacancy/vacs/${id}`);
-      return dispatch({
-        type: "GET_POSTULADOS",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get(`/pipeline/getPostulantsNew/${id}`);
+    return dispatch({
+      type: "GET_POSTULADOS",
+      payload: res.data,
+    });
   };
 };
-
 export function postulanteDetail(id) {
+  console.log(id)
   return async function (dispatch) {
-    try {
-      const res = await axios.get(`/postulant?id=${id}`);
-      return dispatch({
-        type: "GET_POSTULADOS",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get(`/postulant?id=${id}`);
+    return dispatch({
+      type: "GET_POSTULADOS",
+      payload: res.data,
+    });
   };
 }
+
 
 // ESTA AREA ES PARA EL FORM DE CREACION DE VACANTES
-//traer las tecnologias para el form
+//treaer las tecnologias para el form
 export function getTech() {
   return async function (dispatch) {
-    try {
-      const res = await axios.get("/tech");
-      return dispatch({
-        type: "GET_TECH",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get("/tech");
+    return dispatch({
+      type: "GET_TECH",
+      payload: res.data,
+    });
   };
 }
-
-//traer las seniority para el form
+//treaer las seniority para el form
 export function getSeniority() {
   return async function (dispatch) {
-    try {
-      const res = await axios.get("/seniority");
-      return dispatch({
-        type: "GET_SENIORITY",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get("/seniority");
+    return dispatch({
+      type: "GET_SENIORITY",
+      payload: res.data,
+    });
   };
 }
-
-//traer las Lenguajes de programacion para el form
+//treaer las Lenguaje de programacion para el form
 export function getSkills() {
   return async function (dispatch) {
-    try {
-      const res = await axios.get("/skills");
-      return dispatch({
-        type: "GET_SKILLS",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get("/skills");
+    return dispatch({
+      type: "GET_SKILLS",
+      payload: res.data,
+    });
   };
 }
-
-//get para traer los idiomas para el form
+//get para trert los idiomas para el form
 export function getLanguage() {
   return async function (dispatch) {
-    try {
-      const res = await axios.get("/languages");
-      return dispatch({
-        type: "GET_LANGUAGE",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get("/languages");
+    return dispatch({
+      type: "GET_LANGUAGE",
+      payload: res.data,
+    });
   };
 }
 
 //get para traerme un postulante particular y PARA LA SEARCHBAR ES EL MISMO
+
 /*export function postulanteDetail(name) {
   return async function (dispatch) {
     try {
@@ -286,22 +221,16 @@ export function getLanguage() {
     }
   };
 };*/
-
 export function postulantDetail(id) {
   console.log(id)
   return async function (dispatch) {
-    try {
-      const res = await axios.get(`/postulant?id=${id}`);
-      return dispatch({
-        type: "GET_POSTULADOS",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get(`/postulant?id=${id}`);
+    return dispatch({
+      type: "GET_POSTULADOS",
+      payload: res.data,
+    });
   };
 }
-
 //fn para filtrar segun estado de la pipeline
 export function filterStatusPipeline(estado) {
   return async function (dispatch) {
@@ -316,22 +245,16 @@ export function filterStatusPipeline(estado) {
     }
   };
 }
-
 //POST DEL FORM PARA COMPLETAR INFO DE EMPRESA
 export function postEmpresa(payload) {
   return async function (dispatch) {
-    try {
-      const res = await axios.post("/business", payload);
-      return dispatch({
-        type: "POST_EMPRESA",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.post("/business", payload);
+    return dispatch({
+      type: "POST_EMPRESA",
+      payload: res.data,
+    });
   };
 }
-
 //FILTRO DE HOME EMPRESA PARA LOS SELECT
 export function filterVacancies(info) {
   return async function (dispatch) {
@@ -340,6 +263,7 @@ export function filterVacancies(info) {
         "/allFiltersVacancy",
         info
       );
+      console.log(combinated);
       return dispatch({
         type: "FILTER_VACANCIES",
         payload: combinated.data,
@@ -349,8 +273,8 @@ export function filterVacancies(info) {
     }
   };
 }
-
 //SEARCH DE HOME FUNCIONANDO OK
+
 export function getSearchBar(name) {
   return async function (dispatch) {
     try {
@@ -364,7 +288,6 @@ export function getSearchBar(name) {
     }
   };
 }
-
 //FILTRO DE HOME EMPRESA PARA LOS SELECT
 export function filterSelects(info) {
   return async function (dispatch) {
@@ -373,6 +296,7 @@ export function filterSelects(info) {
         "/allFiltersBusiness",
         info
       );
+      console.log(combinated);
       return dispatch({
         type: "FILTER_POSTULANT",
         payload: combinated.data,
@@ -401,9 +325,11 @@ export function filterSelects(info) {
 //   };
 // }
 
-/////////////ACÁ ARRANCA EL EDIT
+/////////////ACÁ ARRANCA EL BENDITO EDIT
 
 export function deleteTechnology(id, input) {
+  console.log('soy id vacancy', id)
+  console.log('soy input', input)
   return async function (dispatch) {
     try {
       const edit = await axios.put(`/vacancyEdit/${id}/technologyDelete`, { input: input })
@@ -418,6 +344,9 @@ export function deleteTechnology(id, input) {
 }
 
 export function addTechnology(id, input) {
+  console.log('soy id', id)
+  console.log('input', input)
+
   return async function (dispatch) {
     try {
       const edit = await axios.put(`/vacancyEdit/${id}/technologyAdd`, { input: input })
@@ -432,6 +361,7 @@ export function addTechnology(id, input) {
 }
 
 export function deleteLanguage(id, input) {
+
   return async function (dispatch) {
     try {
       const edit = await axios.put(`/vacancyEdit/${id}/languageDelete`, { input: input })
@@ -446,6 +376,8 @@ export function deleteLanguage(id, input) {
 }
 
 export function addLanguage(id, input) {
+  console.log('soy id', id)
+  console.log('soy input', input)
   return async function (dispatch) {
     try {
       const edit = await axios.put(`/vacancyEdit/${id}/languageAdd`, { input: input })
@@ -460,6 +392,7 @@ export function addLanguage(id, input) {
 }
 
 export function deleteSkill(id, input) {
+
   return async function (dispatch) {
     try {
       const edit = await axios.put(`/vacancyEdit/${id}/skillDelete`, { input: input })
@@ -488,6 +421,7 @@ export function addSkill(id, input) {
 }
 
 export function deleteSeñority(id, input) {
+
   return async function (dispatch) {
     try {
       const edit = await axios.put(`/vacancyEdit/${id}/seniorityDelete`, { input: input })
@@ -530,6 +464,7 @@ export function removeAll(id, idPostulant) {
     }
   }
 };
+
 export function addNew(id, idPostulant) {
   return async function (dispatch) {
     try {
@@ -624,7 +559,6 @@ export function addInterviewRRHH(id, idPostulant) {
     }
   }
 };
-
 export function removeInterviewRRHH(id, idPostulant) {
   return async function (dispatch) {
     try {
@@ -652,7 +586,6 @@ export function addInterviewTech(id, idPostulant) {
     }
   }
 };
-
 export function removeInterviewTech(id, idPostulant) {
   return async function (dispatch) {
     try {
@@ -666,6 +599,7 @@ export function removeInterviewTech(id, idPostulant) {
     }
   }
 };
+
 export function addOffered(id, idPostulant) {
 
   return async function (dispatch) {
@@ -825,14 +759,3 @@ export function getPostulantsRejected(id) {
   }
 };
 ///////////////////////////////////////////////
-
-export function createOrder(userId){
-  console.log(userId)
-  return async function(dispatch){
-    const order = await axios.post(`/order`, {userId: userId});
-    return dispatch({
-      type: 'CREATE_ORDER',
-      payload : order.data
-    })
-  }
-};

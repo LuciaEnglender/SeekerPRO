@@ -7,10 +7,7 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 //const { DATABASE_URL } = process.env;
 //const DATABASE_URL = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}/hiredpro`
-// const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
-// const proConfig = DB_DATABASE_URL;
-// console.log(`data: ${DB_DATABASE_URL}`)
-// console.log(process.env)
+
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
@@ -73,8 +70,6 @@ const {
   Offered,
   Hired,
   Rejected,
-  Conversation,
-  Order
 } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -167,11 +162,11 @@ Hired.belongsTo(Vacancy);
 Vacancy.hasOne(Rejected, { foreignKey: "fk_vacancy" });
 Rejected.belongsTo(Vacancy);
 
-Postulant.belongsToMany(Contact, { through: "contact_postulant" });
-Contact.belongsToMany(Postulant, { through: "contact_postulant" });
+Postulant.belongsToMany(Contact,{through:"contact_postulant"})
+Contact.belongsToMany(Postulant, {through:"contact_postulant"});
 
-Postulant.belongsToMany(InterviewRRHH, { through: "interviewrrhh_postulant" });
-InterviewRRHH.belongsToMany(Postulant, { through: "interviewrrhh_postulant" });
+Postulant.belongsToMany(InterviewRRHH,{through:"interviewrrhh_postulant"})
+InterviewRRHH.belongsToMany(Postulant, {through:"interviewrrhh_postulant"});
 
 Postulant.belongsToMany(InterviewRRHH, { through: "interviewrrhh_postulant" });
 InterviewRRHH.belongsToMany(Postulant, { through: "interviewrrhh_postulant" });
@@ -193,28 +188,6 @@ New.belongsToMany(Postulant, { through: "new_postulant" });
 
 Postulant.belongsToMany(Review, { through: "review_postulant" });
 Review.belongsToMany(Postulant, { through: "review_postulant" });
-
-//CHAT
-
-Business.hasMany(Conversation, { foreignKey: "fk_business" });
-Conversation.belongsTo(Business);
-
-Postulant.hasMany(Conversation, { foreignKey: "fk_postulant" });
-Conversation.belongsTo(Postulant);
-
-Conversation.belongsToMany(Message, { through: "conversation_message" });
-Message.belongsToMany(Conversation, { through: "conversation_message" });
-
-Business.hasMany(Message, { foreignKey: "fk_business" });
-Message.belongsTo(Business);
-
-Postulant.hasMany(Message, { foreignKey: "fk_postulant" });
-Message.belongsTo(Postulant);
-
-//MERCADOPAGO
-
-Business.hasOne(Order,  { foreignKey: "fk_busines" })
-Order.belongsTo(Business)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
