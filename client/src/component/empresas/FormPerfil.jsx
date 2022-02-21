@@ -58,7 +58,7 @@ export default function FormPerfil() {
         <NavHomeE titulo={"Crear"} />
         {/* FORM PERFIL VACANTE */}
       </div>
-      <div className=" flex  rounded-2xl justify-center">
+      <div className=" flex w-full h-full rounded-2xl justify-center">
         <div className="w-auto flex rounded-2xl justify-center">
           <form
             className="w-full m-9 mauto rounded-2xl  bg-verdeMedio"
