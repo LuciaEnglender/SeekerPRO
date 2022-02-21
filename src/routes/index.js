@@ -1,4 +1,3 @@
-//Comentario de Aly
 //const middleware = require('./Middlewares/loginMiddleware')
 const { Router } = require("express");
 const routerBusiness = require("./business");
@@ -9,6 +8,7 @@ const routerAdmin = require("./admin");
 const routerFavorite = require("./favorite");
 const routerPending = require("./pending");
 const routerEditing = require('./postulantEdit')
+
 const routerEditingVacancy= require('./editVacancy')
 const routerMetric = require("./metricVacancy");
 const routerMetricP = require("./metricPostulant");
@@ -26,6 +26,9 @@ const allFilters = require("./Filters/allFiltersVacancy");
 const allFiltersBuss = require("./Filters/allFiltersBusiness");
 const location = require("./Filters/location");
 
+//       Chat Online
+const conversations = require("./Chat/conversation");
+const messages = require("./Chat/messages");
 ///MERCADOPAGOS
 const order = require("./order");
 const product = require("./product");
@@ -70,6 +73,5 @@ router.use("/vacancyEdit", routerEditingVacancy);
 //       Chat Online
 router.use("/messages", messages);
 router.use("/conversations", conversations);
-
 
 module.exports = router;

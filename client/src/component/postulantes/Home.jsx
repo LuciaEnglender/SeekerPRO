@@ -54,10 +54,10 @@ export default function Home() {
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
-//Renderizacions todas las vacantes
-const handleAll = (e) => {
-  dispatch(clearBusiness());
-  dispatch(getVacancy()); 
+  //Renderizacions todas las vacantes
+  const handleAll = (e) => {
+    dispatch(clearBusiness());
+    dispatch(getVacancy());
   };
 
   //Renderizacion de todas las empresas

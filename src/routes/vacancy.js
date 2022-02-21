@@ -626,4 +626,5 @@ routerVacancy.get("/vac/:id", async (req, res) => {
   });
 });
 
+
 module.exports = routerVacancy;
