@@ -187,6 +187,7 @@ function handleSort (e){
                                   ?.map((t) => t.name)
                                   .join(", ")}
                                   business={el.businesses[0]?.name}
+                                  businessId = {el.businessId}
                                   date={el.createdAt}
                               />
                             </div>

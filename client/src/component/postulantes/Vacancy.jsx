@@ -17,7 +17,8 @@ function Vacancy({
   id,
   technologies,
   business,
-  date
+  date,
+  businessId
 }) {
   //console.log("id", id);
   //
@@ -66,7 +67,8 @@ function Vacancy({
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-            <Apply id={id} />
+            <Apply id={id} 
+                   businessId={businessId}/>
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
             <SeeLater id={id} />
