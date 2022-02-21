@@ -41,20 +41,11 @@ server.post("/", async (req, res, next) => {
     quantity: i.quantity,
   }))
 
-  const fecha = moment()
 
   // Crea un objeto de preferencia
   let preference = {
     items: items_ml,
     external_reference : `${id_orden.id}`,
-    auto_recurring: {
-      frequency: 1,
-      frequency_type: "months",
-      transaction_amount: 10,
-      currency_id: "ARS",
-      start_date: fecha,
-      end_date: "2022-07-20T15:59:52.581Z"
-    },
     payment_methods: {
       excluded_payment_types: [
         {
