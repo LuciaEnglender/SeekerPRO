@@ -18,6 +18,7 @@ import SeeLaterVancancies from "./component/postulantes/SeeLaterVacancies/SeeLat
 import Postulations from "./component/postulantes/MyPostulations/Postulations";
 
 //Rutas de Empresa
+import CompraPlan from "./component/empresas/CompraPlan"
 import HomeEmpresa from "./component/empresas/HomeEmpresa";
 import NotiEmp from "./component/empresas/NotiEmp";
 import MensajeEmp from "./component/empresas/MensajeEmp";
@@ -53,6 +54,7 @@ function App() {
         <Route path="/homep/mypostulations" element={<Postulations />} />
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
+        <Route path='/homee/premiumDetail' element={<CompraPlan/>}/>
         <Route path="/homee/mercado" element={<MercadoPago />} />
         <Route path="/homee/create" element={<FormPerfil />} />
         <Route path="/homee/notification" element={<NotiEmp />} />

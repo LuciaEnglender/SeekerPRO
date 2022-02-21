@@ -5,7 +5,8 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 
-//const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 // const { DATABASE_URL } = process.env;
 //const DATABASE_URL = "postgres://bbvsylwlpvhgqq:3535d924e0c63721da39debabe7a096db94d691e97174e22ee6a9d9d99732191@ec2-52-73-29-239.compute-1.amazonaws.com:5432/d9kbdiduvvh4e"
@@ -14,9 +15,6 @@ const path = require("path");
 // const proConfig = DB_DATABASE_URL;
 // console.log(`data: ${DB_DATABASE_URL}`)
 // console.log(process.env)
-const DB_USER="postgres"
-const DB_PASSWORD="Danna2021"
-const DB_HOST="localhost"
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
 	{
@@ -79,6 +77,7 @@ const {
   Hired,
   Rejected,
   Conversation,
+  Order
 } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -214,6 +213,11 @@ Message.belongsTo(Business);
 
 Postulant.hasMany(Message, { foreignKey: "fk_postulant" });
 Message.belongsTo(Postulant);
+
+//MERCADOPAGO
+
+Business.hasOne(Order,  { foreignKey: "fk_busines" })
+Order.belongsTo(Business)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
