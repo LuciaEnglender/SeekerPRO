@@ -14,21 +14,22 @@ const path = require("path");
 // const proConfig = DB_DATABASE_URL;
 // console.log(`data: ${DB_DATABASE_URL}`)
 // console.log(process.env)
-const DB_USER="postgres"
-const DB_PASSWORD="Danna2021"
-const DB_HOST="localhost"
+const DB_USER = "postgres";
+const DB_PASSWORD = "Museo429634";
+const DB_HOST = "localhost";
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
-	{
-		logging: false, // set to console.log to see the raw SQL queries
-		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-	/*	dialectOptions: {
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    /*	dialectOptions: {
 			ssl: {
 				require: true,
 				rejectUnauthorized: false,
 			},
 		},*/
-	}
+  }
 );
 const basename = path.basename(__filename);
 
@@ -171,11 +172,11 @@ Hired.belongsTo(Vacancy);
 Vacancy.hasOne(Rejected, { foreignKey: "fk_vacancy" });
 Rejected.belongsTo(Vacancy);
 
-Postulant.belongsToMany(Contact,{through:"contact_postulant"})
-Contact.belongsToMany(Postulant, {through:"contact_postulant"});
+Postulant.belongsToMany(Contact, { through: "contact_postulant" });
+Contact.belongsToMany(Postulant, { through: "contact_postulant" });
 
-Postulant.belongsToMany(InterviewRRHH,{through:"interviewrrhh_postulant"})
-InterviewRRHH.belongsToMany(Postulant, {through:"interviewrrhh_postulant"});
+Postulant.belongsToMany(InterviewRRHH, { through: "interviewrrhh_postulant" });
+InterviewRRHH.belongsToMany(Postulant, { through: "interviewrrhh_postulant" });
 
 Postulant.belongsToMany(InterviewRRHH, { through: "interviewrrhh_postulant" });
 InterviewRRHH.belongsToMany(Postulant, { through: "interviewrrhh_postulant" });
@@ -206,8 +207,8 @@ Conversation.belongsTo(Business);
 Postulant.hasMany(Conversation, { foreignKey: "fk_postulant" });
 Conversation.belongsTo(Postulant);
 
-Conversation.belongsToMany(Message, {through:"conversation_message"});
-Message.belongsToMany(Conversation, {through:"conversation_message"});
+Conversation.belongsToMany(Message, { through: "conversation_message" });
+Message.belongsToMany(Conversation, { through: "conversation_message" });
 
 Business.hasMany(Message, { foreignKey: "fk_business" });
 Message.belongsTo(Business);
