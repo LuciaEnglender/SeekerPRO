@@ -3,7 +3,7 @@ import RemovePost from '../MyPostulations/RemovePost';
 import {useSelector} from "react-redux";
 
 
-function PostCard({name, description, id, date}) {
+function PostCard({name, description, id, status, business, seniorities, technologies, languages}) {
   //const pipeline = useSelector((state)=> state.rootReducerPostulante.pipeline)
   //console.log(pipeline)
 
@@ -22,7 +22,7 @@ function PostCard({name, description, id, date}) {
                   class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
                 > 
                   {name} <br/> 
-                  <p> from: Una empresa</p>
+                  <p> Business: {business}</p>
                   {description}
                     </p>      
               </div>
@@ -40,12 +40,12 @@ function PostCard({name, description, id, date}) {
               tabindex="0"
               class="focus:outline-none text-sm leading-5 py-2 text-gray-600"
             >
-               <p> Requirements: JavasCript, React, Redux - English</p>
+               <p> Requirements:{ seniorities}, {technologies}, {languages}</p>
             </p>
             <div>
-     <p>Application date: {date.substr(0, 10)}</p>
+     <p>Application date: </p>
    </div>
-   <div> Application state: New, wainting for review</div>
+   <div> Application state: {status}</div>
           </div>
         </div>
       );

@@ -31,7 +31,7 @@ function MessengerBussines() {
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducer.business);//es el que tengo en reducer empresa
   const id = profile[0]?.id
-
+console.log("id>", id)
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
     socket.current = io("ws://localhost:8900")
