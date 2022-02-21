@@ -16,7 +16,7 @@ const navigation = [
   { name: "Home", href: "/homee", current: false },
   { name: "Mails", href: "/homee/message", current: false },
   { name: "Search", href: "/homee/search", current: false },
-  { name: "Mercado", href: "/homee/mercado", current: false },
+  { name: "Go Premium", href: '/homee/premiumDetail', current: false },
 ];
 
 function classNames(...classes) {

@@ -744,4 +744,16 @@ export function removeRejected(id, input) {
     }
   }
 };
-///////////////////////////////////////////////
+
+
+export function createOrder(userId){
+  console.log(userId)
+  return async function(dispatch){
+    const order = await axios.post(`/order`, {userId: userId});
+    return dispatch({
+      type: 'CREATE_ORDER',
+      payload : order.data
+    })
+  }
+}
+
