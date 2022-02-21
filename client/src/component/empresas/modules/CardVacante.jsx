@@ -12,6 +12,8 @@ export default function CardVacante({
   vacancies,
 }) {
   const { user, isAuthenticated } = useAuth0();
+
+  console.log(createdAt)
   return (
     <div
       tabindex="0"
