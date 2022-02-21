@@ -4,10 +4,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('message', {
-  
-    message:{
-        type: DataTypes.TEXT,
-        allowNull: false
+    sender: {
+      type: DataTypes.STRING,
     },
-  });
-};
+    text: {
+      type: DataTypes.STRING,
+    },
+  })
+}

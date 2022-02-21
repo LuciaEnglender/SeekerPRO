@@ -1,8 +1,9 @@
-const { Order} = require('../db.js');
+const { Order, Business} = require('../db.js');
 const server = require('express').Router();
 
 // SDK de Mercado Pago
 const mercadopago = require ('mercadopago');
+const moment =require("moment");
 
 const { ACCESS_TOKEN } = process.env;
 
@@ -13,9 +14,21 @@ mercadopago.configure({
 
 
 //Ruta que genera la URL de MercadoPago
-server.get("/", (req, res, next) => {
+server.post("/", async (req, res, next) => {
+  const {email} = req.body
 
-  const id_orden= 1
+  const empresa = await Business.findAll({
+    where:{
+      loginEmail: email
+    }
+  })
+ console.log(empresa)
+  const id_orden= await Order.findOne({
+    where : {
+      fk_busines : empresa[0].dataValues.id
+    }
+  })
+  
 
   //Cargamos el carrido de la bd
   const carrito = [
@@ -28,10 +41,11 @@ server.get("/", (req, res, next) => {
     quantity: i.quantity,
   }))
 
+
   // Crea un objeto de preferencia
   let preference = {
     items: items_ml,
-    external_reference : `${id_orden}`,
+    external_reference : `${id_orden.id}`,
     payment_methods: {
       excluded_payment_types: [
         {
@@ -62,40 +76,43 @@ server.get("/", (req, res, next) => {
 
 
 //Ruta que recibe la información del pago
-server.get("/pagos", (req, res)=>{
-  console.info("EN LA RUTA PAGOS ", req)
-  const payment_id= req.query.payment_id
-  const payment_status= req.query.status
-  const external_reference = req.query.external_reference
-  const merchant_order_id= req.query.merchant_order_id
-  console.log("EXTERNAL REFERENCE ", external_reference)
+server.get("/pagos", async (req, res)=>{
+  // console.info("EN LA RUTA PAGOS ", req)
 
+  try{
+    const payment_id= req.query.payment_id
+    const payment_status= req.query.status
+    const external_reference = req.query.external_reference
+    const merchant_order_id= req.query.merchant_order_id
+  // console.log("EXTERNAL REFERENCE ", external_reference)
+  
   //Aquí edito el status de mi orden
-  Order.findByPk(external_reference)
-  .then((order) => {
-    order.payment_id= payment_id
-    order.payment_status= payment_status
-    order.merchant_order_id = merchant_order_id
-    order.status = "completed"
-    console.info('Salvando order')
-    order.save()
-    .then((_) => {
-      console.info('redirect success')
-      
-      return res.redirect("http://localhost:3000")
-    })
-    .catch((err) =>{
-      console.error('error al salvar', err)
-      return res.redirect(`http://localhost:3000/?error=${err}&where=al+salvar`)
-    })
-  })
-  .catch(err =>{
-    console.error('error al buscar', err)
-    return res.redirect(`http://localhost:3000/?error=${err}&where=al+buscar`)
-  })
+    const orden= await Order.findByPk(external_reference, {
+          include : [
+            {model:Business}
+          ]
+        })
 
-  //proceso los datos del pago 
-  //redirijo de nuevo a react con mensaje de exito, falla o pendiente
+    orden.payment_id= payment_id
+    orden.payment_status= payment_status
+    orden.merchant_order_id = merchant_order_id
+    orden.status = "completed"
+
+   orden.save()
+
+     const empresa= await Business.update({
+       pro: true
+     },{
+        where : {
+          id : orden.fk_busines
+        }
+      })
+
+   console.log(empresa)
+      res.redirect('http://localhost:3000/homee')
+    }catch (e) {
+      console.log(e)
+    }
 })
 
 

@@ -45,7 +45,7 @@ function rootReducer(state = initialState, action) {
         vacancies: action.payload,
         allVacancies: action.payload,
       };
-    case "GET_PROFILES":
+    case "GET_BISSNESS_DETAIL":
       return {
         ...state,
         profiles: action.payload,

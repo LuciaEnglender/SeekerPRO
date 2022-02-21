@@ -7,7 +7,6 @@
     "start": "nodemon",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
- 
   "author": "PWA",
   "license": "ISC",
   "engines": {

@@ -3,6 +3,7 @@ import Apply from "./Assets/Apply";
 import SeeLater from "./SeeLaterVacancies/SeeLater";
 import Follow from "./FollowBusiness/Follow";
 import { AiOutlineWhatsApp } from "react-icons/ai";
+import { format } from "timeago.js";
 
 //import {getVacancy} from actions
 // import AddToFavourite from "./Assets/AddToFavourite";
@@ -17,9 +18,10 @@ function Vacancy({
   technologies,
   business,
   date,
-  vacancies
+  vacancies,
+  businessId
 }) {
-  console.log("id", id);
+  //console.log("id", id);
   //
   return (
     <div
@@ -66,15 +68,17 @@ function Vacancy({
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-            <Apply id={id} />
+            <Apply id={id} 
+                   businessId={businessId}/>
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
             <SeeLater id={id} />
           </div>
         </div>
         <div>
-          <p> publication date: {date.substr(0, 10)} </p>
-          <p>vacancies available: {vacancies}</p></div><br />
+      <p>vacancies available: {vacancies}</p></div><br />
+ <p> Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}</p> </div><br/>
+         </div>
       </div>
 
     </div>
