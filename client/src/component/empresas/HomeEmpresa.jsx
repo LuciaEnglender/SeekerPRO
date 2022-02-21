@@ -41,7 +41,7 @@ const HomeEmpresa = () => {
       </div>
       {/* BODY */}
 
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
+      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-10">
         {/* AREA DE CREACION */}
         <div className="ml-16"><SearcHome /></div>
         {/* AREA DE VACANTES */}

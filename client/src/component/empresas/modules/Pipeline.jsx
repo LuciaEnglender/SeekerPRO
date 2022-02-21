@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
 getPostulados,
 removeAll, getReview,
@@ -14,6 +15,7 @@ addOffered, addHired, addRejected
 function Pipeline({ id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useAuth0();
   const postulados = useSelector((state) => state.rootReducer.postulados);
   const review = useSelector((state) => state.rootReducer.review);
   const contacted = useSelector((state) => state.rootReducer.postulados);
@@ -30,7 +32,8 @@ function Pipeline({ id }) {
     dispatch(getInterview(id));
   }, [dispatch, id]);
 
-
+  useEffect(() => {
+  }, [dispatch, id]);
 
   useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
@@ -71,6 +74,7 @@ function Pipeline({ id }) {
       action: e.target.value
     })
   }
+  
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(removeAll(id, input.idPostulant));
@@ -99,9 +103,12 @@ function Pipeline({ id }) {
     if (input.action === "rejected") {
       dispatch(addRejected(id, input.idPostulant))
     }
-    //else { alert("Choose an option") };
-    navigate(+1);
-
+    else { alert("Choose an option") };
+  //   setInput({
+  //   idPostulant: "",
+  //   action: "",
+  // })
+  //navigate(`/vacancy/`)
   }
 
   return (
