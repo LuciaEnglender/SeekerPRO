@@ -9,16 +9,14 @@ import {
   getLanguage,
   getSeniority,
   getLocation,
-  getProfile
+  getProfile,
 } from "../../redux/actions/indexP";
 import { GrFormClose } from "react-icons/gr";
 import validate from "./Validation";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
-
-
-
+import foto from "./Styles/Imagenes/fondo1.jpg";
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -29,8 +27,8 @@ export default function CreateForm() {
   const experiencia = useSelector(
     (state) => state.rootReducerPostulante.seniority
   );
-  const locat = useSelector((state) => state.rootReducerPostulante.location)
-  
+  const locat = useSelector((state) => state.rootReducerPostulante.location);
+
   const profileState = useSelector(
     (state) => state.rootReducerLanding.perfiles
   );
@@ -40,7 +38,6 @@ export default function CreateForm() {
 
   //const locat = useSelector((state) => state.rootReducerPostulante.location)
   const [errors, setErrors] = useState("");
-  
 
   const [input, setInput] = useState({
     name: "",
@@ -51,7 +48,7 @@ export default function CreateForm() {
     linkedIn: "",
     portfolio: "",
     CV: "",
-    file:"",
+    //file: "",
     technologies: [],
     languages: [],
     skills: [],
@@ -59,23 +56,22 @@ export default function CreateForm() {
     extras: "",
     loginId: email2,
   });
-  console.log(input)
+  console.log(input);
 
-  const handleFile=(e)=>{
+  /* const handleFile = (e) => {
     setInput({
       ...input,
-      file: e.target.files[0]
-    })
-}
+      file: e.target.files[0],
+    });
+  }; */
 
-const handleCv=(e)=>{
-  setInput({
-    ...input,
-    CV: e.target.files[0]
-  })
-  console.log(e.target.files)
-}
-  
+  const handleCv = (e) => {
+    setInput({
+      ...input,
+      CV: e.target.files[0],
+    });
+    console.log(e.target.files);
+  };
 
   function handleGithub(e) {
     setInput({
@@ -148,7 +144,7 @@ const handleCv=(e)=>{
     } else {
       setInput({
         ...input,
-        location: [e.target.value]
+        location: [e.target.value],
       });
     }
   }
@@ -165,11 +161,11 @@ const handleCv=(e)=>{
       ...input,
       [e.target.name]: e.target.value,
     });
-		let objError = validate({
-			...input,
-			[e.target.name]: e.target.value,
-		});
-		setErrors(objError);
+    let objError = validate({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    setErrors(objError);
   }
 
   const handleDelete = (e) => {
@@ -205,8 +201,7 @@ const handleCv=(e)=>{
       ...input,
       location: input.location.filter((el) => el !== e),
     });
-  }
-  
+  };
 
   //// control de gender ////
   function handleCheck(e) {
@@ -232,8 +227,8 @@ const handleCv=(e)=>{
       !input.location ||
       !input.gender ||
       !input.linkedIn ||
-      !input.file||
-      !input.CV||
+      /* !input.file || */
+      !input.CV ||
       !input.technologies ||
       !input.languages ||
       !input.skills ||
@@ -250,14 +245,14 @@ const handleCv=(e)=>{
       data.append("github", input.github);
       data.append("linkedIn", input.linkedIn);
       data.append("portfolio", input.portfolio);
-      data.append("file", input.file);
+      /*  data.append("file", input.file); */
       data.append("file", input.CV);
       data.append("technologies", [input.technologies]);
       data.append("languages", [input.languages]);
       data.append("skills", [input.skills]);
       data.append("seniority", [input.seniority]);
       data.append("extras", input.extras);
-      data.append("loginId", input.loginId)
+      data.append("loginId", input.loginId);
       dispatch(createPostulante(data));
       setInput({
         name: "",
@@ -267,7 +262,7 @@ const handleCv=(e)=>{
         github: "",
         linkedIn: "",
         portfolio: "",
-        file: "",
+        //file: "",
         CV: "",
         technologies: [],
         languages: [],
@@ -278,102 +273,100 @@ const handleCv=(e)=>{
       });
       navigate("/homep");
     }
-
   }
-  
+
   useEffect(() => {
     dispatch(getSkill());
     dispatch(getTechnology());
     dispatch(getLanguage());
     dispatch(getSeniority());
     dispatch(getLocation());
-    dispatch(getProfile(email2))
-
+    dispatch(getProfile(email2));
   }, []);
 
   return (
-    <div className="bg-verdeOscuro w-screen h-full">
-      <div>
-        <NavBar />
-      </div>
-      <div className=" flex m-3  rounded-2xl justify-center">
-        <div className="w-auto flex  m-0 rounded-2xl justify-center">
-          <form
-            className="w-full flex flex-row m-7 justify-center mauto rounded-2xl  bg-verdeMedio"
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <div className="m-9">
-              <div className="w-full flex flex-col my-2 justify-center">
-                <h3 className="text-center text-verdeHover">Name*</h3>
-                <input
-                  className="xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  type="text"
-                  value={input.name}
-                  name="name"
-                  onChange={(e) => handleChange(e)}
-                />
-                {errors.name && <p className="error">{errors.name}</p>}
-              </div>
-              <div className="w-44 flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover"> Phone*</label>
-                <input
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  type="number"
-                  value={input.phone}
-                  name="phone"
-                  onChange={(e) => handleChange(e)}
-                />
-                {errors.phone && <p className="error">{errors.phone}</p>}
-              </div>
-              <br />
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Location*</label>
-                <select
-                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                  placeholder="location"
-                  value={input.location}
-                  name="location"
-                  onChange={(e) => handleSelectLocation(e)}
+    <div className="bg-hero-pattern bg-cover w-screen md:h-screen h-full p-4 md:px-24 md:py-24">
+      <div className="w-full p-3 shadow-2xl h-full bg-colorFondo2 backdrop-blur-lg bg-opacity-50  rounded-2xl drop-shadow-2xl">
+        <form
+          className="grid grid-cols-1 grid-rows-3 gap-3 md:grid-cols-3 md:grid-rows-1 md:max-h-96"
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          {/* /////COL1 */}
+          <div className="flex flex-col  mt-4 md:mt-14 w-full h-full shrink m-0 px-16 md:px-2 justify-center">
+            <div className="w-full pt-8  flex flex-col m-0 justify-center">
+              <h3 className="text-center text-verdeHover">Name*</h3>
+              <input
+                className=" px-2 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                type="text"
+                value={input.name}
+                name="name"
+                onChange={(e) => handleChange(e)}
+              />
+              {/* {errors.name && <p className="error">{errors.name}</p>} */}
+            </div>
+            <div className="w-full pt-8 flex flex-col my-0 justify-center">
+              <label className="text-center text-verdeHover"> Phone*</label>
+              <input
+                className=" px-2 text-center w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                type="number"
+                value={input.phone}
+                name="phone"
+                onChange={(e) => handleChange(e)}
+              />
+              {/*  {errors.phone && <p className="error">{errors.phone}</p>} */}
+            </div>
+            <div className="w-full pt-8 flex flex-col m-0 justify-center">
+              <label className="text-center text-verdeHover">Location*</label>
+              <select
+                className="w-full rounded-2xl bg-verdeClaro"
+                placeholder="location"
+                value={input.location}
+                name="location"
+                onChange={(e) => handleSelectLocation(e)}
+              >
+                <option
+                  className="rounded-2xl bg-verdeClaro"
+                  selected
+                  disabled
+                  value=""
                 >
+                  Location Selection
+                </option>
+                {locat?.map((el) => (
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    selected
-                    disabled
-                    value=""
+                    value={el.name}
+                    key={el.id}
                   >
-                    Location Selection
+                    {el.name}
                   </option>
-                  {locat?.map((el) => (
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value={el.name}
-                      key={el.id}
+                ))}
+              </select>
+              <div className="h-6 flex flex-row">
+                {input.location.map((el, i) => (
+                  <li
+                    className="flex flex-row  mt-1 list-none  rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLocation(el)}
                     >
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-                <div>
-                  {input.location.map((el, i) => (
-                    <li
-                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={i}
-                    >
-                      {el}
-                      <button
-                        className="rounded-2xl hover:bg-verdeClaro"
-                        type="reset"
-                        onClick={() => handleDeleteLocation(el)}
-                      >
-                        X{" "}
-                      </button>
-                    </li>
-                  ))}
-                </div>
+                      <GrFormClose />
+                    </button>
+                  </li>
+                ))}
               </div>
-              <div className="w-44 flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover">Gender*</label>
-                <label className="text-center text-verdeHover">
+            </div>
+            <div className="w-full pt-14 flex flex-col m-0 justify-center">
+              <label className="text-center text-verdeHover">Gender*</label>
+              <div className="grid justify-center ">
+                <label
+                  className="text-center m-px p-px px-1 bg-verdeClaro w-fit rounded-xl"
+                  htmlFor="cbox2"
+                >
                   <input
                     className="text-center"
                     value="Femenine"
@@ -384,8 +377,12 @@ const handleCv=(e)=>{
                   />
                   Feminine
                 </label>
-                <label className="text-center text-verdeHover" htmlFor="cbox2">
+                <label
+                  className="text-center m-px p-px px-1 bg-verdeClaro w-fit rounded-xl"
+                  htmlFor="cbox2"
+                >
                   <input
+                    className="text-center"
                     value="Masculine"
                     type="radio"
                     id="cbox2"
@@ -394,8 +391,12 @@ const handleCv=(e)=>{
                   />
                   Masculine
                 </label>
-                <label className="text-center text-verdeHover" htmlFor="cbox2">
+                <label
+                  className="text-center m-px p-px px-1 bg-verdeClaro w-fit rounded-xl"
+                  htmlFor="cbox2"
+                >
                   <input
+                    className="text-center"
                     value="non-binary"
                     type="radio"
                     id="cbox3"
@@ -404,8 +405,12 @@ const handleCv=(e)=>{
                   />
                   Non-Binary
                 </label>
-                <label className="text-center text-verdeHover" htmlFor="cbox2">
+                <label
+                  className="text-center m-px p-px px-1 bg-verdeClaro w-fit rounded-xl"
+                  htmlFor="cbox2"
+                >
                   <input
+                    className="text-center"
                     value="Other"
                     type="radio"
                     name="check"
@@ -415,105 +420,62 @@ const handleCv=(e)=>{
                   Other
                 </label>
               </div>
-              {/*  ///////////////////////PHOTO////////////////////// */}
-              <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover" htmlFor="file">
-                  {" "}
-                  Photo (.jpg)
-                </label>
-                <input
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder=".jpg"
-                  type="file"
-                  name="file"
-                  id="file"
-                  accept=".jpg"
-                  onChange={(e) => handleFile(e)}
-                />
-              </div>
-              <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover" htmlFor="github">
-                  GitHub:
-                </label>
-                <input
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  type="text"
-                  value={input.github}
-                  name="github"
-                  onChange={(e) => handleGithub(e)}
-                />
-              </div>
-              <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover" htmlFor="linkedin">
-                  LinkedIn:
-                </label>
-                <input
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  value={input.linkedIn}
-                  type="text"
-                  name="linkedin"
-                  onChange={(e) => handleLinkedIn(e)}
-                />
-              </div>
-              <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover" for="portfolio">
-                  PortFolio
-                </label>
-                <input
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  type="text"
-                  name="portfolio"
-                  value={input.portfolio}
-                  onChange={(e) => handlePortfolio(e)}
-                />
-              </div>
-              {/* /////////////////CV/////////////// */}
-              <div className="w-fit flex flex-col my-2 justify-center">
-                <label className="text-center text-verdeHover">CV (.pdf)*</label>
-                <input
-                  className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                  placeholder=".pdf"
-                  type="file"
-                  id="file"
-                  accept=".pdf"
-                  name="file"
-                  onChange={(e) => handleCv(e)}
-                />
-              </div>
             </div>
+            {/*  ///////////////////////PHOTO////////////////////// */}
+            {/* <div className="w-fit flex flex-col my-2 justify-center">
+            <label className="text-center text-verdeHover" htmlFor="file">
+              {" "}
+              Photo (.jpg)
+            </label>
+            <input
+              className="w-full  m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+              placeholder=".jpg"
+              type="file"
+              name="file"
+              id="file"
+              accept=".jpg"
+              onChange={(e) => handleFile(e)}
+            />
+          </div>*/}
+          </div>
 
-            <div className="m-9">
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Technology*</label>
-                <select
-                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                  placeholder="technology"
-                  value={input.technologies}
-                  name="technology"
-                  onChange={(e) => handleSelectTechnology(e)}
+          {/* /////COL3 */}
+          <div className="flex flex-col   mt-6 md:mt-14 w-full m-0 px-16 md:px-2 h-full justify-center">
+            <div className="w-full  flex flex-col m-0 justify-center">
+              <label className=" text-center text-verdeHover">
+                Technology*
+              </label>
+              <select
+                className="w-full rounded-2xl mb-1 bg-verdeClaro"
+                placeholder="technology"
+                value={input.technologies}
+                name="technology"
+                onChange={(e) => handleSelectTechnology(e)}
+              >
+                <option
+                  className="rounded-2xl bg-verdeClaro"
+                  value=""
+                  disabled
+                  selected
                 >
+                  Tecnologies Selection
+                </option>
+
+                {tecno?.map((el) => (
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
+                    value={el.name}
+                    key={el.id}
                   >
-                    Tecnologies Selection
+                    {el.name}
                   </option>
-                  {tecno?.map((el) => (
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value={el.name}
-                      key={el.id}
-                    >
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-                <div>
+                ))}
+              </select>
+              <div>
+                <div className="h-6 flex flex-row">
                   {input.technologies.map((el, i) => (
                     <li
-                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                      className="flex flex-row mr-1 px-1 w-fit list-none rounded-2xl bg-verdeHover"
                       key={i}
                     >
                       {el}
@@ -528,154 +490,208 @@ const handleCv=(e)=>{
                   ))}
                 </div>
               </div>
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Languages*</label>
-                <select
-                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                  placeholder="languages"
-                  value={input.languages}
-                  name="languages"
-                  onChange={(e) => handleLanguage(e)}
+            </div>
+            <div className="w-full flex flex-col m-0 justify-center">
+              <label className="text-center text-verdeHover">Languages*</label>
+              <select
+                className="w-full rounded-2xl mb-1 bg-verdeClaro"
+                placeholder="languages"
+                value={input.languages}
+                name="languages"
+                onChange={(e) => handleLanguage(e)}
+              >
+                <option
+                  className="rounded-2xl bg-verdeClaro"
+                  value=""
+                  disabled
+                  selected
                 >
+                  Languages Selection
+                </option>
+                {lenguaje?.map((el) => (
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
+                    value={el.name}
+                    key={el.id}
                   >
-                    Languages Selection
+                    {el.name}
                   </option>
-                  {lenguaje?.map((el) => (
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value={el.name}
-                      key={el.id}
+                ))}
+              </select>
+              <div className="h-6  flex flex-row ">
+                {input.languages.map((el, i) => (
+                  <li
+                    className="flex flex-row mr-1 px-1 w-fit list-none rounded-2xl bg-verdeHover"
+                    key={i}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteLanguage(el)}
                     >
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-                <div>
-                  {input.languages.map((el, i) => (
-                    <li
-                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={i}
-                    >
-                      {el}
-                      <button
-                        className="rounded-2xl hover:bg-verdeClaro"
-                        type="reset"
-                        onClick={() => handleDeleteLanguage(el)}
-                      >
-                        X{" "}
-                      </button>
-                    </li>
-                  ))}
-                </div>
+                      <GrFormClose />
+                    </button>
+                  </li>
+                ))}
               </div>
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover"> Skill*</label>
-                <select
-                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                  placeholder="skill"
-                  value={input.skills}
-                  name="skills"
-                  onChange={(e) => handleSkill(e)}
+            </div>
+            <div className="w-full flex flex-col m-0 justify-center">
+              <label className="text-center text-verdeHover"> Skill*</label>
+              <select
+                className="w-full rounded-2xl mb-1 bg-verdeClaro"
+                placeholder="skill"
+                value={input.skills}
+                name="skills"
+                onChange={(e) => handleSkill(e)}
+              >
+                <option
+                  className="rounded-2xl bg-verdeClaro"
+                  value=""
+                  disabled
+                  selected
                 >
+                  Skills Selection
+                </option>
+                {habilidades?.map((el) => (
                   <option
                     className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
+                    value={el.name}
+                    key={el.id}
                   >
-                    Skills Selection
+                    {el.name}
                   </option>
-                  {habilidades?.map((el) => (
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value={el.name}
-                      key={el.id}
-                    >
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-                <div>
-                  {input.skills?.map((el, i) => (
-                    <li
-                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={i}
-                    >
-                      .name                      {el}
-                      <button
-                        className="rounded-2xl hover:bg-verdeClaro"
-                        type="reset"
-                        onClick={() => handleDeleteSkills(el)}
-                      >
-                                                X
-                      </button>
-                    </li>
-                  ))}                </div>
-              </div>
-              
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Siniority*</label>
-                <select
-                  className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                  placeholder="Seniority"
-                  value={input.seniority}
-                  name="seniority"
-                  onChange={(e) => handleSelectSeniority(e)}
-                >
-                  <option
-                    className="rounded-2xl bg-verdeClaro"
-                    value=""
-                    disabled
-                    selected
+                ))}
+              </select>
+              <div className="h-6  flex flex-row">
+                {input.skills?.map((el, i) => (
+                  <li
+                    className="flex flex-row mr-1 px-1 w-fit list-none rounded-2xl bg-verdeHover"
+                    key={i}
                   >
-                    Seniority Selection
-                  </option>
-                  {experiencia?.map((el) => (
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value={el.name}
-                      key={el.id}
+                    {el}
+                    <button
+                      className="rounded-2xl  hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteSkills(el)}
                     >
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-                <div>
-                  {input.seniority?.map((el, i) => (
-                    <li
-                      Name="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={el.id}               >
-                      
-                      {el}
-                      <button
-                        className="rounded-2xl hover:bg-verdeClaro"
-                        type="reset"
-                        ok={() => handleDeleteSeniority(el)}
-                      >
-                        
-                        X
-                      </button>
-                    </li>
-                  ))}
-                </div>
+                      <GrFormClose />
+                    </button>
+                  </li>
+                ))}
               </div>
-              <br />
+            </div>
 
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center text-verdeHover">Extras</label>
-                <textarea
-                  type="text"
-                  value={input.extras}
-                  name="extras"
-                  onChange={(e) => handleExtra(e)}
-                />
+            <div className="w-full  flex flex-col m-0 justify-center">
+              <label className="text-center text-verdeHover">Siniority*</label>
+              <select
+                className="w-full rounded-2xl mb-1 bg-verdeClaro"
+                placeholder="Seniority"
+                value={input.seniority}
+                name="seniority"
+                onChange={(e) => handleSelectSeniority(e)}
+              >
+                <option
+                  className="rounded-2xl bg-verdeClaro"
+                  value=""
+                  disabled
+                  selected
+                >
+                  Seniority Selection
+                </option>
+                {experiencia?.map((el) => (
+                  <option
+                    className="rounded-2xl bg-verdeClaro"
+                    value={el.name}
+                    key={el.id}
+                  >
+                    {el.name}
+                  </option>
+                ))}
+              </select>
+              <div className="h-6  flex flex-row ">
+                {input.seniority?.map((el, id) => (
+                  <li
+                    className="flex flex-row mr-1 px-1 w-fit list-none rounded-2xl bg-verdeHover"
+                    key={el.id}
+                  >
+                    {el}
+                    <button
+                      className="rounded-2xl hover:bg-verdeClaro"
+                      type="reset"
+                      onClick={() => handleDeleteSeniority(el)}
+                    >
+                      <GrFormClose />
+                    </button>
+                  </li>
+                ))}
               </div>
-              <div className="w-full  my-3 flex m-0 justify-center">
+            </div>
+
+            <div className="w-full  flex flex-col m-0 justify-center">
+              <label className="text-center text-verdeHover">Extras</label>
+              <textarea
+                className="rounded-2xl px-3 bg-verdeClaro"
+                type="text"
+                value={input.extras}
+                name="extras"
+                onChange={(e) => handleExtra(e)}
+              />
+            </div>
+          </div>
+          {/* /////COL2 */}
+          <div className="flex flex-col mt-6  md:mt-16 w-full h-full m-0 px-16 md:px-2 justify-center">
+            <div className="w-full flex flex-col mt-3 justify-center">
+              <label className=" text-center text-verdeHover" htmlFor="github">
+                GitHub:
+              </label>
+              <input
+                className=" mb-4 px-2 text-center w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                type="text"
+                value={input.github}
+                name="github"
+                onChange={(e) => handleGithub(e)}
+              />
+            </div>
+            <div className="w-full flex flex-col my-2 justify-center">
+              <label className="text-center text-verdeHover" htmlFor="linkedin">
+                LinkedIn*
+              </label>
+              <input
+                className=" px-2 text-center w-full  m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                value={input.linkedIn}
+                type="text"
+                name="linkedin"
+                onChange={(e) => handleLinkedIn(e)}
+              />
+            </div>
+            <div className="w-full flex flex-col my-2 justify-center">
+              <label className="text-center text-verdeHover" for="portfolio">
+                PortFolio
+              </label>
+              <input
+                className=" px-2  mb-8 text-center w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                type="text"
+                name="portfolio"
+                value={input.portfolio}
+                onChange={(e) => handlePortfolio(e)}
+              />
+            </div>
+            {/* /////////////////CV/////////////// */}
+            <div className="w-fit flex flex-col pb-5 justify-center">
+              <label className="text-center text-verdeHover">CV (.pdf)*</label>
+              <input
+                className="w-full h-fit m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                placeholder=".pdf"
+                type="file"
+                id="file"
+                accept=".pdf"
+                name="file"
+                onChange={(e) => handleCv(e)}
+              />
+            </div>
+            <div className="mt-10 flex flex-col m-0 justify-center">
+              <div className="flex m-0 justify-center">
                 <button
                   className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
                   type="submit"
@@ -684,12 +700,13 @@ const handleCv=(e)=>{
                   CREAR
                 </button>
               </div>
+              <h1 className=" text-center mt-2 text-yellow-500">
+                (*) Required Fields
+              </h1>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );
 }
-
-

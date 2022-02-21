@@ -38,7 +38,6 @@ const SectionNuevo = () => {
 
   function handleSubmitE(e) {
     e.preventDefault();
-    console.log(inpute);
     dispatch(postEmail(inpute));
     alert("Cuenta EMPRESA creada!");
     setInpute({

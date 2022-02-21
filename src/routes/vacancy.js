@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const {
   New,
-    Review,
-    Contact,
-    InterviewTech,
-    InterviewRRHH,
-    Offered, Hired, Rejected,
+  Review,
+  Contact,
+  InterviewTech,
+  InterviewRRHH,
+  Offered, Hired, Rejected,
   Vacancy,
   Business,
   Language,
@@ -83,7 +83,7 @@ routerVacancy.get("/", async (req, res) => {
   try {
     const ALLVACS = await Vacancy.findAll({
       include: [
-       
+
         {
           model: Language,
           attributes: ["name"],
@@ -160,22 +160,22 @@ routerVacancy.get("/", async (req, res) => {
         ? res.status(200).send(vacanciesInDB)
         : res.status(400).send("doesnt exist this vacancy");
     } else if (business) {
-      
+
       const finderBusiness = await Business.findOne({
         where: {
           loginEmail: business,
         },
       });
-  
+
       //y sino, devuelve todos las vacantes
       const vacanciesInDB = await Vacancy.findAll({
-        where : {
-          businessId : finderBusiness.id
+        where: {
+          businessId: finderBusiness.id
         },
         include: [
           {
             model: Business,
-            attributes: ["name",'description', 'id'],
+            attributes: ["name", 'description', 'id'],
 
             through: {
               attributes: [],
@@ -203,10 +203,10 @@ routerVacancy.get("/", async (req, res) => {
               attributes: [],
             },
           },
-        
+
         ],
       });
-     
+
       vacanciesInDB
         ? res.status(200).json(vacanciesInDB)
         : res.status(400).send("there arent any vacancies yet");
@@ -230,14 +230,16 @@ routerVacancy.post("/", async (req, res) => {
     seniority,
     // skill,
     technology,
-    phone
+    phone,
+    vacancies
   } = req.body;
 
   try {
     let newVacancyInDB = await Vacancy.create({
       name,
       description,
-      phone
+      phone,
+      vacancies
     });
     //busco la empresa para obtener su nombre;
     let businessInDB = await Business.findOne({
@@ -277,44 +279,44 @@ routerVacancy.post("/", async (req, res) => {
     }
 
     const newStatus = await New.create({
-      name: name
-  })
+      name: 'New'
+    })
 
-  const reviewStatus = await Review.create({
-      name: name
-  })
+    const reviewStatus = await Review.create({
+      name: 'Review'
+    })
 
-  const contactStatus = await Contact.create({
-      name: name
-  })
+    const contactStatus = await Contact.create({
+      name: 'Contact'
+    })
 
-  const interviewRRHHStatus = await InterviewRRHH.create({
-      name: name
-  })
+    const interviewRRHHStatus = await InterviewRRHH.create({
+      name: 'InterviewRRHH'
+    })
 
-  const interviewTechStatus = await InterviewTech.create({
-      name: name
-  })
-  const offeredStatus = await Offered.create({
-      name: name
-  })
-  const hiredStatus = await Hired.create({
-      name: name
-  })
-  const rejectedStatus = await Rejected.create({
-      name: name
-  })
+    const interviewTechStatus = await InterviewTech.create({
+      name: 'InterviewTech'
+    })
+    const offeredStatus = await Offered.create({
+      name: 'Offered'
+    })
+    const hiredStatus = await Hired.create({
+      name: 'Hired'
+    })
+    const rejectedStatus = await Rejected.create({
+      name: 'Rejected'
+    })
 
- 
-  await newVacancyInDB.setNew(newStatus)
-  await newVacancyInDB.setReview(reviewStatus)
-  await newVacancyInDB.setContact(contactStatus)
-  await newVacancyInDB.setInterviewRRHH(interviewRRHHStatus)
-  await newVacancyInDB.setInterviewTech(interviewTechStatus)
-  await newVacancyInDB.setOffered(offeredStatus)
-  await newVacancyInDB.setHired(hiredStatus)
-  await newVacancyInDB.setRejected(rejectedStatus)
-    
+
+    await newVacancyInDB.setNew(newStatus)
+    await newVacancyInDB.setReview(reviewStatus)
+    await newVacancyInDB.setContact(contactStatus)
+    await newVacancyInDB.setInterviewRRHH(interviewRRHHStatus)
+    await newVacancyInDB.setInterviewTech(interviewTechStatus)
+    await newVacancyInDB.setOffered(offeredStatus)
+    await newVacancyInDB.setHired(hiredStatus)
+    await newVacancyInDB.setRejected(rejectedStatus)
+
     res.status(200).json(newVacancyInDB);
   } catch (e) {
     console.log(e);
@@ -350,14 +352,16 @@ routerVacancy.get("/search/:name", async (req, res) => {
     });
     if (business.length !== 0) acum.push(business);
 
+
     const vacancy = await Vacancy.findAll({
       where: {
+        // businessId:business.id,
         [Op.or]: {
           name: { [Op.iLike]: `%${name}%` },
           description: { [Op.iLike]: `%${name}%` },
-          },
+        },
       },
-     attributes: ['name','id', 'description'],
+    
       include: [
         {
           model: Technology,
@@ -433,13 +437,13 @@ routerVacancy.get("/search/:name", async (req, res) => {
         },
       ],
     });
-   
+
     for (let i = 0; i < languageSearch.length; i++) {
       if (languageSearch[i].vacancies.length !== 0) {
         acum.push(languageSearch[i].vacancies);
       }
     }
-    
+
     const techSearch = await Technology.findAll({
       where: {
         name: { [Op.iLike]: `%${name}%` },
@@ -560,43 +564,43 @@ routerVacancy.get("/filterByTech", async (req, res) => {
   res.status(200).send(vacanciesInDB);
 });
 
-// routerVacancy.get("/:name", async (req, res) => {
-//   const { name } = req.params;
+routerVacancy.get("/:name", async (req, res) => {
+  const { name } = req.params;
 
-//   try {
-//     const businesss = await Business.findAll({
-//       where: {
-//         name: name,
-//       },
-//     });
-//     console.log(businesss);
+  try {
+    const businesss = await Business.findAll({
+      where: {
+        name: name,
+      },
+    });
+    console.log(businesss);
 
-//     const vacanciesXbusiness = await Vacancy.findAll({
-//       where: {
-//         businessId: businesss.id,
-//       },
-//     });
+    const vacanciesXbusiness = await Vacancy.findAll({
+      where: {
+        businessId: businesss.id,
+      },
+    });
 
-//     res.status(200).json(vacanciesXbusiness);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// });
+    res.status(200).json(vacanciesXbusiness);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 routerVacancy.get("/vacs/:id", async (req, res) => {
   // Trae todos los pustulantes de una vacante
- 
+
   Vacancy.findByPk(req.params.id).then((vacancy) => {
     vacancy
       .getPostulants({
-        
+
       })
       .then((postulant) => {
-       res.json(postulant);
+        res.json(postulant);
       });
   });
 });
-  // cambio a async
+// cambio a async
 // const vacancy = await Vacancy.findByPk(req.params.id, {
 //   include: [
 //  {

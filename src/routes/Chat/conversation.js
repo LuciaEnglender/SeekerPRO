@@ -10,8 +10,8 @@ routerConversation.post("/", async (req, res) => {
 	try {
 		const business = await Business.findByPk(businessId);
 		const postulant = await Postulant.findByPk(postulantId);
-
-		const savedConversation = await Conversation.findOrCreate({
+    
+		const savedConversation = await Conversation.create({
 			members: [businessId, postulantId],
 		});
 
@@ -66,7 +66,7 @@ routerConversation.get("/postulant/:userId", async (req, res) => {
 
 routerConversation.get("/find/:businessId/:postulantId", async (req, res) => {
 	try {
-		const conversation = await Conversation.findOne({
+		const conversation = await Conversation.findAll({
 			where: {
 				members: [req.params.businessId, req.params.postulantId],
 			},
@@ -76,6 +76,27 @@ routerConversation.get("/find/:businessId/:postulantId", async (req, res) => {
 			: res.status(400).send("No hay conversación");
 	} catch (err) {
 		res.status(500).json(err);
+	}
+});
+
+//get all data from a particular postulant
+
+routerConversation.get("/dataPostulant/:postulantId", async (req, res) => {
+	const { postulantId } = req.params;
+
+	try {
+		if (postulantId) {
+			const allPostulant = await Postulant.findAll({
+				where: {
+					id: postulantId,
+				},
+			})
+			allPostulant
+				? res.status(200).send(allPostulant)
+				: res.status(400).send("No applicant found");
+		}
+	} catch (error) {
+		res.status(400).send("ERROR" + error);
 	}
 });
 

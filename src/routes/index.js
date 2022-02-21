@@ -35,6 +35,11 @@ const product = require("./product");
 const user = require("./user");
 const mercadopago = require("./mercadopago");
 
+//       Chat Online
+const conversations = require("./Chat/conversation");
+const messages = require("./Chat/message");
+
+
 const router = Router();
 
 //ROUTER DE MERCADOPAGO

@@ -7,7 +7,7 @@ const routes = require('./routes/index.js');
 const path = require('path');
 
 require('./db.js');
-const path = require('path');
+
 
 const server = express();
 

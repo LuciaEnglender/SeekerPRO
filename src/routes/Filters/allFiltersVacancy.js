@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Vacancy, Language, Skill, Technology, Seniority } = require("../../db");
+const { Vacancy, Language, Skill, Technology, Seniority, Business } = require("../../db");
 
 const router = Router();
 
@@ -92,6 +92,9 @@ router.post("/", async (req, res) => {
             attributes: [],
           },
         },
+        {
+          model:Business
+        }
       ],
     });
     var arrVacancy = [];

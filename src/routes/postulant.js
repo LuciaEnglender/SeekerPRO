@@ -1,6 +1,12 @@
 const { Router } = require("express");
 const path = require("path");
 const {
+  New,
+  Review,
+  Contact,
+  InterviewTech,
+  InterviewRRHH,
+  Offered, Hired, Rejected,
   Postulant,
   Technology,
   Skill,
@@ -9,7 +15,7 @@ const {
   Vacancy,
   Location,
   Login,
-  Business
+  Business, 
 } = require("../db");
 
 const { check, validationResult } = require("express-validator");
@@ -79,6 +85,8 @@ routerPostulant.get("/", async (req, res) => {
           },
         ],
       });
+
+      console.log(allPostulant)
 
       allPostulant
         ? res.status(200).send(allPostulant)
@@ -167,7 +175,7 @@ routerPostulant.put("/postulate/:id", async (req, res) => {
   }
 });
 
-routerPostulant.post("/", upload.any("file",2), async (req, res) => {
+routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
   //el campo de genero recibe un solo valor
   let {
     name,
@@ -189,17 +197,17 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
   let file = req.files;
   //let cv =req.file
   console.log(file);
-  if(file){
-     for(let i=0;i<file.length;i++){
-       if(file[i].mimetype==='image/jpeg'){
-         var photo=file[i].path
-       }
-       else{
-         var CV=file[i].path
-       }
-     }
+  if (file) {
+    for (let i = 0; i < file.length; i++) {
+      if (file[i].mimetype === 'image/jpeg') {
+        var photo = file[i].path
+      }
+      else {
+        var CV = file[i].path
+      }
+    }
   }
-  
+
 
 
   try {
@@ -232,7 +240,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
 
     if (languages) {
 
-      let arrL=languages.split(",")
+      let arrL = languages.split(",")
       let lenguageInDB = await Language.findAll({
         where: {
           name: arrL,
@@ -251,7 +259,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
     }
 
     if (skills) {
-      let skillArr=skills.split(",")
+      let skillArr = skills.split(",")
       let skillInDB = await Skill.findAll({
         where: {
           name: skillArr,
@@ -261,7 +269,7 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
     }
 
     if (technologies) {
-      let tecno=technologies.split(",")
+      let tecno = technologies.split(",")
       let technologyInDB = await Technology.findAll({
         where: {
           name: tecno,
@@ -287,51 +295,200 @@ routerPostulant.post("/", upload.any("file",2), async (req, res) => {
     console.log(error);
   }
 });
+
+
 //Trae las vacantes  por postulante
 //paso 2
+//Ruta que Trae las vacantes con sus estados  por postulante (recibo id de poestulante)
+
+const arr = [New, Review, Contact, InterviewTech, InterviewRRHH, Offered, Hired, Rejected]
+
 routerPostulant.get("/:id/vacancy", async (req, res) => {
-  Postulant.findByPk(req.params.id).then((postulant) => {
-    postulant
-      .getVacancies({
-        attributes: ["name", "description"],
-        include: [
-          {
-              model: Language,
-              attributes: ["name"],
-              through: {
-                  attributes: [],
-              },
+
+  //Aqui busco postulantes con sus estados
+  var vacanciesP = []
+  var postulantP = []
+  for (var i = 0; i < arr.length; i++) {
+    postulantP = await Postulant.findByPk(req.params.id, {
+      include: [
+        {
+          model: arr[i],
+          attributes: ["id", "name"],
+          through: {
+            attributes: [],
           },
-          {
-              model: Seniority,
-              attributes: ["name"],
-              through: {
-                  attributes: [],
-              },
-          },
-          {
+        }
+      ]
+    })
+    //le incluyo a vacancies cada estado con su postulante
+    vacanciesP.push(postulantP.dataValues)
+  }//Fin del for
+
+  //mapea las vacantes de ese postulnte y le agrega el estado
+  var news = vacanciesP.map(el => {
+    if (el.news) {
+      let estado = el.news
+      return estado
+    }
+    if (el.reviews) {
+      let estado = el.reviews
+      return estado
+    }
+    if (el.contacts) {
+      let estado = el.contacts
+      return estado
+    }
+    if (el.interviewTechs) {
+      let estado = el.interviewTechs
+      return estado
+    }
+    if (el.interviewRRHHs) {
+      let estado = el.interviewRRHHs
+      return estado
+    }
+    if (el.offereds) {
+      let estado = el.offereds
+      return estado
+    }
+    if (el.hireds) {
+      let estado = el.hireds
+      return estado
+    }
+    if (el.rejecteds) {
+      let estado = el.rejecteds
+      return estado
+    }
+    //Ojo Hasta aqui news trae todos sin el estado incluido
+  })
+  //aqui le incluto los estados en cada vacante
+  var todos = []
+  for (var i = 0; i < news.length; i++) {
+    if (i === 0) {
+      const e = { status: "New" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+    if (i === 1) {
+      const e = { status: "Reviews" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+    if (i === 2 && news[i].length !== 0) {
+      const e = { status: "InterviewTech" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+
+    // no hace el cuatro porque esta repetido eso no pasara ya que cada vacante solo puese tener un estado
+    //  if(i === 3 && news[i].length !== 0 ){
+    //   const e = { status: "InterviewTech" };
+    //    for(var j=0; j< news[i].length; j++){
+    //       todos.push(Object.assign(news[i][j], e))
+    //    }   
+    //  }
+  if (i === 4 && news[i].length !== 0) {
+      const e = { status: "InterviewRRHH" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+
+    if (i === 5 && news[i].length !== 0) {
+      const e = { status: "Offered" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+    if (i === 6 && news[i].length !== 0) {
+      const e = { status: "Hired" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+    if (i === 7 && news[i].length !== 0) {
+      const e = { status: "Rejected" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+  }
+  // COdigo de Vacantes por postulantes con un for y sus modelos de estado trae todos 
+
+  var postulant = []
+  for (let i = 0; i < arr.length; i++) {
+    postulant = await Postulant.findByPk(req.params.id, {
+      include: [
+        {
+          model: Vacancy,
+          include: [
+            {
               model: Technology,
               attributes: ["name"],
               through: {
-                  attributes: [],
+                attributes: [],
               },
-          },
-          {
+            },
+            {
+              model: Language,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Seniority,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
               model: Business,
               attributes: ["name"],
               through: {
-                  attributes: [],
+                attributes: [],
               },
-          },
-      ],
-      })
-      .then((vacancy) => {
-        console.log(vacancy);
-        res.json(vacancy);
-      });
-  });
-});
+            },
 
+          ],
+          attributes: ["id", "name"],
+          through: {
+            attributes: [],
+          },
+        }
+      ]
+    })
+  }
+  var agregado = []
+  agregado.push(postulant)
+
+  var Nuevo = []
+  var filtroUno = agregado.map(el => el.vacancies)
+
+  for (var x = 0; x < todos.length; x++) {
+    for (var y = 0; y < filtroUno[0].length; y++) {
+      var obj = { status: todos[x].status }
+
+      if (todos[x].id === filtroUno[0][y].id) {
+        Nuevo.push(Object.assign(filtroUno[0][y], obj))
+      }
+    }
+  }
+  var Nuevo2 = []
+  var otro = Nuevo.map(el => el.dataValues)
+  var otro2 = Nuevo.map(el => el.status)
+  for (var x = 0; x < otro.length; x++) {
+
+    var obj = { status: otro2[x] }
+    Nuevo2.push(Object.assign(otro[x], obj))
+
+  }
+console.log(postulant)
+  res.json(postulant)
+})
   //Cuenta cuantos vacantes tiene un postulante
   routerPostulant.get("/:id/vacancy", async (req, res) => {
     try{Postulant.findByPk(req.params.id).then((postulant) => {
@@ -343,10 +500,11 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
           console.log(vacancy);
           res.json(vacancy.length);
         });
-    });}catch(e){
-      console.log(e)
-    }
-  });
+    });
+  } catch (e) {
+    console.log(e)
+  }
+});
 
 //put para modificar datos de un detalle / perfil de postulante
 routerPostulant.put("/:id", async (req, res) => {
@@ -389,16 +547,16 @@ routerPostulant.put("/editProfile/:id", async (req, res) => {
 
   try {
     const finderPostulant = await Postulant.findOne({
-      where : {
-        loginEmail : loginId
+      where: {
+        loginEmail: loginId
       }
     });
 
     finderPostulant.update({
-      name ,
-      gender ,
+      name,
+      gender,
       phone,
-      linkedIn ,
+      linkedIn,
       portfolio,
       github,
       extras,
@@ -406,13 +564,13 @@ routerPostulant.put("/editProfile/:id", async (req, res) => {
 
     if (location) {
       let locationInDB = await Location.findAll({
-        where : {
-          name : location
+        where: {
+          name: location
         }
       });
     }
   } catch (e) {
-    console.log (e)
+    console.log(e)
   }
 })
 

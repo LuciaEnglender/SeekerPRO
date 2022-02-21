@@ -17,6 +17,7 @@ import { GrFormClose } from "react-icons/gr";
 const SearchPostu = () => {
   const dispatch = useDispatch();
   const profiles = useSelector((state) => state.rootReducer.profiles);
+
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
@@ -115,182 +116,198 @@ const SearchPostu = () => {
   }
 
   return (
-    <div className="bg-verdeOscuro w-screen h-screen">
+    <div className="min-h-full">
+      {/* NAVEGACION */}
       <div>
         <NavHomeE titulo={"SearchPostu"} />
       </div>
       {/* BODY */}
-      <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro h-auto pt-7">
-        {/* AREA DE BUSQUEDA */}
-        <div className="ml-16">
-          {/* SEARCHBAR */}
-          <div>
-            <div className="w-full flex flex-col m-0 justify-center pt-5">
-              <label> search:</label>
-              <input
-                className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
-                type="text"
-                onChange={(e) => handleInputChange(e)}
-              />
-              <button type="submit" onClick={(e) => handleSubmit2(e)}>
-                BUSCARR
-              </button>
-            </div>
-          </div>
-          {/* FILTROS */}
-          <div>
-            <div className="w-full my-3 flex flex-col m-0 justify-center">
-              <label> technologies:</label>
-              <select
-                className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                name="technology"
-                onChange={(e) => handleSelectTechno(e)}
-              >
-                <option
-                  className="rounded-2xl bg-verdeClaro"
-                  selected
-                  disabled
-                  value=""
-                >
-                  Select...
-                </option>
-                {technology.map((e) => (
-                  <option className="rounded-2xl bg-verdeClaro">
-                    {e.name}
-                  </option>
-                ))}
-              </select>
-              <div>
-                {input.technology.map((el, i) => (
-                  <li
-                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                    key={i}
-                  >
-                    {el}
-                    <button
-                      className="rounded-2xl hover:bg-verdeClaro"
-                      type="reset"
-                      onClick={() => handleDeleteTechnology(el)}
-                    >
-                      <GrFormClose />
-                    </button>
-                  </li>
-                ))}
-              </div>
-              {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
-            </div>
-            <div className="w-full my-3 flex flex-col m-0 justify-center">
-              <label> language:</label>
-              <select
-                className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                name="language"
-                onChange={(e) => handleSelectLenguge(e)}
-              >
-                <option
-                  className="rounded-2xl bg-verdeClaro"
-                  selected
-                  disabled
-                  value=""
-                >
-                  Select...
-                </option>
-                {language.map((e) => (
-                  <option value={e.name}>{e.name}</option>
-                ))}
-              </select>
-              <div>
-                {input.language.map((el, i) => (
-                  <li
-                    className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                    key={i}
-                  >
-                    {el}
-                    <button
-                      className=" rounded-2xl hover:bg-verdeClaro"
-                      type="reset"
-                      onClick={() => handleDeleteLanguage(el)}
-                    >
-                      <GrFormClose />
-                    </button>
-                  </li>
-                ))}
-              </div>
-              {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
-            </div>
-            <div className="w-full my-3 flex flex-col m-0 justify-center">
-              <label> seniority:</label>
-              <select
-                className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                name="seniority"
-                onChange={(e) => handleSelectSeniority(e)}
-              >
-                <option
-                  className="rounded-2xl bg-verdeClaro"
-                  selected
-                  disabled
-                  value=""
-                >
-                  Select...
-                </option>
-                {seniority.map((e) => (
-                  <option className="rounded-2xl bg-verdeClaro" value={e.name}>
-                    {e.name}
-                  </option>
-                ))}
-              </select>
-              <div>
-                {input.seniority.map((el, i) => (
-                  <li
-                    className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
-                    key={i}
-                  >
-                    {el}
-                    <button
-                      className=" rounded-2xl hover:bg-verdeClaro"
-                      type="reset"
-                      onClick={() => handleDeleteSeniority(el)}
-                    >
-                      <GrFormClose />
-                    </button>
-                  </li>
-                ))}
-              </div>
-            </div>
-            <button type="submit" onClick={(e) => handleSubmit(e)}>
-              BUSCARR
-            </button>
-          </div>
-        </div>
-        {/* AREA DE DATA PERSONAS */}
-        <div className="col-span-2 bg-verdeOscuro p-2">
-          <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
-            <div className="lg:grid items-center justify-center">
-              <h1 className=" font-bold text-center mb-3">Perfiles:</h1>
-              {/* AREA CARD PERFILES DE USUARIOS (no empresas) */}
-              {profiles ? (
-                profiles.map((el) => {
-                  return (
-                    <Link to={`/homee/${el.id}`}>
-                      <CardProfile
-                        name={el.name}
-                        extras={el.extras}
-                        technologies={el.technologies}
-                        seniorities={el.seniorities}
-                        languages={el.languages}
-                      />
-                    </Link>
-                  );
-                })
-              ) : (
-                <h3>No hay Developers</h3>
-              )}
-            </div>
-          </div>
-        </div>
 
-        {/* DIV PARA GRID 2BLE */}
-        <div></div>
-      </div>
+      <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+        </div>
+      </header>
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
+          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro h-auto pt-7">
+            {/* AREA DE BUSQUEDA */}
+            <div className="ml-16">
+              {/* SEARCHBAR */}
+              <div>
+                <div className="w-full flex flex-col m-0 justify-center pt-5">
+                  <label> search:</label>
+                  <input
+                    className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
+                    type="text"
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <button type="submit" onClick={(e) => handleSubmit2(e)}>
+                    BUSCARR
+                  </button>
+                </div>
+              </div>
+              {/* FILTROS */}
+              <div>
+                <div className="w-full my-3 flex flex-col m-0 justify-center">
+                  <label> technologies:</label>
+                  <select
+                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                    name="technology"
+                    onChange={(e) => handleSelectTechno(e)}
+                  >
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      selected
+                      disabled
+                      value=""
+                    >
+                      Select...
+                    </option>
+                    {technology.map((e) => (
+                      <option className="rounded-2xl bg-verdeClaro">
+                        {e.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div>
+                    {input.technology.map((el, i) => (
+                      <li
+                        className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                        key={i}
+                      >
+                        {el}
+                        <button
+                          className="rounded-2xl hover:bg-verdeClaro"
+                          type="reset"
+                          onClick={() => handleDeleteTechnology(el)}
+                        >
+                          <GrFormClose />
+                        </button>
+                      </li>
+                    ))}
+                  </div>
+                  {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
+                </div>
+                <div className="w-full my-3 flex flex-col m-0 justify-center">
+                  <label> language:</label>
+                  <select
+                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                    name="language"
+                    onChange={(e) => handleSelectLenguge(e)}
+                  >
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      selected
+                      disabled
+                      value=""
+                    >
+                      Select...
+                    </option>
+                    {language.map((e) => (
+                      <option value={e.name}>{e.name}</option>
+                    ))}
+                  </select>
+                  <div>
+                    {input.language.map((el, i) => (
+                      <li
+                        className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                        key={i}
+                      >
+                        {el}
+                        <button
+                          className=" rounded-2xl hover:bg-verdeClaro"
+                          type="reset"
+                          onClick={() => handleDeleteLanguage(el)}
+                        >
+                          <GrFormClose />
+                        </button>
+                      </li>
+                    ))}
+                  </div>
+                  {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
+                </div>
+                <div className="w-full my-3 flex flex-col m-0 justify-center">
+                  <label> seniority:</label>
+                  <select
+                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                    name="seniority"
+                    onChange={(e) => handleSelectSeniority(e)}
+                  >
+                    <option
+                      className="rounded-2xl bg-verdeClaro"
+                      selected
+                      disabled
+                      value=""
+                    >
+                      Select...
+                    </option>
+                    {seniority.map((e) => (
+                      <option
+                        className="rounded-2xl bg-verdeClaro"
+                        value={e.name}
+                      >
+                        {e.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div>
+                    {input.seniority.map((el, i) => (
+                      <li
+                        className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
+                        key={i}
+                      >
+                        {el}
+                        <button
+                          className=" rounded-2xl hover:bg-verdeClaro"
+                          type="reset"
+                          onClick={() => handleDeleteSeniority(el)}
+                        >
+                          <GrFormClose />
+                        </button>
+                      </li>
+                    ))}
+                  </div>
+                </div>
+                <button type="submit" onClick={(e) => handleSubmit(e)}>
+                  BUSCARR
+                </button>
+              </div>
+            </div>
+            {/* AREA DE DATA PERSONAS */}
+            <div className="col-span-2 bg-verdeOscuro p-2">
+              <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
+                <div className="lg:grid items-center justify-center">
+                  <h1 className=" font-bold text-center mb-3">Perfiles:</h1>
+                  {/* AREA CARD PERFILES DE USUARIOS (no empresas) */}
+                  {profiles ? (
+                    profiles.map((el) => {
+                      return (
+                        <Link to={`/homee/${el.id}`}>
+                          <CardProfile
+                            name={el.name}
+                            extras={el.extras}
+                            technologies={el.technologies}
+                            seniorities={el.seniorities}
+                            languages={el.languages}
+                          />
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <h3>No hay Developers</h3>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* DIV PARA GRID 2BLE */}
+            <div></div>
+          </div>
+          {/* /End replace */}
+        </div>
+      </main>
     </div>
   );
 };

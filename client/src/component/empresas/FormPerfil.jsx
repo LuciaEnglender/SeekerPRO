@@ -15,7 +15,6 @@ export default function FormPerfil() {
   );
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
-  console.log(profileState);
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -26,7 +25,6 @@ export default function FormPerfil() {
 
   useEffect(() => {
     dispatch(getUsers(email2));
-    console.log(email2);
   }, [dispatch, email2]);
 
   function handleSubmit(e) {
@@ -52,69 +50,63 @@ export default function FormPerfil() {
   }
 
   return (
-    <div className="bg-verdeOscuro w-screen h-screen ">
-      <div>
-        {/* NAVsEGACION */}
-        <NavHomeE titulo={"Crear"} />
-        {/* FORM PERFIL VACANTE */}
-      </div>
-      <div className=" flex  rounded-2xl justify-center">
-        <div className="w-auto flex rounded-2xl justify-center">
-          <form
-            className="w-full m-9 mauto rounded-2xl  bg-verdeMedio"
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <div className="w-full flex flex-col m-0 justify-center">
-              <h3 className="text-center">Name:</h3>
-              <input
-                className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                type="text"
-                name="name"
-                value={input.name}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="w-full flex flex-col m-0 justify-center">
-              <h3 className="text-center">Description:</h3>
-              <input
-                className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                type="text"
-                name="description"
-                value={input.description}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="w-full flex flex-col m-0 justify-center">
-              <h3 className="text-center">Location:</h3>
-              <input
-                className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                type="text"
-                name="location"
-                value={input.location}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="w-full flex flex-col m-0 justify-center">
-              <h3 className="text-center">CUIT/CUIL</h3>
-              <input
-                className="w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                type="text"
-                name="cuit"
-                value={input.cuit}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="w-full  my-3 flex m-0 justify-center">
-              <button
-                className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-                type="submit"
-              >
-                Guardar Perfil
-              </button>
-            </div>
-          </form>
+    <div className="bg-hero-pattern2 bg-cover w-screen m-0 flex justify-center md:h-screen h-screen p-4 md:px-24 md:py-28">
+    <div className=" max-w-xl shadow-2xl md:px-12  h-full bg-colorFondo2 backdrop-blur-sm bg-opacity-30  rounded-2xl drop-shadow-2xl">
+      <form
+        className="grid grid-cols-1 grid-rows-1 gap-3 pt-20 px-14 md:px-10 md:p-20  md:max-h-96"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <h1 className="text-center font-bold">CREATE YOUR PROFILE</h1>
+        <div className="w-full flex flex-col mt-10 justify-center">
+          <h3 className="text-center">Name:</h3>
+          <input
+            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            type="text"
+            name="name"
+            value={input.name}
+            onChange={(e) => handleChange(e)}
+          />
         </div>
-      </div>
+        <div className="w-full flex flex-col m-0 justify-center">
+          <h3 className="text-center">Description:</h3>
+          <textarea
+            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            type="text"
+            name="description"
+            value={input.description}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className="w-full flex flex-col m-0 justify-center">
+          <h3 className="text-center">Location:</h3>
+          <input
+            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            type="text"
+            name="location"
+            value={input.location}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className="w-full flex flex-col m-0 justify-center">
+          <h3 className="text-center">CUIT/CUIL</h3>
+          <input
+            className="w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            type="text"
+            name="cuit"
+            value={input.cuit}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className="w-full  mt-10 flex m-0 justify-center">
+          <button
+            className=" w-32  shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+            type="submit"
+          >
+            Guardar Perfil
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
   );
 }

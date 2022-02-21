@@ -4,14 +4,16 @@ import {
   apply,
   toPipeline,
   getProfile,
+  chatRoomPost
 } from "../../../redux/actions/indexP";
 import { useAuth0, isAuthenticated } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom"
 
-function Apply({id}) {
+function Apply({id, businessId}) {
   const postulanteId = useSelector((state) => state.rootReducerPostulante.profile[0].id)
+  
   const navigate = useNavigate()
-  console.log("apply", id)
+  //console.log("apply", id)
   const dispatch = useDispatch()
   const { user } = useAuth0();
   const email = JSON.stringify(user.email);
@@ -21,6 +23,7 @@ function Apply({id}) {
     dispatch(apply(id, postulanteId));
     alert("you applied for this job... Good luck!");
     dispatch(toPipeline(id, postulanteId))
+    dispatch(chatRoomPost(postulanteId, businessId ))
     navigate("/homep")
   }
 
