@@ -4,12 +4,12 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
-getPostulados,
-removeAll, getReview,
-getContacted, getInterview,
-addNew, addReview, addContact,
-addInterviewRRHH, addInterviewTech,
-addOffered, addHired, addRejected
+  getPostulados, getTechInterview, getOffered, getPostulantsRejected,
+  removeAll, getReview, getHired,
+  getContacted, getInterview,
+  addNew, addReview, addContact,
+  addInterviewRRHH, addInterviewTech,
+  addOffered, addHired, addRejected
 } from "../../../redux/actions/index"
 
 function Pipeline({ id }) {
@@ -30,10 +30,14 @@ function Pipeline({ id }) {
     dispatch(getReview(id));
     dispatch(getContacted(id));
     dispatch(getInterview(id));
+    dispatch(getTechInterview(id));
+    dispatch(getOffered(id));
+    dispatch(getHired(id));
+    dispatch(getPostulantsRejected(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
-  }, [dispatch, id]);
+  // useEffect(() => {
+  // }, [dispatch, id]);
 
   useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
@@ -54,30 +58,25 @@ function Pipeline({ id }) {
       })
     });
     document.getElementById("default-tab").click();
-  }, [dispatch]);
+  }, []);
 
   const [input, setInput] = useState({
     idPostulant: "",
     action: "",
-  })
+  });
   //console.log(input)
-  // useEffect(() => {
-  
-  // }, [addNew(), addReview(), addContact(),
-  //   addInterviewRRHH(), addInterviewTech(),
-  //   addOffered(), addHired(), addRejected(), input]);
-
   function handleSelect(e) {
     setInput({
       ...input,
       //idPostulant: e.target.key,
       action: e.target.value
     })
-  }
-  
+  };
+
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(removeAll(id, input.idPostulant));
+
     if (input.action === "new") {
       dispatch(addNew(id, input.idPostulant))
       //setInput({})
@@ -104,11 +103,11 @@ function Pipeline({ id }) {
       dispatch(addRejected(id, input.idPostulant))
     }
     else { alert("Choose an option") };
-  //   setInput({
-  //   idPostulant: "",
-  //   action: "",
-  // })
-  //navigate(`/vacancy/`)
+    //   setInput({
+    //   idPostulant: "",
+    //   action: "",
+    // })
+    //navigate(`/vacancy/`)
   }
 
   return (
@@ -133,15 +132,12 @@ function Pipeline({ id }) {
                 return (
                   <div >
                     <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
-                      {/* <div class="flex justify-center md:justify-end -mt-8"> */}
-                      {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
-                      {/* </div> */}
                       <Link to={`/postulant/${el.loginEmail}`}>
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
                       </Link>
                       <div class="flex justify-center mt-2">
                         <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
-                        {console.log(id, input.idPostulant)}
+                        {/* {console.log(id, input.idPostulant)} */}
                       </div>
                       <form onSubmit={(e) => handleSubmit(e)}>
                         <select onChange={(e) => handleSelect(e)}>
@@ -276,7 +272,7 @@ function Pipeline({ id }) {
           </div>
           {/* renderizado estado TECH INTERVIEW */}
           <div id="five" class="hidden p-4">
-          {tech.length === 0 ? <p>Waiting for people...</p> :
+            {tech.length === 0 ? <p>Waiting for people...</p> :
               tech.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -311,9 +307,9 @@ function Pipeline({ id }) {
               })
             }
           </div>
-           {/* renderizado estado OFFERED */}
+          {/* renderizado estado OFFERED */}
           <div id="six" class="hidden p-4">
-          {offered.length === 0 ? <p>Waiting for people...</p> :
+            {offered.length === 0 ? <p>Waiting for people...</p> :
               offered.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -348,9 +344,9 @@ function Pipeline({ id }) {
               })
             }
           </div>
-           {/* renderizado estado HIRED */}
+          {/* renderizado estado HIRED */}
           <div id="seven" class="hidden p-4">
-          {hired.length === 0 ? <p>Waiting for people...</p> :
+            {hired.length === 0 ? <p>Waiting for people...</p> :
               hired.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (
@@ -385,9 +381,10 @@ function Pipeline({ id }) {
               })
             }
           </div>
-           {/* renderizado estado REJECTED */}
+          {/* renderizado estado REJECTED */}
           <div id="eight" class="hidden p-4">
-          {rejected.length === 0 ? <p>Waiting for people...</p> :
+            {rejected.length === 0 ?
+              <p>Waiting for people...</p> :
               rejected.map((el) => {
                 //console.log(el.loginEmail, id)
                 return (

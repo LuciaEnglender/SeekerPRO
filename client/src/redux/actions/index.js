@@ -714,4 +714,48 @@ export function getInterview(id) {
     } catch (e) { console.log(e) }
   }
 };
+export function getTechInterview(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsInterviewTech/${id}`);
+      return dispatch({
+        type: "GET_TECH_INTERVIEW",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
+export function getOffered(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsOffered/${id}`);
+      return dispatch({
+        type: "GET_OFFERED",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
+export function getHired(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsHired/${id}`);
+      return dispatch({
+        type: "GET_HIRED",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
+export function getPostulantsRejected(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/pipeline/getPostulantsRejected/${id}`);
+      return dispatch({
+        type: "GET_REJECTED",
+        payload: res.data,
+      })
+    } catch (e) { console.log(e) }
+  }
+};
 ///////////////////////////////////////////////

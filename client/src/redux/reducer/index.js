@@ -18,7 +18,11 @@ const initialState = {
   filterPostulant: [],
   review: [],
   contacted: [],
-  interview: []
+  interview: [],
+  techInterview: [],
+  offered: [],
+  hired: [],
+  rejected: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -203,11 +207,32 @@ function rootReducer(state = initialState, action) {
         ...state,
         contacted: action.payload
       };
-      case "GET_INTERVIEW":
+    case "GET_INTERVIEW":
       return {
         ...state,
         interview: action.payload
       };
+    case "GET_TECH_INTERVIEW":
+      return {
+        ...state,
+        techInterview: action.payload
+      };
+    case "GET_OFFERED":
+      return {
+        ...state,
+        offered: action.payload
+      };
+    case "GET_HIRED":
+      return {
+        ...state,
+        hired: action.payload
+      };
+    case "GET_REJECTED":
+      return {
+        ...state,
+        rejected: action.payload
+      };
+
     default:
       return state;
   }
