@@ -144,7 +144,9 @@ pipeline.put('/:idVacancy/removeAll', async (req, res) => {
         console.log(e)
     }
 })
+
 //ruta que trae los postulantes en un estado determinado en una vacante especifica (id vacante)
+
 pipeline.get('/getPostulantsNew/:id', async (req , res) => {
     const {id} = req.params
     try{
@@ -371,8 +373,7 @@ pipeline.put('/:idVacancy/addReview', async (req, res) => {
         })
         const finderPostulant = await Postulant.findByPk(idPostulant);
 
-
-        await finderPostulant.addReview(finderReview)
+        await finderPostulant.setReview(finderReview)
         res.send('New, wainting for rewiew')
     } catch (e) {
         console.log(e)

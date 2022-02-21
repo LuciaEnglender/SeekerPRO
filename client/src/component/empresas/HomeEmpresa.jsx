@@ -97,6 +97,7 @@ const HomeEmpresa = () => {
                     <AiOutlineArrowLeft />
                   </button>
 
+
                   <button
                     className="m-3"
                     onClick={() =>
