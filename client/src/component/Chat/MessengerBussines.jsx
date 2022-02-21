@@ -6,12 +6,10 @@ import ChatOnline from "./ChatOnline";
 import { useContext, useEffect, useRef, useState } from 'react'
 import { getProfile } from '../../redux/actions/index';
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import "./Messenger.css";
 import { io } from "socket.io-client"
-
-
 
 
 
@@ -28,35 +26,38 @@ function MessengerBussines() {
   const scrollRef = useRef();
 
   // To bring business data
-  const dispatch = useDispatch()
+
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducer.business);//es el que tengo en reducer empresa
   const id = profile[0]?.id
 
   //socket io////////////////////////////////////////////////////////
-  useEffect(()=> {
+  useEffect(() => {
     socket.current = io("ws://localhost:8900")
-    socket.current?.on("getMessage", data=>{
+    socket.current?.on("getMessage", data => {
+      socket.current.open();
       setArrivalMessage({
         sender: data.senderId,
         text: data.text
       })
     })
-  },[])
+  }, [])
 
-  
+
   useEffect(() => {
     arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage])
+    console.log("arrival>", arrivalMessage)
   }, [arrivalMessage, currentChat])
 
   useEffect(() => {
     socket.current?.emit("addUser", id)
-    socket.current?.on("getUsers", users=>{
-      console.log(users)
+    //console.log(socket)
+    socket.current?.on("getUsers", users => {
+      //  console.log(users)
     })
-  },[id])
+  }, [id])
 
 
   ////////////////////////////////////////////////////////////////////
@@ -78,17 +79,17 @@ function MessengerBussines() {
 
   useEffect(() => {
     const getMessage = async () => {
-      if(currentChat){ 
-      try {
-        const res = await axios.get(`/messages/${currentChat?.id}`);
-        setMessages(res.data);
-      } catch (err) {
-        console.log(err);
+      if (currentChat) {
+        try {
+          const res = await axios.get(`/messages/${currentChat?.id}`);
+          setMessages(res.data);
+        } catch (err) {
+          console.log(err);
+        }
       }
-    }
     };
     getMessage();
-  }, [currentChat, newMessage]);
+  }, [currentChat, newMessage, arrivalMessage]);
 
 
   // Controlamos el botón "sender" del mensaje
@@ -101,11 +102,11 @@ function MessengerBussines() {
     };
 
     const receiverId = currentChat?.members[1]
-    console.log(currentChat.members)
+    //console.log(currentChat.members)
 
     socket.current?.emit("sendMessage", {
       senderId: id,
-      receiverId,
+      receiverId: receiverId,
       text: newMessage
     })
     try {
@@ -116,11 +117,9 @@ function MessengerBussines() {
       console.log(err);
     }
   }
-
-
   // La conversación se renderiza arriba, con esto "scrolleamos" a la última charla, abajo, y 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current?.scrollIntoView();
   }, [messages]);
 
   return (

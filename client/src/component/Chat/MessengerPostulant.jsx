@@ -13,8 +13,6 @@ import { io } from "socket.io-client"
 
 
 
-
-
 // Es la page donde se va a renderizar el Chat Online, el conjunto de conversaciones.
 
 function MessengerPostulant() {
@@ -28,38 +26,38 @@ function MessengerPostulant() {
   const scrollRef = useRef();
 
   // To bring my data
-  
+
   const email = JSON.stringify(user.email);
-  const email2 = email.substring(1, email.length - 1);  
+  const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducerPostulante.profile); //es el que tengo guardado
   const id = profile[0]?.id
-  
- 
-  //socket io////////////////////////////////////////////////////////
-useEffect(()=> {
-  socket.current = io("ws://localhost:8900")
-  socket.current?.on("getMessage", data => {
-    console.log(data)
-setArrivalMessage({
-  sender: data.senderId,
-  text: data.text,
-    })
-  
-  })
-},[])
 
-useEffect(()=> {
-  arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) && 
-  setMessages((prev) => [...prev, arrivalMessage])
-  console.log(arrivalMessage)
-}, [arrivalMessage, currentChat])
+  //socket io////////////////////////////////////////////////////////
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900")
+    socket.current?.on("getMessage", data => {
+      socket.current.open();
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text
+      })
+    })
+  }, [])
+
 
   useEffect(() => {
-  socket.current?.emit("addUser", id)
-  socket.current?.on("getUsers", users => {
-    //console.log(users)
-  })
-}, [id])
+    arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage])
+    console.log("arrival>", arrivalMessage)
+  }, [arrivalMessage, currentChat])
+
+  useEffect(() => {
+    socket.current?.emit("addUser", id)
+    //console.log(socket)
+    socket.current?.on("getUsers", users => {
+      //  console.log(users)
+    })
+  }, [id])
 
 
   ////////////////////////////////////////////////////////////////////
@@ -81,17 +79,17 @@ useEffect(()=> {
 
   useEffect(() => {
     const getMessage = async () => {
-      if(currentChat){
-      try {
-        const res = await axios.get(`/messages/${currentChat?.id}`);
-        setMessages(res.data);
-      } catch (err) {
-        console.log(err);
+      if (currentChat) {
+        try {
+          const res = await axios.get(`/messages/${currentChat?.id}`);
+          setMessages(res.data);
+        } catch (err) {
+          console.log(err);
+        }
       }
-    }
-  };
+    };
     getMessage();
-  }, [currentChat, newMessage]);
+  }, [currentChat, newMessage, arrivalMessage]);
 
 
   // Controlamos el botón "sender" del mensaje
@@ -108,7 +106,7 @@ useEffect(()=> {
 
     socket.current?.emit("sendMessage", {
       senderId: id,
-      receiverId,
+      receiverId: receiverId,
       text: newMessage
     })
     try {
@@ -121,7 +119,7 @@ useEffect(()=> {
   }
   // La conversación se renderiza arriba, con esto "scrolleamos" a la última charla, abajo, y con movimiento "smooth"
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current?.scrollIntoView();
   }, [messages]);
 
   return (

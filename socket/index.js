@@ -9,10 +9,18 @@ let users = [];
 
 // add objects users in the users array
 const addUser = (userId, socketId) => {
+    console.log("typeof socketId", typeof socketId)
+    const userIndex = users.findIndex( user => user.userId === userId )
+    if(userIndex >= 0) {
+        users = [... users.slice(0, userIndex), {userId, socketId}, ... users.slice(userIndex + 1, users.length) ]
+        return;
+    }
+    users.push ({userId, socketId})
    //console.log("user y socket", userId, socketId)
-    !users.some((user) => user.userId === userId) &&
-        users.push({ userId, socketId });
-    };
+    // !users.some((user) => user.userId === userId) &&
+    //     users.push({ userId, socketId });
+    // };
+}
 
 // remove objects users in the users array
 const removeUser = (socketId) => {
@@ -21,8 +29,9 @@ const removeUser = (socketId) => {
 
 const getUser = (userId) => { 
     console.log(users) 
-    //console.log("user", userId)
-    return users.find((user) => user.userId === userId);   
+    console.log("user >", userId)
+    console.log("type of user >", typeof userId);
+    return users.find((user) => user.userId === parseInt(userId, 10));
 };
 
 io.on("connection", (socket) => {
@@ -38,10 +47,11 @@ io.on("connection", (socket) => {
     // send and get message
     socket.on("sendMessage", ({senderId, receiverId, text})=>{
         const user = getUser(receiverId);
-       //console.log("receiver", receiverId)
-       //console.log("sender", senderId)
+        console.log(users)
+       console.log("receiver", receiverId)
+       console.log("sender", senderId)
    
-        io.to(user?.socketId).emit("getMessage", {
+        io.to(user.socketId).emit("getMessage", {
             senderId,
             text
         })
