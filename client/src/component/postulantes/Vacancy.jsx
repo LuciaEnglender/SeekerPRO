@@ -18,6 +18,7 @@ function Vacancy({
   technologies,
   business,
   date,
+  vacancies,
   businessId
 }) {
   //console.log("id", id);
@@ -38,8 +39,8 @@ function Vacancy({
             </p>
             <p> {business}</p>
             <div class="flex flex-row">
-           
-           
+
+
               <p
                 tabindex="0"
                 class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"
@@ -74,11 +75,14 @@ function Vacancy({
             <SeeLater id={id} />
           </div>
         </div>
-        <div> 
+        <div>
+      <p>vacancies available: {vacancies}</p></div><br />
  <p> Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}</p> </div><br/>
          </div>
       </div>
-  
+
+    </div>
+
   );
 }
 

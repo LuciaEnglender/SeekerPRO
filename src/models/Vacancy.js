@@ -10,5 +10,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    vacancies: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 };

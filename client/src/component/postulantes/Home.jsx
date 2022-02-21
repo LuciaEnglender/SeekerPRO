@@ -189,6 +189,7 @@ function handleSort (e){
                                   business={el.businesses[0]?.name}
                                   businessId = {el.businessId}
                                   date={el.createdAt}
+                                  vacancies={el.vacancies}
                               />
                             </div>
                           );
