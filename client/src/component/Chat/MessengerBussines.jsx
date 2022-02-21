@@ -164,7 +164,8 @@ function MessengerBussines() {
           </div>
         </div>     
       </div>
-    </>
+ 
+      </div>
   )
 }
 

@@ -15,7 +15,7 @@ const {
   Vacancy,
   Location,
   Login,
-  Business, New, Review, Contact, InterviewTech, InterviewRRHH, Offered, Hired, Rejected
+  Business, 
 } = require("../db");
 
 const { check, validationResult } = require("express-validator");

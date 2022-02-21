@@ -77,11 +77,11 @@ function Vacancy({
         </div>
         <div>
       <p>vacancies available: {vacancies}</p></div><br />
- <p> Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}</p> </div><br/>
+    <p> Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}</p> </div><br/>
          </div>
-      </div>
+     
 
-    </div>
+ 
 
   );
 }
