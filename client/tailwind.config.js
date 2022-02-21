@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "hero-pattern":
-          "url('/src/component/postulantes/Styles/Imagenes/FOndo2.jpg')",
+        "hero-pattern":"url('/src/component/postulantes/Styles/Imagenes/FOndo2.jpg')",
+        "hero-pattern2": "url('/src/component/empresas/assets/landingEmp.jpg)",
       },
       padding: {
         "20%": "20vh",

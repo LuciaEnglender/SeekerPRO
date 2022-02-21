@@ -486,7 +486,7 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
     Nuevo2.push(Object.assign(otro[x], obj))
 
   }
-
+console.log(postulant)
   res.json(postulant)
 })
   //Cuenta cuantos vacantes tiene un postulante

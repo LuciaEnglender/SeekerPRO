@@ -44,7 +44,7 @@ const HomeEmpresa = () => {
       </header>
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Replace with your content */}
+          {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
             {/* AREA DE CREACION */}
             <div className="ml-16">

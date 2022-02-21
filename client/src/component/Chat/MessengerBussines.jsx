@@ -122,51 +122,74 @@ function MessengerBussines() {
     <div className="min-h-full">
       {/* NAVEGACION */}
       <NavHomeE />
-      <div className="messenger">
-        <div className="chatMenu">
-          <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
-            {conversations.map((c) =>
-              <div onClick={() => setCurrentChat(c)} >
-                <ConversationBusiness conversation={c} />
-              </div>
-            )}
-          </div>
+      {/* BODY */}
+
+      <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
         </div>
-        <div className="chatBox">
-          <div className="chatBoxWrapper">
-            {currentChat ? (
-              <>
-                <div className="chatBoxTop">
-                  {
-                    messages[0]?.messages?.map(m => (
-                      <div ref={scrollRef}>
-                        <Message message={m} own={m.businessId ? false : true} />
-                      </div>
-                    ))
-                  }
-                </div>
-                <div className="chatBoxBottom">
-                  <textarea
-                    className="chatMessageInput"
-                    placeholder="write something..."
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    value={newMessage}
-                  > </textarea>
-                  <button className="chatSubmitButton" onClick={handleSubmit}>
-                    Send
-                  </button>
-                </div>
-              </>) :
-              <span className="noConversationText">
-                Open a conversation to start a chat.
-              </span>}
+      </header>
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
+          <div className="messenger">
+            <div className="chatMenu">
+              <div className="chatMenuWrapper">
+                <input
+                  placeholder="Search for friends"
+                  className="chatMenuInput"
+                />
+                {conversations.map((c) => (
+                  <div onClick={() => setCurrentChat(c)}>
+                    <ConversationBusiness conversation={c} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="chatBox">
+              <div className="chatBoxWrapper">
+                {currentChat ? (
+                  <>
+                    <div className="chatBoxTop">
+                      {messages[0]?.messages?.map((m) => (
+                        <div ref={scrollRef}>
+                          <Message
+                            message={m}
+                            own={m.businessId ? false : true}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="chatBoxBottom">
+                      <textarea
+                        className="chatMessageInput"
+                        placeholder="write something..."
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        value={newMessage}
+                      >
+                        {" "}
+                      </textarea>
+                      <button
+                        className="chatSubmitButton"
+                        onClick={handleSubmit}
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <span className="noConversationText">
+                    Open a conversation to start a chat.
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
-        </div>     
-      </div>
- 
-      </div>
-  )
+          {/* /End replace */}
+        </div>
+      </main>
+    </div>
+  );
 }
 
 export default MessengerBussines;

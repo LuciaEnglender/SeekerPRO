@@ -26,7 +26,7 @@ const CompraPlan = () => {
       </header>
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Replace with your content */}
+          {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div class="bg-white">
                 <div class="max-w-2xl mx-auto py-24 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
                   <div>
@@ -53,7 +53,7 @@ const CompraPlan = () => {
                       <div class="border-t border-gray-200 pt-4">  
                       <Link to="/homee/mercado">
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded">
-                      Let's get started!
+                      Go Premium now!
                         </button></Link>
                       </div>
 

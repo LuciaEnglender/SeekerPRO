@@ -37,7 +37,7 @@ const MercadoPago = () => {
       </header>
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Replace with your content */}
+          {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="App">
             {!datos ? (
               <p>Aguarde un momento....</p>
