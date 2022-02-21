@@ -50,21 +50,13 @@ const CompraPlan = () => {
                         <dd class="mt-2 text-sm text-gray-500">The pack will be all yours for a full year. Our payment method is through Mercado Pago.</dd>
                       </div>
 
-                      <div class="border-t border-gray-200 pt-4">
+                      <div class="border-t border-gray-200 pt-4">  
+                      <Link to="/homee/mercado">
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded">
-                        <Link to="/homee/mercado">Let's get started!</Link>
-                        </button>
+                      Let's get started!
+                        </button></Link>
                       </div>
 
-                      {/*<div class="border-t border-gray-200 pt-4">
-                        <dt class="font-medium text-gray-900">Includes</dt>
-                        <dd class="mt-2 text-sm text-gray-500">Wood card tray and 3 refill packs</dd>
-                      </div>
-
-                      <div class="border-t border-gray-200 pt-4">
-                        <dt class="font-medium text-gray-900">Considerations</dt>
-                        <dd class="mt-2 text-sm text-gray-500">Made from natural materials. Grain and color vary with each item.</dd>
-                      </div> */}
                     </dl>
                   </div>
                   <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
