@@ -12,8 +12,8 @@ import {
 import CardProfile from "./modules/CardPerfiles";
 import NavHomeE from "./modules/NavHomeE";
 import { GrFormClose } from "react-icons/gr";
+import CardPerfiles from "./modules/CardPerfiles";
 
-/////////////// FALTARIa TRAER LOS USUARIOS DESDE LA BASE DE DATOS
 const SearchPostu = () => {
   const dispatch = useDispatch();
   const profiles = useSelector((state) => state.rootReducer.profiles);
@@ -137,21 +137,21 @@ const SearchPostu = () => {
               {/* SEARCHBAR */}
               <div>
                 <div className="w-full flex flex-col m-0 justify-center pt-5">
-                  <label> search:</label>
+                  <label> Search:</label>
                   <input
                     className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
                     type="text"
                     onChange={(e) => handleInputChange(e)}
                   />
                   <button type="submit" onClick={(e) => handleSubmit2(e)}>
-                    SEARCH
+                    Search
                   </button>
                 </div>
               </div>
               {/* FILTROS */}
               <div>
                 <div className="w-full my-3 flex flex-col m-0 justify-center">
-                  <label> technologies:</label>
+                  <label> Technologies:</label>
                   <select
                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                     name="technology"
@@ -191,7 +191,7 @@ const SearchPostu = () => {
                   {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
                 </div>
                 <div className="w-full my-3 flex flex-col m-0 justify-center">
-                  <label> language:</label>
+                  <label> Language:</label>
                   <select
                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                     name="language"
@@ -229,7 +229,7 @@ const SearchPostu = () => {
                   {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
                 </div>
                 <div className="w-full my-3 flex flex-col m-0 justify-center">
-                  <label> seniority:</label>
+                  <label> Seniority:</label>
                   <select
                     className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                     name="seniority"
@@ -271,7 +271,7 @@ const SearchPostu = () => {
                   </div>
                 </div>
                 <button type="submit" onClick={(e) => handleSubmit(e)}>
-                  SEARCH
+                  Filter
                 </button>
               </div>
             </div>
@@ -279,13 +279,13 @@ const SearchPostu = () => {
             <div className="col-span-2 bg-verdeOscuro p-2">
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
                 <div className="lg:grid items-center justify-center">
-                  <h1 className=" font-bold text-center mb-3">Perfiles:</h1>
+                  <h1 className=" font-bold text-center mb-3">Profile:</h1>
                   {/* AREA CARD PERFILES DE USUARIOS (no empresas) */}
                   {profiles ? (
                     profiles.map((el) => {
                       return (
-                        <Link to={`/homee/${el.id}`}>
-                          <CardProfile
+                        <Link to={`/postulant/${el.loginEmail}`}>
+                          <CardPerfiles
                             name={el.name}
                             extras={el.extras}
                             technologies={el.technologies}

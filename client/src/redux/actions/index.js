@@ -173,27 +173,30 @@ export function clearDetail() {
 
 //GET PARA TRAER A LOS POSTULADOS DE UNA DE MIS VACANTES
 
-//export function getPostulados(id) {
-  //return async function (dispatch) {
-    //const res = await axios.get(`/pipeline/getPostulantsNew/${id}`);
-    //return dispatch({
-     // type: "GET_POSTULADOS",
-      //payload: res.data,
-    //});
-
 export function getPostulados(id) {
   return async function (dispatch) {
-    try {
-      const res = await axios.get(`/vacancy/vacs/${id}`);
-      return dispatch({
-        type: "GET_POSTULADOS",
-        payload: res.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+    const res = await axios.get(`/pipeline/getPostulantsNew/${id}`);
+    return dispatch({
+     type: "GET_POSTULADOS",
+      payload: res.data,
+    })
+  }
+}
+  
+
+// export function getPostulados(id) {
+//   return async function (dispatch) {
+//     try {
+//       const res = await axios.get(`/vacancy/vacs/${id}`);
+//       return dispatch({
+//         type: "GET_POSTULADOS",
+//         payload: res.data,
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
 export function postulanteDetail(id) {
   return async function (dispatch) {
@@ -356,6 +359,7 @@ export function getSearchBar(name) {
   return async function (dispatch) {
     try {
       let det = await axios.get(`/vacancy/search/${name}`);
+      console.log(det.data)
       return dispatch({
         type: "GET_VACANCY_NAME",
         payload: det.data,
