@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
-import { getVacancy } from "../../redux/actions";
+import { getVacancy , getProfile } from "../../redux/actions";
 import CardVacante from "./modules/CardVacante";
 import Pagination from "./Pagination";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -12,7 +12,9 @@ import SearcHome from "./modules/SearcHome";
 
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
-  const vacancy = useSelector((state) => state.rootReducer.vacancies);
+  const empresa = useSelector((state) => state.rootReducer.business);
+  console.log(empresa)
+  const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
   console.log('soy el home', vacancy);
   const { user } = useAuth0();
 
@@ -28,7 +30,9 @@ const HomeEmpresa = () => {
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
+
   useEffect(() => {
+    dispatch(getProfile(email2))
     dispatch(getVacancy(email2));
   }, [dispatch]);
 
@@ -68,6 +72,7 @@ const HomeEmpresa = () => {
                   <div className="mt-5">
                     {currentVacancy ? (
                       currentVacancy.map((el) => {
+                        if(el !== null) {
                         return (
                           <Link to={`/vacancy/${el.id}`}>
                             <CardVacante
@@ -81,7 +86,7 @@ const HomeEmpresa = () => {
                               business={el.businesses[0].name}
                             />
                           </Link>
-                        );
+                        );}
                       })
                     ) : (
                       <h1>Crea tu vacante</h1>
