@@ -108,7 +108,7 @@ function SearcHome() {
 
   function handleSubmit2(e) {
     e.preventDefault();
-  
+
     if (name.length === 0) {
       return alert("Please write a name");
     } else {
