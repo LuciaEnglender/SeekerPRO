@@ -37,7 +37,7 @@ function ConversationBusiness({ conversation }) {
     return (
         <>
             <div className="conversation">
-                
+
                 {
                     userChat &&
                     <span className="conversationName">{userChat[0]?.name}</span>

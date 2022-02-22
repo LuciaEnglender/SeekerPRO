@@ -22,9 +22,11 @@ routerConversation.post("/", async (req, res) => {
 			})
 			await business.addConversation(newConversation);
 			await postulant.addConversation(newConversation);
+
 			return res.status(200).json(newConversation);
 		} else {
-			res.status(200).json(savedConversation);
+	
+			res.status(200).json(savedConversation[0]);
 		}
 
 		
@@ -37,6 +39,7 @@ routerConversation.post("/", async (req, res) => {
 
 routerConversation.get("/", async (req, res) => {
 	const conversation = await Conversation.findAll();
+	console.log(conversation)
 	res.status(200).send(conversation);
 });
 
