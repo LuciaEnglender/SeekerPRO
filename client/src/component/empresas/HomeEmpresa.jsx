@@ -36,6 +36,13 @@ const HomeEmpresa = () => {
     dispatch(getVacancy(email2));
   }, [dispatch]);
 
+  
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(getVacancy(email2));
+
+}
+
   return (
     <div className="min-h-full">
       {/* NAVEGACION */}
@@ -67,6 +74,9 @@ const HomeEmpresa = () => {
                       <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
                         Add Vacancy
                       </button>
+                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2" onClick = {(e) => handleClick(e)} >
+                        All Vacancy
+                    </button>
                     </Link>
                   </div>
                   <div className="mt-5">
