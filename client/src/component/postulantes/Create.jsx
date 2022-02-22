@@ -460,7 +460,7 @@ export default function CreateForm() {
                 onChange={(e) => handleSelectTechnology(e)}
               >
                 <option
-                  className="rounded-2xl bg-verdeClaro"
+                  className="rounded-2xl text-white bg-nuevoFondo"
                   value=""
                   disabled
                   selected
@@ -470,7 +470,7 @@ export default function CreateForm() {
 
                 {tecno?.map((el) => (
                   <option
-                    className="rounded-2xl bg-verdeClaro"
+                    className="rounded-2xl text-white bg-nuevoFondo"
                     value={el.name}
                     key={el.id}
                   >
@@ -511,7 +511,7 @@ export default function CreateForm() {
                 onChange={(e) => handleLanguage(e)}
               >
                 <option
-                  className="rounded-2xl bg-verdeClaro"
+                  className="rounded-2xl text-white bg-nuevoFondo"
                   value=""
                   disabled
                   selected
@@ -520,7 +520,7 @@ export default function CreateForm() {
                 </option>
                 {lenguaje?.map((el) => (
                   <option
-                    className="rounded-2xl font-bold text-nuevoFondo "
+                    className="rounded-2xl  text-white bg-nuevoFondo"
                     value={el.name}
                     key={el.id}
                   >
@@ -559,7 +559,7 @@ export default function CreateForm() {
                 onChange={(e) => handleSkill(e)}
               >
                 <option
-                  className="rounded-2xl bg-verdeClaro"
+                  className="rounded-2xl text-white bg-nuevoFondo"
                   value=""
                   disabled
                   selected
@@ -568,7 +568,7 @@ export default function CreateForm() {
                 </option>
                 {habilidades?.map((el) => (
                   <option
-                    className="rounded-2xl bg-verdeClaro"
+                    className="rounded-2xl text-white bg-nuevoFondo"
                     value={el.name}
                     key={el.id}
                   >
@@ -607,7 +607,7 @@ export default function CreateForm() {
                 onChange={(e) => handleSelectSeniority(e)}
               >
                 <option
-                  className="rounded-2xl bg-verdeClaro"
+                  className="rounded-2xl text-white bg-nuevoFondo"
                   value=""
                   disabled
                   selected
@@ -616,7 +616,7 @@ export default function CreateForm() {
                 </option>
                 {experiencia?.map((el) => (
                   <option
-                    className="rounded-2xl bg-verdeClaro"
+                    className="rounded-2xl text-white bg-nuevoFondo"
                     value={el.name}
                     key={el.id}
                   >
