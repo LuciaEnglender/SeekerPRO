@@ -14,6 +14,7 @@ const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const empresa = useSelector((state) => state.rootReducer.business);
   const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
+  //console.log("vacancy" , vacancy)
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,12 +37,10 @@ const HomeEmpresa = () => {
     dispatch(getVacancy(email2));
   }, [dispatch]);
 
-
-  
+ 
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVacancy(email2));
-
 }
 
 
@@ -80,10 +79,6 @@ const HomeEmpresa = () => {
                         All Vacancy
                     </button>
                     </Link>
-                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                    onClick={(e) => getVacancy()}>
-                        All Vacancy
-                    </button>
                   </div>
                   <div className="mt-5">
                     {currentVacancy ? (
