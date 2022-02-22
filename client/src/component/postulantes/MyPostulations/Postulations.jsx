@@ -7,9 +7,7 @@ import NavBar from "../NavBar";
 
 function Postulations() {
   const dispatch = useDispatch();
-  const postulations = useSelector(
-    (state) => state.rootReducerPostulante.postulations
-  );
+  const postulations = useSelector((state) => state.rootReducerPostulante.postulations);
   console.log(postulations.vacancies);
 
   const postulanteId = useSelector(
@@ -59,6 +57,7 @@ function Postulations() {
                         technologies={el.technologies
                           ?.map((t) => t.name)
                           .join(", ")}
+                          date= {el.createdAt}
                         status={el.status}
                       />
                     </div>

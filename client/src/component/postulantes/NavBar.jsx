@@ -143,7 +143,7 @@ const NavBar = ({ titulo }) => {
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                            Pending Vacancies
+                            Saved Vacancies
                           </Link>
                         )}
                       </Menu.Item>
@@ -156,7 +156,7 @@ const NavBar = ({ titulo }) => {
                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
                             )}
                           >
-                            My applies
+                            My applications
                           </Link>
                         )}
                       </Menu.Item>

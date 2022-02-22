@@ -1,14 +1,10 @@
 import React from "react";
 import Apply from "./Assets/Apply";
 import SeeLater from "./SeeLaterVacancies/SeeLater";
-import Follow from "./FollowBusiness/Follow";
-import { AiOutlineWhatsApp } from "react-icons/ai";
 import { format } from "timeago.js";
 
-//import {getVacancy} from actions
-// import AddToFavourite from "./Assets/AddToFavourite";
 
-//importo nombre de la empresa, tecnologias, lenguajes, siniority, location, id...
+
 function Vacancy({
   name,
   description,
@@ -60,7 +56,7 @@ function Vacancy({
           Date: {date.substr(0, 10)} - {format(date.substr(0, 10))}
         </p>
         <p className="text-black text-xs w-full text-right">
-          vacancies: {vacancies}
+        Vacancies available: {vacancies}
         </p>
       </div>
     </div>

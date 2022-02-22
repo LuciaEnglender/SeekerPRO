@@ -21,7 +21,7 @@ function SeeLater({ id }) {
         onClick={() => handleMasTarde()}
       >
         {" "}
-        Fav{" "}
+        Save{" "}
       </button>
     </div>
   );
