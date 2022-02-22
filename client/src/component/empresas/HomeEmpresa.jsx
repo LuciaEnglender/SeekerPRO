@@ -64,18 +64,18 @@ const HomeEmpresa = () => {
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
                 <div className="lg:grid items-center justify-center ">
                   <h1 className=" font-bold text-center mb-3 pt-2">
-                    Vacancys:
+                    Vacancies:
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
                     <Link to="/homee/vacante">
                       <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
-                        Add Vacancy
+                        Publish a vacancy
                       </button>
                     </Link>
                     <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
                     onClick={(e) => handleClick(e)}>
-                        All Vacancy
+                        All Vacancies
                     </button>
                   </div>
                   <div className="mt-5">
