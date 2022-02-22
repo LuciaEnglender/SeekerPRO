@@ -129,25 +129,36 @@ export default function FiltroDinamico() {
           </label>
           <div className="flex m-0 justify-center">
             <select
-              className="rounded-xl w text-black"
+              className="rounded-xl w text-white bg-nuevoFondo  border-solid border-2 border-white "
               placeholder="technology"
               value={input.technology}
               name="technology"
               onChange={(e) => handleSelectTechnology(e)}
             >
-              <option className="text-black" selected="false" disabled>
+              <option
+                className="text-white bg-nuevoFondo"
+                selected="false"
+                disabled
+              >
                 Selection...
               </option>
               {tecno?.map((el) => (
-                <option className="text-black" value={el.name} key={el.id}>
+                <option
+                  className="text-white bg-nuevoFondo"
+                  value={el.name}
+                  key={el.id}
+                >
                   {el.name}
                 </option>
               ))}
             </select>
           </div>
-          <div>
+          <div className="h-3">
             {input.technology.map((el, i) => (
-              <li key={i}>
+              <li
+                className="text-nuevoFondo w-fit  px-2 bg-white rounded-2xl my-1"
+                key={i}
+              >
                 {el}
                 <button type="reset" onClick={() => handleDelete(el)}>
                   X
@@ -162,25 +173,36 @@ export default function FiltroDinamico() {
           </label>
           <div className="flex m-0 justify-center">
             <select
-              className="rounded-xl text-black"
+              className="rounded-xl text-white bg-nuevoFondo  border-solid border-2 border-white "
               placeholder="languages"
               value={input.language}
               name="language"
               onChange={(e) => handleLanguage(e)}
             >
-              <option className="text-black" selected="false" disabled>
+              <option
+                className="text-white bg-nuevoFondo"
+                selected="false"
+                disabled
+              >
                 Selection...
               </option>
               {lenguaje?.map((el) => (
-                <option className="text-black" value={el.name} key={el.id}>
+                <option
+                  className="text-white bg-nuevoFondo"
+                  value={el.name}
+                  key={el.id}
+                >
                   {el.name}
                 </option>
               ))}
             </select>
           </div>
-          <div>
+          <div className="h-3">
             {input.language.map((el, i) => (
-              <li key={i}>
+              <li
+                className="text-nuevoFondo w-fit px-2 bg-white rounded-2xl my-1"
+                key={i}
+              >
                 {el}
                 <button type="reset" onClick={() => handleDeleteLanguage(el)}>
                   X
@@ -195,25 +217,37 @@ export default function FiltroDinamico() {
           </label>
           <div className="flex m-0 justify-center">
             <select
-              className="rounded-xl text-black"
+              className="rounded-xl text-white bg-nuevoFondo border-solid border-2 border-white"
               placeholder="Seniority"
               value={input.seniority}
               name="seniority"
               onChange={(e) => handleSelectSeniority(e)}
             >
-              <option className="text-black" selected="false" disabled>
+              <option
+                className="text-white bg-nuevoFondo"
+                selected="false"
+                disabled
+              >
                 Selection...
               </option>
               {experiencia?.map((el) => (
-                <option className="text-black" value={el.name} key={el.id}>
+                <option
+                  className="text-white bg-nuevoFondo"
+                  value={el.name}
+                  key={el.id}
+                >
                   {el.name}
                 </option>
               ))}
             </select>
           </div>
-          <div>
+          <div className="h-3">
             {input.seniority?.map((el, i) => (
-              <li key={i}>
+              <li
+                className="text-nuevoFondo w-fit px-2 bg-white rounded-2xl my-1"
+                value={el.name}
+                key={el.i}
+              >
                 {el}
                 <button type="reset" onClick={() => handleDeleteSeniority(el)}>
                   X
