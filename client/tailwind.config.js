@@ -22,6 +22,7 @@ module.exports = {
         colorDetalles: "#284b63",
 
         //DANI
+        nuevoFondo: "#283747",
         azul: "#044c7b",
         gris: "#212F3C",
         azulp: "#212F3C",

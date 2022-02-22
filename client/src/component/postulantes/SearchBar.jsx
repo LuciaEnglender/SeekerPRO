@@ -24,7 +24,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="w-fit justify-center h-9 flex flex-row text-gray-800 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro">
+    <div className="w-fit justify-center h-9 flex flex-row text-white m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro">
       <input
         className="w-full xl:w-80 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
         type="text"

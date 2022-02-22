@@ -80,29 +80,29 @@ export default function Home() {
     setOrden(e.target.value);
   }
   return (
-    <div className="min-h-full">
+    <div className="min-h-full bg-verdeOscuro">
       {/* NAVEGACION */}
       <NavBar />
       {/* BODY */}
 
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+      <header className=" shadow">
+        <div className="max-w-7xl mx-auto bg-verdeMedio py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold bg-verdeMedio text-white">Home</h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl bg-verdeOscuro mx-auto py-6 sm:px-6 lg:px-8">
           {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
           {/* AREA */}
-          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-gray-300  h-auto pt-7">
+          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro  h-auto pt-7">
             {/* MI PERFIL */}
-            <div className="bg-gray-300 p-2">
+            <div className="bg-bg-verdeOscuro p-2">
               <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
                 <MiPerfil />
               </div>
             </div>
             {/* VACAN */}
-            <div className="col-span-3 bg-gray-300 p-2">
+            <div className="col-span-3 bg-bg-verdeOscuro p-2">
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
                 <div className="items-center justify-center grid grid-row-7">
                   <div className="grid-span-2 bg-verdeMedio w-fit">
@@ -117,13 +117,13 @@ export default function Home() {
                     <FiltroDinamico />
                     <div className=" flex m-0 justify-center">
                       <button
-                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onClick={(e) => handleAll(e)}
                       >
                         all vacancies{" "}
                       </button>
                       <button
-                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onClick={(e) => handleAllBusiness(e)}
                       >
                         all business{" "}
@@ -141,7 +141,7 @@ export default function Home() {
                   </div>
                   <div className="grid-span-4 h-full">
                     {currentVacancy.length === 0 ? (
-                      <p className=" font-bold text-center text-zinc-400 my-4 mb-3">
+                      <p className=" font-bold text-center text-white my-4 mb-3">
                         Don't wait for opportunities, go for them!
                       </p>
                     ) : (
@@ -204,7 +204,7 @@ export default function Home() {
                   </div>
                   <div className="w-full mt-3 flex justify-center ">
                     <button
-                      className="m-3 text-zinc-400"
+                      className="m-3 text-white"
                       onClick={() =>
                         paginado(
                           currentPage === 1 ? currentPage : currentPage - 1
@@ -215,7 +215,7 @@ export default function Home() {
                     </button>
 
                     <button
-                      className="m-3 text-zinc-400"
+                      className="m-3 text-white"
                       onClick={() =>
                         paginado(
                           pageMax <= currentPage ? currentPage : currentPage + 1

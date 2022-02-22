@@ -19,7 +19,7 @@ function Vacancy({
   business,
   date,
   vacancies,
-  businessId
+  businessId,
 }) {
   //console.log("id", id);
   //
@@ -34,16 +34,16 @@ function Vacancy({
           <div class="pl-3 w-full">
             <p
               tabindex="0"
-              class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-            >  {name}
+              class="focus:outline-none text-xl font-medium leading-5 text-white"
+            >
+              {" "}
+              {name}
             </p>
             <p> {business}</p>
             <div class="flex flex-row">
-
-
               <p
                 tabindex="0"
-                class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"
+                class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-white"
               >
                 {seniorities ? seniorities : "No especificado"}
               </p>
@@ -68,21 +68,23 @@ function Vacancy({
             {technologies ? technologies : "No especificado"}
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-            <Apply id={id} 
-                   businessId={businessId}/>
+            <Apply id={id} businessId={businessId} />
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
             <SeeLater id={id} />
           </div>
         </div>
         <div>
-      <p>vacancies available: {vacancies}</p></div><br />
-    <p> Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}</p> </div><br/>
-         </div>
-     
-
- 
-
+          <p>vacancies available: {vacancies}</p>
+        </div>
+        <br />
+        <p>
+          {" "}
+          Publication date: {date.substr(0, 10)} - {format(date.substr(0, 10))}
+        </p>{" "}
+      </div>
+      <br />
+    </div>
   );
 }
 

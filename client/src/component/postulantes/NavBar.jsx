@@ -12,7 +12,6 @@ import ButtonLogOut from "../../private/ButtonLogOut";
 const navigation = [
   { name: "Home", href: "/homep", current: false },
   { name: "Messages", href: "/homep/mensajes", current: false },
-  { name: "Notifications", href: "/homep/notificaciones", current: false },
 ];
 
 function classNames(...classes) {
@@ -158,20 +157,6 @@ const NavBar = ({ titulo }) => {
                             )}
                           >
                             My applies
-                          </Link>
-                        )}
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/homep/notificaciones"
-                            className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Notifications
                           </Link>
                         )}
                       </Menu.Item>
