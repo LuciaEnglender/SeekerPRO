@@ -12,8 +12,8 @@ import {
 import CardProfile from "./modules/CardPerfiles";
 import NavHomeE from "./modules/NavHomeE";
 import { GrFormClose } from "react-icons/gr";
+import CardPerfiles from "./modules/CardPerfiles";
 
-/////////////// FALTARIa TRAER LOS USUARIOS DESDE LA BASE DE DATOS
 const SearchPostu = () => {
   const dispatch = useDispatch();
   const profiles = useSelector((state) => state.rootReducer.profiles);
@@ -284,8 +284,8 @@ const SearchPostu = () => {
                   {profiles ? (
                     profiles.map((el) => {
                       return (
-                        <Link to={`/homee/${el.id}`}>
-                          <CardProfile
+                        <Link to={`/postulant/${el.loginEmail}`}>
+                          <CardPerfiles
                             name={el.name}
                             extras={el.extras}
                             technologies={el.technologies}

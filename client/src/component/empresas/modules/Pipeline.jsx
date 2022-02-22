@@ -60,10 +60,12 @@ function Pipeline({ id }) {
     document.getElementById("default-tab").click();
   }, [Pipeline]);
 
+ 
   const [input, setInput] = useState({
     idPostulant: '',
     action: "",
-  });
+  })
+
 
   //console.log(input)
   function handleSelect(e) {
@@ -82,31 +84,36 @@ function Pipeline({ id }) {
   .then(() => {
       
     if (input.action === "new") {
-      dispatch(addNew(id, input.idPostulant))
+     return dispatch(addNew(id, input.idPostulant))
+    
    
    };
    if (input.action === "review") {
-      dispatch(addReview(id, input.idPostulant))
+    return dispatch(addReview(id, input.idPostulant))
+   
    };
    if (input.action === "contacted") {
-     dispatch(addContact(id, input.idPostulant))
+    return dispatch(addContact(id, input.idPostulant))
+     
    };
    if (input.action === "interview") {
-     dispatch(addInterviewRRHH(id, input.idPostulant))
+    return  dispatch(addInterviewRRHH(id, input.idPostulant))
+    
    };
    if (input.action === "techInterview") {
-     dispatch(addInterviewTech(id, input.idPostulant))
+    return  dispatch(addInterviewTech(id, input.idPostulant))
    };
    if (input.action === "offered") {
-     dispatch(addOffered(id, input.idPostulant))
+    return  dispatch(addOffered(id, input.idPostulant))
    };
    if (input.action === "hired") {
-     dispatch(addHired(id, input.idPostulant))
+    return  dispatch(addHired(id, input.idPostulant))
    };
    if (input.action === "rejected") {
-     dispatch(addRejected(id, input.idPostulant))
+   return   dispatch(addRejected(id, input.idPostulant))
    }
-   else { alert("Choose an option") };
+ // else { alert("Choose an option") };
+ // return
     }).catch((e) => {
       console.log(e)
     });
