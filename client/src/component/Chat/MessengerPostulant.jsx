@@ -137,10 +137,7 @@ console.log("postuid", id)
             <div className="w-5/6 h-96  rounded-xl flex bg-gradient-to-r to-verdeOscuro  from-slate-50">
               <div className="chatMenu">
                 <div className="border-2 solid ">
-                  <input
-                    className="border-2 rounded-xl m-1 border-solid border-black"
-                    placeholder="Search for friends"
-                  />
+                <h1>APPLICANTS</h1>            
                   {conversations.map((c) => (
                     <div onClick={() => setCurrentChat(c)}>
                       <ConversationPostulant conversation={c} />

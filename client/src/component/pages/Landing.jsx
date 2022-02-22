@@ -66,7 +66,7 @@ const Landing = () => {
           ) : (
             <>
               <div className="flex flex-col m-0 justify-center">
-                <h1 className="text-4xl text-center font-bold">JSekkers</h1>
+                <h1 className="text-4xl text-center font-bold">JSeekers</h1>
                 <h2 className="text-3xl text-center">
                   Optimized to make you grow
                 </h2>
@@ -140,9 +140,9 @@ const Landing = () => {
           <p className="pb-4">
             Doubts? Wanting to have the premium? ... Feel free to cantact us!{" "}
             <br />
-            Call our general manager of UX/UI Franco Montini to more details:
+            To more details:
             +5490303456 <br />
-            Cordoba, Argentina{" "}
+           Argentina{" "}
           </p>
           <div className="flex m-0 justify-center">
             <a
@@ -184,7 +184,7 @@ const Landing = () => {
           Contact
         </a>
         <a className="hover:opacity-100 opacity-70" href="a">
-          Por Henry Group PAPA!
+          Henry - February 2022
         </a>
       </footer>
     </div>

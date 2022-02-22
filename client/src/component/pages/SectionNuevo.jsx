@@ -28,7 +28,7 @@ const SectionNuevo = () => {
     e.preventDefault();
     console.log(inputp);
     dispatch(postEmail(inputp));
-    alert("Cuenta DEVELOPER creada!");
+    alert("New account created successfully ");
     setInputp({
       email: "",
       profile: "",
@@ -39,7 +39,7 @@ const SectionNuevo = () => {
   function handleSubmitE(e) {
     e.preventDefault();
     dispatch(postEmail(inpute));
-    alert("Cuenta EMPRESA creada!");
+    alert("New account created successfully");
     setInpute({
       email: "",
       profile: "",
@@ -65,7 +65,7 @@ const SectionNuevo = () => {
             <div className="my-7">
               <div className="md:mb-10">
                 <h2 className="text-3xl md:text-5xl text-center font-bold pb-4">
-                  Candidate
+                  Applicants
                 </h2>
               </div>
               <div className="md:px-14 ">
@@ -81,7 +81,7 @@ const SectionNuevo = () => {
                     value="DEVELOPER"
                     onClick={(e) => handleSubmitP(e)}
                   >
-                    Candidate
+                    Applicants
                   </button>
                 </div>
               </div>
@@ -89,7 +89,7 @@ const SectionNuevo = () => {
             <div className="my-7">
               <div className="md:mb-10">
                 <h2 className="text-3xl md:text-5xl text-center  font-bold pb-4">
-                  Administrator
+                  Recruiters
                 </h2>
               </div>
               <div className="md:px-14 ">
@@ -105,7 +105,7 @@ const SectionNuevo = () => {
                     value="BUSINESS"
                     onClick={(e) => handleSubmitE(e)}
                   >
-                    Administrator
+                    Recruiters
                   </button>
                 </div>
               </div>

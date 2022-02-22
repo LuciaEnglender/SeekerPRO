@@ -67,7 +67,7 @@ const HomeEmpresa = () => {
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
                 <div className="lg:grid items-center justify-center ">
                   <h1 className=" font-bold text-center mb-3 pt-2">
-                    Vacancys:
+                    Vacancies:
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
