@@ -140,7 +140,7 @@ export default function Home() {
                       </select>
                     </div>
                   </div>
-                  <div className="grid-span-4 h-full">
+                  <div className="grid-span-4 mt-3 border-t-2 border-b-2 border-solid border-slate-900 no-scrollbar overflow-scroll h-96">
                     {currentVacancy.length === 0 ? (
                       <p className=" font-bold text-center text-white my-4 mb-3">
                         Don't wait for opportunities, go for them!
@@ -202,37 +202,6 @@ export default function Home() {
                             })}
                       </div>
                     )}
-                  </div>
-                  <div className="w-full mt-3 flex justify-center ">
-                    <button
-                      className="m-3 text-white"
-                      onClick={() =>
-                        paginado(
-                          currentPage === 1 ? currentPage : currentPage - 1
-                        )
-                      }
-                    >
-                      <AiOutlineArrowLeft />
-                    </button>
-
-                    <button
-                      className="m-3 text-white"
-                      onClick={() =>
-                        paginado(
-                          pageMax <= currentPage ? currentPage : currentPage + 1
-                        )
-                      }
-                    >
-                      {" "}
-                      <AiOutlineArrowRight />
-                    </button>
-                    <h1>
-                      <Pagination
-                        vacancyPerPage={vacancyPerPage}
-                        filtradas={filtradas}
-                        paginado={paginado}
-                      />
-                    </h1>
                   </div>
                 </div>
               </div>
