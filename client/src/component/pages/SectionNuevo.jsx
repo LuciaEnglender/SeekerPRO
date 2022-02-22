@@ -48,7 +48,7 @@ const SectionNuevo = () => {
   }
 
   return (
-    <div className="bg-colorFondo2 h-screen">
+    <div className="bg-nuevoFondo   h-screen">
       <nav className="p-4 px-10 md:px-16 grid grid-cols-2">
         <h3 className="font-bold md:text-5xl text-2xl">JSeekers</h3>
         <div>
@@ -60,7 +60,7 @@ const SectionNuevo = () => {
         </div>
       </nav>
       <section>
-        <div className=" pt-35% px-10   bg-colorFondo2">
+        <div className=" pt-35% px-10  bg-nuevoFondo">
           <div className="flex flex-col  md:flex-row ">
             <div className="my-7">
               <div className="md:mb-10">
