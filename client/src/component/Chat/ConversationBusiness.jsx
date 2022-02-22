@@ -39,13 +39,6 @@ function ConversationBusiness({ conversation }) {
   return (
     <>
       <div className="conversation">
-        {isAuthenticated && (
-          <img
-            className="h-8 w-8 rounded-full"
-            alt="Not img"
-            src={user.picture}
-          ></img>
-        )}
         {userChat && (
           <span className="conversationName">{userChat[0]?.name}</span>
         )}
@@ -55,5 +48,3 @@ function ConversationBusiness({ conversation }) {
 }
 
 export default ConversationBusiness;
-
-/**/
