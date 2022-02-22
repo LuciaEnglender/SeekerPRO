@@ -79,11 +79,16 @@ const HomeEmpresa = () => {
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
-                    <Link to="/homee/vacante">
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
+                   
+                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={()=> {
+                        setOpenVac(true)
+                        setisOpenVac(true)
+                      }}>
                         Publish a vacancy
                       </button>
-                    </Link>
+                      {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
+              
                     <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
                     onClick={(e) => handleClick(e)}>
                         All Vacancies
