@@ -57,7 +57,7 @@ function App() {
         {/* RUTAS DE EMPRESA */}
         <Route path="/homee" element={<HomeEmpresa />} />
         <Route path='/homee/premiumDetail' element={<CompraPlan/>}/>
-        <Route path="/homee/mercado" element={<MercadoPago />} />
+        <Route path="/homee/mercado" element={<MercadoPago/>} />
         <Route path="/homee/create" element={<FormPerfil />} />
         <Route path="/homee/notification" element={<NotiEmp />} />
         <Route path="/homee/message" element={<MessengerBussines/>} />
