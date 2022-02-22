@@ -21,8 +21,9 @@ function SearcHome() {
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
-  const filtro = useSelector((state) => state.rootReducer.vacancies);
   const empresa = useSelector((state) => state.rootReducer.business);
+  const filtro = useSelector((state) => state.rootReducer.vacancies);
+
   const [name, setName] = useState("");
   const [input, setInput] = useState({
     technology: [],
@@ -107,6 +108,7 @@ function SearcHome() {
 
   function handleSubmit2(e) {
     e.preventDefault();
+  
     if (name.length === 0) {
       return alert("Please write a name");
     } else {
