@@ -31,7 +31,7 @@ function Vacancy({
             <p className="text-black text-xl px-2 underline font-bold">
               {name}
             </p>
-            <p className="text-black ml-2 items-center">({business})</p>
+            <p className="text-black pt-1 items-center">({business})</p>
           </div>
           <p className="text-black px-1 text-sm ">{description}</p>
         </div>
