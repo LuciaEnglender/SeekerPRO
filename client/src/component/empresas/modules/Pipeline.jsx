@@ -11,6 +11,7 @@ import {
   addInterviewRRHH, addInterviewTech,
   addOffered, addHired, addRejected
 } from "../../../redux/actions/index"
+import rootReducer from '../../../redux/reducer';
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
@@ -35,10 +36,8 @@ function Pipeline({ id }) {
     dispatch(getOffered(id));
     dispatch(getHired(id));
     dispatch(getPostulantsRejected(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
-  // useEffect(() => {
-  // }, [dispatch, id]);
 
   useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
@@ -59,12 +58,13 @@ function Pipeline({ id }) {
       })
     });
     document.getElementById("default-tab").click();
-  }, []);
+  }, [Pipeline]);
 
   const [input, setInput] = useState({
     idPostulant: '',
     action: "",
   });
+
   //console.log(input)
   function handleSelect(e) {
     setInput({
@@ -79,7 +79,7 @@ function Pipeline({ id }) {
     e.preventDefault();
      dispatch(removeAll(id, input.idPostulant))
      
-    .then(() => {
+  .then(() => {
       
     if (input.action === "new") {
       dispatch(addNew(id, input.idPostulant))
@@ -107,12 +107,10 @@ function Pipeline({ id }) {
      dispatch(addRejected(id, input.idPostulant))
    }
    else { alert("Choose an option") };
-    }).catch(e => {
+    }).catch((e) => {
       console.log(e)
-    })
-    
-
-  }
+    });
+  };
 
   return (
     <div>
