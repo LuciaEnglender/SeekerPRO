@@ -4,17 +4,19 @@ import {
   apply,
   toPipeline,
   getProfile,
-  chatRoomPost
+  chatRoomPost,
 } from "../../../redux/actions/indexP";
 import { useAuth0, isAuthenticated } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-function Apply({id, businessId}) {
-  const postulanteId = useSelector((state) => state.rootReducerPostulante.profile[0].id)
-  
-  const navigate = useNavigate()
+function Apply({ id, businessId }) {
+  const postulanteId = useSelector(
+    (state) => state.rootReducerPostulante.profile[0].id
+  );
+
+  const navigate = useNavigate();
   //console.log("apply", id)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useAuth0();
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
@@ -22,19 +24,23 @@ function Apply({id, businessId}) {
   function handleApply() {
     dispatch(apply(id, postulanteId));
     alert("you applied for this job... Good luck!");
-    dispatch(toPipeline(id, postulanteId))
-    dispatch(chatRoomPost(postulanteId, businessId ))
-    navigate("/homep")
+    dispatch(toPipeline(id, postulanteId));
+    dispatch(chatRoomPost(postulanteId, businessId));
+    navigate("/homep");
   }
 
   useEffect(() => {
     dispatch(getProfile(email2));
   }, [dispatch]);
 
-
   return (
     <div>
-      <button onClick={() => handleApply()}> Apply </button>
+      <button
+        className="rounded-xl  bg-gradient-to-t px-3 text-white  hover:opacity-25 to-black from-nuevoFondo mt-1 mx-1"
+        onClick={() => handleApply()}
+      >
+        Apply
+      </button>
     </div>
   );
 }
