@@ -9,13 +9,14 @@ import NavHomeE from "./NavHomeE";
 function DetailPostulante() {
   const dispatch = useDispatch()
   const postulante = useSelector((state) => state.rootReducer.postulados)
+  console.log(postulante)
 
   const { id } = useParams();
   //console.log("id detail", id)
 
   useEffect(() => {
     dispatch(postulantDetail(id));
-  }, [dispatch, id])
+  }, [])
 
   //console.log("postulante", postulante)
 
@@ -33,13 +34,13 @@ function DetailPostulante() {
             <p class="mt-2 text-gray-600"><BsFillTelephoneFill />{postulante[0].phone}</p>
             {/* <p class="mt-2 text-gray-600">{postulante[0]?.photo}</p> */}
             <p class="mt-2 text-gray-600">CV: {postulante[0]?.CV}</p>
-            <p class="mt-2 text-gray-600">Location: {postulante[0].locations.length ? postulante[0].locations.map((loc) => loc.name) : <p> No especificado</p>}</p>
+            <p class="mt-2 text-gray-600">Location: {postulante[0].locations && postulante[0].locations.length ? postulante[0].locations.map((loc) => loc.name) : <p> No especificado</p>}</p>
             <p class="mt-2 text-gray-600"> <AiFillGithub /> {postulante[0]?.github}</p>
             <p class="mt-2 text-gray-600"><AiFillLinkedin /> {postulante[0]?.linkedIn}</p>
             <p class="mt-2 text-gray-600">Portfolio:{postulante[0]?.portfolio}</p>
-            <p class="mt-2 text-gray-600">Languages: {postulante[0].languages.length ? postulante[0].languages.map((lang) => lang.name) : <p> Non tell</p>}</p>
-            <p class="mt-2 text-gray-600">Seniority: {postulante[0].seniorities.length ? postulante[0].seniorities.map((sen) => sen.name) : <p> Non tell</p>}</p>
-            <p class="mt-2 text-gray-600">Technologies: {postulante[0].technologies.length ? postulante[0].technologies.map((t) => t.name + ", ") : <p>Non tell</p>}</p>
+            <p class="mt-2 text-gray-600">Languages: {postulante[0].languages && postulante[0].languages.length ? postulante[0].languages.map((lang) => lang.name) : <p> Non tell</p>}</p>
+            <p class="mt-2 text-gray-600">Seniority: {postulante[0].seniorities && postulante[0].seniorities.length ? postulante[0].seniorities.map((sen) => sen.name) : <p> Non tell</p>}</p>
+            <p class="mt-2 text-gray-600">Technologies: {postulante[0].technologies && postulante[0].technologies.length ? postulante[0].technologies.map((t) => t.name + ", ") : <p>Non tell</p>}</p>
             <div class="flex justify-end mt-1">
             </div>
           </div>

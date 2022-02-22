@@ -11,13 +11,25 @@ routerConversation.post("/", async (req, res) => {
 		const business = await Business.findByPk(businessId);
 		const postulant = await Postulant.findByPk(postulantId);
 
-		const savedConversation = await Conversation.create({
-			members: [businessId, postulantId],
+		const savedConversation = await Conversation.findAll({
+			where: {
+				members: [businessId, postulantId],
+			}
 		});
+		if(savedConversation.length === 0){
+			const newConversation= await Conversation.create({
+				members: [businessId, postulantId],
+			})
+			await business.addConversation(newConversation);
+			await postulant.addConversation(newConversation);
 
-		await business.addConversation(savedConversation);
-		await postulant.addConversation(savedConversation);
-		res.status(200).json(savedConversation);
+			return res.status(200).json(newConversation);
+		} else {
+	
+			res.status(200).json(savedConversation[0]);
+		}
+
+		
 	} catch (err) {
 		console.log(err);
 	}
@@ -27,6 +39,7 @@ routerConversation.post("/", async (req, res) => {
 
 routerConversation.get("/", async (req, res) => {
 	const conversation = await Conversation.findAll();
+	console.log(conversation)
 	res.status(200).send(conversation);
 });
 
