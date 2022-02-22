@@ -72,7 +72,7 @@ function Vacancy({
                    businessId={businessId}/>
           </div>
           <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-            <SeeLater id={id} />
+            <SeeLater id={id} businessId={businessId}/>
           </div>
         </div>
         <div>
