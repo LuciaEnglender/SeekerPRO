@@ -87,7 +87,6 @@ export default function Home() {
 
       <header className=" shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 bg-verdeOscuro sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold bg-verdeOscuro text-white">Home</h1>
         </div>
       </header>
       <main>
@@ -194,7 +193,7 @@ export default function Home() {
                                       .join(", ")}
                                     business={el.businesses[0]?.name}
                                     businessId={el.businessId}
-                                    date={el.createdAt}
+                                    date={el.createdAt? el.createdAt : "No Data"}
                                     vacancies={el.vacancies}
                                   />
                                 </div>
