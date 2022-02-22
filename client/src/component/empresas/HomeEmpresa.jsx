@@ -66,6 +66,7 @@ const HomeEmpresa = () => {
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
             {/* AREA DE CREACION */}
+
             <div className="ml-16">
               <button
                 onClick={() => {
@@ -77,6 +78,7 @@ const HomeEmpresa = () => {
               </button>
               {isopen && <SideBar open={open} setOpen={setOpen} />}
             </div>
+
             {/* AREA DE VACANTES */}
             <div className="col-span-2 bg-gray-300 p-2 mr-16">
               <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full ">
@@ -87,19 +89,38 @@ const HomeEmpresa = () => {
                   <hr />
                   <div className="flex m-0 justify-center">
 
-                   
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                      onClick={()=> {
-                        setOpenVac(true)
-                        setisOpenVac(true)
-                      }}>
-                        Publish a vacancy
-                      </button>
-                      {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
-              
-                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                    onClick={(e) => handleClick(e)}>
-                        All Vacancies
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={() => {
+                        setOpen(true);
+                        setisOpen(true);
+                      }}
+                    >
+                      FILTROS
+                    </button>
+                    {isopen && <SideBar open={open} setOpen={setOpen} />}
+
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={() => {
+                        setOpenVac(true);
+                        setisOpenVac(true);
+                      }}
+                    >
+                      Publish a vacancy
+                    </button>
+                    {isopenVac && (
+                      <SideBarVacancies
+                        openVac={openVac}
+                        setOpenVac={setOpenVac}
+                      />
+                    )}
+
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={(e) => handleClick(e)}
+                    >
+                      All Vacancies
 
                     </button>
                   </div>
