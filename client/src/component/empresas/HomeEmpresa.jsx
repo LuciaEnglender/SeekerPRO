@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
-import { getVacancy , getProfile } from "../../redux/actions";
+import { getVacancy, getProfile } from "../../redux/actions";
 import CardVacante from "./modules/CardVacante";
 import Pagination from "./Pagination";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -15,15 +15,17 @@ import SideBarVacancies from "./modules/SideBarVacancies";
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const empresa = useSelector((state) => state.rootReducer.business);
-  const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
+  const vacancy = useSelector((state) =>
+    state.rootReducer.vacancies.map((v) =>
+      v.businessId === empresa[0].id ? v : null
+    )
+  );
   const { user } = useAuth0();
-  const [open, setOpen] = useState(false)
-  const [isopen, setisOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [isopen, setisOpen] = useState(false);
 
-  const [openVac, setOpenVac] = useState(false)
-  const [isopenVac, setisOpenVac] = useState(false)
-
-
+  const [openVac, setOpenVac] = useState(false);
+  const [isopenVac, setisOpenVac] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const vacancyPerPage = 10;
@@ -39,16 +41,15 @@ const HomeEmpresa = () => {
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
-
   useEffect(() => {
-    dispatch(getProfile(email2))
+    dispatch(getProfile(email2));
     dispatch(getVacancy(email2));
   }, [dispatch]);
-  
+
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVacancy(email2));
-};
+  }
 
   return (
     <div className="min-h-full">
@@ -65,11 +66,7 @@ const HomeEmpresa = () => {
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
             {/* AREA DE CREACION */}
-            <div className="ml-16">
-              <button onClick={()=>{setOpen(true)
-                                  setisOpen(true)}}>FILTROS</button>
-              {isopen && <SideBar open={open} setOpen={setOpen}/>  }
-            </div>
+
             {/* AREA DE VACANTES */}
             <div className="col-span-2 bg-gray-300 p-2 mr-16">
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
@@ -79,39 +76,59 @@ const HomeEmpresa = () => {
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
-                   
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                      onClick={()=> {
-                        setOpenVac(true)
-                        setisOpenVac(true)
-                      }}>
-                        Publish a vacancy
-                      </button>
-                      {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
-              
-                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                    onClick={(e) => handleClick(e)}>
-                        All Vacancies
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={() => {
+                        setOpen(true);
+                        setisOpen(true);
+                      }}
+                    >
+                      FILTROS
+                    </button>
+                    {isopen && <SideBar open={open} setOpen={setOpen} />}
+
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={() => {
+                        setOpenVac(true);
+                        setisOpenVac(true);
+                      }}
+                    >
+                      Publish a vacancy
+                    </button>
+                    {isopenVac && (
+                      <SideBarVacancies
+                        openVac={openVac}
+                        setOpenVac={setOpenVac}
+                      />
+                    )}
+
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      onClick={(e) => handleClick(e)}
+                    >
+                      All Vacancies
                     </button>
                   </div>
                   <div className="mt-5">
                     {currentVacancy ? (
                       currentVacancy.map((el) => {
-                        if(el !== null) {
-                        return (
-                          <Link to={`/vacancy/${el.id}`}>
-                            <CardVacante
-                              name={el.name}
-                              description={el.description}
-                              technologies={el.technologies}
-                              seniorities={el.seniorities}
-                              languages={el.languages}
-                              vacancies={el.vacancies}
-                              createdAt={el.createdAt}
-                              business={el.businesses[0].name}
-                            />
-                          </Link>
-                        );}
+                        if (el !== null) {
+                          return (
+                            <Link to={`/vacancy/${el.id}`}>
+                              <CardVacante
+                                name={el.name}
+                                description={el.description}
+                                technologies={el.technologies}
+                                seniorities={el.seniorities}
+                                languages={el.languages}
+                                vacancies={el.vacancies}
+                                createdAt={el.createdAt}
+                                business={el.businesses[0].name}
+                              />
+                            </Link>
+                          );
+                        }
                       })
                     ) : (
                       <h1>Crea tu vacante</h1>
@@ -123,21 +140,33 @@ const HomeEmpresa = () => {
                     className="m-3"
                     onClick={() =>
                       paginado(
-                        currentPage === 1 ? currentPage : <> {currentPage - 1   }<AiOutlineArrowLeft
-                        /> </> 
+                        currentPage === 1 ? (
+                          currentPage
+                        ) : (
+                          <>
+                            {" "}
+                            {currentPage - 1}
+                            <AiOutlineArrowLeft />{" "}
+                          </>
+                        )
                       )
                     }
-                  >
-                  </button>
+                  ></button>
                   <button
                     className="m-3"
                     onClick={() =>
                       paginado(
-                         pageMax <= currentPage ? currentPage : <> {currentPage + 1}  <AiOutlineArrowRight /> </> 
+                        pageMax <= currentPage ? (
+                          currentPage
+                        ) : (
+                          <>
+                            {" "}
+                            {currentPage + 1} <AiOutlineArrowRight />{" "}
+                          </>
+                        )
                       )
                     }
-                  >
-                  </button>
+                  ></button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}
                     vacancy={vacancy}
