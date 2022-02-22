@@ -124,56 +124,60 @@ export default function FiltroDinamico() {
     <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
       <div className="flex flex-col md:flex-row my-2">
         <div className=" flex flex-col mx-1">
-          <label className="text-white text-center font-bold">
-            {" "}
-            Technology
+          <label className="text-white text-center font-bold mx-1">
+            Technologys
           </label>
-          <select
-            className="rounded-xl text-black"
-            placeholder="technology"
-            value={input.technology}
-            name="technology"
-            onChange={(e) => handleSelectTechnology(e)}
-          >
-            <option className="text-black" selected="false" disabled>
-              Selection Tecnology
-            </option>
-            {tecno?.map((el) => (
-              <option className="text-black" value={el.name} key={el.id}>
-                {el.name}
+          <div className="flex m-0 justify-center">
+            <select
+              className="rounded-xl w text-black"
+              placeholder="technology"
+              value={input.technology}
+              name="technology"
+              onChange={(e) => handleSelectTechnology(e)}
+            >
+              <option className="text-black" selected="false" disabled>
+                Selection...
               </option>
+              {tecno?.map((el) => (
+                <option className="text-black" value={el.name} key={el.id}>
+                  {el.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            {input.technology.map((el, i) => (
+              <li key={i}>
+                {el}
+                <button type="reset" onClick={() => handleDelete(el)}>
+                  X
+                </button>
+              </li>
             ))}
-          </select>
-          {input.technology.map((el, i) => (
-            <li key={i}>
-              {el}
-              <button type="reset" onClick={() => handleDelete(el)}>
-                X
-              </button>
-            </li>
-          ))}
+          </div>
         </div>
         <div className=" flex flex-col mx-1">
           <label className="text-white text-center font-bold mx-1">
-            {" "}
             Languages
           </label>
-          <select
-            className="rounded-xl text-black"
-            placeholder="languages"
-            value={input.language}
-            name="language"
-            onChange={(e) => handleLanguage(e)}
-          >
-            <option className="text-black" selected="false" disabled>
-              Selecction Languages
-            </option>
-            {lenguaje?.map((el) => (
-              <option className="text-black" value={el.name} key={el.id}>
-                {el.name}
+          <div className="flex m-0 justify-center">
+            <select
+              className="rounded-xl text-black"
+              placeholder="languages"
+              value={input.language}
+              name="language"
+              onChange={(e) => handleLanguage(e)}
+            >
+              <option className="text-black" selected="false" disabled>
+                Selection...
               </option>
-            ))}
-          </select>
+              {lenguaje?.map((el) => (
+                <option className="text-black" value={el.name} key={el.id}>
+                  {el.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             {input.language.map((el, i) => (
               <li key={i}>
@@ -189,7 +193,7 @@ export default function FiltroDinamico() {
           <label className="text-white text-center font-bold mx-1">
             Seniority
           </label>
-          <div>
+          <div className="flex m-0 justify-center">
             <select
               className="rounded-xl text-black"
               placeholder="Seniority"
@@ -198,7 +202,7 @@ export default function FiltroDinamico() {
               onChange={(e) => handleSelectSeniority(e)}
             >
               <option className="text-black" selected="false" disabled>
-                Selecction Siniority
+                Selection...
               </option>
               {experiencia?.map((el) => (
                 <option className="text-black" value={el.name} key={el.id}>
@@ -221,7 +225,7 @@ export default function FiltroDinamico() {
       </div>
       <div className="flex m-0 justify-center my-2">
         <button
-          className="h-fit  mx-4 px-2 shadow-lg mb-5 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
+          className="h-fit  mx-4 px-2 hover:text-black shadow-lg mb-5 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
           type="submit"
         >
           filter

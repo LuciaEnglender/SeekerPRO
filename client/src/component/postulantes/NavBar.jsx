@@ -50,7 +50,7 @@ const NavBar = ({ titulo }) => {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-verdeHover hover:text-white",
+                            : "text-gray-300 hover:bg-nuevoDetalle hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -64,7 +64,7 @@ const NavBar = ({ titulo }) => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="bg-verdeMedio hover:bg-verdeHover p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  className="bg-verdeMedio hover:bg-nuevoDetalle p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -73,7 +73,7 @@ const NavBar = ({ titulo }) => {
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3  z-40 bg-verdeMedio  relative">
                   <div>
-                    <Menu.Button className="bg-verdeMedio hover:bg-verdeHover flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Menu.Button className="bg-verdeMedio hover:bg-nuevoDetalle flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       {isAuthenticated && (
                         <img
@@ -112,8 +112,8 @@ const NavBar = ({ titulo }) => {
                           <Link
                             to="/homep/miperfil"
                             className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                              active ? "bg-gray-100 hover:bg-nuevoDetalle" : "",
+                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-gray-700"
                             )}
                           >
                             Edit profile

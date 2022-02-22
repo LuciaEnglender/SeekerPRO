@@ -94,15 +94,15 @@ export default function Home() {
         <div className="bg-verdeOscuro max-w-7xl mx-auto sm:px-6 lg:px-8">
           {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
           {/* AREA */}
-          <div className="focus:outline-none grid grid-rows-1 grid-cols-4 bg-verdeOscuro h-full">
+          <div className="focus:outline-none grid md:grid-rows-1 grid-rows-2 grid-cols-1 md:grid-cols-4 bg-verdeOscuro  md:h-full">
             {/* MI PERFIL */}
-            <div className="bg-bg-verdeOscuro p-2">
-              <div className="bg-nuevoFondo rounded-2xl p-2 w-full h-full">
+            <div className="bg-bg-verdeOscuro rounded-2xl px-6 md:p-2">
+              <div className="bg-nuevoFondo rounded-2xl  md:p-2 w-full md:h-full">
                 <MiPerfil />
               </div>
             </div>
             {/* VACAN */}
-            <div className="col-span-3 px-2">
+            <div className="col-span-3 md:px-2">
               <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <div className="items-center justify-center grid grid-row-7">
                   <div className="grid-span-2 bg-nuevoFondo w-fit">
@@ -115,21 +115,21 @@ export default function Home() {
                       </div>
                     </div>
                     <FiltroDinamico />
-                    <div className=" flex m-0 justify-center">
+                    <div className=" flex  flex-wrap m-0 justify-center">
                       <button
-                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
+                        className="h-fit hover:text-black mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onClick={(e) => handleAll(e)}
                       >
                         all vacancies{" "}
                       </button>
                       <button
-                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
+                        className="h-fit hover:text-black mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onClick={(e) => handleAllBusiness(e)}
                       >
                         all business{" "}
                       </button>
                       <select
-                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
+                        className="h-fit hover:text-black  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onChange={(e) => handleSort(e)}
                       >
                         <option value="default"> Sort by.. </option>
@@ -206,7 +206,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            {/* CUARTO GRID */}
           </div>
           {/* /End replace */}
         </div>
