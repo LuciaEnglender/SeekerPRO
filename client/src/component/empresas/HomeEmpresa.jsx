@@ -19,10 +19,12 @@ const HomeEmpresa = () => {
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const vacancyPerPage = 3;
+  const vacancyPerPage = 10;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = vacancy.slice(numberOfFirtsVac, numbersOfLastVac);
+  const pageMax = vacancy.length / 10;
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -98,11 +100,12 @@ const HomeEmpresa = () => {
                     className="m-3"
                     onClick={() =>
                       paginado(
-                        currentPage === 1 ? currentPage : currentPage - 1
+                        currentPage === 1 ? currentPage : <> {currentPage - 1   }<AiOutlineArrowLeft
+                        /> </> 
                       )
                     }
                   >
-                    <AiOutlineArrowLeft />
+                    
                   </button>
 
 
@@ -110,11 +113,11 @@ const HomeEmpresa = () => {
                     className="m-3"
                     onClick={() =>
                       paginado(
-                        currentPage === 3 ? currentPage : currentPage + 1
+                         pageMax <= currentPage ? currentPage : <> {currentPage + 1}  <AiOutlineArrowRight /> </> 
                       )
                     }
                   >
-                    <AiOutlineArrowRight />
+                   
                   </button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}
