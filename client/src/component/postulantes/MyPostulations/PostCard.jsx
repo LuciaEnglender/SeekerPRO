@@ -30,7 +30,7 @@ function PostCard({
               class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
             >
               {name} <br />
-              <p> Business: {business}</p>
+              <p> Company: {business}</p>
               {description}
             </p>
           </div>
