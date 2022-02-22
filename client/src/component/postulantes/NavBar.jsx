@@ -71,7 +71,7 @@ const NavBar = ({ titulo }) => {
                 </button>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 bg-verdeMedio  relative">
+                <Menu as="div" className="ml-3  z-40 bg-verdeMedio  relative">
                   <div>
                     <Menu.Button className="bg-verdeMedio hover:bg-verdeHover flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
@@ -193,7 +193,7 @@ const NavBar = ({ titulo }) => {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className=" px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}

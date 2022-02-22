@@ -283,9 +283,9 @@ export default function EditProfile() {
       <NavBar />
       {/* BODYsss */}
 
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+          <h1 className="text-3xl font-bold text-white">Home</h1>
         </div>
       </header>
       <main>
@@ -309,13 +309,12 @@ export default function EditProfile() {
                   </div>
                   {/*NAME*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center text-verdeHover">
-                      {" "}
-                      Name*{" "}
+                    <label className="text-center found-bold  text-white">
+                      Name*
                     </label>
                     <div className="flex m-0 justify-center">
                       <input
-                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         type="text"
                         value={input.name}
                         name="name"
@@ -325,13 +324,12 @@ export default function EditProfile() {
                   </div>
                   {/*PHONE*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
-                      {" "}
+                    <label className="text-center found-bold  text-white">
                       Phone*
                     </label>
                     <div className="flex m-0 justify-center">
                       <input
-                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         type="number"
                         value={input.phone}
                         name="phone"
@@ -340,20 +338,20 @@ export default function EditProfile() {
                     </div>
                   </div>
                   {/*LOCATION*/}
-                  <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className=" text-center  text-verdeHover">
+                  <div className="w-full my-3  flex flex-col m-0 justify-center">
+                    <label className=" text-center   found-bold  text-white">
                       Location*
                     </label>
                     <div className="flex m-0 justify-center">
                       <select
-                        className="w-fit text-center xl:w-52 rounded-2xl bg-verdeClaro"
+                        className="w-fit  text-center  rounded-2xl bg-nuevoFondo"
                         placeholder="location"
                         // value={input.locations}
                         name="locations"
                         onChange={(e) => handleSelectLocation(e)}
                       >
                         <option
-                          className="rounded-2xl bg-verdeClaro"
+                          className="rounded-2xl bg-nuevoFondo  text-white"
                           selected
                           disabled
                           value=""
@@ -363,7 +361,7 @@ export default function EditProfile() {
 
                         {locat?.map((el, i) => (
                           <option
-                            className="rounded-2xl bg-verdeClaro"
+                            className="rounded-2xl bg-nuevoFondo  text-white"
                             value={el}
                             key={i}
                           >
@@ -375,7 +373,7 @@ export default function EditProfile() {
                     {input.locations?.map((el, i) => (
                       <div className="flex m-0 justify-center">
                         <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white font-bold text-nuevoFondo "
                           key={i}
                           value={el}
                         >
@@ -393,64 +391,66 @@ export default function EditProfile() {
                   </div>
                   {/*GENDER*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
+                    <label className="text-center found-bold  text-white">
                       Gender*
                     </label>
-                    <div className="flex m-0 justify-center">
-                      <div className="mx-2 flex">
-                        <label className="text-center">
-                          <input
-                            value="Femenine"
-                            type="radio"
-                            id="cbox1"
-                            name="check"
-                            onChange={(e) => handleCheck(e)}
-                          />
-                        </label>
-                        <h2>Feminine</h2>
-                      </div>
-                      <div className="mx-2 flex">
-                        <label className="text-center" htmlFor="cbox2">
-                          <input
-                            value="Masculine"
-                            type="radio"
-                            id="cbox2"
-                            name="check"
-                            onChange={(e) => handleCheck(e)}
-                          />
-                        </label>
-                        <h2> Masculine</h2>
-                      </div>
-                      <div className="mx-2 flex">
-                        <label className="text-center" htmlFor="cbox2">
-                          <input
-                            value="non-binary"
-                            type="radio"
-                            id="cbox3"
-                            name="check"
-                            onChange={(e) => handleCheck(e)}
-                          />
-                        </label>
-                        <h2>NoBinary</h2>
-                      </div>
-                      <div className="mx-2 flex">
-                        <label className="text-center" htmlFor="cbox2">
-                          <input
-                            value="Other"
-                            type="radio"
-                            name="check"
-                            id="cbox4"
-                            onChange={(e) => handleCheck(e)}
-                          />
-                        </label>
-                        <h2>Other</h2>
+                    <div className="flex m-0  justify-center">
+                      <div className="flex flex-col  m-0  justify-center">
+                        <div className="mx-px my-px bg-nuevoFondo rounded-xl px-1 flex">
+                          <label className="text-center">
+                            <input
+                              value="Femenine"
+                              type="radio"
+                              id="cbox1"
+                              name="check"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2>Feminine</h2>
+                        </div>
+                        <div className="mx-px my-px bg-nuevoFondo rounded-xl px-1 flex">
+                          <label className="text-center" htmlFor="cbox2">
+                            <input
+                              value="Masculine"
+                              type="radio"
+                              id="cbox2"
+                              name="check"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2> Masculine</h2>
+                        </div>
+                        <div className="mx-px my-px flex bg-nuevoFondo px-1 rounded-xl">
+                          <label className="text-center " htmlFor="cbox2">
+                            <input
+                              value="non-binary"
+                              type="radio"
+                              id="cbox3"
+                              name="check"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2>NoBinary</h2>
+                        </div>
+                        <div className="mx-px my-px flex bg-nuevoFondo px-1 rounded-xl">
+                          <label className="text-center " htmlFor="cbox2">
+                            <input
+                              value="Other"
+                              type="radio"
+                              name="check"
+                              id="cbox4"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2>Other</h2>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  {/*PHOTO*/}
-                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                  {/*  {/*PHOTO*/}
+                  {/* <div className="w-full my-3 flex flex-col m-0 justify-center">
                     <label
-                      className="text-center  text-verdeHover"
+                      className="text-center found-bold  text-white"
                       htmlFor="file"
                     >
                       Photo (.jpg)*
@@ -466,7 +466,7 @@ export default function EditProfile() {
                         onChange={(e) => handleFile(e)}
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* INFORMACION LABORAL Y PROYECTOS */}
@@ -481,14 +481,14 @@ export default function EditProfile() {
                   {/*GITHUB*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
                     <label
-                      className="text-center  text-verdeHover"
+                      className="text-center  found-bold  text-white"
                       htmlFor="github"
                     >
                       GitHub
                     </label>
                     <div className="flex m-0 justify-center">
                       <input
-                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         type="text"
                         value={input.github}
                         name="github"
@@ -499,14 +499,14 @@ export default function EditProfile() {
                   {/*LINKEDIN*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
                     <label
-                      className="text-center  text-verdeHover"
+                      className="text-center  found-bold  text-white"
                       htmlFor="linkedin"
                     >
                       LinkedIn*
                     </label>
                     <div className="flex m-0 justify-center">
                       <input
-                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         value={input.linkedIn}
                         type="text"
                         name="linkedin"
@@ -517,14 +517,14 @@ export default function EditProfile() {
                   {/*PORTFOLIO*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
                     <label
-                      className="text-center  text-verdeHover"
+                      className=" text-center found-bold  text-white"
                       for="portfolio"
                     >
                       PortFolio
                     </label>
                     <div className="flex m-0 justify-center">
                       <input
-                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         type="text"
                         name="portfolio"
                         value={input.portfolio}
@@ -534,12 +534,12 @@ export default function EditProfile() {
                   </div>
                   {/*CV*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
+                    <label className=" text-center found-bold  text-white">
                       CV (.pdf)*
                     </label>
                     <div className="flex m-0 justify-center">
                       <input
-                        className="w-fit xl:w-60 m-0 text-center border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-fit xl:w-60 m-0 text-center border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         placeholder=".pdf"
                         type="file"
                         id="file"
@@ -551,12 +551,12 @@ export default function EditProfile() {
                   </div>
                   {/*EXTRAS*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
+                    <label className="text-center found-bold  text-white">
                       Extras
                     </label>
                     <div className="flex m-0 justify-center">
                       <textarea
-                        className="w-full text-center  xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        className="w-full text-center  xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
                         placeholder=""
                         type="text"
                         value={input.extras}
@@ -578,19 +578,19 @@ export default function EditProfile() {
                   </div>
                   {/*TECHNO*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
+                    <label className="text-center found-bold  text-white">
                       Technology*
                     </label>
                     <div className="flex m-0 justify-center">
                       <select
-                        className="w-fit  text-center xl:w-52 rounded-2xl bg-verdeClaro"
+                        className="w-fit  text-center xl:w-52 rounded-2xl bg-nuevoFondo"
                         placeholder="technology"
                         value={input.technologies}
                         name="technology"
                         onChange={(e) => handleSelectTechnology(e)}
                       >
                         <option
-                          className="rounded-2xl bg-verdeClaro"
+                          className="rounded-2xl bg-nuevoFondo  text-white"
                           value=""
                           disabled
                           selected
@@ -599,7 +599,7 @@ export default function EditProfile() {
                         </option>
                         {tecno?.map((el) => (
                           <option
-                            className="rounded-2xl bg-verdeClaro"
+                            className="rounded-2xl bg-nuevoFondo  text-white"
                             value={el.name}
                             key={el.id}
                           >
@@ -613,7 +613,7 @@ export default function EditProfile() {
                         typeof el === "object" ? (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row bg-white px-2 text-black w-fit list-none m-1 rounded-2xl "
                               key={i}
                             >
                               {el.name}
@@ -629,7 +629,7 @@ export default function EditProfile() {
                         ) : (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row bg-white px-2 text-black w-fit list-none m-1 rounded-2xl "
                               key={i}
                             >
                               {el}
@@ -648,19 +648,19 @@ export default function EditProfile() {
                   </div>
                   {/*LENGUA*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
+                    <label className="text-center found-bold  text-white">
                       Languages*
                     </label>
                     <div className="flex m-0 justify-center">
                       <select
-                        className="w-fit  text-center xl:w-52 rounded-2xl bg-verdeClaro"
+                        className="w-fit  text-center xl:w-52 rounded-2xl bg-nuevoFondo"
                         placeholder="languages"
                         value={input.languages}
                         name="languages"
                         onChange={(e) => handleLanguage(e)}
                       >
                         <option
-                          className="rounded-2xl bg-verdeClaro"
+                          className="rounded-2xl bg-nuevoFondo  text-white"
                           value=""
                           disabled
                           selected
@@ -669,7 +669,7 @@ export default function EditProfile() {
                         </option>
                         {lenguaje?.map((el) => (
                           <option
-                            className="rounded-2xl bg-verdeClaro"
+                            className="rounded-2xl bg-nuevoFondo  text-white"
                             value={el.name}
                             key={el.id}
                           >
@@ -683,7 +683,7 @@ export default function EditProfile() {
                         typeof el === "object" ? (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
                               key={i}
                             >
                               {el.name}
@@ -699,7 +699,7 @@ export default function EditProfile() {
                         ) : (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
                               key={i}
                             >
                               {el}
@@ -718,20 +718,19 @@ export default function EditProfile() {
                   </div>
                   {/*SKILLS*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
-                      {" "}
+                    <label className="text-center found-bold  text-white">
                       Skill*
                     </label>
                     <div className="flex m-0 justify-center">
                       <select
-                        className="w-fit text-center xl:w-52 rounded-2xl bg-verdeClaro"
+                        className="w-fit text-center xl:w-52 rounded-2xl bg-nuevoFondo"
                         placeholder="skill"
                         value={input.skills}
                         name="skills"
                         onChange={(e) => handleSkill(e)}
                       >
                         <option
-                          className="rounded-2xl bg-verdeClaro"
+                          className="rounded-2xl bg-nuevoFondo  text-white"
                           value=""
                           disabled
                           selected
@@ -740,7 +739,7 @@ export default function EditProfile() {
                         </option>
                         {habilidades?.map((el) => (
                           <option
-                            className="rounded-2xl bg-verdeClaro"
+                            className="rounded-2xl bg-nuevoFondo  text-white"
                             value={el.name}
                             key={el.id}
                           >
@@ -754,7 +753,7 @@ export default function EditProfile() {
                         typeof el === "object" ? (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
                               key={i}
                             >
                               {el.name}
@@ -770,7 +769,7 @@ export default function EditProfile() {
                         ) : (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
                               key={i}
                             >
                               {el}
@@ -789,19 +788,19 @@ export default function EditProfile() {
                   </div>
                   {/*SENIORITY*/}
                   <div className="w-full my-3 flex flex-col m-0 justify-center">
-                    <label className="text-center  text-verdeHover">
+                    <label className="text-center found-bold  text-white">
                       Siniority*
                     </label>
                     <div className="flex m-0 justify-center">
                       <select
-                        className="w-fit  text-center xl:w-52 rounded-2xl bg-verdeClaro"
+                        className="w-fit  text-center xl:w-52 rounded-2xl bg-nuevoFondo"
                         placeholder="Seniority"
                         value={input.seniority}
                         name="seniority"
                         onChange={(e) => handleSelectSeniority(e)}
                       >
                         <option
-                          className="rounded-2xl bg-verdeClaro"
+                          className="rounded-2xl bg-nuevoFondo  text-white"
                           value=""
                           disabled
                           selected
@@ -810,7 +809,7 @@ export default function EditProfile() {
                         </option>
                         {experiencia?.map((el, i) => (
                           <option
-                            className="rounded-2xl bg-verdeClaro"
+                            className="rounded-2xl  bg-nuevoFondo  text-white"
                             value={el}
                             key={i}
                           >
@@ -824,7 +823,7 @@ export default function EditProfile() {
                         typeof el === "object" ? (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white"
                               key={i}
                             >
                               {el.name}
@@ -840,7 +839,7 @@ export default function EditProfile() {
                         ) : (
                           <div className="flex m-0 justify-center">
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
                               key={i}
                             >
                               {el}
@@ -864,7 +863,7 @@ export default function EditProfile() {
             {/*BUTTON*/}
             <div className="flex m-0 pb-3 justify-center">
               <button
-                className="text-center w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
+                className="text-center w-32 shadow-lg shadow-black rounded-2xl text-white hover:text-black bg-nuevoFondo hover:bg-gray-300"
                 type="submit"
                 //onClick={(e)=>fileOnChange(e)}//
               >
