@@ -373,7 +373,7 @@ pipeline.put('/:idVacancy/addReview', async (req, res) => {
         })
         const finderPostulant = await Postulant.findByPk(idPostulant);
         console.log(finderPostulant)
-        await finderPostulant.setReview(finderReview)
+        await finderPostulant.addReview(finderReview)
         res.send('New, wainting for rewiew')
     } catch (e) {
         console.log(e)
