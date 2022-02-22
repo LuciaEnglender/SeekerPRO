@@ -123,42 +123,48 @@ const SearchPostu = () => {
       </div>
       {/* BODY */}
 
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+          <h1 className="text-3xl font-bold text-white">Home</h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  bg-verdeOscuro  py-6 sm:px-6 lg:px-8">
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro h-auto pt-7">
             {/* AREA DE BUSQUEDA */}
             <div className="ml-16">
               {/* SEARCHBAR */}
               <div>
-                <div className="w-full flex flex-col m-0 justify-center pt-5">
-                  <label> Search:</label>
+                <div className="w-full flex flex-col m-0 justify-center pt-5 ">
+                  <label className="text-white "> Search:</label>
                   <input
-                    className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
+                    className="w-full xl:w-60 m-0 border-verdeMuyClaro  px-2 rounded-2xl bg-nuevoFondo"
                     type="text"
                     onChange={(e) => handleInputChange(e)}
                   />
-                  <button type="submit" onClick={(e) => handleSubmit2(e)}>
-                    Search
-                  </button>
+                  <div className="flex m-0 justify-center">
+                    <button
+                      className="text-white rounded-xl hover:bg-white hover:text-black bg-nuevoFondo px-2  mt-3"
+                      type="submit"
+                      onClick={(e) => handleSubmit2(e)}
+                    >
+                      Search
+                    </button>
+                  </div>
                 </div>
               </div>
               {/* FILTROS */}
-              <div>
-                <div className="w-full my-3 flex flex-col m-0 justify-center">
+              <div className="mt-8">
+                <div className="w-full my-3 flex flex-col m-0 justify-center text-white">
                   <label> Technologies:</label>
                   <select
-                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                    className="w-full xl:w-52 rounded-2xl bg-nuevoFondo"
                     name="technology"
                     onChange={(e) => handleSelectTechno(e)}
                   >
                     <option
-                      className="rounded-2xl bg-verdeClaro"
+                      className="rounded-2xl  h-3 bg-nuevoFondo"
                       selected
                       disabled
                       value=""
@@ -166,20 +172,20 @@ const SearchPostu = () => {
                       Select...
                     </option>
                     {technology.map((e) => (
-                      <option className="rounded-2xl bg-verdeClaro">
+                      <option className="rounded-2xl  h-3 bg-nuevoFondo">
                         {e.name}
                       </option>
                     ))}
                   </select>
-                  <div>
+                  <div className="h-4">
                     {input.technology.map((el, i) => (
                       <li
-                        className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                        className="flex flex-row text-nuevoFondo w-fit  px-2 list-none m-1 rounded-2xl bg-white"
                         key={i}
                       >
                         {el}
                         <button
-                          className="rounded-2xl hover:bg-verdeClaro"
+                          className="rounded-2xl hover:bg-nuevoFondo"
                           type="reset"
                           onClick={() => handleDeleteTechnology(el)}
                         >
@@ -190,15 +196,15 @@ const SearchPostu = () => {
                   </div>
                   {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
                 </div>
-                <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <div className="w-full my-3 flex  mt-3 flex-col m-0 justify-center text-white">
                   <label> Language:</label>
                   <select
-                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                    className="w-full xl:w-52 rounded-2xl bg-nuevoFondo"
                     name="language"
                     onChange={(e) => handleSelectLenguge(e)}
                   >
                     <option
-                      className="rounded-2xl bg-verdeClaro"
+                      className="rounded-2xl  h-3 bg-nuevoFondo"
                       selected
                       disabled
                       value=""
@@ -206,13 +212,18 @@ const SearchPostu = () => {
                       Select...
                     </option>
                     {language.map((e) => (
-                      <option value={e.name}>{e.name}</option>
+                      <option
+                        className="rounded-2xl  h-3 bg-nuevoFondo"
+                        value={e.name}
+                      >
+                        {e.name}
+                      </option>
                     ))}
                   </select>
-                  <div>
+                  <div className="h-4">
                     {input.language.map((el, i) => (
                       <li
-                        className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                        className="flex flex-row w-fit  text-nuevoFondo list-none m-1 rounded-2xl bg-white"
                         key={i}
                       >
                         {el}
@@ -228,15 +239,15 @@ const SearchPostu = () => {
                   </div>
                   {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
                 </div>
-                <div className="w-full my-3 flex flex-col m-0 justify-center">
+                <div className="w-full my-3 flex flex-col mt-3 justify-center text-white">
                   <label> Seniority:</label>
                   <select
-                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+                    className="w-full xl:w-52 rounded-2xl bg-nuevoFondo"
                     name="seniority"
                     onChange={(e) => handleSelectSeniority(e)}
                   >
                     <option
-                      className="rounded-2xl bg-verdeClaro"
+                      className="rounded-2xl  h-3 bg-nuevoFondo"
                       selected
                       disabled
                       value=""
@@ -245,17 +256,17 @@ const SearchPostu = () => {
                     </option>
                     {seniority.map((e) => (
                       <option
-                        className="rounded-2xl bg-verdeClaro"
+                        className="rounded-2xl  h-3 bg-nuevoFondo"
                         value={e.name}
                       >
                         {e.name}
                       </option>
                     ))}
                   </select>
-                  <div>
+                  <div className="h-4">
                     {input.seniority.map((el, i) => (
                       <li
-                        className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
+                        className="flex flex-row text-nuevoFondo w-fit  px-2 list-none m-1 rounded-2xl bg-white"
                         key={i}
                       >
                         {el}
@@ -270,16 +281,24 @@ const SearchPostu = () => {
                     ))}
                   </div>
                 </div>
-                <button type="submit" onClick={(e) => handleSubmit(e)}>
-                  Filter
-                </button>
+                <div className="flex m-0 justify-center">
+                  <button
+                    className="text-white rounded-xl hover:bg-white hover:text-black bg-nuevoFondo px-2  mt-8"
+                    type="submit"
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Filter
+                  </button>
+                </div>
               </div>
             </div>
             {/* AREA DE DATA PERSONAS */}
             <div className="col-span-2 bg-verdeOscuro p-2">
-              <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
+              <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <div className="lg:grid items-center justify-center">
-                  <h1 className=" font-bold text-center mb-3">Profile:</h1>
+                  <h1 className=" font-bold text-center mb-3 text-white">
+                    Profile:
+                  </h1>
                   {/* AREA CARD PERFILES DE USUARIOS (no empresas) */}
                   {profiles ? (
                     profiles.map((el) => {
