@@ -48,18 +48,22 @@ const FormVacancy = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postVacancy(input), console.log(input));
-    alert("Vacante creada");
-    setInput({
-      name: "",
-      description: "",
-      technology: [],
-      seniority: [],
-      language: [],
-      business: email2,
-      vacancies: "",
-    });
-    navigate(-1);
+    if (!input.name || !input.description || !input.vacancies) {
+      alert("Please, complete all fields");
+    } else {
+      alert("Congrats! Vacancy Created");
+      dispatch(postVacancy(input), console.log(input));
+      setInput({
+        name: "",
+        description: "",
+        technology: [],
+        seniority: [],
+        language: [],
+        business: email2,
+        vacancies: "",
+      });
+      navigate("/homee");
+    }
   }
   function handleChange(e) {
     setInput({
@@ -122,6 +126,7 @@ const FormVacancy = () => {
 
   return (
     <div>
+
       {/* TAILWIND */}
 
       <div className="mt-10 sm:mt-0">
@@ -286,19 +291,12 @@ const FormVacancy = () => {
                     </div>
                
                   </div>
-                    
 
-
-
-              
-
-               
-
-                 
                   </div>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 mt-9">
                 <button
+
               type="submit"
               className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
             >
