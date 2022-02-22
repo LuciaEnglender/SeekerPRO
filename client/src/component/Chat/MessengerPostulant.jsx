@@ -28,8 +28,8 @@ function MessengerPostulant() {
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducerPostulante.profile); //es el que tengo guardado
 
-  const id = profile[0]?.id
-console.log("postuid", id)
+  const id = profile[0]?.id;
+  console.log("postuid", id);
 
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
@@ -131,14 +131,14 @@ console.log("postuid", id)
         </div>
       </header>
       <main>
-        <div className="max-w-7xl justify-center mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl  justify-center mx-auto py-6 sm:px-6 lg:px-8">
           {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
-          <div className="flex px-10 items-center justify-center content-center">
-            <div className="w-5/6 h-96  rounded-xl flex bg-gradient-to-r to-verdeOscuro  from-slate-50">
+          <div className="flex px-10  items-center justify-center content-center">
+            <div className="w-5/6 h-96 flex flex-col md:flex-row rounded-xl bg-gradient-to-r to-verdeOscuro  from-slate-50">
               <div className="chatMenu">
                 <div className="border-2 solid ">
                   <input
-                    className="border-2 rounded-xl m-1 border-solid border-black"
+                    className="border-2 rounded-xl m-1 text-black border-solid border-black"
                     placeholder="Search for friends"
                   />
                   {conversations.map((c) => (
@@ -148,7 +148,7 @@ console.log("postuid", id)
                   ))}
                 </div>
               </div>
-              <div className=" w-11/12 bg-gray-100  rounded-r-xl">
+              <div className=" w-11/12 bg-nuevoFondo rounded-r-xl">
                 <div className="chatBoxWrapper">
                   {currentChat ? (
                     <>
@@ -164,7 +164,7 @@ console.log("postuid", id)
                       </div>
                       <div className="chatBoxBottom">
                         <textarea
-                          className="chatMessageInput"
+                          className="chatMessageInput text-black"
                           placeholder="write something..."
                           onChange={(e) => setNewMessage(e.target.value)}
                           value={newMessage}
