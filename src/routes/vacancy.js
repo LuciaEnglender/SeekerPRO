@@ -403,8 +403,7 @@ routerVacancy.get("/search/:name", async (req, res) => {
       include: [
         {
           model: Vacancy,
-          attributes: ["name", 'id', 'description'],
-          include: [
+            include: [
             {
               model: Technology,
               attributes: ["name"],
@@ -452,8 +451,7 @@ routerVacancy.get("/search/:name", async (req, res) => {
       include: [
         {
           model: Vacancy,
-          attributes: ["name", "description", 'id'],
-          include: [
+           include: [
             {
               model: Language,
               attributes: ["name", 'id'],
@@ -499,7 +497,6 @@ routerVacancy.get("/search/:name", async (req, res) => {
       attributes: ["name", 'id'],
       include: {
         model: Vacancy,
-        attributes: ["name", "description", 'id'],
         include: [
           {
             model: Language,
@@ -522,6 +519,13 @@ routerVacancy.get("/search/:name", async (req, res) => {
               attributes: [],
             },
           },
+          {
+            model: Business,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          }
         ],
       },
     });
