@@ -44,15 +44,11 @@ const HomeEmpresa = () => {
     dispatch(getProfile(email2))
     dispatch(getVacancy(email2));
   }, [dispatch]);
-
-
   
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVacancy(email2));
-
-}
-
+};
 
   return (
     <div className="min-h-full">
@@ -79,20 +75,18 @@ const HomeEmpresa = () => {
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
                 <div className="lg:grid items-center justify-center ">
                   <h1 className=" font-bold text-center mb-3 pt-2">
-                    Vacancys:
+                    Vacancies:
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
-               
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2" onClick={() => {setOpenVac(true)
-                                                                                                                                                       setisOpenVac(true)}}>
-                        Add Vacancy
+                    <Link to="/homee/vacante">
+                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
+                        Publish a vacancy
                       </button>
-                      {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
-                    
+                    </Link>
                     <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                    onClick={(e) =>{ getVacancy()}}>
-                        All Vacancy
+                    onClick={(e) => handleClick(e)}>
+                        All Vacancies
                     </button>
                   </div>
                   <div className="mt-5">
@@ -129,10 +123,7 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                    
                   </button>
-
-
                   <button
                     className="m-3"
                     onClick={() =>
@@ -141,7 +132,6 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                   
                   </button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}
