@@ -48,18 +48,22 @@ const FormVacancy = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postVacancy(input), console.log(input));
-    alert("Vacante creada");
-    setInput({
-      name: "",
-      description: "",
-      technology: [],
-      seniority: [],
-      language: [],
-      business: email2,
-      vacancies: "",
-    });
-    navigate(-1);
+    if (!input.name || !input.description || !input.vacancies) {
+      alert("Please, complete all fields");
+    } else {
+      alert("Congrats! Vacancy Created");
+      dispatch(postVacancy(input), console.log(input));
+      setInput({
+        name: "",
+        description: "",
+        technology: [],
+        seniority: [],
+        language: [],
+        business: email2,
+        vacancies: "",
+      });
+      navigate("/homee");
+    }
   }
   function handleChange(e) {
     setInput({
@@ -135,6 +139,7 @@ const FormVacancy = () => {
               name="name"
               value={input.name}
               onChange={(e) => handleChange(e)}
+              require
             />
           </div>
           <div className="w-full flex flex-col">
