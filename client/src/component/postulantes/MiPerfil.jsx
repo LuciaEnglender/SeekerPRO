@@ -46,9 +46,6 @@ function MiPerfil() {
             <h2 className={s.extras}>{perfil[0].extras}</h2>
             <div className="grid grid-cols-1">
               <hr className="h-px bg-black" />
-              <div className="fond-bold text-white m-px">
-                {perfil[0].gender}
-              </div>
               <hr className="h-px bg-black" />
               <div className="fond-bold text-white m-px">
                 {perfil[0].technologies?.map((t) => t.name).join(" - ")}
