@@ -533,7 +533,7 @@ routerVacancy.get("/search/:name", async (req, res) => {
 
     acum.length
       ? res.status(200).json(acum[0])
-      : res.status(404).send("there arent coincidences");
+      : res.status(400).send('como?')
   } catch (e) {
     console.log(e);
   }

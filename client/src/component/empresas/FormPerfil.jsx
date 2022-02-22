@@ -91,7 +91,8 @@ export default function FormPerfil() {
           <h3 className="text-center">CUIT/CUIL</h3>
           <input
             className="w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-            type="text"
+            type="number"
+            min={0}
             name="cuit"
             value={input.cuit}
             onChange={(e) => handleChange(e)}

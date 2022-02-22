@@ -22,6 +22,10 @@ function DetailVacy() {
     dispatch(getVacancyDetail(id), getPostulados(id))
   }, [dispatch, id])
   console.log(detalle)
+  
+  useEffect(()=>{
+
+  }, [Pipeline])
 
   function handleDelete(e) {
     e.preventDefault();

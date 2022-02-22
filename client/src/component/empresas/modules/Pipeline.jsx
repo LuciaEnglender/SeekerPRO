@@ -11,6 +11,7 @@ import {
   addInterviewRRHH, addInterviewTech,
   addOffered, addHired, addRejected
 } from "../../../redux/actions/index"
+import rootReducer from '../../../redux/reducer';
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
@@ -18,12 +19,13 @@ function Pipeline({ id }) {
   const { user } = useAuth0();
   const postulados = useSelector((state) => state.rootReducer.postulados);
   const review = useSelector((state) => state.rootReducer.review);
-  const contacted = useSelector((state) => state.rootReducer.postulados);
-  const interview = useSelector((state) => state.rootReducer.postulados);
-  const tech = useSelector((state) => state.rootReducer.postulados);
-  const offered = useSelector((state) => state.rootReducer.postulados);
-  const hired = useSelector((state) => state.rootReducer.postulados);
-  const rejected = useSelector((state) => state.rootReducer.postulados);
+  const contacted = useSelector((state) => state.rootReducer.contacted);
+  const interview = useSelector((state) => state.rootReducer.interview);
+  const tech = useSelector((state) => state.rootReducer.techInterview);
+  const offered = useSelector((state) => state.rootReducer.offered);
+  const hired = useSelector((state) => state.rootReducer.hired);
+  const rejected = useSelector((state) => state.rootReducer.rejected);
+  
 
   useEffect(() => {
     dispatch(getPostulados(id));
@@ -36,8 +38,6 @@ function Pipeline({ id }) {
     dispatch(getPostulantsRejected(id));
   }, [dispatch, id]);
 
-  // useEffect(() => {
-  // }, [dispatch, id]);
 
   useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
@@ -58,12 +58,15 @@ function Pipeline({ id }) {
       })
     });
     document.getElementById("default-tab").click();
-  }, []);
+  }, [Pipeline]);
 
+ 
   const [input, setInput] = useState({
-    idPostulant: "",
+    idPostulant: '',
     action: "",
-  });
+  })
+
+
   //console.log(input)
   function handleSelect(e) {
     setInput({
@@ -73,42 +76,48 @@ function Pipeline({ id }) {
     })
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(removeAll(id, input.idPostulant));
+   function handleSubmit(e) {
 
+    e.preventDefault();
+     dispatch(removeAll(id, input.idPostulant))
+     
+  .then(() => {
+      
     if (input.action === "new") {
-      dispatch(addNew(id, input.idPostulant))
-      //setInput({})
-    };
-    if (input.action === "review") {
-      dispatch(addReview(id, input.idPostulant))
-    };
-    if (input.action === "contacted") {
-      dispatch(addContact(id, input.idPostulant))
-    };
-    if (input.action === "interview") {
-      dispatch(addInterviewRRHH(id, input.idPostulant))
-    };
-    if (input.action === "techInterview") {
-      dispatch(addInterviewTech(id, input.idPostulant))
-    };
-    if (input.action === "offered") {
-      dispatch(addOffered(id, input.idPostulant))
-    };
-    if (input.action === "hired") {
-      dispatch(addHired(id, input.idPostulant))
-    };
-    if (input.action === "rejected") {
-      dispatch(addRejected(id, input.idPostulant))
-    }
-    else { alert("Choose an option") };
-    //   setInput({
-    //   idPostulant: "",
-    //   action: "",
-    // })
-    //navigate(`/vacancy/`)
-  }
+     return dispatch(addNew(id, input.idPostulant))
+    
+   
+   };
+   if (input.action === "review") {
+    return dispatch(addReview(id, input.idPostulant))
+   
+   };
+   if (input.action === "contacted") {
+    return dispatch(addContact(id, input.idPostulant))
+     
+   };
+   if (input.action === "interview") {
+    return  dispatch(addInterviewRRHH(id, input.idPostulant))
+    
+   };
+   if (input.action === "techInterview") {
+    return  dispatch(addInterviewTech(id, input.idPostulant))
+   };
+   if (input.action === "offered") {
+    return  dispatch(addOffered(id, input.idPostulant))
+   };
+   if (input.action === "hired") {
+    return  dispatch(addHired(id, input.idPostulant))
+   };
+   if (input.action === "rejected") {
+   return   dispatch(addRejected(id, input.idPostulant))
+   }
+ // else { alert("Choose an option") };
+ // return
+    }).catch((e) => {
+      console.log(e)
+    });
+  };
 
   return (
     <div>
@@ -138,8 +147,14 @@ function Pipeline({ id }) {
                       <div class="flex justify-center mt-2">
                         <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
                         {/* {console.log(id, input.idPostulant)} */}
+                        <hr />
+                        <hr />
+                     <br />
+                     <br />
+                     <br />
                       </div>
                       <form onSubmit={(e) => handleSubmit(e)}>
+                      
                         <select onChange={(e) => handleSelect(e)}>
                           <option value="new" key={el.id}>new</option>
                           <option value="review" key={el.id}>review</option>
@@ -150,8 +165,16 @@ function Pipeline({ id }) {
                           <option value="hired" key={el.id}>hired</option>
                           <option value="rejected" key={el.id}>rejected</option>
                         </select>
-                        <button type="submit">confirm</button>
-
+                        <hr />
+                     <br />
+                     <br />
+                     <br />
+                        <button type='submit'>confirm</button>
+                     <hr />
+                     <br />
+                     <br />
+                     <br />
+          
                       </form>
                     </div>
                   </div>

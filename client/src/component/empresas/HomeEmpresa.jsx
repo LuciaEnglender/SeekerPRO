@@ -13,9 +13,7 @@ import SearcHome from "./modules/SearcHome";
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const empresa = useSelector((state) => state.rootReducer.business);
-  console.log(empresa)
   const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
-  console.log('soy el home', vacancy);
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,6 +35,11 @@ const HomeEmpresa = () => {
     dispatch(getProfile(email2))
     dispatch(getVacancy(email2));
   }, [dispatch]);
+  
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(getVacancy(email2));
+};
 
   return (
     <div className="min-h-full">
@@ -61,15 +64,19 @@ const HomeEmpresa = () => {
               <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
                 <div className="lg:grid items-center justify-center ">
                   <h1 className=" font-bold text-center mb-3 pt-2">
-                    Vacancys:
+                    Vacancies:
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
                     <Link to="/homee/vacante">
                       <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
-                        Add Vacancy
+                        Publish a vacancy
                       </button>
                     </Link>
+                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                    onClick={(e) => handleClick(e)}>
+                        All Vacancies
+                    </button>
                   </div>
                   <div className="mt-5">
                     {currentVacancy ? (
@@ -105,10 +112,7 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                    
                   </button>
-
-
                   <button
                     className="m-3"
                     onClick={() =>
@@ -117,7 +121,6 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                   
                   </button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}

@@ -108,7 +108,7 @@ function SearcHome() {
 
   function handleSubmit2(e) {
     e.preventDefault();
-  
+
     if (name.length === 0) {
       return alert("Please write a name");
     } else {
@@ -136,7 +136,7 @@ function SearcHome() {
             <hr />
             <div>
               <div className="w-full flex flex-col m-0 justify-center pt-5">
-                <label> search:</label>
+                <label> Search:</label>
                 <input
                   className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
                   type="text"
@@ -153,7 +153,7 @@ function SearcHome() {
                 </button>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label> technologies:</label>
+                <label> Technologies:</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   name="technology"
@@ -193,7 +193,7 @@ function SearcHome() {
                 {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label> language:</label>
+                <label> Language:</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   name="language"
@@ -232,7 +232,7 @@ function SearcHome() {
               </div>
 
               <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label> seniority:</label>
+                <label> Seniority:</label>
                 <select
                   className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
                   name="seniority"
