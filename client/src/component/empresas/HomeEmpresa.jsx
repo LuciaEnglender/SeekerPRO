@@ -9,12 +9,21 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
 import SearcHome from "./modules/SearcHome";
+import SideBar from "./modules/SideBar";
+import SideBarVacancies from "./modules/SideBarVacancies";
 
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const empresa = useSelector((state) => state.rootReducer.business);
   const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
   const { user } = useAuth0();
+  const [open, setOpen] = useState(false)
+  const [isopen, setisOpen] = useState(false)
+
+  const [openVac, setOpenVac] = useState(false)
+  const [isopenVac, setisOpenVac] = useState(false)
+
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const vacancyPerPage = 10;
@@ -61,7 +70,9 @@ const HomeEmpresa = () => {
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
             {/* AREA DE CREACION */}
             <div className="ml-16">
-              <SearcHome />
+              <button onClick={()=>{setOpen(true)
+                                  setisOpen(true)}}>FILTROS</button>
+              {isopen && <SideBar open={open} setOpen={setOpen}/>  }
             </div>
             {/* AREA DE VACANTES */}
             <div className="col-span-2 bg-gray-300 p-2 mr-16">
@@ -72,16 +83,15 @@ const HomeEmpresa = () => {
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
-                    <Link to="/homee/vacante">
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
+               
+                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2" onClick={() => {setOpenVac(true)
+                                                                                                                                                       setisOpenVac(true)}}>
                         Add Vacancy
                       </button>
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2" onClick = {(e) => handleClick(e)} >
-                        All Vacancy
-                    </button>
-                    </Link>
+                      {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
+                    
                     <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
-                    onClick={(e) => getVacancy()}>
+                    onClick={(e) =>{ getVacancy()}}>
                         All Vacancy
                     </button>
                   </div>
