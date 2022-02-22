@@ -102,13 +102,13 @@ export default function Home() {
               </div>
             </div>
             {/* VACAN */}
-            <div className="col-span-3 bg-bg-verdeOscuro p-2">
-              <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
+            <div className="col-span-3  p-2">
+              <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <div className="items-center justify-center grid grid-row-7">
-                  <div className="grid-span-2 bg-verdeMedio w-fit">
+                  <div className="grid-span-2 bg-nuevoFondo w-fit">
                     {/* SEARCHBAR */}
                     <div className=" flex m-0 justify-center">
-                      <div className=" flex m-0 justify-center bg-verdeMedio w-fit">
+                      <div className=" flex m-0 justify-center bg-nuevoFondo w-fit">
                         <div className="mx-2">
                           <SearchBar />
                         </div>
@@ -128,9 +128,10 @@ export default function Home() {
                       >
                         all business{" "}
                       </button>
-                    </div>
-                    <div>
-                      <select onChange={(e) => handleSort(e)}>
+                      <select
+                        className="h-fit  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
+                        onChange={(e) => handleSort(e)}
+                      >
                         <option value="default"> Sort by.. </option>
                         <option value="az"> A-Z</option>
                         <option value="za"> Z-A </option>

@@ -24,16 +24,16 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="w-fit justify-center h-9 flex flex-row text-white m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro">
+    <div className="w-fit justify-center h-7 flex flex-row text-white m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo">
       <input
-        className="w-full xl:w-80 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+        className="w-full px-1 border-2 border-solid border-white  m-0  rounded-2xl bg-verdeClaro"
         type="text"
         value={name}
         placeholder="  vacancy or company..."
         onKeyPress={(e) => e.key === "Enter" && handleSubmit(e)}
         onChange={(e) => handleInputChange(e)}
       />
-      <div className="mt-1 text-2xl rounded-2xl hover:bg-verdeOscuro">
+      <div className="text-2xl rounded-2xl hover:bg-verdeOscuro">
         <button onClick={(e) => handleSubmit(e)}>
           <AiOutlineSearch />
         </button>
