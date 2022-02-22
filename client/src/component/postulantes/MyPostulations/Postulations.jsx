@@ -27,25 +27,23 @@ function Postulations() {
       <NavBar />
       {/* BODYsss */}
 
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+      <header className="bg-verdeOscuro shadow">
+        <div className="max-w-7xl mx-auto bg-verdeOscuro py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold bg-verdeOscuro text-white">
+            My applies
+          </h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
-          <h1 className=" bg-gray-300 text-center pt-4 font-bold text-xl ">
-            {" "}
-            My applications{" "}
-          </h1>
-          <div>
+        <div className="max-w-7xl mx-auto  py-6 sm:px-6 lg:px-8">
+          {/*!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
+          <div className="no-scrollbar overflow-scroll border-y-2 border-gray-700 border-solid h-96">
             {postulations.length === 0 ? (
               <p className=" font-bold text-center mb-3">
                 No applies? Search know!
               </p>
             ) : (
-              <div className="focus:outline-none bg-gray-300 w-screen h-screen pt-7">
+              <div className="focus:outline-none bg-verdeOscuro  ">
                 {postulations.vacancies?.map((el) => {
                   return (
                     <div className="m-4" key={el.id}>

@@ -21,20 +21,19 @@ function SeeLaterVacancies() {
       <NavBar />
       {/* BODYsss */}
 
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+      <header className="bg-verdeOscuro shadow">
+        <div className="max-w-7xl mx-auto bg-verdeOscuro py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold bg-verdeOscuro text-white">
+            Pendding Vacancies
+          </h1>
         </div>
       </header>
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {/* Replace with your content */}
-          <div>
+          <div className="flex flex-col m-0 justify-center p-10 px-20">
             {pending.length === 0 ? (
-              <p className=" font-bold text-center my-4 mb-3">
-                {" "}
-                Nothing to see{" "}
-              </p>
+              <p className=" font-bold text-center my-4 mb-3">Nothing to see</p>
             ) : (
               <div>
                 {pending?.map((el) => {

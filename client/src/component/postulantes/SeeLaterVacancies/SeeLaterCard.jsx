@@ -1,67 +1,59 @@
 import React from "react";
-import Apply from "../Assets/Apply"
-import RemoveSeeLater from './RemoveSeeLater'
+import Apply from "../Assets/Apply";
+import RemoveSeeLater from "./RemoveSeeLater";
 
-function seeLaterCard({ name, business, description, languages, seniorities, id, technologies}) {
-console.log({ name, business, description, languages, seniorities, id, technologies} )
-//
+function seeLaterCard({
+  name,
+  business,
+  description,
+  languages,
+  seniorities,
+  id,
+  technologies,
+}) {
+  console.log({
+    name,
+    business,
+    description,
+    languages,
+    seniorities,
+    id,
+    technologies,
+  });
+  //
   return (
-    <div className="absolute bg-verdeOscuro h-screen w-screen"> 
-        <div className="focus:outline-none grid sm:grid-rows-4 
-grid-cols-3 bg-verdeOscuro  h-auto pt-7">
-  <div
-      tabindex="0"
-      aria-label="card 1"
-      class="focus:outline-none shadow-lg shadow-black rounded-2xl 2xl:w-full mb-7 bg-gray-300 p-6"
-    >
-      <div class="flex items-center  border-b border-gray-400 pb-6">
-        <div class="flex items-start justify-between w-full">
-          <div class="pl-3 w-full">
-            <p
-              tabindex="0"
-              class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-            >  {name} <br/>
-              {business}
-            </p>
-            <div class="flex flex-row">
-              <p
-                tabindex="0"
-                class="focus:outline-none text-sm mx-1 leading-normal pt-2 text-verdeOscuro"
-              >
-                {seniorities ? seniorities : "No especificado"}
-              </p>
-            </div>
+    <div className=" h-28 w-full flex flex-col border-2 border-solid border-slate-900 shadow-2lg bg-gradient-to-t to-nuevoFondo from-white hover:from-gray-300 hover:scale-105  shadow-black rounded-2xl bg-gray-300">
+      <div className="flex w-full justify-between border-b-2 border-black border-dashed ">
+        <div className=" col-span-2">
+          <div className="flex">
+            <p className="text-black text-xl px-2 font-bold">{name}</p>
+            <p className="text-black pt-1 items-center">({business})</p>
           </div>
-          <div role="img" aria-label="bookmark">
-            <p class="focus:outline-none" width="28" height="28">
-              {languages ? languages : "No especificado"}
-            </p>
+          <p className="text-black px-1 text-sm ">{description}</p>
+        </div>
+
+        <div className="text-right flex">
+          <div className="text-black  justify-end ">
+            <Apply id={id} />
+          </div>
+          <div className="text-black justify-end">
+            <RemoveSeeLater id={id} />
           </div>
         </div>
       </div>
-      <div class="px-2">
-        <p
-          tabindex="0"
-          class="focus:outline-none text-sm leading-5 py-4 text-gray-600"
-        >
-          {description}
+      <div className="flex mt-2 border-y-2 justify-between mx-1 mb-1">
+        <p className="text-black">
+          {seniorities ? seniorities : "No especificado"}
         </p>
-        <div tabindex="0" class="focus:outline-none flex">
-          <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-            {technologies ? technologies : "No especificado"}
-          </div>
-          <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <Apply
-        id= {id}/>
-        </div>
-        <div class="py-2 mx-4 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
-        <RemoveSeeLater
-        id= {id}/>
-        </div>
-        </div>
-        </div>
+        <p className="text-black">/</p>
+        <p className="text-black">
+          {languages ? languages : "No especificado"}
+        </p>
+        <p className="text-black">/</p>
+        <p className="text-black">
+          {technologies ? technologies : "No especificado"}
+        </p>
       </div>
-    </div>
     </div>
   );
 }
