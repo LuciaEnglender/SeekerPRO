@@ -356,6 +356,7 @@ export function getSearchBar(name) {
   return async function (dispatch) {
     try {
       let det = await axios.get(`/vacancy/search/${name}`);
+      console.log(det.data)
       return dispatch({
         type: "GET_VACANCY_NAME",
         payload: det.data,

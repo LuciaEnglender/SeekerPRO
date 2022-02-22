@@ -37,13 +37,7 @@ function ConversationPostulant({ conversation }) {
     return (
         <>
             <div className="conversation">
-                {isAuthenticated && (
-                    <img
-                        className="h-8 w-8 rounded-full"
-                        alt="Not img"
-                        src={user.picture}
-                    ></img>
-                )}
+               
                 {
                     userChat &&
                     <span className="conversationName">{userChat[0]?.businesses[0]?.name}</span>

@@ -13,9 +13,7 @@ import SearcHome from "./modules/SearcHome";
 const HomeEmpresa = () => {
   const dispatch = useDispatch();
   const empresa = useSelector((state) => state.rootReducer.business);
-  console.log(empresa)
   const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
-  console.log('soy el home', vacancy);
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);

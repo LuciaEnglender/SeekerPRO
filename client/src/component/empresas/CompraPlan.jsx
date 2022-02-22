@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import NavHomeE from "./modules/NavHomeE";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder, getProfile } from "../../redux/actions/index";
+
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
+import MercadoPago from "./MercadoPago";
 
 const CompraPlan = () => {
   const { user } = useAuth0();
@@ -12,7 +15,8 @@ const CompraPlan = () => {
   const email2 = email.substring(1, email.length - 1);
 
   const dispatch = useDispatch();
-
+  const[isopen, setisOpen] = useState(false)
+   const [open, setOpen] = useState(false)
   return (
     <div className="min-h-full">
       {/* NAVEGACION */}
@@ -51,11 +55,14 @@ const CompraPlan = () => {
                       </div>
 
                       <div class="border-t border-gray-200 pt-4">  
-                      <Link to="/homee/mercado">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded">
+                     
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded" onClick={()=> {setisOpen(true)  
+                                                                                                                              setOpen(true)}}>
                       Go Premium now!
-                        </button></Link>
+                        </button>
+                        
                       </div>
+                      {isopen && <MercadoPago open={open} setOpen={setOpen}/>  }
 
                     </dl>
                   </div>
