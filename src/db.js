@@ -59,8 +59,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
   
 //const { DATABASE_URL } = process.env;
 //const DATABASE_URL = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}/hiredpro`
-
-// const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+//const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 // const { DATABASE_URL } = process.env;
 const DATABASE_URL = "postgres://bbvsylwlpvhgqq:3535d924e0c63721da39debabe7a096db94d691e97174e22ee6a9d9d99732191@ec2-52-73-29-239.compute-1.amazonaws.com:5432/d9kbdiduvvh4e"
 
@@ -260,24 +259,6 @@ Conversation.belongsTo(Postulant);
 
 Conversation.belongsToMany(Message, {through:"conversation_message"});
 Message.belongsToMany(Conversation, {through:"conversation_message"});
-
-Business.hasMany(Message, { foreignKey: "fk_business" });
-Message.belongsTo(Business);
-
-Postulant.hasMany(Message, { foreignKey: "fk_postulant" });
-Message.belongsTo(Postulant);
-
-
-//CHAT
-
-Business.hasMany(Conversation, { foreignKey: "fk_business" });
-Conversation.belongsTo(Business);
-
-Postulant.hasMany(Conversation, { foreignKey: "fk_postulant" });
-Conversation.belongsTo(Postulant);
-
-Conversation.belongsToMany(Message, { through: "conversation_message" });
-Message.belongsToMany(Conversation, { through: "conversation_message" });
 
 Business.hasMany(Message, { foreignKey: "fk_business" });
 Message.belongsTo(Business);

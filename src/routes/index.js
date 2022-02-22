@@ -28,7 +28,7 @@ const location = require("./Filters/location");
 
 //       Chat Online
 const conversations = require("./Chat/conversation");
-const messages = require("./Chat/messages");
+const messages = require("./Chat/message");
 ///MERCADOPAGOS
 const order = require("./order");
 const product = require("./product");

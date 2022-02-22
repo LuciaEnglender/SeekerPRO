@@ -10,7 +10,7 @@ routerConversation.post("/", async (req, res) => {
 	try {
 		const business = await Business.findByPk(businessId);
 		const postulant = await Postulant.findByPk(postulantId);
-    
+
 		const savedConversation = await Conversation.create({
 			members: [businessId, postulantId],
 		});
