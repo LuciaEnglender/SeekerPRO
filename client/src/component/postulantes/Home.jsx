@@ -86,18 +86,18 @@ export default function Home() {
       {/* BODY */}
 
       <header className=" shadow">
-        <div className="max-w-7xl mx-auto bg-verdeMedio py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold bg-verdeMedio text-white">Home</h1>
+        <div className="max-w-7xl mx-auto py-6 px-4 bg-verdeOscuro sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold bg-verdeOscuro text-white">Home</h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl bg-verdeOscuro mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="bg-verdeOscuro max-w-7xl mx-auto sm:px-6 lg:px-8">
           {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
           {/* AREA */}
-          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro  h-auto pt-7">
+          <div className="focus:outline-none grid grid-rows-1 grid-cols-4 bg-verdeOscuro h-full">
             {/* MI PERFIL */}
             <div className="bg-bg-verdeOscuro p-2">
-              <div className="bg-verdeMedio rounded-2xl p-2 w-full h-full">
+              <div className="bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <MiPerfil />
               </div>
             </div>
@@ -237,10 +237,6 @@ export default function Home() {
               </div>
             </div>
             {/* CUARTO GRID */}
-
-            {/* SPAN */}
-            <div> </div>
-            <div></div>
           </div>
           {/* /End replace */}
         </div>

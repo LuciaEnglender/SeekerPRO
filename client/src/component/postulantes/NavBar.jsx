@@ -21,7 +21,7 @@ const NavBar = ({ titulo }) => {
   const { user, isAuthenticated } = useAuth0();
 
   return (
-    <Disclosure as="nav" className="bg-azulp">
+    <Disclosure as="nav" className="bg-nuevoFondo">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
