@@ -112,10 +112,7 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                    
                   </button>
-
-
                   <button
                     className="m-3"
                     onClick={() =>
@@ -124,7 +121,6 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                   
                   </button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}
