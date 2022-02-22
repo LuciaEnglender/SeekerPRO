@@ -35,15 +35,11 @@ const HomeEmpresa = () => {
     dispatch(getProfile(email2))
     dispatch(getVacancy(email2));
   }, [dispatch]);
-
-
   
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVacancy(email2));
-
-}
-
+};
 
   return (
     <div className="min-h-full">
@@ -76,9 +72,6 @@ const HomeEmpresa = () => {
                       <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
                         Add Vacancy
                       </button>
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2" onClick = {(e) => handleClick(e)} >
-                        All Vacancy
-                    </button>
                     </Link>
                     <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
                     onClick={(e) => getVacancy()}>
