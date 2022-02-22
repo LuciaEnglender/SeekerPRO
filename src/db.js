@@ -68,16 +68,16 @@ const DATABASE_URL = "postgres://bbvsylwlpvhgqq:3535d924e0c63721da39debabe7a096d
 // console.log(`data: ${DB_DATABASE_URL}`)
 // console.log(process.env)
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hiredpro`,
+const sequelize = new Sequelize(DATABASE_URL,
 	{
 		logging: false, // set to console.log to see the raw SQL queries
 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-		/*dialectOptions: {
+		dialectOptions: {
 			ssl: {
 				require: true,
 				rejectUnauthorized: false,
 			},
-		},*/
+		},
 	}
 );
 const basename = path.basename(__filename);
