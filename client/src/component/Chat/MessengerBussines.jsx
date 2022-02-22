@@ -29,7 +29,7 @@ function MessengerBussines() {
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducer.business); //es el que tengo en reducer empresa
   const id = profile[0]?.id;
-  console.log("busid", id)
+  console.log("busid", id);
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -43,7 +43,8 @@ function MessengerBussines() {
   }, []);
 
   useEffect(() => {
-    arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) &&
+    arrivalMessage &&
+      currentChat?.members?.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
     console.log("arrival>", arrivalMessage);
   }, [arrivalMessage, currentChat]);
@@ -118,69 +119,71 @@ function MessengerBussines() {
   }, [messages]);
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-full bg-verdeOscuro">
       {/* NAVEGACION */}
       <NavHomeE />
-      {/* BODY */}
+      {/* BODYssss */}
 
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow ">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+          <h1 className="text-3xl font-bold text-white">Messages</h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
-          <div className="messenger">
-            <div className="chatMenu">
-              <div className="chatMenuWrapper">
-                <input
-                  placeholder="Search for friends"
-                  className="chatMenuInput"
-                />
-                {conversations.map((c) => (
-                  <div onClick={() => setCurrentChat(c)}>
-                    <ConversationBusiness conversation={c} />
-                  </div>
-                ))}
+        <div className="max-w-7xl  justify-center mx-auto py-6 sm:px-6 lg:px-8">
+          {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
+          <div className="flex px-10  items-center justify-center content-center">
+            <div className="w-5/6 h-96 flex flex-col md:flex-row rounded-xl bg-gradient-to-r to-verdeOscuro  from-slate-50">
+              <div className="chatMenu">
+                <div className="border-2 solid ">
+                  <input
+                    className="border-2 rounded-xl m-1 text-black border-solid border-black"
+                    placeholder="Search for friends"
+                  />
+                  {conversations.map((c) => (
+                    <div onClick={() => setCurrentChat(c)}>
+                      <ConversationBusiness conversation={c} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="chatBox">
-              <div className="chatBoxWrapper">
-                {currentChat ? (
-                  <>
-                    <div className="chatBoxTop">
-                      {messages[0]?.messages?.map((m) => (
-                        <div ref={scrollRef}>
-                          <Message
-                            message={m}
-                            own={m.businessId ? false : true}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="chatBoxBottom">
-                      <textarea
-                        className="chatMessageInput"
-                        placeholder="write something..."
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        value={newMessage}
-                      >
-                        {" "}
-                      </textarea>
-                      <button
-                        className="chatSubmitButton"
-                        onClick={handleSubmit}
-                      >
-                        Send
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <span className="noConversationText">
-                    Open a conversation to start a chat.
-                  </span>
-                )}
+              <div className=" w-11/12 bg-nuevoFondo rounded-r-xl">
+                <div className="chatBoxWrapper">
+                  {currentChat ? (
+                    <>
+                      <div className="chatBoxTop">
+                        {messages[0]?.messages?.map((m) => (
+                          <div ref={scrollRef}>
+                            <Message
+                              message={m}
+                              own={m.businessId ? true : false}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="chatBoxBottom">
+                        <textarea
+                          className="chatMessageInput text-black"
+                          placeholder="write something..."
+                          onChange={(e) => setNewMessage(e.target.value)}
+                          value={newMessage}
+                        >
+                          {" "}
+                        </textarea>
+                        <button
+                          className="chatSubmitButton"
+                          onClick={handleSubmit}
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <span className="noConversationText text-center ">
+                      Open a conversation to start a chat.
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

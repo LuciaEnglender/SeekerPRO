@@ -53,29 +53,42 @@ const HomeEmpresa = () => {
 
   return (
     <div className="min-h-full">
-      {/* NAVEGACION */}
+      {/* NAVEGACsION */}
       <NavHomeE />
       {/* BODY */}
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+          <h1 className="text-3xl font-bold text-white">Home</h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  bg-verdeOscuro py-6 sm:px-6 lg:px-8">
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
             {/* AREA DE CREACION */}
 
+            <div className="ml-16">
+              <button
+                onClick={() => {
+                  setOpen(true);
+                  setisOpen(true);
+                }}
+              >
+                FILTROS
+              </button>
+              {isopen && <SideBar open={open} setOpen={setOpen} />}
+            </div>
+
             {/* AREA DE VACANTES */}
             <div className="col-span-2 bg-gray-300 p-2 mr-16">
-              <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full ">
+              <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full ">
                 <div className="lg:grid items-center justify-center ">
-                  <h1 className=" font-bold text-center mb-3 pt-2">
+                  <h1 className=" font-bold text-center text-white pt-2">
                     Vacancies:
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
+
                     <button
                       className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
                       onClick={() => {
@@ -108,6 +121,7 @@ const HomeEmpresa = () => {
                       onClick={(e) => handleClick(e)}
                     >
                       All Vacancies
+
                     </button>
                   </div>
                   <div className="mt-5">
