@@ -35,7 +35,7 @@ export default function Home() {
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const vacancyPerPage = 10;
+  const vacancyPerPage = 100;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
@@ -102,7 +102,7 @@ export default function Home() {
               </div>
             </div>
             {/* VACAN */}
-            <div className="col-span-3  p-2">
+            <div className="col-span-3 px-2">
               <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <div className="items-center justify-center grid grid-row-7">
                   <div className="grid-span-2 bg-nuevoFondo w-fit">

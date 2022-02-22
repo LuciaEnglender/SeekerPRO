@@ -94,7 +94,7 @@ const NavBar = ({ titulo }) => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-verdeClaro ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/homep"
@@ -106,7 +106,7 @@ const NavBar = ({ titulo }) => {
                             Home
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -161,7 +161,7 @@ const NavBar = ({ titulo }) => {
                         )}
                       </Menu.Item>
 
-                      <Menu.Item>
+                      {/*   <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/homep/mensajes"
@@ -173,7 +173,8 @@ const NavBar = ({ titulo }) => {
                             Messages
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
+
                       <Menu.Item>
                         {({ active }) => (
                           <ButtonLogOut

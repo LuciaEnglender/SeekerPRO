@@ -26,7 +26,7 @@ export default function SearchBar() {
   return (
     <div className="w-fit justify-center h-7 flex flex-row text-white m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo">
       <input
-        className="w-full px-1 border-2 border-solid border-white  m-0  rounded-2xl bg-verdeClaro"
+        className="w-full px-1 border-2 border-solid border-white  m-0  text-bold rounded-2xl bg-nuevoFondo"
         type="text"
         value={name}
         placeholder="  vacancy or company..."

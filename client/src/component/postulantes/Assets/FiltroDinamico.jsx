@@ -218,7 +218,12 @@ export default function FiltroDinamico() {
         </div>
       </div>
       <div className="flex m-0 justify-center my-2">
-        <button type="submit">filter</button>
+        <button
+          className="h-fit  mx-4 px-2 shadow-lg mb-5 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
+          type="submit"
+        >
+          filter
+        </button>
       </div>
     </form>
   );
