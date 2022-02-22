@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./Conversation.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from '../../redux/actions/indexL'
+import { getUsers } from "../../redux/actions/indexL";
 
 function ConversationPostulant({ conversation }) {
-    const { user, isAuthenticated } = useAuth0();
+    const { user} = useAuth0();
     const dispatch = useDispatch()
     //  console.log(conversation.fk_business)
 
@@ -37,13 +37,7 @@ function ConversationPostulant({ conversation }) {
     return (
         <>
             <div className="conversation">
-                {isAuthenticated && (
-                    <img
-                        className="h-8 w-8 rounded-full"
-                        alt="Not img"
-                        src={user.picture}
-                    ></img>
-                )}
+               
                 {
                     userChat &&
                     <span className="conversationName">{userChat[0]?.businesses[0]?.name}</span>
@@ -53,6 +47,6 @@ function ConversationPostulant({ conversation }) {
     )
 }
 
-export default ConversationPostulant
+export default ConversationPostulant;
 
 /**/

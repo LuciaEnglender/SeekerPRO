@@ -1,6 +1,6 @@
 import React from "react";
 import RemovePost from "../MyPostulations/RemovePost";
-import { useSelector } from "react-redux";
+import { format } from "timeago.js";
 
 function PostCard({
   name,
@@ -11,6 +11,7 @@ function PostCard({
   seniorities,
   technologies,
   languages,
+  date
 }) {
   //const pipeline = useSelector((state)=> state.rootReducerPostulante.pipeline)
   //console.log(pipeline)
@@ -29,7 +30,7 @@ function PostCard({
               class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
             >
               {name} <br />
-              <p> Business: {business}</p>
+              <p> Company: {business}</p>
               {description}
             </p>
           </div>
@@ -52,7 +53,7 @@ function PostCard({
           </p>
         </p>
         <div>
-          <p className="text-gray-600">Application date: </p>
+          <p className="text-gray-600">Application date: {date.substr(0, 10)} - {format(date.substr(0, 10))} </p>
         </div>
         <div className="text-gray-600"> Application state: {status}</div>
       </div>

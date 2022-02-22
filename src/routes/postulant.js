@@ -454,7 +454,6 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
             },
 
           ],
-          attributes: ["id", "name"],
           through: {
             attributes: [],
           },

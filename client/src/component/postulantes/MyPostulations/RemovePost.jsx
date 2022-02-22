@@ -27,7 +27,7 @@ function RemovePost({ id }) {
         onClick={() => handleRemove()}
       >
         {" "}
-        Remove Post{" "}
+        Remove{" "}
       </button>
     </div>
   );
