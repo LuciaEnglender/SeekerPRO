@@ -141,9 +141,9 @@ function Pipeline({ id }) {
                 return (
                   <div >
                     <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
-                      <Link to={`/postulant/${el.loginEmail}`}>
+                    {/*  <Link to={`/postulant/${el.loginEmail}`}> */}
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
-                      </Link>
+                     {/* </Link>*/}
                       <div class="flex justify-center mt-2">
                         <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
                         {/* {console.log(id, input.idPostulant)} */}

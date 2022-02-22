@@ -362,7 +362,7 @@ routerBusiness.get("/search/:name", async (req, res) => {
     }
     if (tech.length !== 0) acum.push(tech);
 
-    // Busca por SENIORYTI
+    // Busca por SENIORITY
     const seniority = await Seniority.findAll({
       where: {
         [Op.or]: {
@@ -425,7 +425,6 @@ routerBusiness.get("/search/:name", async (req, res) => {
 
 routerBusiness.post(
   "/",
-
   async (req, res) => {
     let { name, description, location, cuit, emailId, pro } = req.body;
 
@@ -468,6 +467,7 @@ routerBusiness.put("/:id", async (req, res) => {
   }
 });
 
+
 //Ruta delete Recibe por params id esto es solo para pruebas'
 routerBusiness.delete("/:id", async (req, res) => {
   try {
@@ -492,5 +492,6 @@ routerBusiness.post("/emp/:id", async (req, res) => {
 
   res.status(200).json(business);
 });
+
 
 module.exports = routerBusiness;

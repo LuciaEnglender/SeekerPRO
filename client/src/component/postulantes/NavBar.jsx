@@ -12,7 +12,6 @@ import ButtonLogOut from "../../private/ButtonLogOut";
 const navigation = [
   { name: "Home", href: "/homep", current: false },
   { name: "Messages", href: "/homep/mensajes", current: false },
-  { name: "Notifications", href: "/homep/notificaciones", current: false },
 ];
 
 function classNames(...classes) {
@@ -22,7 +21,7 @@ const NavBar = ({ titulo }) => {
   const { user, isAuthenticated } = useAuth0();
 
   return (
-    <Disclosure as="nav" className="bg-verdeMedio">
+    <Disclosure as="nav" className="bg-nuevoFondo">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -72,7 +71,7 @@ const NavBar = ({ titulo }) => {
                 </button>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 bg-verdeMedio  relative">
+                <Menu as="div" className="ml-3  z-40 bg-verdeMedio  relative">
                   <div>
                     <Menu.Button className="bg-verdeMedio hover:bg-verdeHover flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
@@ -95,7 +94,7 @@ const NavBar = ({ titulo }) => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-verdeClaro ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/homep"
@@ -107,7 +106,7 @@ const NavBar = ({ titulo }) => {
                             Home
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -121,7 +120,7 @@ const NavBar = ({ titulo }) => {
                           </Link>
                         )}
                       </Menu.Item>
-                      
+
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -136,19 +135,19 @@ const NavBar = ({ titulo }) => {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                         {({ active }) => (
-                           <Link
-                             to="/homep/seelater"
-                             className={classNames(
-                               active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                               "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
-                             )}
-                           >
-                             Pending Vacancies
-                           </Link>
-                         )}
-                       </Menu.Item>
-                       <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/homep/seelater"
+                            className={classNames(
+                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
+                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            Pending Vacancies
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/homep/mypostulations"
@@ -162,21 +161,7 @@ const NavBar = ({ titulo }) => {
                         )}
                       </Menu.Item>
 
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/homep/notificaciones"
-                            className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
-                            )}
-                          >
-                           Notifications
-                          </Link>
-                        )}
-                      </Menu.Item>
-
-                      <Menu.Item>
+                      {/*   <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/homep/mensajes"
@@ -188,7 +173,8 @@ const NavBar = ({ titulo }) => {
                             Messages
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
+
                       <Menu.Item>
                         {({ active }) => (
                           <ButtonLogOut
@@ -207,7 +193,7 @@ const NavBar = ({ titulo }) => {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className=" px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}

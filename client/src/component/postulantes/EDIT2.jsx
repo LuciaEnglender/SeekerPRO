@@ -42,10 +42,12 @@ export default function EditProfile() {
   const tecno = useSelector((state) => state.rootReducerPostulante.technology);
   const habilidades = useSelector((state) => state.rootReducerPostulante.skill);
   const lenguaje = useSelector((state) => state.rootReducerPostulante.language);
-  const experiencia = useSelector(
-    (state) => state.rootReducerPostulante.seniority?.map(e => e.name)
+  const experiencia = useSelector((state) =>
+    state.rootReducerPostulante.seniority?.map((e) => e.name)
   );
-  const locat = useSelector((state) => state.rootReducerPostulante.location?.map(e => e.name));
+  const locat = useSelector((state) =>
+    state.rootReducerPostulante.location?.map((e) => e.name)
+  );
 
   const profileState = useSelector(
     (state) => state.rootReducerPostulante.profile[0]
@@ -61,23 +63,23 @@ export default function EditProfile() {
     id: profileState.id,
     name: profileState.name,
     phone: profileState.phone,
-    locations: profileState.locations?.map(l => l.name),
+    locations: profileState.locations?.map((l) => l.name),
     gender: profileState.gender,
     github: profileState.github,
     linkedIn: profileState.linkedIn,
     portfolio: profileState.portfolio,
-    CV:profileState.cv,
-    file:profileState.file,
+    CV: profileState.cv,
+    file: profileState.file,
     technologies: profileState.technologies,
     languages: profileState.languages,
     skills: profileState.skills,
-    seniorities: profileState.seniorities?.map(s => s.name),
+    seniorities: profileState.seniorities?.map((s) => s.name),
     extras: profileState.extras,
     //loginId:id,
   });
-console.log(input.seniorities)
-  const asd = input.seniorities
-  const asd2 = input.locations
+  console.log(input.seniorities);
+  const asd = input.seniorities;
+  const asd2 = input.locations;
 
   function handleChange(e) {
     setInput({
@@ -161,7 +163,7 @@ console.log(input.seniorities)
     if (input.seniorities.includes(e.target.value)) {
       alert("Already in the list");
     } else {
-    dispatch(deleteSeñority(id, asd))
+      dispatch(deleteSeñority(id, asd));
       setInput({
         ...input,
         seniorities: [e.target.value],
@@ -174,7 +176,7 @@ console.log(input.seniorities)
     if (input.locations.includes(e.target.value)) {
       alert("Already in the list");
     } else {
-      dispatch(deleteLocation(id, asd2))
+      dispatch(deleteLocation(id, asd2));
       setInput({
         ...input,
         locations: [e.target.value],
@@ -202,7 +204,6 @@ console.log(input.seniorities)
       dispatch(addLanguage(id, e.target.value));
       console.log(input.languages);
     }
-
   }
 
   const handleDelete = (e) => {
@@ -277,577 +278,602 @@ console.log(input.seniorities)
   }
 
   return (
-    <div className="w-screen bg-colorFondo2">
-      <div>
-        <NavBar />
-      </div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="w-full justify-center m-0 flex">
-          <h2 className="text-center font-sansA font-bold text-xl p-4 h-10">
-            Edit Profile
-          </h2>
+    <div className="min-h-full">
+      {/* NAVEGACION */}
+      <NavBar />
+      {/* BODYsss */}
+
+      <header className="bg-verdeOscuro shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-white">Home</h1>
         </div>
-        <div className="grid grid-rows-3 grid-cols-1  md:grid-cols-3 md:grid-rows-1">
-          {/* DATOS PERSONALES */}
-          <div className="bg-transparent p-6 transition ease-in-out hover:-translate-y-1 hover:scale-105">
-            <div className="bg-gray-500 drop-shadow-xl shadow-2xl flex flex-col rounded-xl m-0 p-10 w-full h-full">
-              {/*TITULO*/}
-              <div className="mb-6">
-                <h3 className=" text-center text-xl font-bold">
-                  PERSONAL INFORMATION{" "}
-                </h3>
-              </div>
-              {/*NAME*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-
-                <label className="text-center text-verdeHover"> Name* </label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    type="text"
-                    value={input.name}
-                    name="name"
-                    onChange={(e) => handleChange(e)}
-                  />
-                </div>
-              </div>
-              {/*PHONE*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover"> Phone*</label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    type="number"
-                    value={input.phone}
-                    name="phone"
-                    onChange={(e) => handleChange(e)}
-                  />
-                </div>
-              </div>
-              {/*LOCATION*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className=" text-center  text-verdeHover">
-                  Location*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <select
-                    className="w-fit text-center xl:w-52 rounded-2xl bg-verdeClaro"
-                    placeholder="location"
-                    // value={input.locations}
-                    name="locations"
-                    onChange={(e) => handleSelectLocation(e)}
-
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      selected
-                      disabled
-                      value=""
-                    >
-                      Location Selection
-                    </option>
-
-                    {locat?.map((el, i) => (
-                      <option
-                        className="rounded-2xl bg-verdeClaro"
-                        value={el}
-                        key={i}
+      </header>
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="w-full justify-center m-0 flex">
+              <h2 className="text-center font-sansA font-bold text-xl p-4 h-10">
+                Edit Profile
+              </h2>
+            </div>
+            <div className="grid grid-rows-3 grid-cols-1  md:grid-cols-3 md:grid-rows-1">
+              {/* DATOS PERSONALES */}
+              <div className="bg-transparent p-6 transition ease-in-out hover:-translate-y-1 hover:scale-105">
+                <div className="bg-gray-500 drop-shadow-xl shadow-2xl flex flex-col rounded-xl m-0 p-10 w-full h-full">
+                  {/*TITULO*/}
+                  <div className="mb-6">
+                    <h3 className=" text-center text-xl font-bold">
+                      PERSONAL INFORMATION{" "}
+                    </h3>
+                  </div>
+                  {/*NAME*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Name*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <input
+                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        type="text"
+                        value={input.name}
+                        name="name"
+                        onChange={(e) => handleChange(e)}
+                      />
+                    </div>
+                  </div>
+                  {/*PHONE*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Phone*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <input
+                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        type="number"
+                        value={input.phone}
+                        name="phone"
+                        onChange={(e) => handleChange(e)}
+                      />
+                    </div>
+                  </div>
+                  {/*LOCATION*/}
+                  <div className="w-full my-3  flex flex-col m-0 justify-center">
+                    <label className=" text-center   found-bold  text-white">
+                      Location*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <select
+                        className="w-fit  text-center  rounded-2xl bg-nuevoFondo"
+                        placeholder="location"
+                        // value={input.locations}
+                        name="locations"
+                        onChange={(e) => handleSelectLocation(e)}
                       >
-                        {el}
-                      </option>
+                        <option
+                          className="rounded-2xl bg-nuevoFondo  text-white"
+                          selected
+                          disabled
+                          value=""
+                        >
+                          Location Selection
+                        </option>
+
+                        {locat?.map((el, i) => (
+                          <option
+                            className="rounded-2xl bg-nuevoFondo  text-white"
+                            value={el}
+                            key={i}
+                          >
+                            {el}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    {input.locations?.map((el, i) => (
+                      <div className="flex m-0 justify-center">
+                        <li
+                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white font-bold text-nuevoFondo "
+                          key={i}
+                          value={el}
+                        >
+                          {el}
+                          <button
+                            className="rounded-2xl hover:bg-verdeClaro"
+                            type="reset"
+                            onClick={() => handleDeleteLocation(el)}
+                          >
+                            <GrFormClose />
+                          </button>
+                        </li>
+                      </div>
                     ))}
-                  </select>
-                </div>
-                {input.locations?.map((el, i) => (
-                  <div className="flex m-0 justify-center">
-
-                    <li
-                      className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                      key={i}
-                      value={el}
+                  </div>
+                  {/*GENDER*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Gender*
+                    </label>
+                    <div className="flex m-0  justify-center">
+                      <div className="flex flex-col  m-0  justify-center">
+                        <div className="mx-px my-px bg-nuevoFondo rounded-xl px-1 flex">
+                          <label className="text-center">
+                            <input
+                              value="Femenine"
+                              type="radio"
+                              id="cbox1"
+                              name="check"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2>Feminine</h2>
+                        </div>
+                        <div className="mx-px my-px bg-nuevoFondo rounded-xl px-1 flex">
+                          <label className="text-center" htmlFor="cbox2">
+                            <input
+                              value="Masculine"
+                              type="radio"
+                              id="cbox2"
+                              name="check"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2> Masculine</h2>
+                        </div>
+                        <div className="mx-px my-px flex bg-nuevoFondo px-1 rounded-xl">
+                          <label className="text-center " htmlFor="cbox2">
+                            <input
+                              value="non-binary"
+                              type="radio"
+                              id="cbox3"
+                              name="check"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2>NoBinary</h2>
+                        </div>
+                        <div className="mx-px my-px flex bg-nuevoFondo px-1 rounded-xl">
+                          <label className="text-center " htmlFor="cbox2">
+                            <input
+                              value="Other"
+                              type="radio"
+                              name="check"
+                              id="cbox4"
+                              onChange={(e) => handleCheck(e)}
+                            />
+                          </label>
+                          <h2>Other</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/*  {/*PHOTO*/}
+                  {/* <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label
+                      className="text-center found-bold  text-white"
+                      htmlFor="file"
                     >
-                      {el}
-                      <button
-                        className="rounded-2xl hover:bg-verdeClaro"
-                        type="reset"
-                        onClick={() => handleDeleteLocation(el)}
-                      >
-                        <GrFormClose />
-                      </button>
-
-                    </li>
-                  </div>
-                ))}
-              </div>
-              {/*GENDER*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover">Gender*</label>
-                <div className="flex m-0 justify-center">
-                  <div className="mx-2 flex">
-                    <label className="text-center">
-                      <input
-                        value="Femenine"
-                        type="radio"
-                        id="cbox1"
-                        name="check"
-                        onChange={(e) => handleCheck(e)}
-                      />
+                      Photo (.jpg)*
                     </label>
-                    <h2>Feminine</h2>
-                  </div>
-                  <div className="mx-2 flex">
-                    <label className="text-center" htmlFor="cbox2">
+                    <div className="flex m-0 justify-center">
                       <input
-                        value="Masculine"
-                        type="radio"
-                        id="cbox2"
-                        name="check"
-                        onChange={(e) => handleCheck(e)}
+                        className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+                        placeholder=".jpg"
+                        type="file"
+                        name="file"
+                        id="file"
+                        accept=".jpg"
+                        onChange={(e) => handleFile(e)}
                       />
-                    </label>
-                    <h2> Masculine</h2>
-                  </div>
-                  <div className="mx-2 flex">
-                    <label className="text-center" htmlFor="cbox2">
-                      <input
-                        value="non-binary"
-                        type="radio"
-                        id="cbox3"
-                        name="check"
-                        onChange={(e) => handleCheck(e)}
-                      />
-                    </label>
-                    <h2>NoBinary</h2>
-                  </div>
-                  <div className="mx-2 flex">
-                    <label className="text-center" htmlFor="cbox2">
-                      <input
-                        value="Other"
-                        type="radio"
-                        name="check"
-                        id="cbox4"
-                        onChange={(e) => handleCheck(e)}
-                      />
-                    </label>
-                    <h2>Other</h2>
-                  </div>
-
+                    </div>
+                  </div> */}
                 </div>
               </div>
-              {/*PHOTO*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover" htmlFor="file">
-                  Photo (.jpg)*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit text-center xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    placeholder=".jpg"
-                    type="file"
-                    name="file"
-                    id="file"
-                    accept=".jpg"
-                    onChange={(e) => handleFile(e)}
-                  />
+              {/* INFORMACION LABORAL Y PROYECTOS */}
+              <div className="bg-transparent p-6 transition ease-in-out hover:-translate-y-1 hover:scale-105">
+                <div className="bg-gray-500 drop-shadow-xl shadow-2xl flex flex-col m-0 p-10 w-full h-full rounded-xl">
+                  {/*TITULO*/}
+                  <div className="mb-6">
+                    <h3 className=" text-center text-xl font-bold">
+                      LABOR INFORMATION AND PROJECTS
+                    </h3>
+                  </div>
+                  {/*GITHUB*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label
+                      className="text-center  found-bold  text-white"
+                      htmlFor="github"
+                    >
+                      GitHub
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <input
+                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        type="text"
+                        value={input.github}
+                        name="github"
+                        onChange={(e) => handleGithub(e)}
+                      />
+                    </div>
+                  </div>
+                  {/*LINKEDIN*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label
+                      className="text-center  found-bold  text-white"
+                      htmlFor="linkedin"
+                    >
+                      LinkedIn*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <input
+                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        value={input.linkedIn}
+                        type="text"
+                        name="linkedin"
+                        onChange={(e) => handleLinkedIn(e)}
+                      />
+                    </div>
+                  </div>
+                  {/*PORTFOLIO*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label
+                      className=" text-center found-bold  text-white"
+                      for="portfolio"
+                    >
+                      PortFolio
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <input
+                        className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        type="text"
+                        name="portfolio"
+                        value={input.portfolio}
+                        onChange={(e) => handlePortfolio(e)}
+                      />
+                    </div>
+                  </div>
+                  {/*CV*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className=" text-center found-bold  text-white">
+                      CV (.pdf)*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <input
+                        className="w-fit xl:w-60 m-0 text-center border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        placeholder=".pdf"
+                        type="file"
+                        id="file"
+                        accept=".pdf"
+                        name="file"
+                        onChange={(e) => handleCv(e)}
+                      />
+                    </div>
+                  </div>
+                  {/*EXTRAS*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Extras
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <textarea
+                        className="w-full text-center  xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo"
+                        placeholder=""
+                        type="text"
+                        value={input.extras}
+                        name="extras"
+                        onChange={(e) => handleExtra(e)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* INFORMACION TECNICA */}
+              <div className="bg-transparent p-6 transition ease-in-out hover:-translate-y-1 hover:scale-105">
+                <div className="bg-gray-500 drop-shadow-xl shadow-2xl rounded-xl flex flex-col m-0 p-10 w-full h-full">
+                  {/*TITULO*/}
+                  <div className="mb-6">
+                    <h3 className=" text-center text-xl font-bold">
+                      TECHNICAL INFORMATION
+                    </h3>
+                  </div>
+                  {/*TECHNO*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Technology*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <select
+                        className="w-fit  text-center xl:w-52 rounded-2xl bg-nuevoFondo"
+                        placeholder="technology"
+                        value={input.technologies}
+                        name="technology"
+                        onChange={(e) => handleSelectTechnology(e)}
+                      >
+                        <option
+                          className="rounded-2xl bg-nuevoFondo  text-white"
+                          value=""
+                          disabled
+                          selected
+                        >
+                          Tecnologies Selection
+                        </option>
+                        {tecno?.map((el) => (
+                          <option
+                            className="rounded-2xl bg-nuevoFondo  text-white"
+                            value={el.name}
+                            key={el.id}
+                          >
+                            {el.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      {input.technologies?.map((el, i) =>
+                        typeof el === "object" ? (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row bg-white px-2 text-black w-fit list-none m-1 rounded-2xl "
+                              key={i}
+                            >
+                              {el.name}
+                              <button
+                                className=" w-fit rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDelete(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        ) : (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row bg-white px-2 text-black w-fit list-none m-1 rounded-2xl "
+                              key={i}
+                            >
+                              {el}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDelete(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                  {/*LENGUA*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Languages*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <select
+                        className="w-fit  text-center xl:w-52 rounded-2xl bg-nuevoFondo"
+                        placeholder="languages"
+                        value={input.languages}
+                        name="languages"
+                        onChange={(e) => handleLanguage(e)}
+                      >
+                        <option
+                          className="rounded-2xl bg-nuevoFondo  text-white"
+                          value=""
+                          disabled
+                          selected
+                        >
+                          Languages Selection
+                        </option>
+                        {lenguaje?.map((el) => (
+                          <option
+                            className="rounded-2xl bg-nuevoFondo  text-white"
+                            value={el.name}
+                            key={el.id}
+                          >
+                            {el.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      {input.languages?.map((el, i) =>
+                        typeof el === "object" ? (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
+                              key={i}
+                            >
+                              {el.name}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDeleteLanguage(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        ) : (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
+                              key={i}
+                            >
+                              {el}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDeleteLanguage(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                  {/*SKILLS*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Skill*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <select
+                        className="w-fit text-center xl:w-52 rounded-2xl bg-nuevoFondo"
+                        placeholder="skill"
+                        value={input.skills}
+                        name="skills"
+                        onChange={(e) => handleSkill(e)}
+                      >
+                        <option
+                          className="rounded-2xl bg-nuevoFondo  text-white"
+                          value=""
+                          disabled
+                          selected
+                        >
+                          Skills Selection
+                        </option>
+                        {habilidades?.map((el) => (
+                          <option
+                            className="rounded-2xl bg-nuevoFondo  text-white"
+                            value={el.name}
+                            key={el.id}
+                          >
+                            {el.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      {input.skills?.map((el, i) =>
+                        typeof el === "object" ? (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
+                              key={i}
+                            >
+                              {el.name}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDeleteSkills(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        ) : (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
+                              key={i}
+                            >
+                              {el}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDeleteSkills(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                  {/*SENIORITY*/}
+                  <div className="w-full my-3 flex flex-col m-0 justify-center">
+                    <label className="text-center found-bold  text-white">
+                      Siniority*
+                    </label>
+                    <div className="flex m-0 justify-center">
+                      <select
+                        className="w-fit  text-center xl:w-52 rounded-2xl bg-nuevoFondo"
+                        placeholder="Seniority"
+                        value={input.seniority}
+                        name="seniority"
+                        onChange={(e) => handleSelectSeniority(e)}
+                      >
+                        <option
+                          className="rounded-2xl bg-nuevoFondo  text-white"
+                          value=""
+                          disabled
+                          selected
+                        >
+                          Seniority Selection
+                        </option>
+                        {experiencia?.map((el, i) => (
+                          <option
+                            className="rounded-2xl  bg-nuevoFondo  text-white"
+                            value={el}
+                            key={i}
+                          >
+                            {el}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      {input.seniorities?.map((el, i) =>
+                        typeof el === "object" ? (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white"
+                              key={i}
+                            >
+                              {el.name}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDeleteSeniority(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        ) : (
+                          <div className="flex m-0 justify-center">
+                            <li
+                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-white px-2 text-black"
+                              key={i}
+                            >
+                              {el}
+                              <button
+                                className="rounded-2xl hover:bg-verdeClaro"
+                                type="reset"
+                                onClick={() => handleDeleteSeniority(el)}
+                              >
+                                <GrFormClose />
+                              </button>
+                            </li>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* INFORMACION LABORAL Y PROYECTOS */}
-          <div className="bg-transparent p-6 transition ease-in-out hover:-translate-y-1 hover:scale-105">
-            <div className="bg-gray-500 drop-shadow-xl shadow-2xl flex flex-col m-0 p-10 w-full h-full rounded-xl">
-              {/*TITULO*/}
-              <div className="mb-6">
-                <h3 className=" text-center text-xl font-bold">
-                  LABOR INFORMATION AND PROJECTS
-                </h3>
-              </div>
-              {/*GITHUB*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label
-                  className="text-center  text-verdeHover"
-                  htmlFor="github"
-                >
-                  GitHub
-                </label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    type="text"
-                    value={input.github}
-                    name="github"
-                    onChange={(e) => handleGithub(e)}
-                  />
-                </div>
-              </div>
-              {/*LINKEDIN*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label
-                  className="text-center  text-verdeHover"
-                  htmlFor="linkedin"
-                >
-                  LinkedIn*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    value={input.linkedIn}
-                    type="text"
-                    name="linkedin"
-                    onChange={(e) => handleLinkedIn(e)}
-                  />
-                </div>
-              </div>
-              {/*PORTFOLIO*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover" for="portfolio">
-                  PortFolio
-                </label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit xl:w-60 text-center m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    type="text"
-                    name="portfolio"
-                    value={input.portfolio}
-                    onChange={(e) => handlePortfolio(e)}
-                  />
-                </div>
-              </div>
-              {/*CV*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover">
-                  CV (.pdf)*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <input
-                    className="w-fit xl:w-60 m-0 text-center border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    placeholder=".pdf"
-                    type="file"
-                    id="file"
-                    accept=".pdf"
-                    name="file"
-                    onChange={(e) => handleCv(e)}
-                  />
-                </div>
-              </div>
-              {/*EXTRAS*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover">Extras</label>
-                <div className="flex m-0 justify-center">
-                  <textarea
-                    className="w-full text-center  xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-                    placeholder=""
-                    type="text"
-                    value={input.extras}
-                    name="extras"
-                    onChange={(e) => handleExtra(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* INFORMACION TECNICA */}
-          <div className="bg-transparent p-6 transition ease-in-out hover:-translate-y-1 hover:scale-105">
-            <div className="bg-gray-500 drop-shadow-xl shadow-2xl rounded-xl flex flex-col m-0 p-10 w-full h-full">
-              {/*TITULO*/}
-              <div className="mb-6">
-                <h3 className=" text-center text-xl font-bold">
-                  TECHNICAL INFORMATION
-                </h3>
-              </div>
-              {/*TECHNO*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover">
-                  Technology*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <select
-                    className="w-fit  text-center xl:w-52 rounded-2xl bg-verdeClaro"
-                    placeholder="technology"
-                    value={input.technologies}
-                    name="technology"
-                    onChange={(e) => handleSelectTechnology(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value=""
-                      disabled
-                      selected
-                    >
-                      Tecnologies Selection
-                    </option>
-                    {tecno?.map((el) => (
-                      <option
-                        className="rounded-2xl bg-verdeClaro"
-                        value={el.name}
-                        key={el.id}
-                      >
-                        {el.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  {input.technologies?.map((el, i) =>
-                    typeof el === "object" ? (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el.name}
-                          <button
-                            className=" w-fit rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDelete(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    ) : (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDelete(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-              {/*LENGUA*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover">
-                  Languages*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <select
-                    className="w-fit  text-center xl:w-52 rounded-2xl bg-verdeClaro"
-                    placeholder="languages"
-                    value={input.languages}
-                    name="languages"
-                    onChange={(e) => handleLanguage(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value=""
-                      disabled
-                      selected
-                    >
-                      Languages Selection
-                    </option>
-                    {lenguaje?.map((el) => (
-                      <option
-                        className="rounded-2xl bg-verdeClaro"
-                        value={el.name}
-                        key={el.id}
-                      >
-                        {el.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  {input.languages?.map((el, i) =>
-                    typeof el === "object" ? (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el.name}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDeleteLanguage(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    ) : (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDeleteLanguage(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-              {/*SKILLS*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover"> Skill*</label>
-                <div className="flex m-0 justify-center">
-                  <select
-                    className="w-fit text-center xl:w-52 rounded-2xl bg-verdeClaro"
-                    placeholder="skill"
-                    value={input.skills}
-                    name="skills"
-                    onChange={(e) => handleSkill(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value=""
-                      disabled
-                      selected
-                    >
-                      Skills Selection
-                    </option>
-                    {habilidades?.map((el) => (
-                      <option
-                        className="rounded-2xl bg-verdeClaro"
-                        value={el.name}
-                        key={el.id}
-                      >
-                        {el.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  {input.skills?.map((el, i) =>
-                    typeof el === "object" ? (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el.name}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDeleteSkills(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    ) : (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDeleteSkills(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-              {/*SENIORITY*/}
-              <div className="w-full my-3 flex flex-col m-0 justify-center">
-                <label className="text-center  text-verdeHover">
-                  Siniority*
-                </label>
-                <div className="flex m-0 justify-center">
-                  <select
-                    className="w-fit  text-center xl:w-52 rounded-2xl bg-verdeClaro"
-                    placeholder="Seniority"
-                    value={input.seniority}
-                    name="seniority"
-                    onChange={(e) => handleSelectSeniority(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      value=""
-                      disabled
-                      selected
-                    >
-                      Seniority Selection
-                    </option>
-                    {experiencia?.map((el, i) => (
-                      <option
-                        className="rounded-2xl bg-verdeClaro"
-                        value={el}
-                        key={i}
-                      >
-                        {el}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  {input.seniorities?.map((el, i) =>
-                    typeof el === "object" ? (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el.name}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDeleteSeniority(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    ) : (
-                      <div className="flex m-0 justify-center">
-                        <li
-                          className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                          key={i}
-                        >
-                          {el}
-                          <button
-                            className="rounded-2xl hover:bg-verdeClaro"
-                            type="reset"
-                            onClick={() => handleDeleteSeniority(el)}
-                          >
-                            <GrFormClose />
-                          </button>
-                        </li>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/*BUTTON*/}
-        <div className="flex m-0 pb-3 justify-center">
-          <button
-            className="text-center w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-            type="submit"
-            //onClick={(e)=>fileOnChange(e)}//
-          >
-            Modificar perfil
-          </button>
+            {/*BUTTON*/}
+            <div className="flex m-0 pb-3 justify-center">
+              <button
+                className="text-center w-32 shadow-lg shadow-black rounded-2xl text-white hover:text-black bg-nuevoFondo hover:bg-gray-300"
+                type="submit"
+                //onClick={(e)=>fileOnChange(e)}//
+              >
+                Modificar perfil
+              </button>
+            </div>
+          </form>
+          {/* /End replace */}
         </div>
-      </form>
+      </main>
     </div>
   );
 }

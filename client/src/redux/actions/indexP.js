@@ -182,6 +182,23 @@ export function getSeniority() {
   };
 }
 
+//*********************************************
+//****** FUNCION CON CONFLICTOS EN GIT
+// export function getFavourites() {
+//   return async function (dispatch) {
+//     try {
+//       const fav = await axios.get("/favourites");
+//       return dispatch({
+//         type: GET_FAVOURITES,
+//         payload: fav.data,
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
+//*********************************************
+
 export function getProfile(payload) {
   return async function (dispatch) {
     try {

@@ -144,7 +144,9 @@ const SearchPostu = () => {
                     onChange={(e) => handleInputChange(e)}
                   />
                   <button type="submit" onClick={(e) => handleSubmit2(e)}>
+
                     Search
+
                   </button>
                 </div>
               </div>
@@ -271,7 +273,9 @@ const SearchPostu = () => {
                   </div>
                 </div>
                 <button type="submit" onClick={(e) => handleSubmit(e)}>
+
                   Filter
+
                 </button>
               </div>
             </div>

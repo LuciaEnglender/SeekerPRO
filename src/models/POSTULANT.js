@@ -25,7 +25,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-  
     github : {
       type: DataTypes.STRING,
       allowNull: true
