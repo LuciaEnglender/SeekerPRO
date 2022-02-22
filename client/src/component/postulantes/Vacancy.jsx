@@ -24,7 +24,7 @@ function Vacancy({
   //console.log("id", id);
   //
   return (
-    <div className=" h-28 w-full flex flex-col border-2 border-solid  shadow-2lg bg-gradient-to-t to-nuevoFondo from-white hover:from-gray-300 hover:scale-105  shadow-black rounded-2xl bg-gray-300">
+    <div className=" h-28 w-full flex p-2 flex-col border-2 border-solid shadow-xl bg-gradient-to-t to-nuevoFondo from-white hover:from-gray-300 hover:scale-105  shadow-black rounded-2xl bg-gray-300">
       <div className="flex justify-between  ">
         <div className=" col-span-3">
           <div className="flex">

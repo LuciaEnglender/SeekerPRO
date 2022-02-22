@@ -69,7 +69,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getProfile(email2));
-  }, []);
+  }, [MiPerfil]);
 
   //Ordenamiento de las vacantes
   const [, setOrden] = useState("Default");
