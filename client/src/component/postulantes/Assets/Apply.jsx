@@ -36,11 +36,10 @@ function Apply({ id, businessId }) {
   return (
     <div>
       <button
-        className="rounded-xl  bg-gradient-to-t px-3 text-white hover:opacity-25 to-black from-nuevoFondo mt-1 mx-1"
+        className="rounded-xl  bg-gradient-to-t px-3 text-white  hover:opacity-25 to-black from-nuevoFondo mt-1 mx-1"
         onClick={() => handleApply()}
       >
-        {" "}
-        Apply{" "}
+        Apply
       </button>
     </div>
   );

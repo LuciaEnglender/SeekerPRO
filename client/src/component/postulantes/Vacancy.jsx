@@ -24,19 +24,17 @@ function Vacancy({
   //console.log("id", id);
   //
   return (
-    <div className=" h-28 w-full flex flex-col shadow-2lg shadow-black rounded-2xl bg-gray-300">
-      <div className="grid grid-cols-4">
+    <div className=" h-28 w-full flex flex-col border-2 border-solid border-slate-900 shadow-2lg bg-gradient-to-t to-nuevoFondo from-white hover:from-gray-300 hover:scale-105  shadow-black rounded-2xl bg-gray-300">
+      <div className="grid grid-cols-4 border-b-2 border-black border-dashed ">
         <div className=" col-span-3">
           <div className="flex">
-            <p className="text-black text-xl px-2 underline font-bold">
-              {name}
-            </p>
+            <p className="text-black text-xl px-2 font-bold">{name}</p>
             <p className="text-black pt-1 items-center">({business})</p>
           </div>
           <p className="text-black px-1 text-sm ">{description}</p>
         </div>
 
-        <div className="text-right">
+        <div className="text-right flex">
           <div className="text-black  justify-end ">
             <Apply id={id} businessId={businessId} />
           </div>
@@ -45,18 +43,20 @@ function Vacancy({
           </div>
         </div>
       </div>
-      <div className="flex mt-2 border-y-2 border-colorFondo1 border-solid justify-between mx-1 mb-1">
+      <div className="flex mt-2 border-y-2 justify-between mx-1 mb-1">
         <p className="text-black">
           {seniorities ? seniorities : "No especificado"}
         </p>
+        <p className="text-black">/</p>
         <p className="text-black">
           {languages ? languages : "No especificado"}
         </p>
-        <div className="text-black">
+        <p className="text-black">/</p>
+        <p className="text-black">
           {technologies ? technologies : "No especificado"}
-        </div>
+        </p>
       </div>
-      <div className="flex mx-7 ">
+      <div className="flex rounded-b-xl px-7 ">
         <p className="text-black text-xs w-full text-left">
           Date: {date.substr(0, 10)} - {format(date.substr(0, 10))}
         </p>

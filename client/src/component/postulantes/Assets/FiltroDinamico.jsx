@@ -186,7 +186,9 @@ export default function FiltroDinamico() {
           </div>
         </div>
         <div className=" flex flex-col mx-1">
-          <label className="text-white  text-center font-bold">Seniority</label>
+          <label className="text-white text-center font-bold mx-1">
+            Seniority
+          </label>
           <div>
             <select
               className="rounded-xl text-black"
