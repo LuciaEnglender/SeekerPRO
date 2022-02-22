@@ -33,13 +33,12 @@ function Vacancy({
           </div>
           <p className="text-black px-1 text-sm ">{description}</p>
         </div>
-
         <div className="text-right flex">
           <div className="text-black  justify-end ">
             <Apply id={id} businessId={businessId} />
           </div>
           <div className="text-black justify-end">
-            <SeeLater id={id} />
+            <SeeLater id={id} businessId={businessId}/>
           </div>
         </div>
       </div>

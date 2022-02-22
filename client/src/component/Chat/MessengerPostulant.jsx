@@ -27,7 +27,9 @@ function MessengerPostulant() {
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducerPostulante.profile); //es el que tengo guardado
-  const id = profile[0]?.id;
+
+  const id = profile[0]?.id
+console.log("postuid", id)
 
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
