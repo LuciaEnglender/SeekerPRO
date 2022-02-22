@@ -2,7 +2,7 @@
 //                      o8888888o
 //                      88" . "88
 //                      (| X_X |)
-//                      0\  =  /0
+//                      0\ ()  /0
 //                    ___/`---'\___
 //                  .' \\|     |// '.
 //                 / \\|||  :  |||// \
@@ -27,6 +27,6 @@ const PORT = process.env.PORT || 3001;
 
 conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
-console.log(`%s listening at ${3001}`); // eslint-disable-line no-console
+console.log(`%s listening at 3001`); // eslint-disable-line no-console
   });
 });
