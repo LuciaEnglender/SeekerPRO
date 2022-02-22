@@ -19,10 +19,12 @@ const HomeEmpresa = () => {
   const { user } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const vacancyPerPage = 3;
+  const vacancyPerPage = 10;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = vacancy.slice(numberOfFirtsVac, numbersOfLastVac);
+  const pageMax = vacancy.length / 10;
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -36,12 +38,14 @@ const HomeEmpresa = () => {
     dispatch(getVacancy(email2));
   }, [dispatch]);
 
+
   
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVacancy(email2));
 
 }
+
 
   return (
     <div className="min-h-full">
@@ -78,6 +82,10 @@ const HomeEmpresa = () => {
                         All Vacancy
                     </button>
                     </Link>
+                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                    onClick={(e) => getVacancy()}>
+                        All Vacancy
+                    </button>
                   </div>
                   <div className="mt-5">
                     {currentVacancy ? (
@@ -108,11 +116,12 @@ const HomeEmpresa = () => {
                     className="m-3"
                     onClick={() =>
                       paginado(
-                        currentPage === 1 ? currentPage : currentPage - 1
+                        currentPage === 1 ? currentPage : <> {currentPage - 1   }<AiOutlineArrowLeft
+                        /> </> 
                       )
                     }
                   >
-                    <AiOutlineArrowLeft />
+                    
                   </button>
 
 
@@ -120,11 +129,11 @@ const HomeEmpresa = () => {
                     className="m-3"
                     onClick={() =>
                       paginado(
-                        currentPage === 3 ? currentPage : currentPage + 1
+                         pageMax <= currentPage ? currentPage : <> {currentPage + 1}  <AiOutlineArrowRight /> </> 
                       )
                     }
                   >
-                    <AiOutlineArrowRight />
+                   
                   </button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}

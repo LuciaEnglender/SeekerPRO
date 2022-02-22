@@ -201,17 +201,20 @@ function handleSort (e){
                 <button
                   className="m-3 text-zinc-400"
                   onClick={() =>
-                    paginado(currentPage === 1 ? currentPage : currentPage - 1)
+                    paginado(currentPage === 1 ? currentPage : <> {currentPage - 1   }<AiOutlineArrowLeft /> </> 
+                      )
                   }
                 >
-                  <AiOutlineArrowLeft />
+                
                 </button>
 
                 <button
                   className="m-3 text-zinc-400"
                   onClick={() =>
                     paginado(
-                      pageMax <= currentPage ? currentPage : currentPage + 1
+                      pageMax <= currentPage ? currentPage  
+                      : <> {currentPage + 1}  
+                    <AiOutlineArrowRight /> </> 
                     )
                   }
                 >
