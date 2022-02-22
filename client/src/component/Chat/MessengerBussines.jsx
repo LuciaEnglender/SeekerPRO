@@ -29,7 +29,7 @@ function MessengerBussines() {
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducer.business); //es el que tengo en reducer empresa
   const id = profile[0]?.id;
-  console.log("busid", id)
+  console.log("busid", id);
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -43,7 +43,8 @@ function MessengerBussines() {
   }, []);
 
   useEffect(() => {
-    arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) &&
+    arrivalMessage &&
+      currentChat?.members?.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
     console.log("arrival>", arrivalMessage);
   }, [arrivalMessage, currentChat]);
@@ -118,12 +119,12 @@ function MessengerBussines() {
   }, [messages]);
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-full bg-verdeOscuro">
       {/* NAVEGACION */}
       <NavHomeE />
-      {/* BODY */}
+      {/* BODYssss */}
 
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow ">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           </div>
       </header>
@@ -140,48 +141,50 @@ function MessengerBussines() {
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="chatBox">
-              <div className="chatBoxWrapper">
-                {currentChat ? (
-                  <>
-                    <div className="chatBoxTop">
-                      {messages[0]?.messages?.map((m) => (
-                        <div ref={scrollRef}>
-                          <Message
-                            message={m}
-                            own={m.businessId ? false : true}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="chatBoxBottom">
-                      <textarea
-                        className="chatMessageInput"
-                        placeholder="write something..."
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        value={newMessage}
-                      >
-                        {" "}
-                      </textarea>
-                      <button
-                        className="chatSubmitButton"
-                        onClick={handleSubmit}
-                      >
-                        Send
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <span className="noConversationText">
-                    Open a conversation to start a chat.
-                  </span>
-                )}
+            </div> 
+           
+              <div className=" w-11/12 bg-nuevoFondo rounded-r-xl">
+                <div className="chatBoxWrapper">
+                  {currentChat ? (
+                    <>
+                      <div className="chatBoxTop">
+                        {messages[0]?.messages?.map((m) => (
+                          <div ref={scrollRef}>
+                            <Message
+                              message={m}
+                              own={m.businessId ? true : false}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="chatBoxBottom">
+                        <textarea
+                          className="chatMessageInput text-black"
+                          placeholder="write something..."
+                          onChange={(e) => setNewMessage(e.target.value)}
+                          value={newMessage}
+                        >
+                          {" "}
+                        </textarea>
+                        <button
+                          className="chatSubmitButton"
+                          onClick={handleSubmit}
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <span className="noConversationText text-center ">
+                      Open a conversation to start a chat.
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
           {/* /End replace */}
-        </div>
+       
       </main>
     </div>
   );

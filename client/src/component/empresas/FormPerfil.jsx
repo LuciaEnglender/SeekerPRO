@@ -92,6 +92,7 @@ export default function FormPerfil() {
           <input
             className="w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
             type="number"
+            min={0}
             name="cuit"
             value={input.cuit}
             onChange={(e) => handleChange(e)}

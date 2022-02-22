@@ -23,7 +23,6 @@ module.exports = {
 
         //DANI
         nuevoFondo: "#283747",
-        nuevoDetalle: "#4a6480",
         azul: "#044c7b",
         gris: "#212F3C",
         azulp: "#212F3C",
