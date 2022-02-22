@@ -9,7 +9,6 @@ import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { deleteVacancy, postVacancyPipeline } from "../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function DetailVacy() {
   const dispatch = useDispatch()
   const navigate = useNavigate();

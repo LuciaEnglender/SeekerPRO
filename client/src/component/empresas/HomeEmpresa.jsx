@@ -15,36 +15,27 @@ const HomeEmpresa = () => {
   const empresa = useSelector((state) => state.rootReducer.business);
   const vacancy = useSelector((state) => state.rootReducer.vacancies.map(v => v.businessId === empresa[0].id? v : null));
   const { user } = useAuth0();
-
   const [currentPage, setCurrentPage] = useState(1);
   const vacancyPerPage = 10;
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = vacancy.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = vacancy.length / 10;
-
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
-
 
   useEffect(() => {
     dispatch(getProfile(email2))
     dispatch(getVacancy(email2));
   }, [dispatch]);
-
-
   
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVacancy(email2));
-
 }
-
-
   return (
     <div className="min-h-full">
       {/* NAVEGACION */}
@@ -76,9 +67,6 @@ const HomeEmpresa = () => {
                       <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2">
                         Add Vacancy
                       </button>
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2" onClick = {(e) => handleClick(e)} >
-                        All Vacancy
-                    </button>
                     </Link>
                     <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
                     onClick={(e) => getVacancy()}>
@@ -119,10 +107,7 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                    
                   </button>
-
-
                   <button
                     className="m-3"
                     onClick={() =>
@@ -131,7 +116,6 @@ const HomeEmpresa = () => {
                       )
                     }
                   >
-                   
                   </button>
                   <Pagination
                     vacancyPerPage={vacancyPerPage}
