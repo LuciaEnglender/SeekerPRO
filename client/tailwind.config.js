@@ -2,6 +2,17 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./src/**/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      height: {
+        "20-": "20vh",
+        "25-": "25vh",
+        "30-": "30vh",
+        "35-": "25vh",
+        "40-": "40vh",
+        "50-": "50vh",
+        "60-": "60vh",
+        "80-": "80vh",
+        "90-": "90vh",
+      },
       backgroundImage: {
         "hero-pattern":
           "url('/src/component/postulantes/Styles/Imagenes/FOndo2.jpg')",
@@ -23,13 +34,12 @@ module.exports = {
 
         //DANI
         nuevoFondo: "#283747",
-        nuevoDetalle: "#4a6480",
         azul: "#044c7b",
         gris: "#212F3C",
         azulp: "#212F3C",
 
         //NUEVOS
-        verdeOscuro: "#242121",
+        verdeOscuro: "#333333",
         verdeMedio: "#333333",
         verdeClaro: "#CDC7CB",
         verdeMuyClaro: "#cad2c5",

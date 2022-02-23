@@ -48,19 +48,24 @@ const FormVacancy = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postVacancy(input), console.log(input));
-    alert("Vacante creada");
-    setInput({
-      name: "",
-      description: "",
-      technology: [],
-      seniority: [],
-      language: [],
-      business: email2,
-      vacancies: "",
-    });
-    navigate(-1);
+    if (!input.name || !input.description || !input.vacancies) {
+      alert("Please, complete all fields");
+    } else {
+      alert("Congrats! Vacancy Created");
+      dispatch(postVacancy(input), console.log(input));
+      setInput({
+        name: "",
+        description: "",
+        technology: [],
+        seniority: [],
+        language: [],
+        business: email2,
+        vacancies: "",
+      });
+      navigate("/homee");
+    }
   }
+
   function handleChange(e) {
     setInput({
       ...input,
@@ -122,155 +127,217 @@ const FormVacancy = () => {
 
   return (
     <div>
-      {/* NAVEGACIOsN */}
-      <NavHomeE titulo={"Crear"} />
-      {/* FORM CREACION VACANTE */}
-      <div className="bg-gray-300 w-fit m-10 rounded-2xl pb-4">
-        <form onSubmit={(e) => handleSubmit(e)} className="m-10 pt-10 ">
-          <div className="w-full flex flex-col m-0 justify-center">
-            <label> Name:</label>
-            <input
-              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-              type="text"
-              name="name"
-              value={input.name}
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="w-full flex flex-col">
-            <label> Description:</label>
-            <textarea
-              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-              type="text-area"
-              name="description"
-              value={input.description}
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="w-full my-3 flex flex-col m-0 justify-center">
-            <label> Tecnologias:</label>
-            <select
-              className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-              name="technology"
-              onChange={(e) => handleSelectTechno(e)}
-            >
-              <option className="rounded-2xl bg-verdeClaro" selected="false">
-                Select...
-              </option>
-              {technology.map((e) => (
-                <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
-              ))}
-            </select>
-            <div>
-              {input.technology.map((el, i) => (
-                <li
-                  className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                  key={i}
-                >
-                  {el}
+      {/* TAILWIND */}
+
+      <div className="mt-10 sm:mt-0">
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          <div className="mt-5 md:mt-0 md:col-span-3">
+            <form onSubmit={(e) => handleSubmit(e)} method="POST">
+              <div className="shadow overflow-hidden sm:rounded-md">
+                <div className="px-4 bg-white py-4">
+                  <div className="flex flex-col">
+                    <div className="flex flex-col">
+                      <div className="col-span-6 sm:col-span-3">
+                        <label
+                          htmlFor="first-name"
+                          className="block text-sm font-medium text-black"
+                        >
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={input.name}
+                          onChange={(e) => handleChange(e)}
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm text-white sm:text-sm border-gray-300 bg-nuevoFondo h-8 rounded-md"
+                        />
+                      </div>
+                      <div className="col-span-6 sm:col-span-3 mt-1">
+                        <label
+                          htmlFor="about"
+                          className="block text-sm font-medium text-black"
+                        >
+                          Description:
+                        </label>
+                        <div className="mt-1">
+                          <textarea
+                            type="text-area"
+                            name="description"
+                            value={input.description}
+                            onChange={(e) => handleChange(e)}
+                            className="mt-1 focus:ring-indigo-500 bg-nuevoFondo focus:border-indigo-500 block w-full h-16  shadow-sm sm:text-sm text-white border-gray-300 rounded-md resize"
+                          />
+                        </div>
+                        <p className="mt-2 text-sm text-black  found-xl text-center">
+                          Brief description for your vacancy.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3 mt-3">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm font-medium text-black"
+                      >
+                        Technologies:
+                      </label>
+                      <select
+                        name="technology"
+                        onChange={(e) => handleSelectTechno(e)}
+                        className="mt-1 block w-full py-1 px-3 border text-white bg-nuevoFondo border-gray-300 bg-zic-400 rounded-md shadow-sm  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      >
+                        <option
+                          className="rounded-2xl text-white bg-nuevoFondo"
+                          selected="false"
+                        >
+                          Select...
+                        </option>
+                        {technology.map((e) => (
+                          <option className="rounded-2xl text-white bg-nuevoFondo">
+                            {e.name}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="flex  h-8   flex-row">
+                        {input.technology.map((el, i) => (
+                          <li
+                            className="flex flex-row w-fit px-1 list-none m-1 rounded-2xl bg-nuevoFondo"
+                            key={i}
+                          >
+                            {el}
+                            <button
+                              className="rounded-2xl hover:bg-verdeClaro"
+                              type="reset"
+                              onClick={() => handleDeleteTechnology(el)}
+                            >
+                              <GrFormClose />
+                            </button>
+                          </li>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3  mt-1">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Languages:
+                      </label>
+                      <select
+                        className="mt-1 block w-full py-1 px-3 border  bg-nuevoFondo border-gray-300 bg-zic-400 rounded-md shadow-sm text-white  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        name="language"
+                        onChange={(e) => handleSelectLenguge(e)}
+                      >
+                        <option
+                          className="rounded-2xl text-white bg-nuevoFondo"
+                          selected="false"
+                        >
+                          Select...
+                        </option>
+                        {language.map((e) => (
+                          <option className="rounded-2xl text-white bg-nuevoFondo">
+                            {e.name}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="flex  h-8  flex-row">
+                        {input.language.map((el, i) => (
+                          <li
+                            className="flex flex-row w-fit px-1 text-whitelist-none m-1 rounded-2xl bg-nuevoFondo"
+                            key={i}
+                          >
+                            {el}
+                            <button
+                              className=" rounded-2xl hover:bg-verdeClaro"
+                              type="reset"
+                              onClick={() => handleDeleteLanguage(el)}
+                            >
+                              <GrFormClose />
+                            </button>
+                          </li>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3  mt-1">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Seniority:
+                      </label>
+                      <select
+                        className="mt-1 block w-full py-1 px-3  bg-nuevoFondo border border-gray-300 bg-zic-400 rounded-md shadow-sm text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        name="seniority"
+                        onChange={(e) => handleSelectSeniority(e)}
+                      >
+                        <option
+                          className="rounded-2xl text-white bg-nuevoFondo"
+                          selected="false"
+                        >
+                          Select...
+                        </option>
+                        {seniority.map((e) => (
+                          <option
+                            className="rounded-2xl text-white bg-nuevoFondo"
+                            value={e.name}
+                          >
+                            {e.name}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="flex  h-8 flex-row">
+                        {input.seniority.map((el, i) => (
+                          <li
+                            className="flex flex-row w-fit px-1 text-white list-none m-1 rounded-2xl bg-nuevoFondo"
+                            key={i}
+                          >
+                            {el}
+                            <button
+                              className=" text-gray-700 rounded-2xl hover:bg-verdeClaro"
+                              type="reset"
+                              onClick={() => handleDeleteSeniority(el)}
+                            >
+                              <GrFormClose />
+                            </button>
+                          </li>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3 mt-5">
+                      <label
+                        htmlFor="about"
+                        className="block text-sm font-medium text-black"
+                      >
+                        Vacancies available:
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          type="number"
+                          min={0}
+                          name="vacancies"
+                          value={input.vacancies}
+                          onChange={(e) => handleChange(e)}
+                          className="mt-1 text-white bg-nuevoFondo focus:ring-indigo-500  h-8 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md resize"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="px-4 py-2 bg-white justify-center flex text-right sm:px-6 ">
                   <button
-                    className="rounded-2xl hover:bg-verdeClaro"
-                    type="reset"
-                    onClick={() => handleDeleteTechnology(el)}
+                    type="submit"
+                    className=" w-32 shadow-lg shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-nuevoFondo"
                   >
-                    <GrFormClose />
+                    Publicar vacante
                   </button>
-                </li>
-              ))}
-            </div>
-            {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
+                </div>
+              </div>
+            </form>
           </div>
-          <div className="w-full my-3 flex flex-col m-0 justify-center">
-            <label> Lenguaje:</label>
-            <select
-              className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-              name="language"
-              onChange={(e) => handleSelectLenguge(e)}
-            >
-              <option selected="false">Select...</option>
-              {language.map((e) => (
-                <option value={e.name}>{e.name}</option>
-              ))}
-            </select>
-            <div>
-              {input.language.map((el, i) => (
-                <li
-                  className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                  key={i}
-                >
-                  {el}
-                  <button
-                    className=" rounded-2xl hover:bg-verdeClaro"
-                    type="reset"
-                    onClick={() => handleDeleteLanguage(el)}
-                  >
-                    <GrFormClose />
-                  </button>
-                </li>
-              ))}
-            </div>
-            {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
-          </div>
-          <div className="w-full my-3 flex flex-col m-0 justify-center">
-            <label> Seniority:</label>
-            <select
-              className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-              name="seniority"
-              onChange={(e) => handleSelectSeniority(e)}
-            >
-              <option className="rounded-2xl bg-verdeClaro" selected="false">
-                Select...
-              </option>
-              {seniority.map((e) => (
-                <option className="rounded-2xl bg-verdeClaro" value={e.name}>
-                  {e.name}
-                </option>
-              ))}
-            </select>
-            <div>
-              {input.seniority.map((el, i) => (
-                <li
-                  className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
-                  key={i}
-                >
-                  {el}
-                  <button
-                    className=" rounded-2xl hover:bg-verdeClaro"
-                    type="reset"
-                    onClick={() => handleDeleteSeniority(el)}
-                  >
-                    <GrFormClose />
-                  </button>
-                </li>
-              ))}
-            </div>
-            {/*  <ul><li>{input.seniority.map(el => el + " ,")}</li></ul> */}
-          </div>
-          <div className="w-full flex flex-col m-0 justify-center">
-            <label> vacancies available:</label>
-            <input
-              className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
-              type="number"
-              min={0}
-              name="vacancies"
-              value={input.vacancies}
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="w-full  my-3 flex m-0 justify-center pt-10">
-            <button
-              type="submit"
-              className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
-            >
-              Publicar vacante
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="ml-10">
-        <Link to="/homee">
-          <BsFillArrowLeftSquareFill />
-        </Link>
+        </div>
       </div>
     </div>
   );

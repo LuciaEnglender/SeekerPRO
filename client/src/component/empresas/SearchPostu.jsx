@@ -123,163 +123,190 @@ const SearchPostu = () => {
       </div>
       {/* BODY */}
 
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Home</h1>
+          <h1 className="text-3xl font-bold text-white">Applicants</h1>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  bg-verdeOscuro  py-6 sm:px-6 lg:px-8">
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
-          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-4 bg-verdeOscuro h-auto pt-7">
+          <div className="focus:outline-none grid md:grid-rows-1 h-full grid-rows-2 grid-cols-1 md:grid-cols-4 bg-verdeOscuro  md:h-full">
             {/* AREA DE BUSQUEDA */}
-            <div className="ml-16">
-              {/* SEARCHBAR */}
-              <div>
-                <div className="w-full flex flex-col m-0 justify-center pt-5">
-                  <label> Search:</label>
-                  <input
-                    className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro "
-                    type="text"
-                    onChange={(e) => handleInputChange(e)}
-                  />
-                  <button type="submit" onClick={(e) => handleSubmit2(e)}>
-                    Search
-                  </button>
-                </div>
-              </div>
-              {/* FILTROS */}
-              <div>
-                <div className="w-full my-3 flex flex-col m-0 justify-center">
-                  <label> Technologies:</label>
-                  <select
-                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                    name="technology"
-                    onChange={(e) => handleSelectTechno(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      selected
-                      disabled
-                      value=""
-                    >
-                      Select...
-                    </option>
-                    {technology.map((e) => (
-                      <option className="rounded-2xl bg-verdeClaro">
-                        {e.name}
-                      </option>
-                    ))}
-                  </select>
-                  <div>
-                    {input.technology.map((el, i) => (
-                      <li
-                        className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                        key={i}
+            <div className=" bg-verdeOscuro h-full p-2">
+              <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
+                {/* SEARCHBAR */}
+                <div className="bg-nuevoFondo ">
+                  <div className="w-full flex flex-col  m-0 justify-center pt-5 ">
+                    <label className="text-white text-center"> Search</label>
+                    <input
+                      className="w-full xl:w-60 m-0 border-verdeMuyClaro border-2 border-solid text-black px-2 rounded-2xl bg-white"
+                      type="text"
+                      onChange={(e) => handleInputChange(e)}
+                    />
+                    <div className="flex m-0 justify-center">
+                      <button
+                        className="text-white rounded-xl hover:bg-white hover:text-black bg-verdeOscuro px-2  mt-3"
+                        type="submit"
+                        onClick={(e) => handleSubmit2(e)}
                       >
-                        {el}
-                        <button
-                          className="rounded-2xl hover:bg-verdeClaro"
-                          type="reset"
-                          onClick={() => handleDeleteTechnology(el)}
-                        >
-                          <GrFormClose />
-                        </button>
-                      </li>
-                    ))}
+                        Search
+                      </button>
+                    </div>
                   </div>
-                  {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
                 </div>
-                <div className="w-full my-3 flex flex-col m-0 justify-center">
-                  <label> Language:</label>
-                  <select
-                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                    name="language"
-                    onChange={(e) => handleSelectLenguge(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      selected
-                      disabled
-                      value=""
+                {/* FILTROS */}
+                <div className="mt-8 bg-nuevoFondo px-6 rounded-xl">
+                  <div className="w-full my-3 bg-nuevoFondo flex flex-col m-0 justify-center text-white">
+                    <label className="text-white text-center">
+                      {" "}
+                      Technologies:
+                    </label>
+                    <select
+                      className="w-full xl:w-52 rounded-2xl text-nuevoFondo bg-white"
+                      name="technology"
+                      onChange={(e) => handleSelectTechno(e)}
                     >
-                      Select...
-                    </option>
-                    {language.map((e) => (
-                      <option value={e.name}>{e.name}</option>
-                    ))}
-                  </select>
-                  <div>
-                    {input.language.map((el, i) => (
-                      <li
-                        className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
-                        key={i}
-                      >
-                        {el}
-                        <button
-                          className=" rounded-2xl hover:bg-verdeClaro"
-                          type="reset"
-                          onClick={() => handleDeleteLanguage(el)}
-                        >
-                          <GrFormClose />
-                        </button>
-                      </li>
-                    ))}
-                  </div>
-                  {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
-                </div>
-                <div className="w-full my-3 flex flex-col m-0 justify-center">
-                  <label> Seniority:</label>
-                  <select
-                    className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
-                    name="seniority"
-                    onChange={(e) => handleSelectSeniority(e)}
-                  >
-                    <option
-                      className="rounded-2xl bg-verdeClaro"
-                      selected
-                      disabled
-                      value=""
-                    >
-                      Select...
-                    </option>
-                    {seniority.map((e) => (
                       <option
-                        className="rounded-2xl bg-verdeClaro"
-                        value={e.name}
+                        className="rounded-2xl  h-3 text-nuevoFondo bg-white"
+                        selected
+                        disabled
+                        value=""
                       >
-                        {e.name}
+                        Select...
                       </option>
-                    ))}
-                  </select>
-                  <div>
-                    {input.seniority.map((el, i) => (
-                      <li
-                        className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
-                        key={i}
-                      >
-                        {el}
-                        <button
-                          className=" rounded-2xl hover:bg-verdeClaro"
-                          type="reset"
-                          onClick={() => handleDeleteSeniority(el)}
+                      {technology.map((e) => (
+                        <option className="rounded-2xl  h-3 text-nuevoFondo bg-white">
+                          {e.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="h-8 flex">
+                      {input.technology.map((el, i) => (
+                        <li
+                          className="flex flex-row text-nuevoFondo w-fit   px-2 list-none m-1 rounded-2xl bg-white"
+                          key={i}
                         >
-                          <GrFormClose />
-                        </button>
-                      </li>
-                    ))}
+                          {el}
+                          <button
+                            className="rounded-2xl hover:bg-nuevoFondo"
+                            type="reset"
+                            onClick={() => handleDeleteTechnology(el)}
+                          >
+                            <GrFormClose />
+                          </button>
+                        </li>
+                      ))}
+                    </div>
+                    {/* <ul><li>{input.technology.map(el => el + " ,")}</li></ul> */}
+                  </div>
+                  <div className="w-full my-3 flex  mt-3 flex-col m-0 justify-center text-white">
+                    <label className="text-white text-center"> Language:</label>
+                    <select
+                      className="w-full xl:w-52 rounded-2xl text-nuevoFondo bg-white"
+                      name="language"
+                      onChange={(e) => handleSelectLenguge(e)}
+                    >
+                      <option
+                        className="rounded-2xl  h-3 text-nuevoFondo bg-white"
+                        selected
+                        disabled
+                        value=""
+                      >
+                        Select...
+                      </option>
+                      {language.map((e) => (
+                        <option
+                          className="rounded-2xl  h-3 text-nuevoFondo bg-white"
+                          value={e.name}
+                        >
+                          {e.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="h-8 flex">
+                      {input.language.map((el, i) => (
+                        <li
+                          className="flex flex-row w-fit  text-nuevoFondo list-none m-1 rounded-2xl bg-white"
+                          key={i}
+                        >
+                          {el}
+                          <button
+                            className=" rounded-2xl hover:bg-verdeClaro"
+                            type="reset"
+                            onClick={() => handleDeleteLanguage(el)}
+                          >
+                            <GrFormClose />
+                          </button>
+                        </li>
+                      ))}
+                    </div>
+                    {/*  <ul><li>{input.language.map(el => el + " ,")}</li></ul> */}
+                  </div>
+                  <div className="w-full my-3 flex flex-col mt-3 justify-center text-white">
+                    <label className="text-white text-center">
+                      {" "}
+                      Seniority:
+                    </label>
+                    <select
+                      className="w-full xl:w-52 rounded-2xl text-nuevoFondo bg-white"
+                      name="seniority"
+                      onChange={(e) => handleSelectSeniority(e)}
+                    >
+                      <option
+                        className="rounded-2xl  h-3 text-nuevoFondo bg-white"
+                        selected
+                        disabled
+                        value=""
+                      >
+                        Select...
+                      </option>
+                      {seniority.map((e) => (
+                        <option
+                          className="rounded-2xl  h-3 text-nuevoFondo bg-white"
+                          value={e.name}
+                        >
+                          {e.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="h-8 flex">
+                      {input.seniority.map((el, i) => (
+                        <li
+                          className="flex flex-row text-nuevoFondo w-fit  px-2 list-none m-1 rounded-2xl bg-white"
+                          key={i}
+                        >
+                          {el}
+                          <button
+                            className=" rounded-2xl hover:bg-verdeClaro"
+                            type="reset"
+                            onClick={() => handleDeleteSeniority(el)}
+                          >
+                            <GrFormClose />
+                          </button>
+                        </li>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex m-0 justify-center">
+                    <button
+                      className="text-white rounded-xl hover:bg-white hover:text-black bg-nuevoFondo px-2  mt-8"
+                      type="submit"
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      Filter
+                    </button>
                   </div>
                 </div>
-                <button type="submit" onClick={(e) => handleSubmit(e)}>
-                  Filter
-                </button>
               </div>
             </div>
             {/* AREA DE DATA PERSONAS */}
-            <div className="col-span-2 bg-verdeOscuro p-2">
-              <div className=" bg-verdeMedio rounded-2xl p-2 w-full h-full">
-                <div className="lg:grid items-center justify-center">
-                  <h1 className=" font-bold text-center mb-3">Profile:</h1>
+            <div className="col-span-3 bg-verdeOscuro  w-full p-2">
+              <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
+                <div className=" items-center justify-center">
+                  <h1 className=" font-bold text-center mb-3 text-white">
+                    Profile:
+                  </h1>
                   {/* AREA CARD PERFILES DE USUARIOS (no empresas) */}
                   {profiles ? (
                     profiles.map((el) => {
@@ -301,9 +328,6 @@ const SearchPostu = () => {
                 </div>
               </div>
             </div>
-
-            {/* DIV PARA GRID 2BLE */}
-            <div></div>
           </div>
           {/* /End replace */}
         </div>

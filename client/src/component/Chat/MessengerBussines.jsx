@@ -2,8 +2,7 @@ import React from "react";
 import NavHomeE from "../empresas/modules/NavHomeE";
 import ConversationBusiness from "./ConversationBusiness";
 import Message from "./Message";
-import ChatOnline from "./ChatOnline";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getProfile } from "../../redux/actions/index";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
@@ -29,7 +28,7 @@ function MessengerBussines() {
   const email2 = email.substring(1, email.length - 1);
   const profile = useSelector((state) => state.rootReducer.business); //es el que tengo en reducer empresa
   const id = profile[0]?.id;
-  console.log("busid", id)
+  console.log("busid", id);
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -43,7 +42,8 @@ function MessengerBussines() {
   }, []);
 
   useEffect(() => {
-    arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender) &&
+    arrivalMessage &&
+      currentChat?.members?.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
     console.log("arrival>", arrivalMessage);
   }, [arrivalMessage, currentChat]);
@@ -119,29 +119,32 @@ function MessengerBussines() {
 
   return (
     <div className="min-h-full">
-      {/* NAVEGACION */}
+      {/* NAVEGACsION */}
       <NavHomeE />
       {/* BODY */}
-
-      <header className="bg-white shadow">
+      <header className="bg-verdeOscuro shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          </div>
+          <h1 className="text-3xl font-bold text-white">Chat Room</h1>
+        </div>
       </header>
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
-          <div className="messenger">
-            <div className="chatMenu">
+          <div className="messenger bg-pink-200">
+            <div className="chatMenu bg-zinc-200">
               <div className="chatMenuWrapper">
-                <h1>APPLICANTS</h1>
-                 {conversations.map((c) => (
-                  <div onClick={() => setCurrentChat(c)}>
+               <h1 className="text-grey-800 text-4xl"> APPLICANTS</h1>   
+                {conversations.map((c) => (
+                  <div
+                    onClick={() => setCurrentChat(c)}
+                    className="text-zinc-500"
+                  >
                     <ConversationBusiness conversation={c} />
                   </div>
                 ))}
               </div>
             </div>
-            <div className="chatBox">
+            <div className="chatBox  bg-zinc-100">
               <div className="chatBoxWrapper">
                 {currentChat ? (
                   <>
@@ -157,7 +160,7 @@ function MessengerBussines() {
                     </div>
                     <div className="chatBoxBottom">
                       <textarea
-                        className="chatMessageInput"
+                        className="chatMessageInput"                    
                         placeholder="write something..."
                         onChange={(e) => setNewMessage(e.target.value)}
                         value={newMessage}
@@ -173,7 +176,7 @@ function MessengerBussines() {
                     </div>
                   </>
                 ) : (
-                  <span className="noConversationText">
+                  <span className="text-zinc-200 text-4xl">
                     Open a conversation to start a chat.
                   </span>
                 )}

@@ -1,5 +1,6 @@
+
 .messenger {
-  height: calc(100vh - 70px);
+  height: calc(70vh);
   display: flex;
 }
 
@@ -11,7 +12,7 @@
   width: 90%;
   padding: 10px 0;
   border: none;
-  border-bottom: 1px solid rgb(153, 153, 153);
+  border-bottom: 1px solid gray;
 }
 
 .chatBox {
@@ -39,20 +40,20 @@
 }
 
 .chatMessageInput {
-  width: 70%;
-  height: 60px;
+  width: 80%;
+  height: 90px;
   padding: 10px;
-  border: rgb(148, 148, 148) 1px solid;
+  border: rgb(224, 220, 220) 1px solid;
+  color: grey;
 }
 
 .chatSubmitButton {
-  width: 60px;
-  height: 30px;
+  width: 70px;
+  height: 40px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   background-color: teal;
-  color: rgb(207, 204, 204);
 }
 
 .chatOnline {
@@ -70,7 +71,7 @@
   position: absolute;
   top: 10%;
   font-size: 50px;
-  color: rgb(49, 49, 49);
+  color: rgb(224, 220, 220);
   cursor: default;
 }
 

@@ -31,7 +31,7 @@ export default function FormPerfil() {
     e.preventDefault();
 
     dispatch(postEmpresa(input), console.log(input));
-    alert("Empresa completada");
+    alert("Succes");
     setInput({
       name: "",
       description: "",
@@ -60,7 +60,7 @@ export default function FormPerfil() {
         <div className="w-full flex flex-col mt-10 justify-center">
           <h3 className="text-center">Name:</h3>
           <input
-            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            className="w-full text-black xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
             type="text"
             name="name"
             value={input.name}
@@ -70,7 +70,7 @@ export default function FormPerfil() {
         <div className="w-full flex flex-col m-0 justify-center">
           <h3 className="text-center">Description:</h3>
           <textarea
-            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            className="w-full text-black xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
             type="text"
             name="description"
             value={input.description}
@@ -80,7 +80,7 @@ export default function FormPerfil() {
         <div className="w-full flex flex-col m-0 justify-center">
           <h3 className="text-center">Location:</h3>
           <input
-            className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            className="w-full text-black xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
             type="text"
             name="location"
             value={input.location}
@@ -90,14 +90,15 @@ export default function FormPerfil() {
         <div className="w-full flex flex-col m-0 justify-center">
           <h3 className="text-center">CUIT/CUIL</h3>
           <input
-            className="w-full m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
+            className="w-full text-black m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro"
             type="number"
+            min={0}
             name="cuit"
             value={input.cuit}
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="w-full  mt-10 flex m-0 justify-center">
+        <div className="w-full  mt-5 flex m-0 justify-center">
           <button
             className=" w-32  shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"
             type="submit"
