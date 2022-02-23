@@ -161,11 +161,11 @@ function Pipeline({ id }) {
               postulados.map((el) => {
                 return (
                   <div >
-                    <div class=" max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
+                    <div class="flex justify-align mt-2 text-black" >
                       <Link to={`/postulant/${el.loginEmail}`}>
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
                       </Link>
-                      <div class="flex justify-center mt-2 text-black">
+                      <div class="flex justify-align mt-2 text-black">
                         <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
                       </div>
                       <form onSubmit={(e) => handleSubmit(e)}>
@@ -180,7 +180,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black'  key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                     <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm</button>
+                     <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -203,7 +203,7 @@ function Pipeline({ id }) {
                       <Link to={`/postulant/${el.loginEmail}`}>
                         <h2 class="text-gray-800 text-2x2 font-semibold">{el.name}</h2>
                       </Link>
-                      <div class="flex justify-center mt-2 text-black">
+                      <div >
                         <button onClick={() => setInput({ idPostulant: el.id })}>change status</button>
                         {console.log(id, input.idPostulant)}
                       </div>
@@ -218,7 +218,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black'  key={el.id}>hired</option>
                           <option value="rejected" className='text-black'  key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -256,7 +256,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black'  key={el.id}>hired</option>
                           <option value="rejected" className='text-black'  key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -294,7 +294,7 @@ function Pipeline({ id }) {
                           <option value="hired"className='text-black'  key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -332,7 +332,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black' key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -370,7 +370,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black' key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -408,7 +408,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black' key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
@@ -425,6 +425,7 @@ function Pipeline({ id }) {
                 //console.log(el.loginEmail, id)
                 return (
                   <div >
+
                     <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5" >
                       {/* <div class="flex justify-center md:justify-end -mt-8"> */}
                       {/* <img class="w-20 h-20 object-cover rounded-full b=order-2 border-verdeClaro" src={user.picture}/> */}
@@ -447,7 +448,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black' key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm<AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>
