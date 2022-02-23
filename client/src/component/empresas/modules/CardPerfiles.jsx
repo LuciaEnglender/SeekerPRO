@@ -14,7 +14,7 @@ export default function CardPerfiles({
     <div
       tabindex="0"
       aria-label="card 1"
-      class="focus:outline-none shadow-lg shadow-black rounded-2xl 2xl:w-full 2xl:mr-7 2xl:mb-0 mb-7 bg-gray-300 p-6"
+      class="focus:outline-none shadow-lg shadow-black rounded-2xl  mb-7 bg-gray-300 p-6"
     >
       <div class="flex items-center  border-b border-gray-400 pb-6">
         {isAuthenticated && (

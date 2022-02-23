@@ -1,15 +1,17 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
-import FormVacancy from './FormVacancy'
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { XIcon } from "@heroicons/react/outline";
+import FormVacancy from "./FormVacancy";
 
-export default function SideBarVacancies({openVac, setOpenVac}) {
-
-
+export default function SideBarVacancies({ openVac, setOpenVac }) {
   return (
     <Transition.Root show={openVac} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setOpenVac}>
+      <Dialog
+        as="div"
+        className="fixed inset-0 overflow-hidden"
+        onClose={setOpenVac}
+      >
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
             as={Fragment}
@@ -53,13 +55,10 @@ export default function SideBarVacancies({openVac, setOpenVac}) {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                  <div className="px-4 sm:px-6">
-                    <Dialog.Title className="text-lg font-medium text-gray-900"> Create vacancies </Dialog.Title>
-                  </div>
-                  <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                <div className="flex h-full flex-col overflow-y-scroll bg-nuevoFondo py-4 shadow-xl">
+                  <div className="relative  flex-1 px-4 sm:px-6">
                     {/* Replace with your content */}
-                        <FormVacancy/>
+                    <FormVacancy />
                     {/* /End replace */}
                   </div>
                 </div>
@@ -69,5 +68,5 @@ export default function SideBarVacancies({openVac, setOpenVac}) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

@@ -1,14 +1,17 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
-import SearcHome from './SearcHome'
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { XIcon } from "@heroicons/react/outline";
+import SearcHome from "./SearcHome";
 
-export default function SideBar({open, setOpen}) {
-
+export default function SideBar({ open, setOpen }) {
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setOpen}>
+      <Dialog
+        as="div"
+        className="fixed inset-0 overflow-hidden"
+        onClose={setOpen}
+      >
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
             as={Fragment}
@@ -52,13 +55,10 @@ export default function SideBar({open, setOpen}) {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                  <div className="px-4 sm:px-6">
-                    <Dialog.Title className="text-lg font-medium text-gray-900"> Filter by name, technologies, languages or seniorities </Dialog.Title>
-                  </div>
+                <div className="flex h-full flex-col bg-nuevoFondo overflow-y-scroll   shadow-xl">
                   <div className="relative mt-6 flex-1 px-4 sm:px-6">
                     {/* Replace with your content */}
-                   <SearcHome/>
+                    <SearcHome />
                     {/* /End replace */}
                   </div>
                 </div>
@@ -68,5 +68,5 @@ export default function SideBar({open, setOpen}) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

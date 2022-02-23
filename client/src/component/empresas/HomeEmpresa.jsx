@@ -58,53 +58,57 @@ const HomeEmpresa = () => {
       {/* BODY */}
       <header className="bg-verdeOscuro shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          </div>
+          <h1 className="text-3xl font-bold text-white">Home</h1>
+        </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto  bg-verdeOscuro py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto bg-verdeOscuro sm:px-6 lg:px-8">
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
-          <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
+          <div className="focus:outline-none grid  grid-cols-3 bg-verdeOscuro h-auto ">
             {/* AREA DE CREACION */}
-            <div className="ml-16">
-              
-            </div>
             {/* AREA DE VACANTES */}
-            <div className="col-span-2 bg-gray-300 p-2 mr-16">
+            <div className="col-span-4  bg-verdeOscuro p-2 mr-16">
               <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full ">
-                <div className="lg:grid items-center justify-center ">
-                  <h1 className=" font-bold text-center text-white pt-2">
+                <div className=" items-center justify-center ">
+                  <h1 className=" font-bold text-center text-white pt-2 mb-4">
                     Vacancies
                   </h1>
                   <hr />
                   <div className="flex m-0 justify-center">
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2"
+                      onClick={() => {
+                        setOpen(true);
+                        setisOpen(true);
+                      }}
+                    >
+                      Filters
+                    </button>
+                    {isopen && <SideBar open={open} setOpen={setOpen} />}
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2"
+                      onClick={() => {
+                        setOpenVac(true);
+                        setisOpenVac(true);
+                      }}
+                    >
+                      Publish a vacancy
+                    </button>
+                    {isopenVac && (
+                      <SideBarVacancies
+                        openVac={openVac}
+                        setOpenVac={setOpenVac}
+                      />
+                    )}
 
-                      <button
-                       className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2"
-                    onClick={() => {
-                      setOpen(true);
-                      setisOpen(true);
-                    }}
-
-                  >
-                    Filters
-                  </button>
-                  {isopen && <SideBar open={open} setOpen={setOpen} />}
-                   <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2"
-                      onClick={()=> {
-                        setOpenVac(true)
-                        setisOpenVac(true)
-                      }}>
-                        Publish a vacancy
-                      </button>
-                      {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
-              
-                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2 "
-                    onClick={(e) => handleClick(e)}>
-                        All Vacancies
-
+                    <button
+                      className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2 "
+                      onClick={(e) => handleClick(e)}
+                    >
+                      All Vacancies
                     </button>
                   </div>
-                  <div className="mt-5">
+                  <div className="no-scrollbar h-50- overflow-scroll  mt-4">
                     {currentVacancy ? (
                       currentVacancy.map((el) => {
                         if (el !== null) {
@@ -131,7 +135,6 @@ const HomeEmpresa = () => {
                 </div>
               </div>
             </div>
-            <div></div>
           </div>
           {/* /End replace */}
         </div>
