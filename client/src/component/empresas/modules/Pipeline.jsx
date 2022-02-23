@@ -10,8 +10,7 @@ import {
   addNew, addReview, addContact,
   addInterviewRRHH, addInterviewTech,
   addOffered, addHired, addRejected
-} from "../../../redux/actions/index"
-import rootReducer from '../../../redux/reducer';
+} from "../../../redux/actions/index";
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
@@ -25,8 +24,12 @@ function Pipeline({ id }) {
   const offered = useSelector((state) => state.rootReducer.offered);
   const hired = useSelector((state) => state.rootReducer.hired);
   const rejected = useSelector((state) => state.rootReducer.rejected);
+ 
   
-
+  const [flag, setFlag] = useState(0);     //seteamos un flag que va a ser el puntero de re renderizacion del componente,()
+  var x = flag                             // hacemos una variable referencia de flag(no se puede usar var en un useState)
+  const [state, setState] = useState("");  //seteamos un state pivote para el rerender del handlesubmit, que ahora al re renderizar, va a cumplir la condicion del if dentro del
+                                           //useEffect que va a setear el flag en 1 y va a despachar el gerpostulados(id) una unica vez.
   useEffect(() => {
     dispatch(getPostulados(id));
     dispatch(getReview(id));
@@ -36,9 +39,12 @@ function Pipeline({ id }) {
     dispatch(getOffered(id));
     dispatch(getHired(id));
     dispatch(getPostulantsRejected(id));
-  }, [dispatch, id]);
-
-
+    if(flag<1 && state!==""){
+      setFlag(x+1)
+      dispatch(getPostulados(id));
+    }
+  }, [dispatch,flag,state]);
+  
   useEffect(() => { //PARA EL ESTILO DE LA PIPELINE
     let tabsContainer = document.querySelector("#tabs");
     let tabTogglers = tabsContainer.querySelectorAll("a")
@@ -58,14 +64,24 @@ function Pipeline({ id }) {
       })
     });
     document.getElementById("default-tab").click();
-  }, [Pipeline]);
+  }, []);
 
+  useEffect(()=>{
+
+  }, [state]);
  
   const [input, setInput] = useState({
     idPostulant: '',
     action: "",
-  })
+  });
 
+ 
+  
+  function useForceUpdate(){
+    const [value, setValue] = useState(0); console.log("force update")// integer state
+    return () => setValue(value => value + 1); // update the state to force render
+}
+//const forceUpdate = useForceUpdate();
 
   //console.log(input)
   function handleSelect(e) {
@@ -76,44 +92,49 @@ function Pipeline({ id }) {
     })
   };
 
-   function handleSubmit(e) {
+//    useEffect(()=>{
+// removeAll(id, input.idPostulant)
+//    })
 
+
+
+   function handleSubmit(e) {
+    
     e.preventDefault();
      dispatch(removeAll(id, input.idPostulant))
      
   .then(() => {
       
-    if (input.action === "new") {
+    if (input.action === "new") {setState("new")
      return dispatch(addNew(id, input.idPostulant))
-    
-   
    };
-   if (input.action === "review") {
+   if (input.action === "review") {setState("review")
     return dispatch(addReview(id, input.idPostulant))
    
    };
-   if (input.action === "contacted") {
+   if (input.action === "contacted") {setState("contacted")
     return dispatch(addContact(id, input.idPostulant))
      
    };
-   if (input.action === "interview") {
+   if (input.action === "interview") {setState("interview")
     return  dispatch(addInterviewRRHH(id, input.idPostulant))
     
    };
-   if (input.action === "techInterview") {
+   if (input.action === "techInterview") {setState("techInterview")
     return  dispatch(addInterviewTech(id, input.idPostulant))
    };
-   if (input.action === "offered") {
+   if (input.action === "offered") { setState("offered")
     return  dispatch(addOffered(id, input.idPostulant))
    };
-   if (input.action === "hired") {
-    return  dispatch(addHired(id, input.idPostulant))
+   if (input.action === "hired") { setState("hired")
+    return dispatch(addHired(id, input.idPostulant))
    };
-   if (input.action === "rejected") {
-   return   dispatch(addRejected(id, input.idPostulant))
+   if (input.action === "rejected") {setState("rejected")
+   return dispatch(addRejected(id, input.idPostulant))
    }
  // else { alert("Choose an option") };
  // return
+ 
     }).catch((e) => {
       console.log(e)
     });
