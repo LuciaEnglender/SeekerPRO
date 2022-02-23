@@ -4,6 +4,7 @@ import {
   getTech,
   getSeniority,
   getLanguage,
+  getVacancy,
 } from "../../../redux/actions";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,9 +23,7 @@ const FormVacancy = () => {
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.profiles
-  );
+  const profileState = useSelector((state) => state.rootReducerLanding.profiles);
 
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
@@ -54,6 +53,7 @@ const FormVacancy = () => {
     } else {
       alert("Congrats! Vacancy Created");
       dispatch(postVacancy(input), console.log(input));
+    
       setInput({
         name: "",
         description: "",
@@ -63,7 +63,6 @@ const FormVacancy = () => {
         business: email2,
         vacancies: "",
       });
-      navigate("/homee");
     }
   }
 
@@ -332,7 +331,7 @@ const FormVacancy = () => {
                     type="submit"
                     className=" w-32 shadow-lg shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-nuevoFondo"
                   >
-                    Publicar vacante
+                    Post
                   </button>
                 </div>
               </div>

@@ -6,6 +6,7 @@ import {
   getLanguage,
   filterSelects,
   postulanteDetail,
+  getSearchName
 } from "../../../redux/actions/index";
 import { GrFormClose } from "react-icons/gr";
 
@@ -102,7 +103,7 @@ export default function SearchBar() {
     if (name.length === 0) {
       return alert("Please write a name");
     } else {
-      dispatch(postulanteDetail(name));
+      dispatch(getSearchName(name));
       setName("");
     }
   }
@@ -129,7 +130,7 @@ export default function SearchBar() {
                   type="reset"
                   onClick={(e) => handleSubmit2(e)}
                 >
-                  Search
+                  Buscador
                 </button>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">

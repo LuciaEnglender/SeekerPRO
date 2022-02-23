@@ -112,8 +112,8 @@ const NavBar = ({ titulo }) => {
                           <Link
                             to="/homep/miperfil"
                             className={classNames(
-                              active ? "bg-gray-100 hover:bg-nuevoDetalle" : "",
-                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-gray-700"
+                              active ? "bg-gray-100 hover:bg-nuevoFondo text-black hover:text-white" : "",
+                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-white"
                             )}
                           >
                             Edit profile

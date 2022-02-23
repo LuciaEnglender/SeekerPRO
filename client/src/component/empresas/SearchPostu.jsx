@@ -7,6 +7,7 @@ import {
   getSeniority,
   getLanguage,
   postulanteDetail,
+  getSearchName,
   filterSelects,
 } from "../../redux/actions/index";
 import CardProfile from "./modules/CardPerfiles";
@@ -17,7 +18,6 @@ import CardPerfiles from "./modules/CardPerfiles";
 const SearchPostu = () => {
   const dispatch = useDispatch();
   const profiles = useSelector((state) => state.rootReducer.profiles);
-
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
@@ -42,7 +42,7 @@ const SearchPostu = () => {
 
   function handleSubmit2(e) {
     e.preventDefault();
-    dispatch(postulanteDetail(name));
+    dispatch(getSearchName(name));
     setName("");
   }
 
@@ -150,7 +150,8 @@ const SearchPostu = () => {
                         type="submit"
                         onClick={(e) => handleSubmit2(e)}
                       >
-                        Search
+                        {/* LABURAAAAAAAAAAAAAAAAAAAAAAAA VALEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */}
+                       Search 
                       </button>
                     </div>
                   </div>

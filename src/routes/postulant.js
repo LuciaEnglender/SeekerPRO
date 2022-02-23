@@ -19,6 +19,7 @@ const {
 } = require("../db");
 
 const { check, validationResult } = require("express-validator");
+const { Op } = require("sequelize");
 const routerPostulant = Router();
 const multer = require("multer");
 
@@ -137,6 +138,345 @@ routerPostulant.get("/", async (req, res) => {
     }
   } catch (error) {
     res.status(400).send("ERROR" + error);
+  }
+});
+
+//****************BUSQUEDA DEL SEARCHBAR DE POSTULANTE**************** */
+routerPostulant.get("/search/:name", async (req, res) => {
+  const { name } = req.params;
+  const acum = [];
+  try {
+    // ******buscar por nombre del Postulante Trae postulantes con sus vacantes*******
+
+    const postulant = await Postulant.findAll({
+      where: {
+        [Op.or]: {
+          name: { [Op.iLike]: `%${name}%` },
+          github: { [Op.iLike]: `%${name}%` },
+          linkedIn: { [Op.iLike]: `%${name}%` },
+          portfolio: { [Op.iLike]: `%${name}%` },
+        },
+      },
+      include: [
+        {
+          model: Language,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Seniority,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Skill,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Technology,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        // { model: Vacancy,
+        //   attributes: ["name"],
+        //   through: {
+        //     attributes: [],
+        //   },
+        // },
+      ],
+    });
+    if (postulant.length !== 0) acum.push(postulant);
+
+    //   //***********Busca por VACANTE y trae los POSTULANTES****
+    const vacancies = await Vacancy.findAll({
+      where: {
+        [Op.or]: {
+          name: { [Op.iLike]: `%${name}%` },
+          description: { [Op.iLike]: `%${name}%` },
+        },
+      },
+      attributes: {
+        exclude: ["id", "createdAt", "updatedAt", "fk_business", "businessId"],
+      },
+      include: [
+        {
+          model: Postulant,
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "fk_login", "loginId"],
+          },
+          include: [
+            {
+              model: Seniority,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Technology,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Skill,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: Language,
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+            // {
+            //   model: Business,
+            //   attributes: ["name"],
+            //   through: {
+            //     attributes: [],
+            //   },
+            // },
+          ],
+        },
+      ],
+    });
+
+    if (vacancies.length !== 0) acum.push(vacancies);
+    //   //Busco por Skill
+    const skills = await Skill.findAll({
+      where: {
+        [Op.or]: {
+          name: { [Op.iLike]: `%${name}%` },
+          // description: { [Op.iLike]: `%${name}%` },
+        },
+      },
+      include: {
+        model: Postulant,
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Skill,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "fk_login", "loginId"],
+        },
+      },
+      attributes: {
+        exclude: ["id", "createdAt", "updatedAt", "fk_business", "businessId"],
+      },
+    });
+    for (let i = 0; i < skills.length; i++) {
+      if (skills[i].postulants.length !== 0) {
+        acum.push(skills[i].postulants);
+      }
+    }
+    if (skills.length !== 0) acum.push(skills);
+
+    //Busca por LANGUAGE
+    const language = await Language.findAll({
+      where: {
+        [Op.or]: {
+          name: { [Op.iLike]: `%${name}%` },
+          // description: { [Op.iLike]: `%${name}%` },
+        },
+      },
+      include: {
+        model: Postulant,
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Skill,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "fk_login", "loginId"],
+        },
+      },
+      attributes: {
+        exclude: ["id", "createdAt", "updatedAt", "fk_business", "businessId"],
+      },
+    });
+    for (let i = 0; i < language.length; i++) {
+      if (language[i].postulants.length !== 0) {
+        acum.push(language[i].postulants);
+      }
+    }
+    if (language.length !== 0) acum.push(skills);
+
+    //Busca por TECHNOLOGY
+    const tech = await Technology.findAll({
+      where: {
+        [Op.or]: {
+          name: { [Op.iLike]: `%${name}%` },
+          // description: { [Op.iLike]: `%${name}%` },
+        },
+      },
+      include: {
+        model: Postulant,
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Skill,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "fk_login", "loginId"],
+        },
+      },
+      attributes: {
+        exclude: ["id", "createdAt", "updatedAt", "fk_business", "businessId"],
+      },
+    });
+    for (let i = 0; i < tech.length; i++) {
+      if (tech[i].postulants.length !== 0) {
+        acum.push(tech[i].postulants);
+      }
+    }
+    if (tech.length !== 0) acum.push(tech);
+
+    // Busca por SENIORYTI
+    const seniority = await Seniority.findAll({
+      where: {
+        [Op.or]: {
+          name: { [Op.iLike]: `%${name}%` },
+          // description: { [Op.iLike]: `%${name}%` },
+        },
+      },
+      include: {
+        model: Postulant,
+        include: [
+          {
+            model: Language,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Seniority,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Skill,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            model: Technology,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "fk_login", "loginId"],
+        },
+      },
+      attributes: {
+        exclude: ["id", "createdAt", "updatedAt", "fk_business", "businessId"],
+      },
+    });
+    for (let i = 0; i < seniority.length; i++) {
+      if (seniority[i].postulants.length !== 0) {
+        acum.push(seniority[i].postulants);
+      }
+    }
+    if (seniority.length !== 0) acum.push(seniority);
+    res.json(acum[0]);
+  } catch (e) {
+    console.log(e);
   }
 });
 
@@ -301,7 +641,7 @@ routerPostulant.post("/", upload.any("file", 2), async (req, res) => {
 //paso 2
 //Ruta que Trae las vacantes con sus estados  por postulante (recibo id de poestulante)
 
-const arr = [New, Review, Contact, InterviewTech, InterviewRRHH, Offered, Hired, Rejected]
+const arr = [New, Review, Contact,InterviewTech, InterviewRRHH, Offered, Hired, Rejected]
 
 routerPostulant.get("/:id/vacancy", async (req, res) => {
 
@@ -370,38 +710,39 @@ routerPostulant.get("/:id/vacancy", async (req, res) => {
       }
     }
     if (i === 1) {
-      const e = { status: "Reviews" };
+      const e = { status: "Review" };
       for (var j = 0; j < news[i].length; j++) {
         todos.push(Object.assign(news[i][j], e))
       }
     }
     if (i === 2 && news[i].length !== 0) {
+      const e = { status: "Contacted" };
+      for (var j = 0; j < news[i].length; j++) {
+        todos.push(Object.assign(news[i][j], e))
+      }
+    }
+
+   
+  // if (i === 3 && news[i].length !== 0) {
+  //     const e = { status: "Holisssss Naty" };
+  //     for (var j = 0; j < news[i].length; j++) {
+  //       todos.push(Object.assign(news[i][j], e))
+  //     }
+  //   }
+
+    if (i === 4 && news[i].length !== 0) {
       const e = { status: "InterviewTech" };
       for (var j = 0; j < news[i].length; j++) {
         todos.push(Object.assign(news[i][j], e))
       }
     }
-
-    // no hace el cuatro porque esta repetido eso no pasara ya que cada vacante solo puese tener un estado
-    //  if(i === 3 && news[i].length !== 0 ){
-    //   const e = { status: "InterviewTech" };
-    //    for(var j=0; j< news[i].length; j++){
-    //       todos.push(Object.assign(news[i][j], e))
-    //    }   
-    //  }
-  if (i === 4 && news[i].length !== 0) {
-      const e = { status: "InterviewRRHH" };
-      for (var j = 0; j < news[i].length; j++) {
-        todos.push(Object.assign(news[i][j], e))
-      }
-    }
-
-    if (i === 5 && news[i].length !== 0) {
-      const e = { status: "Offered" };
-      for (var j = 0; j < news[i].length; j++) {
-        todos.push(Object.assign(news[i][j], e))
-      }
-    }
+// [New, Review, Contact, InterviewRRHH, InterviewTech, Offered, Hired, Rejected]
+if (i === 5 && news[i].length !== 0) {
+  const e = { status: "Offered" };
+  for (var j = 0; j < news[i].length; j++) {
+    todos.push(Object.assign(news[i][j], e))
+  }
+}
     if (i === 6 && news[i].length !== 0) {
       const e = { status: "Hired" };
       for (var j = 0; j < news[i].length; j++) {

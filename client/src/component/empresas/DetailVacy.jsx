@@ -126,7 +126,9 @@ function DetailVacy() {
         
       </div>
     }
-  <Pipeline id={id} />
+    <div className="h-96 rounded-xl w-full">
+      <Pipeline id={id} />
+    </div>
     <div className="ml-8">
       <Link to="/homee">
         <button>

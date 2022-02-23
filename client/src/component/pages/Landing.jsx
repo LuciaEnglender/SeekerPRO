@@ -157,12 +157,12 @@ const Landing = () => {
               className="m-2"
               href="https://www.facebook.com/soyhenryok/"
             >
-              <AiOutlineFacebook className="hover:opacity-100 opacity-70 text-lg" />
+              {/* <AiOutlineFacebook className="hover:opacity-100 opacity-70 text-lg" /> */}
             </a>
             <a
               target="_blank"
               className="m-2"
-              href="https://www.instagram.com/soyhenry_ok/"
+              href="https://www.instagram.com/jseekerpro/"
             >
               <AiOutlineInstagram className="hover:opacity-100 opacity-70 text-lg" />
             </a>

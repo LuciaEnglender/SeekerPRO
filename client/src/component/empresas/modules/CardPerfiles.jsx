@@ -49,9 +49,9 @@ export default function CardPerfiles({
           <div role="img" aria-label="bookmark">
             {languages?.map((el) => {
               return (
-                <p class="focus:outline-none" width="28" height="28">
+                <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
                   {el.name}
-                </p>
+                </div>
               );
             })}
           </div>
