@@ -15,7 +15,7 @@ import { getProfile } from "../../../redux/actions";
 const navigation = [
   { name: "Home", href: "/homee", current: false },
   { name: "Messages", href: "/homee/message", current: false },
-  { name: "Candidates", href: "/homee/search", current: false },
+  { name: "Applicants", href: "/homee/search", current: false },
   { name: "Go Premium", href: "/homee/premiumDetail", current: false },
 ];
 

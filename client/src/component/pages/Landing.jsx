@@ -146,26 +146,30 @@ const Landing = () => {
           </p>
           <div className="flex m-0 justify-center">
             <a
+              target="_blank"
               className="m-2"
-              href="https://wa.me/número?text=Hola%somos%hired%pro"
+              href="https://wa.me/5493518112156?text=Hola%JSeeker"
             >
               <AiOutlineWhatsApp className="hover:opacity-100 opacity-70 text-lg" />
             </a>
             <a
+              target="_blank"
               className="m-2"
-              href="https://wa.me/número?text=Hola%somos%hired%pro"
+              href="https://www.facebook.com/soyhenryok/"
             >
               <AiOutlineFacebook className="hover:opacity-100 opacity-70 text-lg" />
             </a>
             <a
+              target="_blank"
               className="m-2"
-              href="https://wa.me/número?text=Hola%somos%hired%pro"
+              href="https://www.instagram.com/soyhenry_ok/"
             >
               <AiOutlineInstagram className="hover:opacity-100 opacity-70 text-lg" />
             </a>
             <a
+              target="_blank"
               className="m-2"
-              href="https://wa.me/número?text=Hola%somos%hired%pro"
+              href="https://www.linkedin.com/school/henryok/"
             >
               <AiOutlineLinkedin className="hover:opacity-100 opacity-70 text-lg" />
             </a>
