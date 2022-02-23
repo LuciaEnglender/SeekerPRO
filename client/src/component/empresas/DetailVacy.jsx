@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { useNavigate } from "react-router";
@@ -8,7 +8,7 @@ import { getPostulados, getVacancyDetail } from "../../redux/actions/index"
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { deleteVacancy, postVacancyPipeline } from "../../redux/actions/index"
 import { useAuth0 } from "@auth0/auth0-react";
-
+import SideBarEdit from "./modules/SideBarEdit";
 import { PaperClipIcon } from '@heroicons/react/solid'
 
 
@@ -19,6 +19,10 @@ function DetailVacy() {
   const { id } = useParams()
   //console.log("soy un id en detail" )
   const { user } = useAuth0()
+ 
+  const[openVac, setOpenVac]=useState(false)
+  const[isopen, setIsOpen]=useState(false)
+
 
   useEffect(() => {
     dispatch(getVacancyDetail(id), getPostulados(id))
@@ -76,9 +80,18 @@ function DetailVacy() {
           </div>
           <div className="bg-white px-4 w-full text-cpy-5 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium w-full text-gray-500 ">
-               <Link to={`/vacancy/edit/${id}`}>
-                <button className="text-xs font-medium  text-indigo-500 ">Edit Vacancy</button>
-              </Link>
+               {/* <Link to={`/vacancy/edit/${id}`}> */}
+                <button className="text-xs font-medium  text-indigo-500 " onClick={()=> {
+            setIsOpen(true)
+            setOpenVac(true)
+          }}>Edit Vacancy</button>
+           {isopen && (
+                      <SideBarEdit
+                        openVac={openVac}
+                        setOpenVac={setOpenVac}
+                      />
+                    )}
+              {/* </Link> */}
             </dt>
           </div>
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

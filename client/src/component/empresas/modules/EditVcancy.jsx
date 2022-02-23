@@ -6,7 +6,7 @@ import NavHomeE from "./NavHomeE";
 import { getVacancyDetail, editVacancy , addLanguage, addSeñority, addSkill, addTechnology, deleteLanguage, deleteSeñority, deleteSkill, deleteTechnology} from "../../../redux/actions/index";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
-
+import SideBarEdit from './SideBarEdit'
 
 function EditVcancy() {
   const dispatch = useDispatch();
@@ -24,6 +24,10 @@ function EditVcancy() {
     languages: detalle[0]?.languages.map((ele) => ele.name),
     vacancies: detalle[0]?.vacancies,
   });
+ 
+
+  
+ 
 
   useEffect(() => {
     dispatch(getVacancyDetail(id))
@@ -106,36 +110,36 @@ function EditVcancy() {
 
 
   return (
-    <div>
-      <NavHomeE titulo={"Notificaciones"} />
+    <div className='flex justify-center mt-20'>
+   
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="w-full flex flex-col m-0 justify-center" key={detalle[0]?.id}>
-          <label>We are looking for:</label>
-          <input className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="name" type="text" value={input.name} onChange={(e) => handleChange(e)} />
+        <div className="w-full flex flex-col m-0 justify-center mt-6" key={detalle[0]?.id}>
+          <label>Vacancy name</label>
+          <input className="w-full xl:w-60 m-0 text-nuevoFondo border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="name" type="text" value={input.name} onChange={(e) => handleChange(e)} />
         </div>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col text-white  mt-6">
           <label>Description:</label>
-          <textarea className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="description" type="text-area" value={input.description} onChange={(e) => handleChange(e)} />
+          <textarea className="w-full xl:w-60 m-0 border-verdeMuyClaro text-nuevoFondo rounded-2xl bg-verdeClaro" name="description" type="text-area" value={input.description} onChange={(e) => handleChange(e)} />
         </div>
-        <div className="w-full my-3 flex flex-col m-0 justify-center">
+        <div className="w-full my-3 flex flex-col  mt-6 justify-center">
           <label> Technologies:</label>
           <select
-            className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+            className="w-full xl:w-52 rounded-2xl text-nuevoFondo bg-white"
             name="technologies"
             onChange={(e) => handleSelectTechno(e)}
           >
-            <option className="rounded-2xl bg-verdeClaro" selected="false">
+            <option className="rounded-2xl bg-nuevoFondo" selected="false">
               Select...
             </option>
             {technology.map((e) => (
-              <option value={e.name} key={e.id} className="rounded-2xl bg-verdeClaro">{e.name}</option>
+              <option value={e.name} key={e.id} className="rounded-2xl text-white bg-nuevoFondo">{e.name}</option>
             ))}
           </select>
-          <div>
+          <div className="flex  h-12 overflow-x-scroll w-64">
             {input.technologies.map((el, i) => (
               
               <li
-              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+              className="flex flex-row w-fit list-none m-1 text-nuevoFondo rounded-2xl bg-white"
               key={i}
               value={el}
             >
@@ -151,23 +155,24 @@ function EditVcancy() {
 
             ))}
           </div>
+          <div className='mt-6'>
           <label> Seniority:</label>
           <select
             className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
             name="seniorities"
             onChange={(e) => handleSelectSeniority(e)}
           >
-            <option className="rounded-2xl bg-verdeClaro" selected="false">
+            <option className="rounded-2xl bg-verdeClaro text-nuevoFondo" selected="false">
               Select...
             </option>
             {seniority.map((e) => (
               <option value={e.name} key={e.id} className="rounded-2xl bg-verdeClaro">{e.name}</option>
             ))}
-          </select>
-          <div>
+          </select></div>
+          <div className="h-8 flex">
             {input.seniorities.map((el, i) => (
               <li
-                className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                className="flex flex-row w-fit list-none m-1 text-nuevoFondo rounded-2xl bg-white"
                 key={i}
               >
                 {el}
@@ -182,10 +187,10 @@ function EditVcancy() {
             ))}
           </div>
         </div>
-        <div className="w-full my-3 flex flex-col m-0 justify-center">
+        <div className="w-full my-3 flex flex-col mt-6 justify-center">
           <label> Language:</label>
           <select
-            className="w-full xl:w-52 rounded-2xl bg-verdeClaro"
+            className="w-full xl:w-52 rounded-2xl text-nuevoFondo bg-white"
             name="languages"
             onChange={(e) => handleSelectLenguge(e)}
           >
@@ -196,10 +201,10 @@ function EditVcancy() {
               <option value={e.name} key={e.id} className="rounded-2xl bg-verdeClaro">{e.name}</option>
             ))}
           </select>
-          <div>
+          <div className="h-8 flex">
             {input.languages.map((el, i) => (
               <li
-                className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                className="flex flex-row w-fit list-none m-1 text-nuevoFondo rounded-2xl bg-white"
                 key={i}
               >
                 {el}
@@ -213,15 +218,15 @@ function EditVcancy() {
               </li>
             ))}
           </div>
-          <div className="w-full flex flex-col m-0 justify-center" key={detalle[0]?.id}>
+          <div className="w-full flex flex-col  mt-6 justify-center" key={detalle[0]?.id}>
           <label>Vacancies available:</label>
-          <input className="w-full xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="vacancies" type="number" min={0} value={input.vacancies} onChange={(e) => handleChange(e)} />
+          <input className="w-full px-2 text-nuevoFondo xl:w-60 m-0 border-verdeMuyClaro rounded-2xl bg-verdeClaro" name="vacancies" type="number" min={0} value={input.vacancies} onChange={(e) => handleChange(e)} />
         </div>
         </div>
 
         <div className="w-full  my-3 flex m-0 justify-center">
-          <button type="submit" className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro">
-            Edit Vacancy</button>
+          <button type="submit" className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"  >Edit Vacancy</button>
+         
         </div>
       </form>
       <Link to="/homee">

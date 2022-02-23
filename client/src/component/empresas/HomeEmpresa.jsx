@@ -108,7 +108,7 @@ const HomeEmpresa = () => {
                       All Vacancies
                     </button>
                   </div>
-                  <div className="no-scrollbar h-50- overflow-scroll  mt-4">
+                  <div className="no-scrollbar h-50- overflow-scroll mt-4">
                     {currentVacancy ? (
                       currentVacancy.map((el) => {
                         if (el !== null) {

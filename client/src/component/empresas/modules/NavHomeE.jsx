@@ -131,9 +131,9 @@ const NavHomeE = () => {
                                 to="/homee/message"
                                 className={classNames(
                                   active
-                                    ? "bg-gray-100 hover:bg-verdeHover"
+                                    ? "bg-gray-100 hover:bg-nuevoFondo text-black hover:text-white"
                                     : "",
-                                  "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                                  "block px-4 hover:bg-nuevoFondo py-2 text-sm text-black hover:text-white"
                                 )}
                               >
                                 Messages

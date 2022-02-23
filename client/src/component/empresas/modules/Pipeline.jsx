@@ -27,7 +27,6 @@ function Pipeline({ id }) {
   const hired = useSelector((state) => state.rootReducer.hired);
   const rejected = useSelector((state) => state.rootReducer.rejected);
  
-  
   const [flag, setFlag] = useState(0);     //seteamos un flag que va a ser el puntero de re renderizacion del componente,()
   var x = flag                             // hacemos una variable referencia de flag(no se puede usar var en un useState)
   const [state, setState] = useState("");  //seteamos un state pivote para el rerender del handlesubmit, que ahora al re renderizar, va a cumplir la condicion del if dentro del
@@ -180,7 +179,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black'  key={el.id}>hired</option>
                           <option value="rejected" className='text-black' key={el.id}>rejected</option>
                         </select>
-                     <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit">confirm</button>
+                     <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit" >confirm</button>
                       </form>
                     </div>
                   </div>
@@ -218,7 +217,7 @@ function Pipeline({ id }) {
                           <option value="hired" className='text-black'  key={el.id}>hired</option>
                           <option value="rejected" className='text-black'  key={el.id}>rejected</option>
                         </select>
-                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit"><AiOutlineCheckCircle/></button>
+                        <button className="bg-gray-100 rounded-xl mr-2 text-black" type="submit" ><AiOutlineCheckCircle/></button>
                       </form>
                     </div>
                   </div>

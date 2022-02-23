@@ -39,6 +39,7 @@ const FormVacancy = () => {
     vacancies: "",
   });
 
+
   useEffect(() => {
     dispatch(getUsers(email2));
     dispatch(getTech());
