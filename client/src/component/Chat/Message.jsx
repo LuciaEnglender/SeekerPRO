@@ -18,7 +18,7 @@ function Message({ message, own }) {
         <p className="messageText">
           {message ? message.text : <p> Conseguite un amigo</p>}
         </p>
-        <p> {format(message?.createdAt)}</p>
+        <p className="text-zinc-400"> {format(message?.createdAt)}</p>
       </div>
     </>
   );

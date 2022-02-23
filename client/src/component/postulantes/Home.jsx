@@ -9,8 +9,6 @@ import {
   clearBusiness,
   sort,
 } from "../../redux/actions/indexP";
-//import prueba from "../postulantes/Styles/Imagenes/Lenguajes.png";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 //Componentes
 import MiPerfil from "./MiPerfil";
 import Pagination from "./Paginado";
@@ -19,11 +17,6 @@ import BusinessCard from "../postulantes/FollowBusiness/BusinessCard";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
-//import Metrics from './Metrics/Metrics'
-//import Slides from './Metrics/Slides'
-
-//import Business from './FollowBusiness/Business'
-//import Postulations from "../postulantes/MyPostulations/Postulations";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -39,7 +32,7 @@ export default function Home() {
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
-  const pageMax = filtradas.length / 10;
+
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -127,6 +120,7 @@ export default function Home() {
                       >
                         all business{" "}
                       </button>
+                      
                       <select
                         className="h-fit hover:text-black  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onChange={(e) => handleSort(e)}

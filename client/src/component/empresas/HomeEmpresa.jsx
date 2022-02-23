@@ -66,15 +66,7 @@ const HomeEmpresa = () => {
           <div className="focus:outline-none grid sm:grid-rows-4 grid-cols-3 bg-gray-300 h-auto pt-7">
             {/* AREA DE CREACION */}
             <div className="ml-16">
-              <button
-                onClick={() => {
-                  setOpen(true);
-                  setisOpen(true);
-                }}
-              >
-                FILTERS
-              </button>
-              {isopen && <SideBar open={open} setOpen={setOpen} />}
+              
             </div>
             {/* AREA DE VACANTES */}
             <div className="col-span-2 bg-gray-300 p-2 mr-16">
@@ -86,8 +78,18 @@ const HomeEmpresa = () => {
                   <hr />
                   <div className="flex m-0 justify-center">
 
-                   
-                      <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                      <button
+                       className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2"
+                    onClick={() => {
+                      setOpen(true);
+                      setisOpen(true);
+                    }}
+
+                  >
+                    Filters
+                  </button>
+                  {isopen && <SideBar open={open} setOpen={setOpen} />}
+                   <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2"
                       onClick={()=> {
                         setOpenVac(true)
                         setisOpenVac(true)
@@ -96,7 +98,7 @@ const HomeEmpresa = () => {
                       </button>
                       {isopenVac && <SideBarVacancies openVac={openVac} setOpenVac={setOpenVac}/>  }
               
-                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro mt-2"
+                    <button className=" w-32 shadow-lg shadow-black rounded-2xl text-grisBoton bg-gray-300 hover:bg-verdeClaro m-2 px-2 "
                     onClick={(e) => handleClick(e)}>
                         All Vacancies
 

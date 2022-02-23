@@ -51,15 +51,6 @@ export default function CardVacante({
               })}
             </div>
           </div>
-          <div role="img" aria-label="bookmark">
-            {languages?.map((el) => {
-              return (
-                <p class="focus:outline-none" width="28" height="28">
-                  {el.name}
-                </p>
-              );
-            })}
-          </div>
         </div>
       </div>
       <div class="px-2">
@@ -69,28 +60,39 @@ export default function CardVacante({
         >
           {description}
         </p>
+        <div> 
         <div tabindex="0" class="focus:outline-none flex">
           {technologies?.map((el) => {
             return (
-              <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+              <p class="focus:outline-none text-gray-600"  width="28" height="28">
                 {el.name}
-              </div>
+              </p>
             );
           })}
         </div>
+        <div role="img" aria-label="bookmark">
+            {languages?.map((el) => {
+              return (
+                <p class="focus:outline-none text-gray-600" width="28" height="28">
+                  {el.name}
+                </p>
+              );
+            })}
+          </div>
+          </div>
         <p
           tabindex="0"
           class="focus:outline-none text-sm leading-5 text-gray-600"
         >
-         publication date: {createdAt.slice(0, 10)}
+         Publication date: {createdAt.slice(0, 10)}
         </p>
         <p
           tabindex="0"
           class="focus:outline-none text-sm leading-5 text-gray-600"
         >
-         vacancies available: {vacancies}
+         Vacancies available: {vacancies}
         </p>
-        <p>company: {business}</p>
+        <p className='text-gray-600'>Company: {business}</p>
       </div>
     </div>
   );

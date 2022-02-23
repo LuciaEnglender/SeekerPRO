@@ -48,19 +48,24 @@ const FormVacancy = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postVacancy(input), console.log(input));
-    alert("Vacante creada");
-    setInput({
-      name: "",
-      description: "",
-      technology: [],
-      seniority: [],
-      language: [],
-      business: email2,
-      vacancies: "",
-    });
-    navigate(-1);
+    if (!input.name || !input.description || !input.vacancies) {
+      alert("Please, complete all fields");
+    } else {
+      alert("Congrats! Vacancy Created");
+      dispatch(postVacancy(input), console.log(input));
+      setInput({
+        name: "",
+        description: "",
+        technology: [],
+        seniority: [],
+        language: [],
+        business: email2,
+        vacancies: "",
+      });
+      navigate("/homee");
+    }
   }
+
   function handleChange(e) {
     setInput({
       ...input,
@@ -143,7 +148,7 @@ const FormVacancy = () => {
                         name="name"
                         value={input.name}
                         onChange={(e) => handleChange(e)}
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm text-gray-700 sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                     <div className="col-span-6 sm:col-span-3 mt-9">
@@ -156,7 +161,7 @@ const FormVacancy = () => {
                         name="description"
                         value={input.description}
                         onChange={(e) => handleChange(e)}
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md resize"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm text-gray-700 border-gray-300 rounded-md resize"
                       />
                     </div>
                     <p className="mt-2 text-sm text-gray-500">
@@ -174,7 +179,7 @@ const FormVacancy = () => {
                       <select
                         name="technology"
                         onChange={(e) => handleSelectTechno(e)}
-                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-zic-400 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                        <option className="rounded-2xl bg-verdeClaro" selected="false">
                           Select...
@@ -207,18 +212,20 @@ const FormVacancy = () => {
                         Languages: 
                       </label>
                       <select
+                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-zic-400 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+
                         name="language"
                         onChange={(e) => handleSelectLenguge(e)}
                       >
                         <option selected="false">Select...</option>
                           {language.map((e) => (
-                            <option value={e.name}>{e.name}</option>
+                            <option className="rounded-2xl bg-verdeClaro">{e.name}</option>
                           ))}
                         </select>
                         <div className="flex flex-row">
                         {input.language.map((el, i) => (
                             <li
-                              className="flex flex-row w-fit list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit text-gray-700 list-none m-1 rounded-2xl bg-verdeHover"
                               key={i}
                             >
                               {el}
@@ -239,6 +246,8 @@ const FormVacancy = () => {
                         Seniority: 
                       </label>
                       <select
+                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-zic-400 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+
                         name="seniority"
                         onChange={(e) => handleSelectSeniority(e)}
                       >
@@ -246,7 +255,7 @@ const FormVacancy = () => {
                               Select...
                             </option>
                             {seniority.map((e) => (
-                              <option className="rounded-2xl bg-verdeClaro" value={e.name}>
+                              <option className="rounded-2xl text-gray-700 bg-verdeClaro" value={e.name}>
                                 {e.name}
                               </option>
                             ))}
@@ -254,12 +263,12 @@ const FormVacancy = () => {
                         <div className="flex flex-row">
                           {input.seniority.map((el, i) => (
                             <li
-                              className="flex flex-row w-fit  list-none m-1 rounded-2xl bg-verdeHover"
+                              className="flex flex-row w-fit  text-gray-700 list-none m-1 rounded-2xl bg-verdeHover"
                               key={i}
                             >
                               {el}
                               <button
-                                className=" rounded-2xl hover:bg-verdeClaro"
+                                className=" text-gray-700 rounded-2xl hover:bg-verdeClaro"
                                 type="reset"
                                 onClick={() => handleDeleteSeniority(el)}
                               >
@@ -281,7 +290,7 @@ const FormVacancy = () => {
                         name="vacancies"
                         value={input.vacancies}
                         onChange={(e) => handleChange(e)}
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md resize"
+                        className="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md resize"
                       />
                     </div>
                
