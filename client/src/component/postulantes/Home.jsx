@@ -63,7 +63,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-  }, [MiPerfil]);
+  }, [MiPerfil,perfil]);
 
   //Ordenamiento de las vacantes
   const [, setOrden] = useState("Default");
@@ -88,7 +88,7 @@ export default function Home() {
           {/* AREA */}
           <div className="focus:outline-none flex bg-verdeOscuro w-full  md:h-full">
             {/* MI PERFIL */}
-            <div className="bg-bg-verdeOscuro rounded-2xl px-6 md:p-2 md:w-60">
+            <div className="bg-verdeOscuro rounded-2xl px-6 md:p-2 md:w-96">
               <div className="bg-nuevoFondo rounded-2xl  md:p-2 w-full md:h-full">
                 <MiPerfil />
               </div>
@@ -97,7 +97,7 @@ export default function Home() {
             <div className="w-full md:px-2">
               <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <div className="items-center justify-center grid grid-row-7">
-                  <div className="grid-span-2 bg-nuevoFondo w-fit">
+                  <div className="grid-span-2 bg-nuevoFondo w-full">
                     {/* SEARCHBAR */}
                     <div className=" flex m-0 justify-center">
                       <div className=" flex m-0 justify-center bg-nuevoFondo w-fit">

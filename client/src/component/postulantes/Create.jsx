@@ -353,8 +353,8 @@ export default function CreateForm() {
           onSubmit={(e) => handleSubmit(e)}
         >
           {/* /////COL1 */}
-          <div className="flex flex-col  mt-4 md:mt-16 w-full h-full shrink m-0 px-16 md:px-2 justify-center">
-            <div className="w-full pt-8  flex flex-col m-0 justify-center">
+          <div className="flex flex-col  mt-2 md:mt-8 w-full h-full shrink m-0 px-16 md:px-2 justify-center">
+            <div className="w-full   flex flex-col m-0 justify-center">
               <h3 className="text-center font-bold text-white">Name*</h3>
               <input
                 className="px-2 text-center w-full m-0 rounded-2xl bg-nuevoFondo text-white"
@@ -426,13 +426,13 @@ export default function CreateForm() {
                 ))}
               </div>
             </div>
-            <div className="w-full pt-14 flex flex-col m-0 justify-center">
+            <div className="w-full mb-8 flex flex-col m-0 justify-center">
               <label className="text-center font-bold text-white">
                 Gender *
               </label>
-              <div className="grid justify-center ">
+              <div className="flex justify-center ">
                 <label
-                  className="text-center m-px p-px px-1 bg-nuevoFondo w-fit rounded-xl"
+                  className=" flex  m-px p-px px-1 bg-nuevoFondo w-fit rounded-xl"
                   htmlFor="cbox2"
                 >
                   <input
@@ -508,13 +508,13 @@ export default function CreateForm() {
           </div>
 
           {/* /////COL3 */}
-          <div className="flex flex-col   mt-6 md:mt-14 w-full m-0 px-16 md:px-2 h-full justify-center">
+          <div className="flex flex-col mb-12  mt-6 md:mt-14 w-full m-0 px-16 md:px-2 h-full justify-center">
             <div className="w-full  flex flex-col m-0 justify-center">
               <label className=" text-center  font-bold text-white">
                 Technology *
               </label>
               <select
-                className="w-full rounded-2xl mb-1  bg-nuevoFondo"
+                className="w-full rounded-2xl mb-1 bg-nuevoFondo"
                 placeholder="technology"
                 value={input.technologies}
                 name="technology"
@@ -777,7 +777,7 @@ export default function CreateForm() {
                 onChange={(e) => handleCv(e)}
               />
             </div>
-            <div className="mt-10 flex flex-col m-0 justify-center">
+            <div className="mt-7 flex flex-col m-0 justify-center">
               <div className="flex m-0 justify-center">
                 <button
                   className=" w-32 shadow-lg shadow-black rounded-2xl text-verdeHover bg-verdeOscuro hover:bg-verdeClaro"

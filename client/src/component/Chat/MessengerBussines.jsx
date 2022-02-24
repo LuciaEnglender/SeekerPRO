@@ -137,7 +137,7 @@ function MessengerBussines() {
                 {conversations.map((c) => (
                   <div
                     onClick={() => setCurrentChat(c)}
-                    className="text-zinc-500"
+                    className="nombres"
                   >
                     <ConversationBusiness conversation={c} />
                   </div>
