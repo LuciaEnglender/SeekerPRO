@@ -49,7 +49,7 @@ export default function CardPerfiles({
           <div role="img" aria-label="bookmark">
             {languages?.map((el) => {
               return (
-                <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+                <div class="mt-1 py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
                   {el.name}
                 </div>
               );
@@ -67,7 +67,7 @@ export default function CardPerfiles({
         <div tabindex="0" class="focus:outline-none flex">
           {technologies?.map((el) => {
             return (
-              <div class="py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
+              <div class="mx-1 py-2 px-4 text-xs leading-3 text-verdeHover rounded-full bg-verdeOscuro">
                 {el.name}
               </div>
             );
