@@ -54,9 +54,9 @@ server.post("/", async (req, res, next) => {
       ],
     },
     back_urls: {
-      success: '/mercadopago/pagos',
-      failure: '/mercadopago/pagos',
-      pending: '/mercadopago/pagos',
+      success: "http://localhost:3001/mercadopago/pagos",
+      failure: "http://localhost:3001/mercadopago/pagos",
+      pending: "http://localhost:3001/mercadopago/pagos",
     },
   };
 
