@@ -31,7 +31,7 @@ function MessengerBussines() {
   console.log("busid", id);
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io();
     socket.current?.on("getMessage", (data) => {
       socket.current.open();
       setArrivalMessage({
