@@ -116,11 +116,11 @@ function DetailVacy() {
                         )}
                       </dd>
                     </div>
-                    <div className="bg-white px-4 w-full text-cpy-5 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium w-full text-gray-500 ">
+                    <div className="flex bg-white px-5 w-full text-cpy-8 sm:gap-4 sm:px-8 justify-end">
+                      <dt className="flex text-sm font-medium w-full text-gray-500 justify-end">
                         {/* <Link to={`/vacancy/edit/${id}`}> */}
                         <button
-                          className="text-xs font-medium  text-indigo-500 "
+                          className="w-32 shadow-lg shadow-black rounded-2xl flex text-s font-semibold text-indigo-500 center p-2 my-1 end justify-center"
                           onClick={() => {
                             setIsOpen(true);
                             setOpenVac(true);
@@ -137,10 +137,10 @@ function DetailVacy() {
                         {/* </Link> */}
                       </dt>
                     </div>
-                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                    <div className="text-center flex bg-white px-4 w-full text-cpy-5 sm:gap-4 sm:px-8 justify-end">
+                      <dt className="text-center flex text-sm font-medium w-full text-gray-500 justify-end">
                         <button
-                          className="text-xs font-medium text-indigo-500"
+                          className="justify-center w-32 shadow-lg shadow-black rounded-2xl flex text-s font-semibold text-indigo-500 justify end p-2 my-1"
                           onClick={(e) => {
                             handleDelete(e);
                           }}

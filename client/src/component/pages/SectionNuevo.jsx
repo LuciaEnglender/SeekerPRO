@@ -29,15 +29,6 @@ const SectionNuevo = () => {
     e.preventDefault();
     console.log(inputp);
     dispatch(postEmail(inputp));
-    swal({
-      icon: "success",
-      title: "Welcome!",
-      width: "90%",
-      padding: "2em",
-      color: "#716add",
-      timer: "2000",
-      timerProgressBar: true,
-    });
     setInputp({
       email: "",
       profile: "",
@@ -48,15 +39,6 @@ const SectionNuevo = () => {
   function handleSubmitE(e) {
     e.preventDefault();
     dispatch(postEmail(inpute));
-    swal({
-      icon: "success",
-      title: "Welcome!",
-      width: "90%",
-      padding: "2em",
-      color: "#716add",
-      timer: "2000",
-      timerProgressBar: true,
-    });
 
     setInpute({
       email: "",

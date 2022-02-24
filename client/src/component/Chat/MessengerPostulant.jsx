@@ -157,6 +157,7 @@ function MessengerPostulant() {
                         className="chatMessageInput"
                         placeholder="write something..."
                         onChange={(e) => setNewMessage(e.target.value)}
+                        onKeyPress={e => e.key === 'Enter' && handleSubmit(e)}
                         value={newMessage}
                       >
                         {" "}

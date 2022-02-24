@@ -359,7 +359,7 @@ export default function CreateForm() {
               <input
                 className="px-2 text-center w-full m-0 rounded-2xl bg-nuevoFondo text-white"
                 type="text"
-                maxlength="12"
+                maxlength="30"
                 value={input.name}
                 name="name"
                 onChange={(e) => handleChange(e)}
@@ -367,7 +367,7 @@ export default function CreateForm() {
               {errors.name && <p className="error">{errors.name}</p>}
             </div>
             <div className="w-full pt-8 flex flex-col my-0 justify-center">
-              <label className="text-center font-bold text-white">Phone*</label>
+              <label className="text-center font-bold text-white">Phone *</label>
               <input
                 className=" px-2 text-center w-full m-0 rounded-2xl bg-nuevoFondo text-white"
                 type="number"
@@ -428,7 +428,7 @@ export default function CreateForm() {
             </div>
             <div className="w-full pt-14 flex flex-col m-0 justify-center">
               <label className="text-center font-bold text-white">
-                Gender*
+                Gender *
               </label>
               <div className="grid justify-center ">
                 <label
@@ -511,7 +511,7 @@ export default function CreateForm() {
           <div className="flex flex-col   mt-6 md:mt-14 w-full m-0 px-16 md:px-2 h-full justify-center">
             <div className="w-full  flex flex-col m-0 justify-center">
               <label className=" text-center  font-bold text-white">
-                Technology*
+                Technology *
               </label>
               <select
                 className="w-full rounded-2xl mb-1  bg-nuevoFondo"
@@ -561,7 +561,7 @@ export default function CreateForm() {
             </div>
             <div className="w-full flex flex-col m-0 justify-center">
               <label className="text-center font-bold text-white">
-                Languages*
+                Languages *
               </label>
 
               <select
@@ -609,7 +609,7 @@ export default function CreateForm() {
             </div>
             <div className="w-full flex flex-col m-0 justify-center">
               <label className="text-center  font-bold text-white ">
-                Skill*
+                Skill *
               </label>
               <select
                 className="w-full rounded-2xl mb-1 bg-nuevoFondo"
@@ -657,7 +657,7 @@ export default function CreateForm() {
 
             <div className="w-full  flex flex-col m-0 justify-center">
               <label className="text-center font-bold text-white">
-                Siniority*
+                Siniority *
               </label>
               <select
                 className="w-full rounded-2xl mb-1 bg-nuevoFondo"
@@ -737,7 +737,7 @@ export default function CreateForm() {
                 className="text-center font-bold text-white"
                 htmlFor="linkedin"
               >
-                LinkedIn*
+                LinkedIn *
               </label>
               <input
                 className=" px-2 text-center w-full  m-0 border-verdeMuyClaro rounded-2xl bg-nuevoFondo text-white"
