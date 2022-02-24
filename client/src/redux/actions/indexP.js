@@ -42,7 +42,8 @@ export const SEE_LATER = "SEE_LATER";
 export const EDIT_LOCATION_ADD_POSTULANT = "EDIT_LOCATION_ADD_POSTULANT";
 export const EDIT_LOCATION_DELETE_POSTULANT = "EDIT_LOCATION_DELETE_POSTULANT";
 export const EDIT_TECHNOLOGY_ADD_POSTULANT = "EDIT_TECHNOLOGY_ADD_POSTULANT";
-export const EDIT_TECHNOLOGY_DELETE_POSTULANT =  "EDIT_TECHNOLOGY_DELETE_POSTULANT";
+export const EDIT_TECHNOLOGY_DELETE_POSTULANT =
+  "EDIT_TECHNOLOGY_DELETE_POSTULANT";
 export const EDIT_LANGUAGE_DELETE_POSTULANT = "EDIT_LANGUAGE_DELETE_POSTULANT";
 export const EDIT_LANGUAGE_ADD_POSTULANT = "EDIT_LANGUAGE_ADD_POSTULANT";
 export const EDIT_SKILL_DELETE_POSTULANT = "EDIT_SKILL_DELETE_POSTULANT";
@@ -50,7 +51,7 @@ export const EDIT_SKILL_ADD_POSTULANT = " EDIT_SKILL_ADD_POSTULANT";
 export const EDIT_SEÑORITY_DELETE_POSTULANT = "EDIT_SEÑORITY_DELETE_POSTULANT";
 export const EDIT_SEÑORITY_ADD_POSTULANT = "EDIT_SEÑORITY_ADD_POSTULANT";
 //CHAT
-export const CHAT_ROOM_POST = "CHAT_ROOM_POST"
+export const CHAT_ROOM_POST = "CHAT_ROOM_POST";
 
 //ACTIONS
 export function createPostulante(payload) {
@@ -62,7 +63,7 @@ export function createPostulante(payload) {
         payload: res,
       });
     } catch (error) {
-      alert("Post failed");
+      console.log("Post failed");
     }
   };
 }
@@ -163,7 +164,7 @@ export function getSearchBar(payload) {
         payload: json.data,
       });
     } catch (error) {
-      alert("No data available");
+      console.log("No data available");
     }
   };
 }
@@ -186,7 +187,7 @@ export function getProfile(payload) {
   return async function (dispatch) {
     try {
       const profile = await axios.get(`/postulant?id=${payload}`);
-  
+
       return dispatch({
         type: GET_PROFILE,
         payload: profile.data,
@@ -207,7 +208,7 @@ export function filterByLanguage(info) {
         payload: language.data,
       });
     } catch (error) {
-     console.log(info);
+      console.log(info);
     }
   };
 }
@@ -279,7 +280,7 @@ export function getBusiness() {
         payload: business.data,
       });
     } catch (error) {
-      alert("Business not found");
+      console.log("Business not found");
     }
   };
 }
@@ -292,7 +293,7 @@ export function followBusiness(postulanteId, id) {
         type: FOLLOW,
       });
     } catch (error) {
-      alert("You can't follow");
+      console.log("You can't follow");
     }
   };
 }
@@ -305,7 +306,7 @@ export function unfollow(postulanteId, businessId) {
         type: UNFOLLOW,
       };
     } catch (error) {
-      alert("Can't unfollow, try later");
+      console.log("Can't unfollow, try later");
     }
   };
 }
@@ -319,7 +320,7 @@ export function getFollowed(postulanteId) {
         payload: followed.data,
       });
     } catch (error) {
-      alert("Try later");
+      console.log("Try later");
     }
   };
 }
@@ -339,7 +340,7 @@ export function apply(id, postulanteId) {
         type: APPLY,
       };
     } catch (error) {
-      alert("Postulation failed");
+      console.log("Postulation failed");
     }
   };
 }
@@ -386,7 +387,7 @@ export function removePost(id, postulanteId) {
         type: REMOVE_POST,
       };
     } catch (error) {
-      alert("Can't remove");
+      console.log("Can't remove");
     }
   };
 }
@@ -409,7 +410,10 @@ export function getMyPostulations(payload) {
 export function chatRoomPost(postulantId, businessId) {
   return async function (dispatch) {
     try {
-      const room = await axios.post("/conversations", { businessId, postulantId});
+      const room = await axios.post("/conversations", {
+        businessId,
+        postulantId,
+      });
       return dispatch({
         type: CHAT_ROOM_POST,
         payload: room.data,
@@ -429,7 +433,7 @@ export function seeLater(id, postulanteId) {
         type: SEE_LATER,
       };
     } catch (error) {
-      alert("Postulation failed");
+      console.log("Postulation failed");
     }
   };
 }
@@ -442,7 +446,7 @@ export function removeSeeLater(id, postulanteId) {
         type: REMOVE_SEE_LATER,
       };
     } catch (error) {
-      alert("Can't remove");
+      console.log("Can't remove");
     }
   };
 }

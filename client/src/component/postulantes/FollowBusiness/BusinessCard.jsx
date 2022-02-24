@@ -7,7 +7,7 @@ function BusinessCard({ name, description, location, id }) {
     <div
       tabindex="0"
       aria-label="card 1"
-      className="focus:outline-none h-28 shadow-lg shadow-black rounded-2xl 2xl:w-full  p-1 bg-gradient-to-t to-nuevoFondo hover:to-slate-600 from-white"
+      className="focus:outline-none h-28 shadow-lg shadow-black rounded-2xl 2xl:w-full  p-1  bg-zinc-200"
     >
       <div className="flex items-center  border-b border-gray-400 ">
         <div className="flex items-start justify-between w-full">

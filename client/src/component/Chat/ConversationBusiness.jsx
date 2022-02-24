@@ -40,7 +40,7 @@ function ConversationBusiness({ conversation }) {
     <>
       <div className="conversation">
         {userChat && (
-          <span className="conversationName">{userChat[0]?.name}</span>
+          <button className="conversationName tex">{userChat[0]?.name}</button>
         )}
       </div>
     </>

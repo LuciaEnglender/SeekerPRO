@@ -8,6 +8,7 @@ import {
 } from "../../../redux/actions/indexP";
 import { useAuth0, isAuthenticated } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 function Apply({ id, businessId }) {
   const postulanteId = useSelector(
@@ -23,7 +24,14 @@ function Apply({ id, businessId }) {
 
   function handleApply() {
     dispatch(apply(id, postulanteId));
-    alert("you applied for this job... Good luck!");
+    swal({
+      icon: "success",
+      title: "Great!",
+      text: "You applied for this job... good luck!",
+      width: "90%",
+      padding: "2em",
+      color: "#716add",
+    });
     dispatch(toPipeline(id, postulanteId));
     dispatch(chatRoomPost(postulanteId, businessId));
     navigate("/homep");

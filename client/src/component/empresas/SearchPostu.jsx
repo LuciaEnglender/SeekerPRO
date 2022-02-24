@@ -14,6 +14,7 @@ import CardProfile from "./modules/CardPerfiles";
 import NavHomeE from "./modules/NavHomeE";
 import { GrFormClose } from "react-icons/gr";
 import CardPerfiles from "./modules/CardPerfiles";
+import swal from "sweetalert";
 
 const SearchPostu = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,16 @@ const SearchPostu = () => {
   function handleSelectTechno(e) {
     console.log(input.technology);
     if (input.technology.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -59,7 +69,16 @@ const SearchPostu = () => {
   }
   function handleSelectLenguge(e) {
     if (input.language.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -69,7 +88,16 @@ const SearchPostu = () => {
   }
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -151,7 +179,7 @@ const SearchPostu = () => {
                         onClick={(e) => handleSubmit2(e)}
                       >
                         {/* LABURAAAAAAAAAAAAAAAAAAAAAAAA VALEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */}
-                       Search 
+                        Search
                       </button>
                     </div>
                   </div>

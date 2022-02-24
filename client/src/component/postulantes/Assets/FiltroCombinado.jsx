@@ -49,9 +49,9 @@ function FiltroCombinado() {
     dispatch(filterCombinated(input));
     setInput({
       technology: [],
-    skill: [],
-    language: [],
-    seniority: [],
+      skill: [],
+      language: [],
+      seniority: [],
     });
   }
   console.log(input);
@@ -86,6 +86,7 @@ function FiltroCombinado() {
         <div>
           <div></div>
           <label>TECHNOLOGIES</label>
+
           {tecno?.map((e) => (
             <div key={e.id}>
               <div>
@@ -110,9 +111,7 @@ function FiltroCombinado() {
           {skill?.map((e) => (
             <div key={e.id}>
               <div>
-                <label>
-                  {e.name}
-                </label>
+                <label>{e.name}</label>
                 <div>
                   <input
                     value={e.name}

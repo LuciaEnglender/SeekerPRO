@@ -11,6 +11,7 @@ import {
   getProfile,
 } from "../../../redux/actions/index";
 import { GrFormClose } from "react-icons/gr";
+import swal from "sweetalert";
 
 function SearcHome() {
   const dispatch = useDispatch();
@@ -40,7 +41,16 @@ function SearcHome() {
   function handleSelectTechno(e) {
     console.log(input.technology);
     if (input.technology.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -50,7 +60,16 @@ function SearcHome() {
   }
   function handleSelectLenguge(e) {
     if (input.language.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -60,7 +79,16 @@ function SearcHome() {
   }
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -110,7 +138,16 @@ function SearcHome() {
     e.preventDefault();
 
     if (name.length === 0) {
-      return alert("Please write a name");
+      return swal({
+        icon: "question",
+        title: "Please",
+        text: "Write a name",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       dispatch(getSearchBar(name));
       setName("");

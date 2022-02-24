@@ -60,7 +60,7 @@ function Business() {
                         all business{" "}
                       </button>
                     </p>
-                    <div className="flex m-0 justify-center">
+                    <div className="flex flex-col no-scrollbar overflow-scroll m-0 justify-center">
                       {business.length === 0 ? (
                         <p> No hay empresas disponibles </p>
                       ) : (

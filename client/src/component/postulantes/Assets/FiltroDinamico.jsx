@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { useEffect } from "react";
 //import s from "../Styles/home.module.css";
+import swal from "sweetalert";
 
 export default function FiltroDinamico() {
   const dispatch = useDispatch();
@@ -39,7 +40,16 @@ export default function FiltroDinamico() {
   //console.log(input);
   function handleSelectTechnology(e) {
     if (input.technology.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "error",
+        title: "Oops... Already in the list",
+        text: `You can't select twice the same technology`,
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -50,7 +60,16 @@ export default function FiltroDinamico() {
 
   function handleLanguage(e) {
     if (input.language.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "error",
+        title: "Oops... Already in the list",
+        text: `You can't select twice the same technology`,
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -61,7 +80,16 @@ export default function FiltroDinamico() {
 
   function handleSkill(e) {
     if (input.skill.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "error",
+        title: "Oops... Already in the list",
+        text: `You can't select twice the same technology`,
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -72,7 +100,16 @@ export default function FiltroDinamico() {
 
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "error",
+        title: "Oops... Already in the list",
+        text: `You can't select twice the same technology`,
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -135,11 +172,7 @@ export default function FiltroDinamico() {
               name="technology"
               onChange={(e) => handleSelectTechnology(e)}
             >
-              <option
-                className="text-white bg-nuevoFondo"
-                selected="false"
-                disabled
-              >
+              <option className="text-white bg-nuevoFondo" selected="false">
                 Selection...
               </option>
               {tecno?.map((el) => (
@@ -179,11 +212,7 @@ export default function FiltroDinamico() {
               name="language"
               onChange={(e) => handleLanguage(e)}
             >
-              <option
-                className="text-white bg-nuevoFondo"
-                selected="false"
-                disabled
-              >
+              <option className="text-white bg-nuevoFondo" selected="false">
                 Selection...
               </option>
               {lenguaje?.map((el) => (
@@ -223,11 +252,7 @@ export default function FiltroDinamico() {
               name="seniority"
               onChange={(e) => handleSelectSeniority(e)}
             >
-              <option
-                className="text-white bg-nuevoFondo"
-                selected="false"
-                disabled
-              >
+              <option className="text-white bg-nuevoFondo" selected="false">
                 Selection...
               </option>
               {experiencia?.map((el) => (

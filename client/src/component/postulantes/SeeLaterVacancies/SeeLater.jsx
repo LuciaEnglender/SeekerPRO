@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { seeLater } from "../../../redux/actions/indexP";
+import swal from "sweetalert";
 
 function SeeLater({ id }) {
   const postulanteId = useSelector(
@@ -11,7 +12,14 @@ function SeeLater({ id }) {
 
   function handleMasTarde() {
     dispatch(seeLater(id, postulanteId));
-    alert("You can see this vacancy later, dont forget it!");
+    swal({
+      icon: "info",
+      title: "Saved",
+      text: "You can see this vacancy later, dont forget it!",
+      width: "90%",
+      padding: "2em",
+      color: "#716add",
+    });
   }
 
   return (

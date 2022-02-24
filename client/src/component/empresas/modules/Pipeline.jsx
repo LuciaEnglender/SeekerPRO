@@ -27,8 +27,6 @@ import { PaperClipIcon } from "@heroicons/react/solid";
 
 function Pipeline({ id }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { user } = useAuth0();
   const postulados = useSelector((state) => state.rootReducer.postulados);
   const review = useSelector((state) => state.rootReducer.review);
   const contacted = useSelector((state) => state.rootReducer.contacted);
@@ -187,7 +185,7 @@ function Pipeline({ id }) {
             <a href="#fourth">Interview</a>
           </li>
           <li class="px-4 py-2 font-semibold text-nuevoFondo rounded-t opacity-70 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 ">
-            <a href="#five">Tech Inter</a>
+            <a href="#five">Tech Interv</a>
           </li>
           <li class="px-4 py-2 font-semibold text-nuevoFondo rounded-t opacity-70 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 ">
             <a href="#six">Offered</a>
@@ -199,12 +197,15 @@ function Pipeline({ id }) {
             <a href="#eight">Rejected</a>
           </li>
         </ul>
-        <div id="tab-contents" className="bg-gray-100 h-96 w-full flex flex-col">
+        <div
+          id="tab-contents"
+          className="bg-gray-100 h-96 w-full flex flex-col"
+        >
           {/* renderizado primer estado NEW */}
           <div id="first" className="p-4 h-96 w-full flex flex-col">
             <h1 className="text-3xl text-black">NEW</h1>
             {postulados.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               postulados.map((el) => {
                 return (
@@ -215,7 +216,7 @@ function Pipeline({ id }) {
                           {el.name}
                         </h2>
                       </Link>
-                    
+
                       <div class="flex justify-center mt-2 text-black">
                         <button
                           onClick={() => {
@@ -311,7 +312,7 @@ function Pipeline({ id }) {
           <div id="second" class="hidden p-4">
             <h1 className="text-3xl text-black">REVIEW</h1>
             {review.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               review.map((el) => {
                 //console.log(el.loginEmail, id)
@@ -419,7 +420,7 @@ function Pipeline({ id }) {
           <div id="third" class="hidden p-4">
             <h1 className="text-3xl text-black">CONTACTED</h1>
             {contacted.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               contacted.map((el) => {
                 //console.log(el.loginEmail, id)
@@ -527,10 +528,9 @@ function Pipeline({ id }) {
           <div id="fourth" class="hidden p-4">
             <h1 className="text-3xl text-black">INTERVIEW</h1>
             {interview.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               interview.map((el) => {
-                
                 return (
                   <div>
                     <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-5 ml-5">
@@ -635,7 +635,7 @@ function Pipeline({ id }) {
           <div id="five" class="hidden p-4">
             <h1 className="text-3xl text-black">TECH INTERVIEW</h1>
             {tech.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               tech.map((el) => {
                 //console.log(el.loginEmail, id)
@@ -743,7 +743,7 @@ function Pipeline({ id }) {
           <div id="six" class="hidden p-4">
             <h1 className="text-3xl text-black">OFFERED</h1>
             {offered.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               offered.map((el) => {
                 //console.log(el.loginEmail, id)
@@ -851,7 +851,7 @@ function Pipeline({ id }) {
           <div id="seven" class="hidden p-4">
             <h1 className="text-3xl text-black">HIRED</h1>
             {hired.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               hired.map((el) => {
                 //console.log(el.loginEmail, id)
@@ -959,7 +959,7 @@ function Pipeline({ id }) {
           <div id="eight" class="hidden p-4">
             <h1 className="text-3xl text-black">REJECTED</h1>
             {rejected.length === 0 ? (
-              <p>Waiting for people...</p>
+              <p className="text-black">Waiting for people...</p>
             ) : (
               rejected.map((el) => {
                 //console.log(el.loginEmail, id)

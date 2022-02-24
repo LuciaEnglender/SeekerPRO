@@ -1,15 +1,24 @@
+/* .conversation:focus {
+  background: teal;
+  color: white;
+} */
 .conversation {
   display: flex;
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  margin-top: 20px;
+  width: 100%;
+}
+.conversationName:focus {
+  color: white;
+  background: rgb(34, 103, 206);
+  width: 6rem;
 }
 
-.conversation:hover {
-  background-color: rgb(245, 243, 243);
+.conversationName:hover {
+  background: rgb(34, 103, 206);
+  width: 6rem;
 }
-
 .conversationImg {
   width: 40px;
   height: 40px;
@@ -21,7 +30,6 @@
 .conversationName {
   font-weight: 500;
 }
-
 
 @media screen and (max-width: 768px) {
   .conversationName {

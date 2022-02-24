@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getSearchBar } from "../../redux/actions/indexP";
 import { AiOutlineSearch } from "react-icons/ai";
+import swal from "sweetalert";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -16,7 +17,14 @@ export default function SearchBar() {
   function handleSubmit(e) {
     e.preventDefault();
     if (name.length === 0) {
-      return alert("Please write a name");
+      return swal({
+        icon: "question",
+        title: "Please",
+        text: "Write a name",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+      });
     } else {
       dispatch(getSearchBar(name));
       setName("");

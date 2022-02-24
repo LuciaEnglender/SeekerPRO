@@ -3,8 +3,6 @@ import Apply from "./Assets/Apply";
 import SeeLater from "./SeeLaterVacancies/SeeLater";
 import { format } from "timeago.js";
 
-
-
 function Vacancy({
   name,
   description,
@@ -17,12 +15,10 @@ function Vacancy({
   vacancies,
   businessId,
 }) {
-  //console.log("id", id);
-  //
   return (
-    <div className=" h-28 w-full flex p-2 flex-col border-2 border-solid shadow-xl bg-gradient-to-t to-nuevoFondo from-white hover:from-gray-300 hover:scale-105  shadow-black rounded-2xl bg-gray-300">
-      <div className="flex justify-between  ">
-        <div className=" col-span-3">
+    <div className="w-full h-32 flex p-2 flex-col border-2 border-solid shadow-xl bg-zinc-200  from-white hover:from-gray-300 hover:scale-105  shadow-black rounded-2xl ">
+      <div className="flex justify-between">
+        <div className=" col-span-3 ">
           <div className="flex">
             <p className="text-black text-xl px-2 font-bold">{name}</p>
             <p className="text-black pt-1 items-center">({business})</p>
@@ -34,7 +30,7 @@ function Vacancy({
             <Apply id={id} businessId={businessId} />
           </div>
           <div className="text-black justify-end">
-            <SeeLater id={id} businessId={businessId}/>
+            <SeeLater id={id} businessId={businessId} />
           </div>
         </div>
       </div>
@@ -56,7 +52,7 @@ function Vacancy({
           Date: {date.substr(0, 10)} - {format(date.substr(0, 10))}
         </p>
         <p className="text-black text-xs w-full text-right">
-        Vacancies available: {vacancies}
+          Vacancies available: {vacancies}
         </p>
       </div>
     </div>
