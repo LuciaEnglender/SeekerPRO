@@ -25,6 +25,7 @@ import { GrFormClose } from "react-icons/gr";
 import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
+import swal from "sweetalert";
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -54,7 +55,6 @@ export default function EditProfile() {
   );
   const id = useSelector((state) => state.rootReducerPostulante.profile[0].id);
 
-  /*  console.log("profile:", profileState) */
   const { user } = useAuth0();
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
@@ -77,7 +77,6 @@ export default function EditProfile() {
     extras: profileState.extras,
     //loginId:id,
   });
-  console.log(input.seniorities);
   const asd = input.seniorities;
   const asd2 = input.locations;
 
@@ -124,7 +123,16 @@ export default function EditProfile() {
 
   function handleSelectTechnology(e) {
     if (input.technologies.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -137,7 +145,16 @@ export default function EditProfile() {
 
   function handleLanguage(e) {
     if (input.languages.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -149,7 +166,16 @@ export default function EditProfile() {
 
   function handleSkill(e) {
     if (input.skills.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -161,7 +187,16 @@ export default function EditProfile() {
 
   function handleSelectSeniority(e) {
     if (input.seniorities.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       dispatch(deleteSeñority(id, asd));
       setInput({
@@ -174,7 +209,16 @@ export default function EditProfile() {
 
   function handleSelectLocation(e) {
     if (input.locations.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       dispatch(deleteLocation(id, asd2));
       setInput({
@@ -195,7 +239,16 @@ export default function EditProfile() {
 
   function handleLanguage(e) {
     if (input.languages.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -248,7 +301,6 @@ export default function EditProfile() {
   };
 
   const handleDeleteLocation = (e) => {
-    console.log(e);
     setInput({
       ...input,
       locations: input.locations.filter((el) => el !== e),
@@ -272,7 +324,6 @@ export default function EditProfile() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
     dispatch(editProfile(id, input));
     navigate("/homep");
   }

@@ -127,7 +127,7 @@ export function getSearchName(name) {
     try {
       var res = await axios.get(`/postulant/search/${name}`);
       return dispatch({
-        type: "GET_NAME_PROFILE",
+        type: "GET_PROFILES",
         payload: res.data,
       });
     } catch (error) {

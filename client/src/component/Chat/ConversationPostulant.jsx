@@ -36,13 +36,13 @@ function ConversationPostulant({ conversation }) {
 
   return (
     <>
-      <div className="conversation">
+      <button className="conversation">
         {userChat && (
-          <span className="conversationName">
+          <button className="conversationName text-black rounded active:text-bold translate-x-1 transition active:text-white hover:text-white">
             {userChat[0]?.businesses[0]?.name}
-          </span>
+          </button>
         )}
-      </div>
+      </button>
     </>
   );
 }

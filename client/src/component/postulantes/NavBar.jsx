@@ -62,14 +62,6 @@ const NavBar = ({ titulo }) => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="bg-verdeMedio hover:bg-nuevoDetalle p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3  z-40 bg-verdeMedio  relative">
                   <div>
@@ -112,8 +104,10 @@ const NavBar = ({ titulo }) => {
                           <Link
                             to="/homep/miperfil"
                             className={classNames(
-                              active ? "bg-gray-100 hover:bg-nuevoDetalle" : "",
-                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-gray-700"
+                              active
+                                ? "bg-gray-100 hover:bg-nuevoFondo text-black hover:text-white"
+                                : "",
+                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-nuevoFondo text-center "
                             )}
                           >
                             Edit profile
@@ -126,8 +120,10 @@ const NavBar = ({ titulo }) => {
                           <Link
                             to="/homep/favourites"
                             className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                              active
+                                ? "bg-gray-100 hover:bg-nuevoFondo text-black hover:text-white"
+                                : "",
+                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-nuevoFondo text-center "
                             )}
                           >
                             Followed Business
@@ -139,8 +135,10 @@ const NavBar = ({ titulo }) => {
                           <Link
                             to="/homep/seelater"
                             className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                              active
+                                ? "bg-gray-100 hover:bg-nuevoFondo text-black hover:text-white"
+                                : "",
+                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-nuevoFondo text-center "
                             )}
                           >
                             Saved Vacancies
@@ -152,8 +150,10 @@ const NavBar = ({ titulo }) => {
                           <Link
                             to="/homep/mypostulations"
                             className={classNames(
-                              active ? "bg-gray-100 hover:bg-verdeHover" : "",
-                              "block px-4 hover:bg-verdeHover py-2 text-sm text-gray-700"
+                              active
+                                ? "bg-gray-100 hover:bg-nuevoFondo text-black hover:text-white"
+                                : "",
+                              "block px-4 hover:bg-nuevoDetalle py-2 text-sm text-nuevoFondo text-center "
                             )}
                           >
                             My applications

@@ -31,7 +31,7 @@ function MessengerBussines() {
   console.log("busid", id);
   //socket io////////////////////////////////////////////////////////
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io();
     socket.current?.on("getMessage", (data) => {
       socket.current.open();
       setArrivalMessage({
@@ -132,8 +132,8 @@ function MessengerBussines() {
           {/* !!!!!!!!!! CSS DE ACA PARA ABAJO !!!!!!!!!!!!! */}
           <div className="messenger bg-pink-200">
             <div className="chatMenu bg-zinc-200">
-              <div className="chatMenuWrapper">
-               <h1 className="text-grey-800 text-4xl"> APPLICANTS</h1>   
+              <div className="chatMenuWrapper ">
+                <h1 className="text-nuevoFondo text-4xl"> Applicants</h1>
                 {conversations.map((c) => (
                   <div
                     onClick={() => setCurrentChat(c)}
@@ -160,7 +160,7 @@ function MessengerBussines() {
                     </div>
                     <div className="chatBoxBottom">
                       <textarea
-                        className="chatMessageInput"                    
+                        className="chatMessageInput"
                         placeholder="write something..."
                         onChange={(e) => setNewMessage(e.target.value)}
                         value={newMessage}

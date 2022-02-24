@@ -6,8 +6,10 @@ import {
   getLanguage,
   filterSelects,
   postulanteDetail,
+  getSearchName,
 } from "../../../redux/actions/index";
 import { GrFormClose } from "react-icons/gr";
+import swal from "sweetalert";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -30,7 +32,16 @@ export default function SearchBar() {
   function handleSelectTechno(e) {
     console.log(input.technology);
     if (input.technology.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -40,7 +51,16 @@ export default function SearchBar() {
   }
   function handleSelectLenguge(e) {
     if (input.language.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -50,7 +70,16 @@ export default function SearchBar() {
   }
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -100,9 +129,18 @@ export default function SearchBar() {
   function handleSubmit2(e) {
     e.preventDefault();
     if (name.length === 0) {
-      return alert("Please write a name");
+      return swal({
+        icon: "question",
+        title: "Please",
+        text: "Write a name",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
-      dispatch(postulanteDetail(name));
+      dispatch(getSearchName(name));
       setName("");
     }
   }
@@ -129,7 +167,7 @@ export default function SearchBar() {
                   type="reset"
                   onClick={(e) => handleSubmit2(e)}
                 >
-                  Search
+                  Buscador
                 </button>
               </div>
               <div className="w-full my-3 flex flex-col m-0 justify-center">

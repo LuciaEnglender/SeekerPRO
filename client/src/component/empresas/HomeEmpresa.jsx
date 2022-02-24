@@ -34,10 +34,6 @@ const HomeEmpresa = () => {
   const currentVacancy = vacancy.slice(numberOfFirtsVac, numbersOfLastVac);
   const pageMax = vacancy.length / 10;
 
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
@@ -92,7 +88,7 @@ const HomeEmpresa = () => {
                         setisOpenVac(true);
                       }}
                     >
-                      Publish a vacancy
+                      Post vacancy
                     </button>
                     {isopenVac && (
                       <SideBarVacancies
@@ -108,7 +104,7 @@ const HomeEmpresa = () => {
                       All Vacancies
                     </button>
                   </div>
-                  <div className="no-scrollbar h-50- overflow-scroll  mt-4">
+                  <div className="no-scrollbar h-50- overflow-scroll mt-4">
                     {currentVacancy ? (
                       currentVacancy.map((el) => {
                         if (el !== null) {
@@ -129,7 +125,7 @@ const HomeEmpresa = () => {
                         }
                       })
                     ) : (
-                      <h1>Crea tu vacante</h1>
+                      <h1>Create your own vacancy</h1>
                     )}
                   </div>
                 </div>

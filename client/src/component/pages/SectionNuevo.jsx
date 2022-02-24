@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ButtonLogOutLanding } from "../../private/ButtonLogIn";
+import swal from "sweetalert";
 
 const SectionNuevo = () => {
   const navigate = useNavigate();
@@ -28,7 +29,15 @@ const SectionNuevo = () => {
     e.preventDefault();
     console.log(inputp);
     dispatch(postEmail(inputp));
-    alert("New account created successfully ");
+    swal({
+      icon: "success",
+      title: "Welcome!",
+      width: "90%",
+      padding: "2em",
+      color: "#716add",
+      timer: "2000",
+      timerProgressBar: true,
+    });
     setInputp({
       email: "",
       profile: "",
@@ -39,7 +48,16 @@ const SectionNuevo = () => {
   function handleSubmitE(e) {
     e.preventDefault();
     dispatch(postEmail(inpute));
-    alert("New account created successfully");
+    swal({
+      icon: "success",
+      title: "Welcome!",
+      width: "90%",
+      padding: "2em",
+      color: "#716add",
+      timer: "2000",
+      timerProgressBar: true,
+    });
+
     setInpute({
       email: "",
       profile: "",

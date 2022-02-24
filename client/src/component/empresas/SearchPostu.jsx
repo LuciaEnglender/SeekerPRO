@@ -7,17 +7,18 @@ import {
   getSeniority,
   getLanguage,
   postulanteDetail,
+  getSearchName,
   filterSelects,
 } from "../../redux/actions/index";
 import CardProfile from "./modules/CardPerfiles";
 import NavHomeE from "./modules/NavHomeE";
 import { GrFormClose } from "react-icons/gr";
 import CardPerfiles from "./modules/CardPerfiles";
+import swal from "sweetalert";
 
 const SearchPostu = () => {
   const dispatch = useDispatch();
   const profiles = useSelector((state) => state.rootReducer.profiles);
-
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
@@ -42,14 +43,23 @@ const SearchPostu = () => {
 
   function handleSubmit2(e) {
     e.preventDefault();
-    dispatch(postulanteDetail(name));
+    dispatch(getSearchName(name));
     setName("");
   }
 
   function handleSelectTechno(e) {
     console.log(input.technology);
     if (input.technology.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -59,7 +69,16 @@ const SearchPostu = () => {
   }
   function handleSelectLenguge(e) {
     if (input.language.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -69,7 +88,16 @@ const SearchPostu = () => {
   }
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -150,6 +178,7 @@ const SearchPostu = () => {
                         type="submit"
                         onClick={(e) => handleSubmit2(e)}
                       >
+                        {/* LABURAAAAAAAAAAAAAAAAAAAAAAAA VALEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */}
                         Search
                       </button>
                     </div>

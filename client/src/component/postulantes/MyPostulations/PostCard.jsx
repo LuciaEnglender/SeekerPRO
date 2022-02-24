@@ -11,7 +11,7 @@ function PostCard({
   seniorities,
   technologies,
   languages,
-  date
+  date,
 }) {
   //const pipeline = useSelector((state)=> state.rootReducerPostulante.pipeline)
   //console.log(pipeline)
@@ -20,19 +20,16 @@ function PostCard({
     <div
       tabindex="0"
       aria-label="card 1"
-      class="focus:outline-none shadow-lg shadow-black rounded-2xl 2xl:w-full mb-7 bg-gradient-to-t to-nuevoFondo from-slate-100 p-6"
+      class="focus:outline-none shadow-lg shadow-black rounded-2xl  mb-7 bg-zinc-200 p-6"
     >
       <div class="flex items-center  border-b border-gray-400 pb-6">
         <div class="flex items-start justify-between w-full">
-          <div class="pl-3 w-full">
-            <p
-              tabindex="0"
-              class="focus:outline-none text-xl font-medium leading-5 text-verdeOscuro"
-            >
-              {name} <br />
-              <p> Company: {business}</p>
-              {description}
-            </p>
+          <div class="pl-3  w-full">
+            <div className="text-nuevoFondo font-bold text-2xl"> {name} </div>
+            <div className="text-nuevoFondo flex text-1xl pt-2">
+              Company: <p className="ml-2">{business}</p>
+            </div>
+            <div className="text-nuevoFondo">{description}</div>
           </div>
 
           <div role="img" aria-label="bookmark">
@@ -52,10 +49,13 @@ function PostCard({
             Requirements:{seniorities}, {technologies}, {languages}
           </p>
         </p>
-        <div>
-          <p className="text-gray-600">Application date: {date.substr(0, 10)} - {format(date.substr(0, 10))} </p>
+        <div className="flex justify-between">
+          <p className="text-gray-600">
+            Application date: {date.substr(0, 10)} -{" "}
+            {format(date.substr(0, 10))}{" "}
+          </p>
+          <div className="text-gray-600"> Application state: {status}</div>
         </div>
-        <div className="text-gray-600"> Application state: {status}</div>
       </div>
     </div>
   );

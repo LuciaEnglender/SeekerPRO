@@ -4,28 +4,22 @@ import {
   getTech,
   getSeniority,
   getLanguage,
+  getVacancy,
 } from "../../../redux/actions";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { GrFormClose } from "react-icons/gr";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../../redux/actions/indexL";
-import NavHomeE from "./NavHomeE";
-import { BsFillArrowLeftSquareFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
 // import NavHomeE from "./NavHomeE";
+import swal from "sweetalert";
 
 const FormVacancy = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { user } = useAuth0();
   const technology = useSelector((state) => state.rootReducer.technology);
   const seniority = useSelector((state) => state.rootReducer.seniority);
   const language = useSelector((state) => state.rootReducer.language);
-  const profileState = useSelector(
-    (state) => state.rootReducerLanding.profiles
-  );
-
   const email = JSON.stringify(user.email);
   const email2 = email.substring(1, email.length - 1);
 
@@ -49,10 +43,28 @@ const FormVacancy = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if (!input.name || !input.description || !input.vacancies) {
-      alert("Please, complete all fields");
+      swal({
+        icon: "error",
+        title: "Please",
+        text: "Complete all the fields",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timerProgressBar: true,
+      });
     } else {
-      alert("Congrats! Vacancy Created");
+      swal({
+        icon: "success",
+        title: "Congrats!",
+        text: "Vacancy Created",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
       dispatch(postVacancy(input), console.log(input));
+
       setInput({
         name: "",
         description: "",
@@ -62,7 +74,6 @@ const FormVacancy = () => {
         business: email2,
         vacancies: "",
       });
-      navigate("/homee");
     }
   }
 
@@ -75,7 +86,16 @@ const FormVacancy = () => {
   function handleSelectTechno(e) {
     console.log(input.technology);
     if (input.technology.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -85,7 +105,16 @@ const FormVacancy = () => {
   }
   function handleSelectLenguge(e) {
     if (input.language.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -95,7 +124,16 @@ const FormVacancy = () => {
   }
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry!",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -331,7 +369,7 @@ const FormVacancy = () => {
                     type="submit"
                     className=" w-32 shadow-lg shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-nuevoFondo"
                   >
-                    Publicar vacante
+                    Post
                   </button>
                 </div>
               </div>

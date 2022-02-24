@@ -40,7 +40,7 @@ function ConversationBusiness({ conversation }) {
     <>
       <div className="conversation">
         {userChat && (
-          <span className="conversationName">{userChat[0]?.name}</span>
+          <button className="conversationName text-black rounded active:text-bold translate-x-1 transition active:text-white hover:text-white">{userChat[0]?.name}</button>
         )}
       </div>
     </>

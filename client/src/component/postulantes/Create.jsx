@@ -17,6 +17,7 @@ import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUsers } from "../../redux/actions/indexL";
 import foto from "./Styles/Imagenes/fondo1.jpg";
+import swal from "sweetalert";
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -56,7 +57,6 @@ export default function CreateForm() {
     extras: "",
     loginId: email2,
   });
-  console.log(input);
 
   /* const handleFile = (e) => {
     setInput({
@@ -70,7 +70,6 @@ export default function CreateForm() {
       ...input,
       CV: e.target.files[0],
     });
-    console.log(e.target.files);
   };
 
   function handleGithub(e) {
@@ -96,7 +95,16 @@ export default function CreateForm() {
 
   function handleSelectTechnology(e) {
     if (input.technologies.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -107,7 +115,16 @@ export default function CreateForm() {
 
   function handleLanguage(e) {
     if (input.languages.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -118,7 +135,16 @@ export default function CreateForm() {
 
   function handleSkill(e) {
     if (input.skills.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -129,7 +155,16 @@ export default function CreateForm() {
 
   function handleSelectSeniority(e) {
     if (input.seniority.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -140,7 +175,16 @@ export default function CreateForm() {
 
   function handleSelectLocation(e) {
     if (input.location.includes(e.target.value)) {
-      alert("Already in the list");
+      swal({
+        icon: "warning",
+        title: "Sorry",
+        text: "Already in the list",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
       setInput({
         ...input,
@@ -234,9 +278,26 @@ export default function CreateForm() {
       !input.skills ||
       !input.seniority
     ) {
-      alert("Please, complete all fields");
+      swal({
+        icon: "question",
+        title: "Please",
+        text: "Complete all fields",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
     } else {
-      alert("Congrats!");
+      swal({
+        icon: "success",
+        title: "Congrats!",
+        width: "90%",
+        padding: "2em",
+        color: "#716add",
+        timer: "3000",
+        timerProgressBar: true,
+      });
       const data = new FormData();
       data.append("name", input.name);
       data.append("phone", input.phone);
@@ -298,25 +359,25 @@ export default function CreateForm() {
               <input
                 className="px-2 text-center w-full m-0 rounded-2xl bg-nuevoFondo text-white"
                 type="text"
+                maxlength="12"
                 value={input.name}
                 name="name"
                 onChange={(e) => handleChange(e)}
               />
-              {/* {errors.name && <p className="error">{errors.name}</p>} */}
+              {errors.name && <p className="error">{errors.name}</p>}
             </div>
             <div className="w-full pt-8 flex flex-col my-0 justify-center">
-              <label className="text-center font-bold text-white">
-                {" "}
-                Phone*
-              </label>
+              <label className="text-center font-bold text-white">Phone*</label>
               <input
                 className=" px-2 text-center w-full m-0 rounded-2xl bg-nuevoFondo text-white"
                 type="number"
                 value={input.phone}
                 name="phone"
+                min="0"
+                step="1"
                 onChange={(e) => handleChange(e)}
               />
-              {/*  {errors.phone && <p className="error">{errors.phone}</p>} */}
+              {errors.phone && <p className="error">{errors.phone}</p>}
             </div>
             <div className="w-full pt-8 flex flex-col m-0 justify-center">
               <label className="text-center font-bold text-white">
@@ -548,7 +609,6 @@ export default function CreateForm() {
             </div>
             <div className="w-full flex flex-col m-0 justify-center">
               <label className="text-center  font-bold text-white ">
-                {" "}
                 Skill*
               </label>
               <select
@@ -647,6 +707,7 @@ export default function CreateForm() {
               <label className="text-center font-bold text-white">Extras</label>
               <textarea
                 className="rounded-2xl px-3 bg-nuevoFondo"
+                maxlength="30"
                 type="text"
                 value={input.extras}
                 name="extras"
@@ -723,7 +784,7 @@ export default function CreateForm() {
                   type="submit"
                   //onClick={(e)=>fileOnChange(e)}//
                 >
-                  CREAR
+                  CREATE
                 </button>
               </div>
               <h1 className=" text-center mt-2 text-yellow-500">

@@ -140,9 +140,7 @@ const Landing = () => {
           <p className="pb-4">
             Doubts? Wanting to have the premium? ... Feel free to cantact us!{" "}
             <br />
-            To more details:
-            +5490303456 <br />
-           Argentina{" "}
+            To more details: Argentina{" "}
           </p>
           <div className="flex m-0 justify-center">
             <a
@@ -152,17 +150,11 @@ const Landing = () => {
             >
               <AiOutlineWhatsApp className="hover:opacity-100 opacity-70 text-lg" />
             </a>
+
             <a
               target="_blank"
               className="m-2"
-              href="https://www.facebook.com/soyhenryok/"
-            >
-              <AiOutlineFacebook className="hover:opacity-100 opacity-70 text-lg" />
-            </a>
-            <a
-              target="_blank"
-              className="m-2"
-              href="https://www.instagram.com/soyhenry_ok/"
+              href="https://www.instagram.com/jseekerpro/"
             >
               <AiOutlineInstagram className="hover:opacity-100 opacity-70 text-lg" />
             </a>

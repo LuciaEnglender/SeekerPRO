@@ -33,7 +33,7 @@ function SeeLaterVacancies() {
           {/* Replace with your content */}
           <div className="flex flex-col m-0 justify-center p-10 px-20">
             {pending.length === 0 ? (
-              <p className=" font-bold text-center my-4 mb-3">Nothing to see</p>
+              <p className=" font-bold text-center my-4 mb-3">There are no vacancies saved yet...</p>
             ) : (
               <div>
                 {pending?.map((el) => {

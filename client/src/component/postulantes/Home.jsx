@@ -7,6 +7,7 @@ import {
   getBusiness,
   getVacancy,
   clearBusiness,
+  getFollowed,
   sort,
 } from "../../redux/actions/indexP";
 //Componentes
@@ -24,7 +25,6 @@ export default function Home() {
   const filtradas = useSelector(
     (state) => state.rootReducerPostulante.filteredVacancy
   );
-  console.log(filtradas);
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +32,6 @@ export default function Home() {
   const numbersOfLastVac = currentPage * vacancyPerPage;
   const numberOfFirtsVac = numbersOfLastVac - vacancyPerPage;
   const currentVacancy = filtradas.slice(numberOfFirtsVac, numbersOfLastVac);
-
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -56,9 +55,8 @@ export default function Home() {
   const handleAllBusiness = (e) => {
     e.preventDefault();
     dispatch(getBusiness());
+    dispatch(getFollowed);
   };
-
-  //console.log("business", business)
 
   useEffect(() => {
     dispatch(getProfile(email2));
@@ -82,22 +80,21 @@ export default function Home() {
       {/* BODY */}
 
       <header className=" shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 bg-verdeOscuro sm:px-6 lg:px-8">
-        </div>
+        <div className="max-w-7xl mx-auto py-6 px-4 bg-verdeOscuro sm:px-6 lg:px-8"></div>
       </header>
       <main>
         <div className="bg-verdeOscuro max-w-7xl mx-auto sm:px-6 lg:px-8">
           {/* !!!!!!!!!! DE ACA PARA ABAJO CSS !!!!!!!! */}
           {/* AREA */}
-          <div className="focus:outline-none grid md:grid-rows-1 grid-rows-2 grid-cols-1 md:grid-cols-4 bg-verdeOscuro  md:h-full">
+          <div className="focus:outline-none flex bg-verdeOscuro w-full  md:h-full">
             {/* MI PERFIL */}
-            <div className="bg-bg-verdeOscuro rounded-2xl px-6 md:p-2">
+            <div className="bg-bg-verdeOscuro rounded-2xl px-6 md:p-2 md:w-60">
               <div className="bg-nuevoFondo rounded-2xl  md:p-2 w-full md:h-full">
                 <MiPerfil />
               </div>
             </div>
             {/* VACAN */}
-            <div className="col-span-3 md:px-2">
+            <div className="w-full md:px-2">
               <div className=" bg-nuevoFondo rounded-2xl p-2 w-full h-full">
                 <div className="items-center justify-center grid grid-row-7">
                   <div className="grid-span-2 bg-nuevoFondo w-fit">
@@ -115,15 +112,15 @@ export default function Home() {
                         className="h-fit hover:text-black mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onClick={(e) => handleAll(e)}
                       >
-                        all vacancies{" "}
+                        All vacancies{" "}
                       </button>
                       <button
                         className="h-fit hover:text-black mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onClick={(e) => handleAllBusiness(e)}
                       >
-                        all business{" "}
+                        All business{" "}
                       </button>
-                      
+
                       <select
                         className="h-fit hover:text-black  mx-4 px-2 shadow-lg mt-1 shadow-black rounded-2xl text-white bg-verdeOscuro hover:bg-verdeClaro"
                         onChange={(e) => handleSort(e)}
@@ -190,7 +187,9 @@ export default function Home() {
                                       .join(", ")}
                                     business={el.businesses[0]?.name}
                                     businessId={el.businessId}
-                                    date={el.createdAt? el.createdAt : "No Data"}
+                                    date={
+                                      el.createdAt ? el.createdAt : "No Data"
+                                    }
                                     vacancies={el.vacancies}
                                   />
                                 </div>

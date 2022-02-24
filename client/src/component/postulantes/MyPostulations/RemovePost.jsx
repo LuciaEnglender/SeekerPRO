@@ -4,6 +4,8 @@ import { removePost, removePipeline } from "../../../redux/actions/indexP";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import swal from "sweetalert";
+
 function RemovePost({ id }) {
   const postulanteId = useSelector(
     (state) => state.rootReducerPostulante.profile[0].id
@@ -14,7 +16,16 @@ function RemovePost({ id }) {
   const navigate = useNavigate();
   function handleRemove() {
     dispatch(removePost(id, postulanteId));
-    alert("This applied was remove");
+    swal({
+      icon: "success",
+      title: "Removed",
+      text: "This applied was remove",
+      width: "90%",
+      padding: "2em",
+      color: "#716add",
+      timer: "3000",
+      timerProgressBar: true,
+    });
     dispatch(removePipeline(id, postulanteId));
     navigate("/homep");
   }

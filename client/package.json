@@ -27,6 +27,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "socket.io-client": "^4.4.1",
+    "sweetalert": "^2.1.2",
     "timeago.js": "^4.0.2",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",

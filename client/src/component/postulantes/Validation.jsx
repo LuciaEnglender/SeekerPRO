@@ -1,24 +1,18 @@
 export default function validate(input) {
   let errors = {};
-  if (!input.name) {
+  let validateName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+  if (!input.name || !validateName.test(input.name)) {
     errors.name = "Name is required";
   } else if (parseInt(input.name)) {
     errors.name = "Name is invalid, write a text";
   }
-  if (!input.phone) {
-    errors.phone = "Phone is required";
-  }
-  if (!input.location) {
-    errors.location = "Location is required";
-  }
-  if(input.location.length > 1){
-    errors.location = "Only One Location";
-  }
-  if (!input.linkedin) {
-    errors.linkedin = "Linkedin is required";
-  }
-  if (!input.photo) {
-    errors.photo = "Photo is required";
-  }
+  if (input.phone[0] === "-") errors.phone = " Only positive numbers";
   return errors;
 }
+
+//^ \ d + $ o ^ [1-9] \ d * | 0 $
+//^[a-z]+$/i;
+// Expresiones Regulares:
+// - regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+// - regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+// - regexComments = /^.{1,255}$/;

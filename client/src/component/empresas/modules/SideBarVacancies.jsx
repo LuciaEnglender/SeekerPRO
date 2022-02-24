@@ -4,7 +4,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import FormVacancy from "./FormVacancy";
 
+
+
+
 export default function SideBarVacancies({ openVac, setOpenVac }) {
+  
+
+
   return (
     <Transition.Root show={openVac} as={Fragment}>
       <Dialog
