@@ -54,9 +54,9 @@ server.post("/", async (req, res, next) => {
       ],
     },
     back_urls: {
-      success: 'http://localhost:3001/mercadopago/pagos',
-      failure: 'http://localhost:3001/mercadopago/pagos',
-      pending: 'http://localhost:3001/mercadopago/pagos',
+      success: '/mercadopago/pagos',
+      failure: '/mercadopago/pagos',
+      pending: '/mercadopago/pagos',
     },
   };
 
@@ -109,7 +109,7 @@ server.get("/pagos", async (req, res)=>{
       })
 
    console.log(empresa)
-      res.redirect('http://localhost:3000/homee')
+      res.redirect('https://pf-seekerpro.herokuapp.com/homee')
     }catch (e) {
       console.log(e)
     }

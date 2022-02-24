@@ -24,7 +24,7 @@ const MercadoPago = ({open, setOpen}) => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/mercadopago", { email: email2 })
+      .post("/mercadopago", { email: email2 })
       .then((data) => {
         setDatos(data.data);
         console.info("Contenido de data:", data);
