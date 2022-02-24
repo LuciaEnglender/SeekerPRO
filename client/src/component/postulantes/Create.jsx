@@ -707,7 +707,7 @@ export default function CreateForm() {
               <label className="text-center font-bold text-white">Extras</label>
               <textarea
                 className="rounded-2xl px-3 bg-nuevoFondo"
-                maxlength="12"
+                maxlength="30"
                 type="text"
                 value={input.extras}
                 name="extras"

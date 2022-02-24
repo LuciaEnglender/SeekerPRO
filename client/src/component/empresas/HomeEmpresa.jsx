@@ -88,7 +88,7 @@ const HomeEmpresa = () => {
                         setisOpenVac(true);
                       }}
                     >
-                      Publish a vacancy
+                      Post vacancy
                     </button>
                     {isopenVac && (
                       <SideBarVacancies

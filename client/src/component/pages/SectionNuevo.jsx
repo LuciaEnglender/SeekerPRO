@@ -32,11 +32,10 @@ const SectionNuevo = () => {
     swal({
       icon: "success",
       title: "Welcome!",
-      text: "New account created successfully!",
       width: "90%",
       padding: "2em",
       color: "#716add",
-      timer: "3000",
+      timer: "2000",
       timerProgressBar: true,
     });
     setInputp({
@@ -52,11 +51,10 @@ const SectionNuevo = () => {
     swal({
       icon: "success",
       title: "Welcome!",
-      text: "New account created successfully!",
       width: "90%",
       padding: "2em",
       color: "#716add",
-      timer: "3000",
+      timer: "2000",
       timerProgressBar: true,
     });
 

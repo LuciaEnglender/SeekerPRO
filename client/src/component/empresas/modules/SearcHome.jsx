@@ -139,7 +139,7 @@ function SearcHome() {
 
     if (name.length === 0) {
       return swal({
-        icon: "question",
+        icon: "warning",
         title: "Please",
         text: "Write a name",
         width: "90%",

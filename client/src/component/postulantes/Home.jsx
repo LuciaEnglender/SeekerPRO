@@ -60,6 +60,9 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getProfile(email2));
+  }, []);
+
+  useEffect(() => {
   }, [MiPerfil]);
 
   //Ordenamiento de las vacantes
