@@ -54,9 +54,9 @@ server.post("/", async (req, res, next) => {
       ],
     },
     back_urls: {
-      success: 'https://pf-seekerpro.herokuapp.com/mercadopago/pagos',
-      failure: 'https://pf-seekerpro.herokuapp.com/mercadopago/pagos',
-      pending: 'https://pf-seekerpro.herokuapp.com/mercadopago/pagos',
+      success: '/mercadopago/pagos',
+      failure: '/mercadopago/pagos',
+      pending: '/mercadopago/pagos',
     },
   };
 
